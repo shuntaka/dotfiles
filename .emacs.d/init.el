@@ -1,0 +1,644 @@
+;;=============================================
+;;Appearance
+;;=============================================
+;;----------------------
+;;font 
+;;----------------------
+(set-face-attribute 'default nil
+	    :family "Ricty"
+            :height 140)
+
+(set-fontset-font
+ nil 'japanese-jisx0208
+(font-spec :family "Hiragino Kaku Gothic ProN"))
+
+;;----------------------
+;; color theme 
+;;----------------------
+(when (require 'color-theme nil t)
+(color-theme-initialize))
+
+;;----------------------
+;;zenburn 
+;;----------------------
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (zenburn)))
+ '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
+
+;;----------------------
+;; Hilight the current line
+;;----------------------
+(defface my-hl-line-face
+  '((((class color) (background dark))
+     (:background "NavyBlue" t))
+    (((class color) (background light))
+     (:background "LightGoldenrodYellow" t))
+    (t (:bold t)))
+  "hl-line's my face")
+(setq hl-line-face 'my-hl-line-face)
+(global-hl-line-mode t)
+
+
+;;----------------------
+;;hilight parenthesis
+;;----------------------
+(show-paren-mode t)
+
+
+;;----------------------
+;; emphasize parenthesis
+;;----------------------
+(setq show-paren-delay 0)
+(show-paren-mode t)
+(setq show-paren-style 'expression)
+(set-face-background 'show-paren-match-face nil)
+(set-face-underline-p 'show-paren-match-face "yellow")
+
+;;----------------------
+;; display row  line-number
+;;----------------------
+(line-number-mode 1)
+(column-number-mode 1)
+
+;;----------------------
+;; line-number on the left side
+;;----------------------
+(global-linum-mode t)
+
+;;----------------------
+;; show the file path for the currently opned file
+;;----------------------
+(setq frame-title-format "%f")
+
+;;=============================================
+;; Basic settings
+;;=============================================
+;; Google 日本語入力
+(setq default-input-method "MacOSX")
+(mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ")
+
+
+;;; 履歴を次回Emacs起動時にも保存する
+(savehist-mode 1)
+
+;;; ファイル内のカーソル位置を記憶する
+(setq-default save-place t)
+(require 'saveplace)
+
+;;; 対応する括弧を光らせる
+;;(show-paren-mode t)
+
+;;; シェルに合わせるため、C-hは後退に割り当てる
+;;; ヘルプは<f1>
+(global-set-key (kbd "C-h") 'delete-backward-char) 
+
+;;; モードラインに時刻を表示する
+(display-time)
+
+;;; 行番号・桁番号を表示する
+;;(line-number-mode 1)
+;;(column-number-mode 1)
+
+;;; リージョンに色をつける
+(transient-mark-mode 1) 
+
+;;; GCを減らして軽くする（デフォルトの10倍）
+(setq gc-cons-threshold (* 10 gc-cons-threshold))
+
+;;; ログの記録行数を増やす
+(setq message-log-max 10000)
+
+;;; ミニバッファを再起的に呼び出す
+(setq enable-recursive-minibuffers t)
+
+;;; ダイアログボックスを使わないようにする
+(setq use-dialog-box nil)
+(defalias 'message-box 'message)
+
+;;; 履歴をたくさん保存する
+(setq history-lenght 1000)
+
+;;; キーストロークをエコーエリアに早く表示する
+(setq echo-keystrokes 0.1)
+
+;;; 大きいファイルを開くときに警告を表示する 10MBから25MBへ
+(setq large-file-warning-threshold (* 25 1024 1024))
+
+;;; ミニバッファで入力を取り消しても履歴に残す
+;;; 誤って取り消して入力が失われるのを防ぐため
+(defadvice abort-recursive-edit (before minibuffer-save activate)
+  (when (eq (selected-window) (active-minibuffer-window))
+    (add-to-history minibuffer-history-variable (minibuffer-contents))))
+
+;;; yesをyで応答するように
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;;; ツールバーとスクロールバーを消す
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;;; goto-line ショートカット
+(global-set-key "\M-g" 'goto-line)
+
+
+;;=============================================
+;;2 Package Management
+;;=============================================
+
+;;----------------------
+;; append the  directory and its subdirectoreis to the load-path
+;;----------------------
+;; define add-to-load-path
+(defun add-to-load-path (&rest paths)
+  (let (path)
+    (dolist (path paths paths)
+      (let ((default-directory
+	      (expand-file-name (concat user-emacs-directory path))))
+	(add-to-list 'load-path default-directory)
+	(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+	    (normal-top-level-add-subdirs-to-load-path))))))
+
+;; add directories under "elisp", "elpa", "conf", "public_repos"
+(add-to-load-path "elisp" "elpa" "conf" "public_repos")
+
+;;----------------------
+;; setting for ELPA (package.el)
+;;----------------------
+;; How to use
+;; M-x list-packages
+;;     or
+;; M-x package-refresh-contents
+;; M-x package-initialize "package name"
+
+(package-initialize)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+;;----------------------
+;; auto-install
+;;----------------------
+;;How to use
+;;M-x install-elisp URL
+;;M-x install-elisp-from-emacswiki EmacsWikiのページ名
+;;M-x install-elisp-from-gist gist-id
+;;M-x autoinsall-batch 
+
+;; auto-installによってインストールされるEmacs Lispをロードパスに加える
+;; デフォルトは ~/.emacs.d/auto-install/
+(add-to-list 'load-path "~/.emacs.d/auto-install/")
+(require 'auto-install)
+
+;; set .emacs.d/elisp as the auto-install directory
+;(setq auto-install-directory "~/.emacs.d/elisp/")
+
+;; 起動時にEmacsWikiのページ名を補完候補に加える
+(auto-install-update-emacswiki-package-name t)
+
+;; install-elisp.el互換モードにする
+(auto-install-compatibility-setup)
+
+;; ediff関連のバッファを1つのフレームにまとめる
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;;=============================================
+;; 3 Key Binding
+;;=============================================
+
+;;----------------------
+;; use command key as meta key
+;;----------------------
+(setq ns-command-modifier (quote meta))
+(setq ns-alternate-modifier (quote super))
+
+;;----------------------
+;; map C-h to backspace
+;;----------------------
+(keyboard-translate ?\C-h ?\C-?)
+
+;;----------------------
+;; use C-t for toggling the windows
+;;----------------------
+(define-key global-map (kbd "C-t") 'other-window)
+
+
+;;----------------------
+;;sequential.command.el
+;;----------------------
+(require 'sequential-command-config)
+(sequential-command-setup-keys)
+
+
+;;=============================================
+;; 4 Manipulating Buffers and Files
+;;=============================================
+
+;;----------------------
+;; ffap.el open the specified file
+;;----------------------
+;; e.g. type C-x C-f with the cursor near a file name(e.g. init.el)
+;; if it exists, that file is used as the file name to be opened
+(ffap-bindings)
+
+
+;;----------------------
+;; uniquify.el
+;;----------------------
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+(setq uniquify-ignore-buffers-re "*[^*]+*")
+
+;;----------------------
+;; iswitchb.el
+;;----------------------
+(iswitchb-mode 1)
+;; バッファ読み取り関数を iswitchb にする
+(setq read-buffer-function 'iswitchb-read-buffer)
+;; 部分文字列の代わりに正規表現を使う場合は t に設定する
+(setq iswitchb-regexp nil)
+;; 新しいバッファを作成するときにいちいち聞いてこない
+(setq iswitchb-prompt-newbuffer nil)
+
+;;----------------------
+;; recentf.el
+;;----------------------
+;; 最近使ったファイルを開く
+;; M-x recentf-open-files
+;;   ref:「Emacsテクニックバイブル」 p.87
+;; Author: rubikitch <rubikitch@ruby-lang.org>
+;; Keywords: convenience, files
+;; URL: http://www.emacswiki.org/cgi-bin/wiki/download/recentf-ext.el
+(setq recentf-max-saved-itemsi 3000)
+(setq recentf-exclude '("/TAGS$" "/var/tmp/"))
+(require 'recentf-ext)
+(global-set-key [?\C-c ?r ?f] 'recentf-open-files)
+
+
+
+;;----------------------
+;; bookmark.el
+;;----------------------
+;; ブックマークを変更したら即保存する
+(setq bookmark-save-flag 1)
+;; 超整理法
+(progn
+  (setq bookmark-sort-flag nil)
+  (defun bookmark-arrange-latest-top ()
+    (let ((latest ( bookmark-get-bookmark bookmark)))
+      (setq bookmark-alist (cons latest (delq latest bookmark-aliset))))
+    (bookmark-save))
+  (add-hook 'bookmark-after-jump-hook 'bookmark-arrange-latest-top))
+
+;;----------------------
+;; emacsclient
+;;----------------------
+;; emacsclient
+(server-start)
+(defun iconify-emacs-when-server-is-done ()
+  (unless server-clients (iconify-frame)))
+;; 編集が終了したらEmacsをアイコン化する
+(add-hook 'server-done-hook 'iconify-emacs-when-server-is-done)
+;;  C-x C-cに割り当てる
+(global-set-key (kbd "C-x C-c") 'server-edit)
+;; M-x exitでEmacsを終了できるようにする
+(defalias 'exit 'save-buffers-kill-emacs)
+
+;;----------------------
+;; tempbuf.el
+;;----------------------
+(require 'tempbuf)
+;; ファイルを開いたら自動的にtempbufを有効にする
+;(add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
+;; diredバッファに対してtempbufを有効にする
+;(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
+
+;;=============================================
+;; 5 Moving Cursor
+;;=============================================
+
+;;----------------------
+;; goto-line
+;;----------------------
+
+
+;;----------------------
+;; poin-undo.el
+;;----------------------
+(require 'point-undo)
+(define-key global-map (kbd "<f7>") 'point-undo)
+(define-key global-map (kbd "S-<f7>") 'point-redo)
+
+;;----------------------
+;; bm.el
+;;----------------------
+
+;(setq-default bm-buffer-persistence t)
+;(setq bm-restore-repository-on-load t)
+;(require 'bm)
+;(add-hook 'find-file-hooks 'bm-buffer-restore)
+;(add-hook 'kill-buffer-hook 'bm-buffer-save)
+;(add-hook 'after-save-hook 'bm-buffer-save)
+;(add-hook 'after-revert-hook 'bm-buffer-restore)
+;(add-hook 'vc-before-checkin-hook 'bm-buffer-save)
+;(global-set-key (kbd "M-SPC") 'bm-toggle)
+;(global-set-key (kbd "M-[") 'bm-previous)
+;(global-set-key (kbd "M-]") 'bm-next)
+
+;;; bm.elの設定
+;;; (install-elisp "http://cvs.savannah.gnu.org/viewvc/*checkout*/bm/bm/bm.el")
+(require 'bm)
+;; キーの設定
+(global-set-key (kbd "M-SPC") 'bm-toggle)
+(global-set-key (kbd "M-[") 'bm-previous)
+(global-set-key (kbd "M-]") 'bm-next)
+;; マークのセーブ
+(setq-default bm-buffer-persistence t)
+;; セーブファイル名の設定
+(setq bm-repository-file "~/.emacs.d/bm-repository")
+;; 起動時に設定のロード
+(setq bm-restore-repository-on-load t)
+(add-hook 'after-init-hook 'bm-repository-load)
+(add-hook 'find-file-hooks 'bm-buffer-restore)
+(add-hook 'after-revert-hook 'bm-buffer-restore)
+;; 設定ファイルのセーブ
+(add-hook 'kill-buffer-hook 'bm-buffer-save)
+(add-hook 'auto-save-hook 'bm-buffer-save)
+(add-hook 'after-save-hook 'bm-buffer-save)
+(add-hook 'vc-before-checkin-hook 'bm-buffer-save)
+;; Saving the repository to file when on exit
+;; kill-buffer-hook is not called when emacs is killed, so we
+;; must save all bookmarks first
+(add-hook 'kill-emacs-hook '(lambda nil
+                              (bm-buffer-save-all)
+                              (bm-repository-save)))
+
+(set-face-background 'bm-persistent-face "DarkOrange")
+;(setq bm-highlight-style 'bm-highlight-only-line)
+
+
+;;----------------------
+;; goto-chg.el
+;;----------------------
+(require 'goto-chg)
+(define-key global-map (kbd "<f8>") 'goto-last-change)
+(define-key global-map (kbd "S-<f8>") 'goto-last-change-reverse)
+;;(global-set-key [(control ?.)] 'goto-last-change)
+;;(global-set-key [(control ?,)] 'goto-last-change-reverse)
+
+
+;;=============================================
+;; 6 Input Support
+;;=============================================
+
+;;----------------------
+;; auto-compelte
+;;----------------------
+;(when (require 'auto-complete-config nil t)
+;  (add-to-list 'ac-dictionary-directories "~/.emacs.d/elisp/ac-dict")
+;  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+;  (ac-config-default))
+;(require 'auto-complete-config)
+;(global-auto-complete-mode 1)
+
+
+;;=============================================
+;; 7 Search and Replace
+;;=============================================
+;;----------------------
+;; Moccur
+;;----------------------
+(require 'color-moccur)
+(setq moccur-split-word t)
+
+
+;;=============================================
+;; 13 For Programming 
+;;=============================================
+
+;;----------------------
+;; ipa.el
+;;----------------------
+(require 'ipa)
+
+
+;;=============================================
+;; anything
+;;=============================================
+;;;anything
+;;
+(when (require 'anything nil t)
+  (setq
+   ;;
+   anything-idle-delay 0.3
+   ;;
+   anything-input-idle-delay 0.2
+   ;;
+   anything-candidate-number-limit 100
+   ;;
+   anything-quick-update t
+   ;;
+   anything-enable-shortcuts 'alphabet)
+
+  (when (require 'anything-config nil t)
+    ;;
+    ;;
+    (setq anything-su-or-sudo "sudo"))
+  (require 'anything-match-plugin nil t)
+  
+  (when (and (executable-find "cmigemo")
+	     (require 'migemo nil t))
+    (require 'anything-migemo nil t))
+
+  (when (require 'anything-complete nil t)
+    ;;
+    (anything-lisp-complete-symbol-set-timer 150))
+
+  (require 'anything-show-completion nil t)
+  
+  (when (require 'auto-install nil t)
+    (require 'anything-auto-install nil t))
+
+  (when (require 'descbinds-anything nil t)
+    ;;
+    (descbinds-anything-install)))
+
+
+;;=============================================
+;; helm.el
+;;=============================================
+
+;;(require 'helm-config)
+;;(helm-mode 1)
+
+
+
+;;=============================================
+;; Manipulating Window
+;;=============================================
+;;----------------------------------
+;; elscreen
+;;----------------------------------
+(setq elscreen-prefix-key (kbd "M-l"))
+(when (require 'elscreen nil t)
+  (if window-system
+      (define-key elscreen-map (kbd "C-z") 'iconify-or-deiconify-frame)
+    (define-key elscreen-map (kbd "C-z") 'suspend-emacs)))
+;; タブを表示(非表示にする場合は nil を設定する)
+(setq elscreen-display-tab t)
+
+ (elscreen-start)
+
+;; 自動でスクリーンを作成
+;(defmacro elscreen-create-automatically (ad-do-it)
+;  `(if (not (elscreen-one-screen-p))
+;       ,ad-do-it
+;     (elscreen-create)
+;     (elscreen-notify-screen-modification 'force-immediately)
+;     (elscreen-message "New screen is automatically created")))
+;(defadvice elscreen-next (around elscreen-create-automatically activate)
+;  (elscreen-create-automatically ad-do-it))
+
+;(defadvice elscreen-previous (around elscreen-create-automatically activate)
+;  (elscreen-create-automatically ad-do-it))
+
+;(defadvice elscreen-toggle (around elscreen-create-automatically activate)
+;  (elscreen-create-automatically ad-do-it))
+
+;; タブ移動を簡単に
+(define-key global-map (kbd "M-t") 'elscreen-next)
+
+;;----------------------------------
+;;popwin.el (pop up anything bugger)
+;;----------------------------------
+(require 'popwin)
+(setq display-buffer-function 'popwin:display-buffer)
+
+;; for anything
+(setq anything-samewindow nil)
+(push '("*anything*" :height 30) popwin:special-display-config)
+
+;; for moccur
+(push '("*Moccur*" :position right :width 80) popwin:special-display-config)
+
+
+;;=============================================
+;; For Terminal
+;;=============================================
+(setq ns-pop-up-frames nil)
+
+
+
+;;=============================================
+;; For JavaScript
+;;=============================================
+
+;;----------------------------------
+;; js2-mode
+;;----------------------------------
+(autoload 'js-mode "js")
+(defun my-js2-indent-function ()
+  (interactive)
+  (save-restriction
+    (widen)
+    (let* ((inhibit-point-motion-hooks t)
+           (parse-status (save-excursion (syntax-ppss (point-at-bol))))
+           (offset (- (current-column) (current-indentation)))
+           (indentation (js--proper-indentation parse-status))
+           node)
+      (save-excursion
+        ;; I like to indent case and labels to half of the tab width
+        (back-to-indentation)
+        (if (looking-at "case\\s-")
+            (setq indentation (+ indentation (/ js-indent-level 2))))
+        ;; consecutive declarations in a var statement are nice if
+        ;; properly aligned, i.e:
+        ;; var foo = "bar",
+        ;;     bar = "foo";
+        (setq node (js2-node-at-point))
+        (when (and node
+                   (= js2-NAME (js2-node-type node))
+                   (= js2-VAR (js2-node-type (js2-node-parent node))))
+          (setq indentation (+ 4 indentation))))
+      (indent-line-to indentation)
+      (when (> offset 0) (forward-char offset)))))
+
+(defun my-indent-sexp ()
+  (interactive)
+  (save-restriction
+    (save-excursion
+      (widen)
+      (let* ((inhibit-point-motion-hooks t)
+             (parse-status (syntax-ppss (point)))
+             (beg (nth 1 parse-status))
+             (end-marker (make-marker))
+             (end (progn (goto-char beg) (forward-list) (point)))
+             (ovl (make-overlay beg end)))
+        (set-marker end-marker end)
+        (overlay-put ovl 'face 'highlight)
+        (goto-char beg)
+        (while (< (point) (marker-position end-marker))
+          ;; don't reindent blank lines so we don't set the "buffer
+          ;; modified" property for nothing
+          (beginning-of-line)
+          (unless (looking-at "\\s-*$")
+            (indent-according-to-mode))
+          (forward-line))
+        (run-with-timer 0.5 nil '(lambda(ovl)
+                                   (delete-overlay ovl)) ovl)))))
+(defun my-js2-mode-hook ()
+  (require 'js)
+  (setq js-indent-level 8
+        indent-tabs-mode nil
+        c-basic-offset 8)
+  (c-toggle-auto-state 0)
+  (c-toggle-hungry-state 1)
+  (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
+;  (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
+  (define-key js2-mode-map [(meta control \;)]
+    '(lambda()
+       (interactive)
+       (insert "/* -----[ ")
+       (save-excursion
+         (insert " ]----- */"))
+       ))
+  (define-key js2-mode-map [(return)] 'newline-and-indent)
+  (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+  (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
+  (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
+  (if (featurep 'js2-highlight-vars)
+    (js2-highlight-vars-mode))
+  (message "My JS2 hook"))
+
+(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+
+;;----------------------
+;; Tern.js
+;;----------------------
+
+;; set the path to tern
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+;; set the path to node
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+
+(add-to-list 'load-path "/path/to/tern/emacs/")
+(autoload 'tern-mode "tern.el" nil t)
+
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+ 
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (tern-mode t)))
+ 
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+
+
+
