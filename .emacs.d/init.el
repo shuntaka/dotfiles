@@ -627,7 +627,6 @@
 ;; set the path to node
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
-(add-to-list 'load-path "/path/to/tern/emacs/")
 (autoload 'tern-mode "tern.el" nil t)
 
 (autoload 'js2-mode "js2-mode" nil t)
@@ -641,6 +640,3 @@
    '(progn
       (require 'tern-auto-complete)
       (tern-ac-setup)))
-
-
-
