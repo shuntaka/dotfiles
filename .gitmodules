@@ -4,3 +4,6 @@
 [submodule ".emacs.d/public_repos/helm"]
 	path = .emacs.d/public_repos/helm
 	url = https://github.com/emacs-helm/helm.git
+[submodule ".emacs.d/public_repos/auto-complete"]
+	path = .emacs.d/public_repos/auto-complete
+	url = https://github.com/auto-complete/auto-complete.git
