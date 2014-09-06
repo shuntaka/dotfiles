@@ -631,6 +631,8 @@
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; flymake-jshint.el
+(add-to-list 'load-path "~/.emacs.d/public_repos/flymake-jshint.el/")
+
 (add-hook 'js2-mode-hook '(lambda ()
           (require 'flymake-jshint)
           (flymake-jshint-load)))
