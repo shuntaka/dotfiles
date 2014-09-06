@@ -430,52 +430,59 @@
 ;;=============================================
 ;; anything
 ;;=============================================
-;;;anything
-;;
-(when (require 'anything nil t)
-  (setq
-   ;;
-   anything-idle-delay 0.3
-   ;;
-   anything-input-idle-delay 0.2
-   ;;
-   anything-candidate-number-limit 100
-   ;;
-   anything-quick-update t
-   ;;
-   anything-enable-shortcuts 'alphabet)
+;; ;;;anything
+;; ;;
+;; (when (require 'anything nil t)
+;;   (setq
+;;    ;;
+;;    anything-idle-delay 0.3
+;;    ;;
+;;    anything-input-idle-delay 0.2
+;;    ;;
+;;    anything-candidate-number-limit 100
+;;    ;;
+;;    anything-quick-update t
+;;    ;;
+;;    anything-enable-shortcuts 'alphabet)
 
-  (when (require 'anything-config nil t)
-    ;;
-    ;;
-    (setq anything-su-or-sudo "sudo"))
-  (require 'anything-match-plugin nil t)
+;;   (when (require 'anything-config nil t)
+;;     ;;
+;;     ;;
+;;     (setq anything-su-or-sudo "sudo"))
+;;   (require 'anything-match-plugin nil t)
   
-  (when (and (executable-find "cmigemo")
-	     (require 'migemo nil t))
-    (require 'anything-migemo nil t))
+;;   (when (and (executable-find "cmigemo")
+;; 	     (require 'migemo nil t))
+;;     (require 'anything-migemo nil t))
 
-  (when (require 'anything-complete nil t)
-    ;;
-    (anything-lisp-complete-symbol-set-timer 150))
+;;   (when (require 'anything-complete nil t)
+;;     ;;
+;;     (anything-lisp-complete-symbol-set-timer 150))
 
-  (require 'anything-show-completion nil t)
+;;   (require 'anything-show-completion nil t)
   
-  (when (require 'auto-install nil t)
-    (require 'anything-auto-install nil t))
+;;   (when (require 'auto-install nil t)
+;;     (require 'anything-auto-install nil t))
 
-  (when (require 'descbinds-anything nil t)
-    ;;
-    (descbinds-anything-install)))
+;;   (when (require 'descbinds-anything nil t)
+;;     ;;
+;;     (descbinds-anything-install)))
 
 
 ;;=============================================
 ;; helm.el
 ;;=============================================
 
-;;(require 'helm-config)
-;;(helm-mode 1)
+(add-to-list 'load-path "~/.emacs.d/public_repos/helml/")
+(require 'helm-config)
+(helm-mode 1)
 
+(global-set-key (kbd "C-;") 'helm-for-files)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
+;; (global-set-key (kbd "C-c s") 'helm-ag)
+;; (global-set-key (kbd "C-c y") 'helm-show-kill-ring)
 
 
 ;;=============================================
