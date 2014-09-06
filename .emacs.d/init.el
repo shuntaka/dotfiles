@@ -617,6 +617,31 @@
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
+;;----------------------------------
+;; Node
+;;----------------------------------
+;; set the path to node
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+
+;;----------------------------------
+;; flymake
+;;----------------------------------
+
+;; set the path to jshint
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
+;; flymake-jshint.el
+(add-hook 'js2-mode-hook '(lambda ()
+          (require 'flymake-jshint)
+          (flymake-jshint-load)))
+
+;; for flymake-cursor.el
+(custom-set-variables
+   '(help-at-pt-timer-delay 0.9)
+   '(help-at-pt-display-when-idle '(flymake-overlay)))
+
+
+
 ;;----------------------
 ;; Tern.js
 ;;----------------------
