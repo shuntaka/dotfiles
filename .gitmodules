@@ -7,3 +7,9 @@
 [submodule ".emacs.d/public_repos/auto-complete"]
 	path = .emacs.d/public_repos/auto-complete
 	url = https://github.com/auto-complete/auto-complete.git
+[submodule "flymake-easy"]
+	path = flymake-easy
+	url = https://github.com/purcell/flymake-easy
+[submodule "emacs-flymake-cursor"]
+	path = emacs-flymake-cursor
+	url = https://github.com/illusori/emacs-flymake-cursor
