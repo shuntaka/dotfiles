@@ -10,3 +10,6 @@
 [submodule ".emacs.d/public_repos/emacs-flymake-cursor"]
 	path = .emacs.d/public_repos/emacs-flymake-cursor
 	url = https://github.com/illusori/emacs-flymake-cursor
+[submodule ".emacs.d/public_repos/auto-complete"]
+	path = .emacs.d/public_repos/auto-complete
+	url = https://github.com/auto-complete/auto-complete
