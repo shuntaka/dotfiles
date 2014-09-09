@@ -428,6 +428,21 @@
 
 
 ;;=============================================
+;; 14 Create Documents
+;;=============================================
+(setq howm-directory (concat user-emacs-directory "howm"))
+
+(setq howm-menu-lang 'ja)
+
+(setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
+
+(when (require 'howm-mode nil t)
+
+  (define-key global-map (kbd "C-c , 3") 'howm-menu))
+
+
+
+;;=============================================
 ;; anything
 ;;=============================================
 ;; ;;;anything
@@ -487,12 +502,13 @@
 ;; (global-set-key (kbd "C-c s") 'helm-ag)
 ;; (global-set-key (kbd "C-c y") 'helm-show-kill-ring)
 
-;; For find-file etc.
+;; auto complete with TAB for find-file etc.
 (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
-;; For helm-find-files etc.
+;; auto complete with TAB for helm-find-files etc.
 (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 
-
+; disable helm for kill-buffer
+(add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
 
 ;;=============================================
 ;; Manipulating Window
