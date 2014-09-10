@@ -430,6 +430,11 @@
 ;;=============================================
 ;; 14 Create Documents
 ;;=============================================
+
+
+;;----------------------
+;;; howm from Otake Tomoy's  emacs Jissen Nyumon, p148
+;;----------------------
 (setq howm-directory (concat user-emacs-directory "howm"))
 
 (setq howm-menu-lang 'ja)
@@ -438,8 +443,16 @@
 
 (when (require 'howm-mode nil t)
 
-  (define-key global-map (kbd "C-c , 3") 'howm-menu))
+  (define-key global-map (kbd "C-c , ,") 'howm-menu))
 
+(defun howm-save-buffer-and-kill ()
+  (interactive)
+  (when (and (buffer-file-name)
+	     (string-match "\\.howm" (buffer-file-name)))
+    (save-buffer)
+    (kill-buffer nil)))
+
+(define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
 
 
 ;;=============================================
