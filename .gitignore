@@ -12,7 +12,7 @@ Thumbs.db
 # Emacs #
 history
 auto-save-list
-howm
+/.emacs.d/howm
 ac-comphist.dat
 
 
