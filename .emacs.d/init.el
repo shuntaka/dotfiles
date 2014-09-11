@@ -427,6 +427,11 @@
 (cua-mode t)  ; cua-modeをオン
 (setq cua-enable-cua-keys nil)  ; CUAキーバインドを無効化
 
+;;----------------------
+;; thing
+;;----------------------
+(add-to-list 'load-path "~/.emacs.d/public_repos/thingopt-el")
+(require 'thingopt)
 
 ;;=============================================
 ;; 7 Search and Replace

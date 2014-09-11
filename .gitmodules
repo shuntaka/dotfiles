@@ -13,3 +13,6 @@
 [submodule ".emacs.d/public_repos/auto-complete"]
 	path = .emacs.d/public_repos/auto-complete
 	url = https://github.com/auto-complete/auto-complete
+[submodule ".emacs.d/public_repos/thingopt-el"]
+	path = .emacs.d/public_repos/thingopt-el
+	url = https://github.com/m2ym/thingopt-el.git
