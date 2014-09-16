@@ -142,8 +142,8 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-;;; goto-line ショートカット
-(global-set-key "\M-g" 'goto-line)
+;; ;;; goto-line ショートカット
+;; (global-set-key "\M-g" 'goto-line)
 
 
 ;;=============================================
@@ -197,7 +197,6 @@
 ;(setq auto-install-directory "~/.emacs.d/elisp/")
 
 ;; 起動時にEmacsWikiのページ名を補完候補に加える
-(auto-install-update-emacswiki-package-name t)
 
 ;; install-elisp.el互換モードにする
 (auto-install-compatibility-setup)
@@ -323,7 +322,7 @@
 ;;----------------------
 ;; goto-line
 ;;----------------------
-
+(global-set-key "\M-g" 'goto-line)
 
 ;;----------------------
 ;; poin-undo.el
@@ -432,6 +431,11 @@
 ;;----------------------
 (add-to-list 'load-path "~/.emacs.d/public_repos/thingopt-el")
 (require 'thingopt)
+(define-thing-commands)
+;; short cut
+(global-set-key (kbd "C-$") 'mark-word*)
+(global-set-key (kbd "C-\"") 'mark-string)
+(global-set-key (kbd "C-(") 'mark-up-list)
 
 ;;=============================================
 ;; 7 Search and Replace
@@ -551,6 +555,7 @@
 ;;=============================================
 ;; Manipulating Window
 ;;=============================================
+
 ;;----------------------------------
 ;; elscreen
 ;;----------------------------------
@@ -595,6 +600,15 @@
 
 ;; ;; for moccur
 ;; (push '("*Moccur*" :position right :width 80) popwin:special-display-config)
+
+;;----------------------------------
+;; smooth scroll
+;;----------------------------------
+;; ;;; smooth-scroll
+;; (add-to-list 'load-path "~/.emacs.d/public_repos/smooth-scroll.el/")
+;; (require 'smooth-scroll)
+;; (smooth-scroll-mode t)
+
 
 
 ;;=============================================
