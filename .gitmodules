@@ -28,3 +28,6 @@
 [submodule "colors/tomorrow-theme"]
 	path = colors/tomorrow-theme
 	url = https://github.com/chriskempson/tomorrow-theme.git
+[submodule ".emacs.d/public_repos/perl-completion"]
+	path = .emacs.d/public_repos/perl-completion
+	url = https://github.com/imakado/perl-completion.git
