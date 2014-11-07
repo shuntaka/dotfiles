@@ -8,4 +8,60 @@
     var asyncBe")) ((position . 34180) (time . 1411334101.523688) (annotation) (before-context-string . "      };
     };
 ") (after-context-string . "
-    // Register")))))
+    // Register")))) ("/Users/shun/nexus/gui/nboss-customer-portal/NbossCpPages/GCVComputePool.pm" (version . 2) (size . 51216) (timestamp 21572 57655 349243 0) (bookmarks ((position . 48680) (time . 1413516239.391369) (annotation) (before-context-string . "tatus => 0 };
+}
+") (after-context-string . "
+sub get_callbac")) ((position . 48479) (time . 1413516239.391395) (annotation) (before-context-string . "_networks_form,
+") (after-context-string . "        pool_pol")) ((position . 47805) (time . 1413516239.391407) (annotation) (before-context-string . "=> $data });
+}
+
+") (after-context-string . "# GET Callbacks:")) ((position . 46952) (time . 1413516239.391418) (annotation) (before-context-string . "eturn $tasks;
+}
+") (after-context-string . "
+sub get_pool_po")))) ("/Users/shun/nexus/lib/perl/Model/Handle.pm" (version . 2) (size . 27521) (timestamp 21572 57657 88116 0) (bookmarks ((position . 9240) (time . 1413515249.757895) (annotation) (before-context-string . "---------------
+") (after-context-string . "
+sub _get_query ")) ((position . 9574) (time . 1413515183.662987) (annotation) (before-context-string . "eturn $query;
+}
+") (after-context-string . "
+sub _get_author")) ((position . 13001) (time . 1413515124.495976) (annotation) (before-context-string . "ype : undef;
+}
+
+") (after-context-string . "
+sub _get_rows (")) ((position . 13670) (time . 1413515091.458621) (annotation) (before-context-string . "n $rows->[0];
+}
+") (after-context-string . "
+sub _get_single")) ((position . 13881) (time . 1413513974.401528) (annotation) (before-context-string . "_tag, $rows);
+}
+") (after-context-string . "
+sub _maybe_note")) ((position . 15319) (time . 1413515081.69534) (annotation) (before-context-string . "_tag, $rows);
+}
+") (after-context-string . "
+sub do_id_query")))) ("/Users/shun/nexus/lib/perl/Models/Nexus/CustomerPortal.pm" (version . 2) (size . 23467) (timestamp 21572 57658 641684 0) (bookmarks ((position . 22773) (time . 1413543020.379364) (annotation) (before-context-string . "init_meta_data;
+") (after-context-string . "
+    my $model =")))) ("/Users/shun/nexus/lib/perl/Util/ArgParser.pm" (version . 2) (size . 7852) (timestamp 21572 57683 799728 0) (bookmarks ((position . 900) (time . 1413505642.440377) (annotation) (before-context-string . "   }, $class;
+}
+") (after-context-string . "
+sub objnew ($$;")))) ("/Users/shun/nexus/lib/perl/UI/Callback.pm" (version . 2) (size . 1094) (timestamp 21572 57683 801742 0) (bookmarks ((position . 318) (time . 1413504611.90353) (annotation) (before-context-string . "=> 'ARRAY',
+});
+") (after-context-string . "
+sub new {
+    m")))) ("/Users/shun/nexus/gui/nboss-customer-portal/nboss-cp-gui.pl" (version . 2) (size . 30161) (timestamp 21572 57683 832306 0) (bookmarks ((position . 26993) (time . 1413456304.904279) (annotation) (before-context-string . "_and_js($page);
+") (after-context-string . "    init_cp_page")) ((position . 27273) (time . 1413469786.631121) (annotation) (before-context-string . "et-styling');
+}
+") (after-context-string . "
+sub register_ne")))) ("/Users/shun/nexus/gui/customer-portal/CpPages/Init.pm" (version . 2) (size . 36495) (timestamp 21572 57683 838062 0) (bookmarks ((position . 35233) (time . 1413455225.719449) (annotation) (before-context-string . "eturn false;
+}
+
+") (after-context-string . "
+sub init_cp_pag")))) ("/Users/shun/nexus/gui/customer-portal/CpPages/GCV.pm" (version . 2) (size . 209939) (timestamp 21572 57683 838118 0) (bookmarks ((position . 9575) (time . 1413454773.00206) (annotation) (before-context-string . "  = 'add-vapp';
+") (after-context-string . "my $A_add_vm    ")) ((position . 17873) (time . 1413454788.017392) (annotation) (before-context-string . "rg_vdcs'
+    );
+") (after-context-string . "
+    $page->add_")) ((position . 196671) (time . 1413454757.809863) (annotation) (before-context-string . " => $html });
+}
+") (after-context-string . "
+sub add_vm ($$)")))) ("/Users/shun/nexus/gui/nboss-customer-portal/web/base/javascript/cloud/gcv-service-diagram.js" (version . 2) (size . 9838) (timestamp 21582 16508 327920 0) (bookmarks ((position . 4647) (time . 1414404946.850266) (annotation) (before-context-string . "
+            },
+") (after-context-string . "            html")) ((position . 5056) (time . 1414404946.850275) (annotation) (before-context-string . "ow\");
+        }
+") (after-context-string . "        $contain")))))

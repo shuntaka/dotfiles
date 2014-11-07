@@ -1,5 +1,5 @@
 ;;=============================================
-;;Appearance
+;; Basic settings
 ;;=============================================
 ;;----------------------
 ;;font 
@@ -75,9 +75,6 @@
 ;;----------------------
 (setq frame-title-format "%f")
 
-;;=============================================
-;; Basic settings
-;;=============================================
 ;; Google 日本語入力
 (setq default-input-method "MacOSX")
 (mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ")
@@ -301,8 +298,8 @@
   (unless server-clients (iconify-frame)))
 ;; 編集が終了したらEmacsをアイコン化する
 (add-hook 'server-done-hook 'iconify-emacs-when-server-is-done)
-;;  C-x C-cに割り当てる
-(global-set-key (kbd "C-x C-c") 'server-edit)
+;; ;;  C-x C-cに割り当てる
+;; (global-set-key (kbd "C-x C-c") 'server-edit)
 ;; M-x exitでEmacsを終了できるようにする
 (defalias 'exit 'save-buffers-kill-emacs)
 
@@ -403,6 +400,7 @@
 ;;----------------------
 ;; redo+
 ;;----------------------
+(require 'redo+)
 (global-set-key (kbd "C-M-/") 'redo)
 (setq undo-no-redo t) ; 過去のundoがredoされないようにする
 (setq undo-limit 600000)
@@ -455,11 +453,19 @@
 ;; ipa.el
 ;;----------------------
 (require 'ipa)
+(set-face-background 'highlight "red")
 
 ;;----------------------
 ;; M-x which-func-mode
 ;;----------------------
 
+;;----------------------
+;; ctags
+;;----------------------
+(require 'ctags nil t)
+(setq tags-revert-without-query t)
+(setq ctags-command "/usr/local/bin/ctags -e -R ")
+(global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table) 
 
 
 ;;=============================================
@@ -756,8 +762,6 @@
    '(help-at-pt-timer-delay 0.9)
    '(help-at-pt-display-when-idle '(flymake-overlay)))
 
-
-
 ;;----------------------
 ;; Tern.js
 ;;----------------------
@@ -781,3 +785,30 @@
    '(progn
       (require 'tern-auto-complete)
       (tern-ac-setup)))
+
+;;=============================================
+;; For Perl
+;;=============================================
+;; make cperl-mode as an alias to perl-mode
+(defalias 'perl-mode 'cperl-mode)
+
+
+;; perl-completion
+(add-to-list 'load-path "~/.emacs.d/public_repos/perl-completion/")
+
+(defun perl-completion-hook()
+  (when ( require 'perl-completion nil t)
+    (perl-completion-mode t)
+    (when (require 'auto-compelte nil t)
+      (auto-compelte-mode t)
+      (make-variable-buffer-local 'ac-sources)
+      (setq ac-sources
+	    '(ac-source-perl-completion)))))
+(add-hook 'cperl-mode-hook 'perl-completion-hook)
+
+
+
+;;=============================================
+;; Miscellenious 
+;;=============================================
+
