@@ -31,3 +31,6 @@
 [submodule ".emacs.d/public_repos/perl-completion"]
 	path = .emacs.d/public_repos/perl-completion
 	url = https://github.com/imakado/perl-completion.git
+[submodule "colors/solarized"]
+	path = colors/solarized
+	url = https://github.com/altercation/solarized.git
