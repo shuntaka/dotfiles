@@ -19,3 +19,6 @@
 [submodule ".emacs.d/public_repos/smooth-scroll.el"]
 	path = .emacs.d/public_repos/smooth-scroll.el
 	url = https://github.com/k-talo/smooth-scroll.el.git
+[submodule "perl-completion"]
+	path = perl-completion
+	url = https://github.com/imakado/perl-completion.git
