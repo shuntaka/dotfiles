@@ -3,8 +3,9 @@
 ;;; Code:
 
 
-;;;### (autoloads nil nil ("ctags-pkg.el" "ctags.el") (21566 42683
-;;;;;;  280529 0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ctags-20110911.304/ctags-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/ctags-20110911.304/ctags.el")
+;;;;;;  (21612 28964 538440 0))
 
 ;;;***
 
