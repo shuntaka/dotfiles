@@ -34,3 +34,6 @@
 [submodule "colors/solarized"]
 	path = colors/solarized
 	url = https://github.com/altercation/solarized.git
+[submodule ".emacs.d/public_repos/helm-etags-plus"]
+	path = .emacs.d/public_repos/helm-etags-plus
+	url = https://github.com/jixiuf/helm-etags-plus.git

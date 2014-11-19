@@ -6,7 +6,7 @@
 ;;----------------------
 (set-face-attribute 'default nil
 	    :family "Ricty"
-            :height 140)
+            :height 160)
 
 (set-fontset-font
  nil 'japanese-jisx0208
@@ -563,6 +563,16 @@
 
 ; disable helm for kill-buffer
 (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
+
+;;----------------------------------------------
+;;helm-etags-plus
+;;----------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/public_repos/helm-etags-plus")
+(require 'helm-etags+)
+(define-key global-map (kbd "M-.") 'helm-etags+-select)
+(define-key global-map (kbd "C-.") 'helm-etags+-history-go-forward)
+(define-key global-map (kbd "C-,") 'helm-etags+-history-go-back)
+
 
 ;;=============================================
 ;; Manipulating Window

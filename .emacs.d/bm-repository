@@ -45,11 +45,7 @@ sub objnew ($$;")))) ("/Users/shun/nexus/lib/perl/UI/Callback.pm" (version . 2) 
 });
 ") (after-context-string . "
 sub new {
-    m")))) ("/Users/shun/nexus/gui/nboss-customer-portal/nboss-cp-gui.pl" (version . 2) (size . 30161) (timestamp 21572 57683 832306 0) (bookmarks ((position . 26993) (time . 1413456304.904279) (annotation) (before-context-string . "_and_js($page);
-") (after-context-string . "    init_cp_page")) ((position . 27273) (time . 1413469786.631121) (annotation) (before-context-string . "et-styling');
-}
-") (after-context-string . "
-sub register_ne")))) ("/Users/shun/nexus/gui/customer-portal/CpPages/Init.pm" (version . 2) (size . 36495) (timestamp 21572 57683 838062 0) (bookmarks ((position . 35233) (time . 1413455225.719449) (annotation) (before-context-string . "eturn false;
+    m")))) ("/Users/shun/nexus/gui/customer-portal/CpPages/Init.pm" (version . 2) (size . 36495) (timestamp 21572 57683 838062 0) (bookmarks ((position . 35233) (time . 1413455225.719449) (annotation) (before-context-string . "eturn false;
 }
 
 ") (after-context-string . "
@@ -64,4 +60,8 @@ sub add_vm ($$)")))) ("/Users/shun/nexus/gui/nboss-customer-portal/web/base/java
             },
 ") (after-context-string . "            html")) ((position . 5056) (time . 1414404946.850275) (annotation) (before-context-string . "ow\");
         }
-") (after-context-string . "        $contain")))))
+") (after-context-string . "        $contain")))) ("/Users/shun/nexus/gui/nboss-customer-portal/nboss-cp-gui.pl" (version . 2) (size . 30161) (timestamp 21612 38822 503349 0) (bookmarks ((position . 27273) (time . 1416402315.194046) (annotation) (before-context-string . "et-styling');
+}
+") (after-context-string . "
+sub register_ne")) ((position . 26993) (time . 1416402315.194038) (annotation) (before-context-string . "_and_js($page);
+") (after-context-string . "    init_cp_page")))))
