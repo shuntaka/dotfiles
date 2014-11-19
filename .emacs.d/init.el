@@ -462,8 +462,6 @@
 ;;----------------------
 ;; ctags
 ;;----------------------
-
-(add-to-list 'load-path "~/.emacs.d/ctags-20110911.304/")
 (require ‘ctags nil t)
 (setq tags-revert-without-query t) 
 ;; ctagsを呼び出すコマンドライン。パスが通っていればフルパスでなくてもよい 
