@@ -236,7 +236,7 @@
 ;;----------------------
 ;; ffap.el open the specified file
 ;;----------------------
-;; e.g. type C-x C-f with the cursor near a file name(e.g. init.el)
+
 ;; if it exists, that file is used as the file name to be opened
 (ffap-bindings)
 
@@ -462,16 +462,15 @@
 ;;----------------------
 ;; ctags
 ;;----------------------
-
-(add-to-list 'load-path "~/.emacs.d/elpa/ctags-20110911.304/")
-(require ‘ctags nil t)
+(add-to-list 'load-path "~/.emacs.d/elpa/ctags")
+(require 'ctags nil t)
 (setq tags-revert-without-query t) 
 ;; ctagsを呼び出すコマンドライン。パスが通っていればフルパスでなくてもよい 
 ;; etags互換タグを利用する場合はコメントを外す
-;; (setq ctags-command “ctags -e -R “) 
+;; (setq ctags-command "ctags -e -R ") 
 ;; anything-exuberant-ctags.elを利用しない場合はコメントアウトする
- (setq ctags-command “ctags -R –fields="+afikKlmnsSzt" “)
- (global-set-key (kbd “<f5>”) ‘ctags-create-or-update-tags-table)
+ (setq ctags-command "ctags -R --fields=\"+afikKlmnsSzt\" ")
+ (global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table)
 
 
 
