@@ -6,7 +6,7 @@
 ;;----------------------
 (set-face-attribute 'default nil
 	    :family "Ricty"
-            :height 160)
+            :height 140)
 
 (set-fontset-font
  nil 'japanese-jisx0208
@@ -462,15 +462,10 @@
 ;;----------------------
 ;; ctags
 ;;----------------------
-(require ‘ctags nil t)
-(setq tags-revert-without-query t) 
-;; ctagsを呼び出すコマンドライン。パスが通っていればフルパスでなくてもよい 
-;; etags互換タグを利用する場合はコメントを外す
-;; (setq ctags-command “ctags -e -R “) 
-;; anything-exuberant-ctags.elを利用しない場合はコメントアウトする
- (setq ctags-command “ctags -R –fields="+afikKlmnsSzt" “)
- (global-set-key (kbd “<f5>”) ‘ctags-create-or-update-tags-table)
-
+(require 'ctags nil t)
+(setq tags-revert-without-query t)
+(setq ctags-command "/usr/local/bin/ctags -e -R ")
+(global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table) 
 
 
 ;;=============================================
@@ -653,13 +648,6 @@
                            (split-window-horizontally-n 3)))
 
 ;;=============================================
-;; Shell and Terminal
-;;=============================================
-(when (require 'multi-term nil t)
-  (setq multi-term-program "/usr/local/bin/zsh"))
-
-
-;;=============================================
 ;; For Terminal
 ;;=============================================
 (setq ns-pop-up-frames nil)
@@ -819,43 +807,8 @@
 (add-hook 'cperl-mode-hook 'perl-completion-hook)
 
 
-;;=============================================
-;; DB
-;;=============================================
-;; (defadvice sql-postgres (around sql-postgres-around activate)
-;;   "SSH to linux, then connect"
-;;   (let ((default-directory "/ssh:pelican:"))
-;;     ad-do-it))
-
-
-;; ;; SQLサーバへ接続するためのデフォルト情報 ;; 
-;; (setq sql-user “nexus_admin” ; デフォルトユーザ名 ;; 
-;;       sql-database “nexus_eu” ; データベース名 ;; 
-;;       sql-server “81.20.75.83” ; ホスト名 ;; 
-;;       sql-product ‘postgres) ; データベースの種類
-
 
 ;;=============================================
-;; TRAMP
+;; Miscellenious 
 ;;=============================================
-
-(require 'tramp)
-(setq tramp-default-method "ssh")
- 
-;;; ローカルsudoの設定
-(add-to-list 'tramp-default-proxies-alist
-             '(nil "\\`root\\'" "/ssh:%h:"))
-(add-to-list 'tramp-default-proxies-alist
-             '("localhost" nil nil))
-(add-to-list 'tramp-default-proxies-alist
-             '((regexp-quote (system-name)) nil nil))
- 
-;;; 多段ssh
-;; 一段目
-(add-to-list 'tramp-default-proxies-alist
-             '("egret" "\\`root\\'" "/ssh:shunsuke.takamiya@egret:"))
-;; 二段目
-(add-to-list 'tramp-default-proxies-alist
-             '("pelican" nil "/sudo:pelican:"))
-
 

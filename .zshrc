@@ -115,7 +115,7 @@ bindkey '^R' history-incremental-pattern-search-backward
  
 ########################################
 # エイリアス
-alias emacs='open -a Emacs'
+ 
 alias la='ls -a'
 alias ll='ls -l'
  
