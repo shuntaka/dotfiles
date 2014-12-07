@@ -8,9 +8,10 @@
 	    :family "Ricty"
             :height 160)
 
+(when (eq system-type 'darwin)
 (set-fontset-font
  nil 'japanese-jisx0208
-(font-spec :family "Hiragino Kaku Gothic ProN"))
+(font-spec :family "Hiragino Kaku Gothic ProN")))
 
 ;;----------------------
 ;; color theme 
