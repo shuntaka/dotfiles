@@ -8,9 +8,10 @@
 	    :family "Ricty"
             :height 160)
 
+(when (eq system-type 'darwin)
 (set-fontset-font
  nil 'japanese-jisx0208
-(font-spec :family "Hiragino Kaku Gothic ProN"))
+(font-spec :family "Hiragino Kaku Gothic ProN")))
 
 ;;----------------------
 ;; color theme 
@@ -75,11 +76,6 @@
 ;;----------------------
 (setq frame-title-format "%f")
 
-;; Google 日本語入力
-(setq default-input-method "MacOSX")
-(mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ")
-
-
 ;;; 履歴を次回Emacs起動時にも保存する
 (savehist-mode 1)
 
@@ -135,12 +131,21 @@
 ;;; yesをyで応答するように
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;;; ツールバーとスクロールバーを消す
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-
 ;; ;;; goto-line ショートカット
 ;; (global-set-key "\M-g" 'goto-line)
+
+;; macの時、Google 日本語入力
+(when (eq system-type 'darwin)
+(setq default-input-method "MacOSX")
+(mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ"))
+
+;;; ターミナル以外はツールバーとスクロールバーを消す
+(when window-system
+(tool-bar-mode 0)    
+(scroll-bar-mode 0))
+;; (when (eq system-type 'darwin)
+;; (tool-bar-mode -1)
+;; (scroll-bar-mode -1))
 
 
 ;;=============================================
@@ -570,6 +575,7 @@
 (add-to-list 'load-path "~/.emacs.d/public_repos/helm-etags-plus")
 (require 'helm-etags+)
 (define-key global-map (kbd "M-.") 'helm-etags+-select)
+(define-key global-map (kbd "M-,") 'helm-etags+-history-go-back)
 (define-key global-map (kbd "C-.") 'helm-etags+-history-go-forward)
 (define-key global-map (kbd "C-,") 'helm-etags+-history-go-back)
 
@@ -657,9 +663,9 @@
                            (interactive)
                            (split-window-horizontally-n 3)))
 
-;;----------------------------------------------
-;;縦分割・横分割トグル
-;;----------------------------------------------
+;;=============================================
+;; toggle window split
+;;=============================================
 (defun window-toggle-division ()
   "ウィンドウ 2 分割時に、縦分割<->横分割"
   (interactive)
@@ -676,8 +682,6 @@
 
     (switch-to-buffer-other-window other-buf)
     (other-window -1)))
-
-
 
 ;;=============================================
 ;; For Terminal
@@ -837,6 +841,7 @@
       (setq ac-sources
 	    '(ac-source-perl-completion)))))
 (add-hook 'cperl-mode-hook 'perl-completion-hook)
+
 
 
 ;;=============================================
