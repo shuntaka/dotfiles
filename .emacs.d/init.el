@@ -14,6 +14,7 @@
 ;; Helm
 ;; Manipulating  Frame and Window
 ;; Working with Terminal
+;; Tmux
 ;; terminal on emacs
 ;; Tramp
 ;; For JavaScript
@@ -282,13 +283,13 @@
 ;;----------------------
 ;; iswitchb.el
 ;;----------------------
-(iswitchb-mode 1)
-;; バッファ読み取り関数を iswitchb にする
-(setq read-buffer-function 'iswitchb-read-buffer)
-;; 部分文字列の代わりに正規表現を使う場合は t に設定する
-(setq iswitchb-regexp nil)
-;; 新しいバッファを作成するときにいちいち聞いてこない
-(setq iswitchb-prompt-newbuffer nil)
+;; (iswitchb-mode 1)
+;; ;; バッファ読み取り関数を iswitchb にする
+;; (setq read-buffer-function 'iswitchb-read-buffer)
+;; ;; 部分文字列の代わりに正規表現を使う場合は t に設定する
+;; (setq iswitchb-regexp nil)
+;; ;; 新しいバッファを作成するときにいちいち聞いてこない
+;; (setq iswitchb-prompt-newbuffer nil)
 
 ;;----------------------
 ;; recentf.el
@@ -732,6 +733,16 @@
 ;;===========================================================================
 (when (require 'multi-term nil t)
   (setq multi-term-program "/usr/local/bin/zsh"))
+
+;;===========================================================================
+;; Tmux
+;;===========================================================================
+(defun terminal-init-screen () 
+      "Terminal initialization function for screen." 
+      ;; Use the xterm color initialization code. 
+      (load "term/xterm") 
+      (xterm-register-default-colors))
+
 
 
 ;;===========================================================================
