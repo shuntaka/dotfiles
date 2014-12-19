@@ -1,6 +1,30 @@
-;;=============================================
-;; Basic settings
-;;=============================================
+;;##########################################################################
+;; Index
+;;##########################################################################
+;; Basic Settings
+;; 2. Package Management
+;; 3. Key Binding
+;; 4. Manipulating Buffers and Files
+;; 5. Moving Cursor
+;; 6. Input Support
+;; 7. Search and Replace
+;; 8. 
+;; 13. For Programming
+;; 14. Create Documents
+;; Helm
+;; Manipulating  Frame and Window
+;; Working with Terminal
+;; terminal on emacs
+;; Tramp
+;; For JavaScript
+;; For Perl
+;; Miscellenious
+
+
+
+;;===========================================================================
+;; Basic Settings
+;;===========================================================================
 ;;----------------------
 ;;font 
 ;;----------------------
@@ -8,10 +32,6 @@
 	    :family "Ricty"
             :height 160)
 
-(when (eq system-type 'darwin)
-(set-fontset-font
- nil 'japanese-jisx0208
-(font-spec :family "Hiragino Kaku Gothic ProN")))
 
 ;;----------------------
 ;; color theme 
@@ -139,6 +159,12 @@
 (setq default-input-method "MacOSX")
 (mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ"))
 
+(when (eq system-type 'darwin)
+(set-fontset-font
+ nil 'japanese-jisx0208
+(font-spec :family "Hiragino Kaku Gothic ProN")))
+
+
 ;;; ターミナル以外はツールバーとスクロールバーを消す
 (when window-system
 (tool-bar-mode 0)    
@@ -149,7 +175,7 @@
 
 
 ;;=============================================
-;;2 Package Management
+;;2. Package Management
 ;;=============================================
 
 ;;----------------------
@@ -207,7 +233,7 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;;=============================================
-;; 3 Key Binding
+;; 3. Key Binding
 ;;=============================================
 
 ;;----------------------
@@ -235,7 +261,7 @@
 
 
 ;;=============================================
-;; 4 Manipulating Buffers and Files
+;; 4. Manipulating Buffers and Files
 ;;=============================================
 
 ;;----------------------
@@ -317,8 +343,17 @@
 ;; diredバッファに対してtempbufを有効にする
 ;(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
 
+;----------------------------------------------
+; sudo-ext.el
+;----------------------------------------------
+;; (server-start) ;  sudoeditで使う
+;; (require 'sudo-ext)
+
+
+
+
 ;;=============================================
-;; 5 Moving Cursor
+;; 5. Moving Cursor
 ;;=============================================
 
 ;;----------------------
@@ -543,9 +578,13 @@
 ;;     (descbinds-anything-install)))
 
 
-;;=============================================
+;;===========================================================================
+;; Helm
+;;===========================================================================
+
+;;----------------------------------------------
 ;; helm.el
-;;=============================================
+;;----------------------------------------------
 
 (add-to-list 'load-path "~/.emacs.d/public_repos/helml/")
 (require 'helm-config)
@@ -581,7 +620,7 @@
 
 
 ;;=============================================
-;; Manipulating Window
+;; Manipulating Frame and Window
 ;;=============================================
 
 ;;----------------------------------
@@ -590,8 +629,8 @@
 (setq elscreen-prefix-key (kbd "M-l"))
 (when (require 'elscreen nil t)
   (if window-system
-      (define-key elscreen-map (kbd "C-z") 'iconify-or-deiconify-frame)
-    (define-key elscreen-map (kbd "C-z") 'suspend-emacs)))
+      (define-key elscreen-map (kbd "M-z") 'iconify-or-deiconify-frame)
+    (define-key elscreen-map (kbd "M-z") 'suspend-emacs)))
 ;; タブを表示(非表示にする場合は nil を設定する)
 (setq elscreen-display-tab t)
 
@@ -663,9 +702,9 @@
                            (interactive)
                            (split-window-horizontally-n 3)))
 
-;;=============================================
+;;----------------------------------------------
 ;; toggle window split
-;;=============================================
+;;----------------------------------------------
 (defun window-toggle-division ()
   "ウィンドウ 2 分割時に、縦分割<->横分割"
   (interactive)
@@ -684,9 +723,23 @@
     (other-window -1)))
 
 ;;=============================================
-;; For Terminal
+;; Working with Terminal
 ;;=============================================
-(setq ns-pop-up-frames nil)
+;; (setq ns-pop-up-frames nil)
+
+;;===========================================================================
+;; Terminal on Emacs
+;;===========================================================================
+(when (require 'multi-term nil t)
+  (setq multi-term-program "/usr/local/bin/zsh"))
+
+
+;;===========================================================================
+;; Tramp
+;;===========================================================================
+
+(add-to-list 'tramp-default-proxies-alist
+             '(nil "\\`root\\'" "/ssh:%h:"))
 
 
 
