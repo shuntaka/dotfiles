@@ -696,10 +696,10 @@
       (split-window-horizontally
        (- (window-width) (/ (window-width) num_wins)))
       (split-window-horizontally-n (- num_wins 1)))))
-(global-set-key "\C-x#" '(lambda ()
+(global-set-key "\C-x@" '(lambda ()
                            (interactive)
                            (split-window-vertically-n 3)))
-(global-set-key "\C-x$" '(lambda ()
+(global-set-key "\C-x#" '(lambda ()
                            (interactive)
                            (split-window-horizontally-n 3)))
 
