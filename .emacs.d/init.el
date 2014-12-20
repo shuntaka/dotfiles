@@ -174,6 +174,14 @@
 ;; (tool-bar-mode -1)
 ;; (scroll-bar-mode -1))
 
+(unless  window-system
+(set-language-environment "Japanese")
+(prefer-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(setq file-name-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8))
 
 ;;=============================================
 ;;2. Package Management
