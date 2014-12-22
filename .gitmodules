@@ -1,9 +1,6 @@
 [submodule ".emacs.d/public_repos/flymake-jshint.el"]
 	path = .emacs.d/public_repos/flymake-jshint.el
 	url = https://github.com/Wilfred/flymake-jshint.el.git
-[submodule ".emacs.d/public_repos/helm"]
-	path = .emacs.d/public_repos/helm
-	url = https://github.com/emacs-helm/helm.git
 [submodule ".emacs.d/public_repos/flymake-easy"]
 	path = .emacs.d/public_repos/flymake-easy
 	url = https://github.com/purcell/flymake-easy
@@ -37,3 +34,6 @@
 [submodule ".emacs.d/public_repos/helm-etags-plus"]
 	path = .emacs.d/public_repos/helm-etags-plus
 	url = https://github.com/jixiuf/helm-etags-plus.git
+[submodule ".emacs.d/public_repos/helm"]
+	path = .emacs.d/public_repos/helm
+	url = https://github.com/emacs-helm/helm.git
