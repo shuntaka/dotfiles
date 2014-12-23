@@ -15,6 +15,7 @@
 ;; Manipulating  Frame and Window
 ;; Working with Terminal
 ;; Tmux
+;; emamux
 ;; terminal on emacs
 ;; Tramp
 ;; For JavaScript
@@ -493,6 +494,14 @@
 (require 'color-moccur)
 (setq moccur-split-word t)
 
+;;=============================================
+;; 8 Make Emacs More Convinient
+;;=============================================
+(require 'col-highlight)
+(column-highlight-mode 1)
+(toggle-highlight-column-when-idle 1)
+(col-highlight-set-interval 6)
+
 
 ;;=============================================
 ;; 13 For Programming 
@@ -751,7 +760,12 @@
       (load "term/xterm") 
       (xterm-register-default-colors))
 
+;;===========================================================================
+;; emamux
+;;===========================================================================
 (require 'emamux)
+
+(global-set-key (kbd "C-x M-w") 'emamux:copy-kill-ring) 
 
 ;;===========================================================================
 ;; Tramp
