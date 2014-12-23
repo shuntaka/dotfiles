@@ -31,7 +31,7 @@
 ;;----------------------
 (set-face-attribute 'default nil
 	    :family "Ricty"
-            :height 160)
+            :height 170)
 
 
 ;;----------------------
@@ -751,7 +751,7 @@
       (load "term/xterm") 
       (xterm-register-default-colors))
 
-
+(require 'emamux)
 
 ;;===========================================================================
 ;; Tramp
