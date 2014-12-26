@@ -8,16 +8,12 @@
 ;; 5. Moving Cursor
 ;; 6. Input Support
 ;; 7. Search and Replace
-;; 8. 
+;; 8. Making Emacs Even More Convinient
+;; 9. External Program
 ;; 13. For Programming
 ;; 14. Create Documents
 ;; Helm
 ;; Manipulating  Frame and Window
-;; Working with Terminal
-;; Tmux
-;; emamux
-;; terminal on emacs
-;; Tramp
 ;; For JavaScript
 ;; For Perl
 ;; Miscellenious
@@ -28,30 +24,45 @@
 ;; Basic Settings
 ;;===========================================================================
 ;;----------------------
-;;font 
-;;----------------------
-(set-face-attribute 'default nil
-	    :family "Ricty"
-            :height 170)
-
-
-;;----------------------
 ;; color theme 
 ;;----------------------
 (when (require 'color-theme nil t)
 (color-theme-initialize))
-
-;;----------------------
-;;zenburn 
-;;----------------------
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+
+;;Zenburn For Non-Terminal
+(when window-system
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+
  '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
+ '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default)))))
+
+;;Molokai  For Terminal
+;; (when (eq window-system 'nil)
+;; (setq custom-theme-directory "~/.emacs.d/themes")
+;; (load-theme 'molokai t)
+;; (enable-theme 'molokai))
+
+(when (eq window-system 'nil)
+(load-theme 'solarized-dark t))
+
+
+;;----------------------
+;;font 
+;;----------------------
+(set-face-attribute 'default nil
+	    :family "Ricty"
+            :height 180)
+
+;;----------------------------------------------
+;; Background Color for Region
+;;----------------------------------------------
+(set-face-background 'region "darkgreen")
 
 ;;----------------------
 ;; Hilight the current line
@@ -68,19 +79,28 @@
 
 
 ;;----------------------
-;;hilight parenthesis
+;;Hilight Parenthesis
 ;;----------------------
 (show-paren-mode t)
 
-
 ;;----------------------
-;; emphasize parenthesis
+;; Emphasize Parenthesis
 ;;----------------------
 (setq show-paren-delay 0)
 (show-paren-mode t)
 (setq show-paren-style 'expression)
 (set-face-background 'show-paren-match-face nil)
 (set-face-underline-p 'show-paren-match-face "yellow")
+
+;;----------------------------------------------
+;; ターミナル以外はツーバーとスクロールバーを消す
+;;----------------------------------------------
+(when window-system
+(tool-bar-mode 0)    
+(scroll-bar-mode 0))
+;; (when (eq system-type 'darwin)
+;; (tool-bar-mode -1)
+;; (scroll-bar-mode -1))
 
 ;;----------------------
 ;; display row  line-number
@@ -98,6 +118,14 @@
 ;;----------------------
 (setq frame-title-format "%f")
 
+;;----------------------------------------------
+;; tab width
+;;----------------------------------------------
+(setq-default tab-width 4)
+
+;;----------------------------------------------
+;; from Emacs Technique Bible Basic Setting
+;;----------------------------------------------
 ;;; 履歴を次回Emacs起動時にも保存する
 (savehist-mode 1)
 
@@ -156,33 +184,6 @@
 ;; ;;; goto-line ショートカット
 ;; (global-set-key "\M-g" 'goto-line)
 
-;; macの時、Google 日本語入力
-(when (eq system-type 'darwin)
-(setq default-input-method "MacOSX")
-(mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ"))
-
-(when (eq system-type 'darwin)
-(set-fontset-font
- nil 'japanese-jisx0208
-(font-spec :family "Hiragino Kaku Gothic ProN")))
-
-
-;;; ターミナル以外はツールバーとスクロールバーを消す
-(when window-system
-(tool-bar-mode 0)    
-(scroll-bar-mode 0))
-;; (when (eq system-type 'darwin)
-;; (tool-bar-mode -1)
-;; (scroll-bar-mode -1))
-
-(unless  window-system
-(set-language-environment "Japanese")
-(prefer-coding-system 'utf-8-unix)
-(set-default-coding-systems 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(setq file-name-coding-system 'utf-8)
-(setq default-buffer-file-coding-system 'utf-8))
 
 ;;=============================================
 ;;2. Package Management
@@ -256,6 +257,11 @@
 ;; map C-h to backspace
 ;;----------------------
 (keyboard-translate ?\C-h ?\C-?)
+
+;;----------------------
+;; use C-c l for toggle-truncate-lines
+;;----------------------
+(define-key global-map (kbd "C-c l") 'toggle-truncate-lines)
 
 ;;----------------------
 ;; use C-t for toggling the windows
@@ -334,9 +340,9 @@
 ;; emacsclient
 ;;----------------------
 ;; emacsclient
-(server-start)
-(defun iconify-emacs-when-server-is-done ()
-  (unless server-clients (iconify-frame)))
+;; (server-start)
+;; (defun iconify-emacs-when-server-is-done ()
+;;   (unless server-clients (iconify-frame)))
 ;; 編集が終了したらEmacsをアイコン化する
 (add-hook 'server-done-hook 'iconify-emacs-when-server-is-done)
 ;; ;;  C-x C-cに割り当てる
@@ -498,9 +504,56 @@
 ;; 8 Make Emacs More Convinient
 ;;=============================================
 (require 'col-highlight)
-(column-highlight-mode 1)
-(toggle-highlight-column-when-idle 1)
-(col-highlight-set-interval 6)
+;; (column-highlight-mode 1)
+;; (toggle-highlight-column-when-idle 1)
+;; (col-highlight-set-interval 6)
+
+
+
+;;=================================================================
+;; 9. External Program
+;;=================================================================
+;;----------------------------------------------
+;; Google日本語入力(Macの時)
+;;----------------------------------------------
+;;Google 日本語入力
+(when (eq system-type 'darwin)
+(setq default-input-method "MacOSX")
+(mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ"))
+
+(when (eq system-type 'darwin)
+(set-fontset-font
+ nil 'japanese-jisx0208
+(font-spec :family "Hiragino Kaku Gothic ProN")))
+
+;;----------------------------------------------
+;; Multi-Term
+;;----------------------------------------------
+;;multi-term
+(when (require 'multi-term nil t)
+  (setq multi-term-program "/usr/local/bin/zsh"))
+
+;;----------------------------------------------
+;; Tramp
+;;----------------------------------------------
+(require 'tramp)
+(add-to-list 'tramp-default-proxies-alist
+             '(nil "\\`root\\'" "/ssh:%h:"))
+
+;;----------------------------------------------
+;; Tmux
+;;----------------------------------------------
+(defun terminal-init-screen () 
+      "Terminal initialization function for screen." 
+      ;; Use the xterm color initialization code. 
+      (load "term/xterm") 
+      (xterm-register-default-colors))
+
+;;----------------------------------------------
+;; emamux
+;;----------------------------------------------
+(require 'emamux)
+(global-set-key (kbd "C-x M-w") 'emamux:copy-kill-ring) 
 
 
 ;;=============================================
@@ -554,51 +607,9 @@
 (define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
 
 
-;;=============================================
-;; anything
-;;=============================================
-;; ;;;anything
-;; ;;
-;; (when (require 'anything nil t)
-;;   (setq
-;;    ;;
-;;    anything-idle-delay 0.3
-;;    ;;
-;;    anything-input-idle-delay 0.2
-;;    ;;
-;;    anything-candidate-number-limit 100
-;;    ;;
-;;    anything-quick-update t
-;;    ;;
-;;    anything-enable-shortcuts 'alphabet)
-
-;;   (when (require 'anything-config nil t)
-;;     ;;
-;;     ;;
-;;     (setq anything-su-or-sudo "sudo"))
-;;   (require 'anything-match-plugin nil t)
-  
-;;   (when (and (executable-find "cmigemo")
-;; 	     (require 'migemo nil t))
-;;     (require 'anything-migemo nil t))
-
-;;   (when (require 'anything-complete nil t)
-;;     ;;
-;;     (anything-lisp-complete-symbol-set-timer 150))
-
-;;   (require 'anything-show-completion nil t)
-  
-;;   (when (require 'auto-install nil t)
-;;     (require 'anything-auto-install nil t))
-
-;;   (when (require 'descbinds-anything nil t)
-;;     ;;
-;;     (descbinds-anything-install)))
-
-
-;;===========================================================================
+;;===================================================================
 ;; Helm
-;;===========================================================================
+;;===================================================================
 
 ;;----------------------------------------------
 ;; helm.el
@@ -644,34 +655,69 @@
 ;;----------------------------------
 ;; elscreen
 ;;----------------------------------
+;;; プレフィクスキーはC-z
 (setq elscreen-prefix-key (kbd "M-l"))
-(when (require 'elscreen nil t)
-  (if window-system
-      (define-key elscreen-map (kbd "M-z") 'iconify-or-deiconify-frame)
-    (define-key elscreen-map (kbd "M-z") 'suspend-emacs)))
-;; タブを表示(非表示にする場合は nil を設定する)
-(setq elscreen-display-tab t)
-
- (elscreen-start)
-
-;; 自動でスクリーンを作成
-;(defmacro elscreen-create-automatically (ad-do-it)
-;  `(if (not (elscreen-one-screen-p))
-;       ,ad-do-it
-;     (elscreen-create)
-;     (elscreen-notify-screen-modification 'force-immediately)
-;     (elscreen-message "New screen is automatically created")))
-;(defadvice elscreen-next (around elscreen-create-automatically activate)
-;  (elscreen-create-automatically ad-do-it))
-
-;(defadvice elscreen-previous (around elscreen-create-automatically activate)
-;  (elscreen-create-automatically ad-do-it))
-
-;(defadvice elscreen-toggle (around elscreen-create-automatically activate)
-;  (elscreen-create-automatically ad-do-it))
+(elscreen-start)
+;;; タブの先頭に[X]を表示しない
+(setq elscreen-tab-display-kill-screen nil)
+;;; header-lineの先頭に[<->]を表示しない
+(setq elscreen-tab-display-control nil)
+;;; バッファ名・モード名からタブに表示させる内容を決定する(デフォルト設定)
+(setq elscreen-buffer-to-nickname-alist
+      '(("^dired-mode$" .
+         (lambda ()
+           (format "Dired(%s)" dired-directory)))
+        ("^Info-mode$" .
+         (lambda ()
+           (format "Info(%s)" (file-name-nondirectory Info-current-file))))
+        ("^mew-draft-mode$" .
+         (lambda ()
+           (format "Mew(%s)" (buffer-name (current-buffer)))))
+        ("^mew-" . "Mew")
+        ("^irchat-" . "IRChat")
+        ("^liece-" . "Liece")
+        ("^lookup-" . "Lookup")))
+(setq elscreen-mode-to-nickname-alist
+      '(("[Ss]hell" . "shell")
+        ("compilation" . "compile")
+        ("-telnet" . "telnet")
+        ("dict" . "OnlineDict")
+        ("*WL:Message*" . "Wanderlust")))
 
 ;; タブ移動を簡単に
 (define-key global-map (kbd "M-t") 'elscreen-next)
+
+;;----------------------------------
+;; elscreen_Old
+;;----------------------------------
+;; (setq elscreen-prefix-key (kbd "M-l"))
+;; (when (require 'elscreen nil t)
+;;   (if window-system
+;;       (define-key elscreen-map (kbd "M-z") 'iconify-or-deiconify-frame)
+;;     (define-key elscreen-map (kbd "M-z") 'suspend-emacs)))
+;; ;; タブを表示(非表示にする場合は nil を設定する)
+;; (setq elscreen-display-tab t)
+
+;; (elscreen-start)
+
+;; ;; 自動でスクリーンを作成
+;; ;(defmacro elscreen-create-automatically (ad-do-it)
+;; ;  `(if (not (elscreen-one-screen-p))
+;; ;       ,ad-do-it
+;; ;     (elscreen-create)
+;; ;     (elscreen-notify-screen-modification 'force-immediately)
+;; ;     (elscreen-message "New screen is automatically created")))
+;; ;(defadvice elscreen-next (around elscreen-create-automatically activate)
+;; ;  (elscreen-create-automatically ad-do-it))
+
+;; ;(defadvice elscreen-previous (around elscreen-create-automatically activate)
+;; ;  (elscreen-create-automatically ad-do-it))
+
+;; ;(defadvice elscreen-toggle (around elscreen-create-automatically activate)
+;; ;  (elscreen-create-automatically ad-do-it))
+
+;; ;; タブ移動を簡単に
+;; (define-key global-map (kbd "M-t") 'elscreen-next)
 
 ;;----------------------------------
 ;;popwin.el (pop up anything bugger)
@@ -740,40 +786,10 @@
     (switch-to-buffer-other-window other-buf)
     (other-window -1)))
 
-;;=============================================
+;;----------------------------------------------
 ;; Working with Terminal
-;;=============================================
+;;----------------------------------------------
 ;; (setq ns-pop-up-frames nil)
-
-;;===========================================================================
-;; Terminal on Emacs
-;;===========================================================================
-(when (require 'multi-term nil t)
-  (setq multi-term-program "/usr/local/bin/zsh"))
-
-;;===========================================================================
-;; Tmux
-;;===========================================================================
-(defun terminal-init-screen () 
-      "Terminal initialization function for screen." 
-      ;; Use the xterm color initialization code. 
-      (load "term/xterm") 
-      (xterm-register-default-colors))
-
-;;===========================================================================
-;; emamux
-;;===========================================================================
-(require 'emamux)
-
-(global-set-key (kbd "C-x M-w") 'emamux:copy-kill-ring) 
-
-;;===========================================================================
-;; Tramp
-;;===========================================================================
-
-(add-to-list 'tramp-default-proxies-alist
-             '(nil "\\`root\\'" "/ssh:%h:"))
-
 
 
 ;;=============================================
