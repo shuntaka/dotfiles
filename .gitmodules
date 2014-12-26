@@ -40,3 +40,6 @@
 [submodule ".emacs.d/public_repos/emacs-emamux"]
 	path = .emacs.d/public_repos/emacs-emamux
 	url = https://github.com/syohex/emacs-emamux.git
+[submodule ".emacs.d/themes/emacs-color-theme-solarized"]
+	path = .emacs.d/themes/emacs-color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
