@@ -40,7 +40,10 @@
  ;; If there is more than one, they won't work right.
 
  '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default)))))
+ '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
+
+
+)
 
 ;;Molokai  For Terminal
 ;; (when (eq window-system 'nil)
@@ -48,8 +51,8 @@
 ;; (load-theme 'molokai t)
 ;; (enable-theme 'molokai))
 
-(when (eq window-system 'nil)
-(load-theme 'solarized-dark t))
+;; (when (eq window-system 'nil)
+;; (load-theme 'solarized-dark t))			;
 
 
 ;;----------------------
@@ -553,7 +556,18 @@
 ;; emamux
 ;;----------------------------------------------
 (require 'emamux)
-(global-set-key (kbd "C-x M-w") 'emamux:copy-kill-ring) 
+
+(defun copy-to-tmux ()
+  (interactive)
+  (if (use-region-p)
+	  (kill-ring-save (region-beginning)(region-end)))
+  (let (
+		(data (substring-no-properties (car kill-ring))))
+	(emamux:set-buffer data 0))
+  (shell-command "tmux save-buffer - | nc -q1 localhost 2224")
+  )
+
+(global-set-key (kbd "C-M-w") 'copy-to-tmux) 
 
 
 ;;=============================================
