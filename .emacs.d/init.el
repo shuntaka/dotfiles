@@ -32,7 +32,6 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
 
 ;;Zenburn For Non-Terminal
-(when window-system
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -42,17 +41,18 @@
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
 
-
-)
-
-;;Molokai  For Terminal
-;; (when (eq window-system 'nil)
+;;Molokai 
 ;; (setq custom-theme-directory "~/.emacs.d/themes")
 ;; (load-theme 'molokai t)
-;; (enable-theme 'molokai))
+;; (enable-theme 'molokai)
 
-;; (when (eq window-system 'nil)
-;; (load-theme 'solarized-dark t))			;
+;; Solarized
+;; (setq custom-theme-directory "~/.emacs.d/themes/emacs-color-theme-solarized")
+;; (load-theme 'solarized-dark t)
+
+;; apribase
+;; (setq custom-theme-directory "~/.emacs.d/themes")
+;; (require 'apribase-theme)
 
 
 ;;----------------------
@@ -431,8 +431,18 @@
                               (bm-buffer-save-all)
                               (bm-repository-save)))
 
-(set-face-background 'bm-persistent-face "DarkOrange")
-;(setq bm-highlight-style 'bm-highlight-only-line)
+;; デフォルトでは文字色を白に染めてくれたので背景色だけ弄るよう変更
+(custom-set-faces
+ '(bm-persistent-face ((t (:background "olive drab")))))
+
+;; 背景オレンジ
+;; (set-face-background 'bm-persistent-face "DarkOrange")
+
+;;背景ライトグリーン
+;; (set-face-background 'bm-persistent-face "LightGreen")
+
+;; (setq bm-highlight-style 'bm-highlight-only-line)
+
 
 
 ;;----------------------
@@ -665,6 +675,22 @@
 ;;=============================================
 ;; Manipulating Frame and Window
 ;;=============================================
+
+;; ウィンドウ移動
+;;http://fukuyama.co/window-number
+(require 'window-number)
+(window-number-meta-mode)
+
+
+;; ウィンドウ間の移動
+;;http://dev.ariel-networks.com/wp/documents/aritcles/emacs/part16
+;; (define-prefix-command 'windmove-map)
+;;     (global-set-key (kbd "C-t") 'windmove-map)
+;;     (define-key windmove-map "h" 'windmove-left)
+;;     (define-key windmove-map "j" 'windmove-down)
+;;     (define-key windmove-map "k" 'windmove-up)
+;;     (define-key windmove-map "l" 'windmove-right)
+
 
 ;;----------------------------------
 ;; elscreen

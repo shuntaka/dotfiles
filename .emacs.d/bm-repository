@@ -63,4 +63,48 @@ sub init_cp_pag")))) ("/Users/shun/nexus/gui/nboss-customer-portal/nboss-cp-gui.
 }
 ") (after-context-string . "
 sub register_ne")) ((position . 27635) (time . 1416589997.12337) (annotation) (before-context-string . "_and_js($page);
-") (after-context-string . "    init_cp_page")))))
+") (after-context-string . "    init_cp_page")))) ("/Users/shun/projects/dotfiles/.emacs.d/init.el" (version . 2) (size . 28998) (timestamp 21665 37580 200324 0) (bookmarks ((position . 12100) (time . 1419873638.615327) (annotation) (before-context-string . "ustom-set-faces
+") (after-context-string . " '(bm-persistent")))) ("/Users/shun/Dropbox/Note/Plagger_Note/plagger_note.org" (version . 2) (size . 80633) (timestamp 21665 42363 934280 0) (bookmarks ((position . 73995) (time . 1419879777.460337) (annotation) (before-context-string . "}
+
+    $res;
+}
+
+") (after-context-string . "** 6
+** $self
+0 ")) ((position . 73680) (time . 1419879777.460348) (annotation) (before-context-string . "n, $opt) = @_;
+
+") (after-context-string . "    my $res = UR")) ((position . 73596) (time . 1419879777.460355) (annotation) (before-context-string . "
+
+** $response
+
+") (after-context-string . "* 6 Plagger::Use")) ((position . 59499) (time . 1419879777.460364) (annotation) (before-context-string . "   $response;
+}
+") (after-context-string . "* 5 
+** $self
+0 ")) ((position . 59103) (time . 1419879777.460375) (annotation) (before-context-string . "UserAgent->new;
+") (after-context-string . "    my $response")) ((position . 58937) (time . 1419879777.460383) (annotation) (before-context-string . "::fetch_content
+") (after-context-string . "sub fetch_conten")) ((position . 44479) (time . 1419879777.460391) (annotation) (before-context-string . "   return 1;
+}
+
+") (after-context-string . "* 4 
+** $self ( ")) ((position . 43864) (time . 1419879777.460399) (annotation) (before-context-string . "s->{feed}->url;
+") (after-context-string . "    my $res = $s")) ((position . 43776) (time . 1419879777.460409) (annotation) (before-context-string . "mple::aggretate
+") (after-context-string . "* sub aggregate ")) ((position . 27926) (time . 1419879777.460416) (annotation) (before-context-string . "ook, $args) ) {
+") (after-context-string . "            my $")) ((position . 27687) (time . 1419879777.460426) (annotation) (before-context-string . "k_once callsx6)
+") (after-context-string . "* sub run_hook {")) ((position . 14902) (time . 1419879777.460435) (annotation) (before-context-string . "callback) = @_;
+") (after-context-string . "     $self->run_")) ((position . 14831) (time . 1419879777.460442) (annotation) (before-context-string . "::run calls x1)
+") (after-context-string . "*  sub run_hook_")) ((position . 1493) (time . 1419879777.460451) (annotation) (before-context-string . "       } else {
+") (after-context-string . "            my $")) ((position . 1156) (time . 1419879777.460458) (annotation) (before-context-string . " 1 Plagger::run
+") (after-context-string . "* sub run {
+    ")) ((position . 76035) (time . 1419879777.460464) (annotation) (before-context-string . "::Accessor
+   
+
+") (after-context-string . "* 7 URI::Fetch::")) ((position . 78080) (time . 1419879777.460471) (annotation) (before-context-string . "ce($ts);
+    }
+
+") (after-context-string . "    my $res = $u")) ((position . 80286) (time . 1419879777.460482) (annotation) (before-context-string . "  $fetch;
+}
+
+** ") (after-context-string . "7
+** $class
+0  '")))))
