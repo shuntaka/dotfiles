@@ -63,48 +63,142 @@ sub init_cp_pag")))) ("/Users/shun/nexus/gui/nboss-customer-portal/nboss-cp-gui.
 }
 ") (after-context-string . "
 sub register_ne")) ((position . 27635) (time . 1416589997.12337) (annotation) (before-context-string . "_and_js($page);
-") (after-context-string . "    init_cp_page")))) ("/Users/shun/projects/dotfiles/.emacs.d/init.el" (version . 2) (size . 28998) (timestamp 21665 37580 200324 0) (bookmarks ((position . 12100) (time . 1419873638.615327) (annotation) (before-context-string . "ustom-set-faces
-") (after-context-string . " '(bm-persistent")))) ("/Users/shun/Dropbox/Note/Plagger_Note/plagger_note.org" (version . 2) (size . 80633) (timestamp 21665 42363 934280 0) (bookmarks ((position . 73995) (time . 1419879777.460337) (annotation) (before-context-string . "}
+") (after-context-string . "    init_cp_page")))) ("/Users/shun/Dropbox/Note/Plagger_Note/plagger_note.org" (version . 2) (size . 133667) (timestamp 21666 3275 45179 0) (bookmarks ((position . 1156) (time . 1419879949.419952) (annotation) (before-context-string . " 1 Plagger::run
+") (after-context-string . "* sub run {
+    ")) ((position . 1493) (time . 1419879949.41994) (annotation) (before-context-string . "       } else {
+") (after-context-string . "            my $")) ((position . 14761) (time . 1419898826.167055) (annotation) (before-context-string . "dereference
+
+
+
+
+") (after-context-string . "* 2 Plagger::run")) ((position . 14902) (time . 1419879949.419924) (annotation) (before-context-string . "callback) = @_;
+") (after-context-string . "     $self->run_")) ((position . 14957) (time . 1419899139.6566) (annotation) (before-context-string . "callback);
+  }
+
+") (after-context-string . "** 2
+** $self
+0 ")) ((position . 27622) (time . 1419899200.014797) (annotation) (before-context-string . "k
+0  undef
+
+
+
+
+
+") (after-context-string . "* 3 Plagger::run")) ((position . 27935) (time . 1419879949.419908) (annotation) (before-context-string . "ook, $args) ) {
+") (after-context-string . "            my $")) ((position . 28298) (time . 1419899047.962049) (annotation) (before-context-string . "return @ret;
+}
+
+") (after-context-string . "** 3
+** $self 
+0")) ((position . 43753) (time . 1419899226.509934) (annotation) (before-context-string . "** ^ $ret
+1
+
+
+
+
+") (after-context-string . "* 4 Plagger::Plu")) ((position . 43892) (time . 1419879949.419892) (annotation) (before-context-string . "s->{feed}->url;
+") (after-context-string . "    my $res = $s")) ((position . 44508) (time . 1419899238.334002) (annotation) (before-context-string . "  return 1;
+}
+
+
+") (after-context-string . "** 4 
+** $self (")) ((position . 66272) (time . 1419896684.930329) (annotation) (before-context-string . "mojamjam/rss'
+
+
+") (after-context-string . "
+* 5 Plagger::Pl")) ((position . 66328) (time . 1419879949.419877) (annotation) (before-context-string . "::fetch_content
+") (after-context-string . "sub fetch_conten")) ((position . 66494) (time . 1419879949.419869) (annotation) (before-context-string . "UserAgent->new;
+") (after-context-string . "    my $response")) ((position . 66891) (time . 1419898899.437234) (annotation) (before-context-string . "  $response;
+}
+
+") (after-context-string . "** 5 
+** $self
+0")) ((position . 88341) (time . 1419879949.419853) (annotation) (before-context-string . "mojamjam/rss'
+
+
+") (after-context-string . "
+* 6 Plagger::Us")) ((position . 88426) (time . 1419879949.419845) (annotation) (before-context-string . "n, $opt) = @_;
+
+") (after-context-string . "    my $res = UR")) ((position . 88741) (time . 1419879949.419834) (annotation) (before-context-string . "}
 
     $res;
 }
 
 ") (after-context-string . "** 6
 ** $self
-0 ")) ((position . 73680) (time . 1419879777.460348) (annotation) (before-context-string . "n, $opt) = @_;
+0 ")) ((position . 98306) (time . 1419879949.419959) (annotation) (before-context-string . "mojamjam/rss'
 
-") (after-context-string . "    my $res = UR")) ((position . 73596) (time . 1419879777.460355) (annotation) (before-context-string . "
 
-** $response
-
-") (after-context-string . "* 6 Plagger::Use")) ((position . 59499) (time . 1419879777.460364) (annotation) (before-context-string . "   $response;
-}
-") (after-context-string . "* 5 
-** $self
-0 ")) ((position . 59103) (time . 1419879777.460375) (annotation) (before-context-string . "UserAgent->new;
-") (after-context-string . "    my $response")) ((position . 58937) (time . 1419879777.460383) (annotation) (before-context-string . "::fetch_content
-") (after-context-string . "sub fetch_conten")) ((position . 44479) (time . 1419879777.460391) (annotation) (before-context-string . "   return 1;
-}
-
-") (after-context-string . "* 4 
-** $self ( ")) ((position . 43864) (time . 1419879777.460399) (annotation) (before-context-string . "s->{feed}->url;
-") (after-context-string . "    my $res = $s")) ((position . 43776) (time . 1419879777.460409) (annotation) (before-context-string . "mple::aggretate
-") (after-context-string . "* sub aggregate ")) ((position . 27926) (time . 1419879777.460416) (annotation) (before-context-string . "ook, $args) ) {
-") (after-context-string . "            my $")) ((position . 27687) (time . 1419879777.460426) (annotation) (before-context-string . "k_once callsx6)
-") (after-context-string . "* sub run_hook {")) ((position . 14902) (time . 1419879777.460435) (annotation) (before-context-string . "callback) = @_;
-") (after-context-string . "     $self->run_")) ((position . 14831) (time . 1419879777.460442) (annotation) (before-context-string . "::run calls x1)
-") (after-context-string . "*  sub run_hook_")) ((position . 1493) (time . 1419879777.460451) (annotation) (before-context-string . "       } else {
-") (after-context-string . "            my $")) ((position . 1156) (time . 1419879777.460458) (annotation) (before-context-string . " 1 Plagger::run
-") (after-context-string . "* sub run {
-    ")) ((position . 76035) (time . 1419879777.460464) (annotation) (before-context-string . "::Accessor
-   
-
-") (after-context-string . "* 7 URI::Fetch::")) ((position . 78080) (time . 1419879777.460471) (annotation) (before-context-string . "ce($ts);
+") (after-context-string . "* 7 URI::Fetch::")) ((position . 100363) (time . 1419879949.419966) (annotation) (before-context-string . "ce($ts);
     }
 
-") (after-context-string . "    my $res = $u")) ((position . 80286) (time . 1419879777.460482) (annotation) (before-context-string . "  $fetch;
+") (after-context-string . "    my $res = $u")) ((position . 102569) (time . 1419879949.419976) (annotation) (before-context-string . "  $fetch;
 }
 
 ** ") (after-context-string . "7
-** $class
-0  '")))))
+** ($uri, %par")) ((position . 107860) (time . 1419892784.981622) (annotation) (before-context-string . "amjam/rss'
+
+
+
+
+
+") (after-context-string . "* 8 Plagger::Use")) ((position . 108086) (time . 1419893498.553597) (annotation) (before-context-string . " $req });
+    }
+") (after-context-string . "    $self->SUPER")) ((position . 108120) (time . 1419893570.532422) (annotation) (before-context-string . "request(@_);
+}
+
+") (after-context-string . "** 8
+** $self
+0 ")) ((position . 109104) (time . 1419893727.969705) (annotation) (before-context-string . "jamjam/rss'
+
+
+
+
+") (after-context-string . "* 9 LWP::UserAge")) ((position . 109202) (time . 1419893905.645896) (annotation) (before-context-string . "revious) = @_;
+
+") (after-context-string . "    my $response")) ((position . 112985) (time . 1419894079.490313) (annotation) (before-context-string . "n $response;
+}
+
+") (after-context-string . "** 9
+** $self
+0 ")) ((position . 114031) (time . 1419894093.256643) (annotation) (before-context-string . "ious
+0  undef
+
+
+") (after-context-string . "* 10 LWP::UserAg")) ((position . 114786) (time . 1419894160.104615) (annotation) (before-context-string . "EST, $@);
+    }
+") (after-context-string . "    return $self")) ((position . 114845) (time . 1419894429.834661) (annotation) (before-context-string . "rg, $size);
+}
+
+
+") (after-context-string . "** 10
+** $self
+0")) ((position . 116248) (time . 1419894443.706637) (annotation) (before-context-string . "omojamjam/rss'
+
+") (after-context-string . "* 11 LWP::UserAg")) ((position . 118349) (time . 1419894923.416052) (annotation) (before-context-string . "         eval {
+") (after-context-string . "                ")) ((position . 119620) (time . 1419894452.218144) (annotation) (before-context-string . "n $response;
+}
+
+") (after-context-string . "** 11
+** $self
+0")) ((position . 121688) (time . 1419895570.297179) (annotation) (before-context-string . "eval' => 1
+
+
+
+
+
+") (after-context-string . "* 12 LWP::Protoc")) ((position . 130120) (time . 1419895784.574224) (annotation) (before-context-string . " @h) = $socket->") (after-context-string . "read_response_he")) ((position . 131239) (time . 1419895799.414228) (annotation) (before-context-string . "t->read_response") (after-context-string . "_headers(laxed =")) ((position . 131342) (time . 1419895800.66107) (annotation) (before-context-string . "t->read_response") (after-context-string . "_headers(laxed =")) ((position . 133156) (time . 1419895584.569243) (annotation) (before-context-string . "  $response;
+}
+
+") (after-context-string . "** 12
+** $self
+
+")) ((position . 133503) (time . 1419895581.561696) (annotation) (before-context-string . "ent
+
+** $clen
+
+
+") (after-context-string . "* 13 Net:HTTP::M")))) ("/Users/shun/projects/dotfiles/.emacs.d/init.el" (version . 2) (size . 29482) (timestamp 21666 3310 534942 0) (bookmarks ((position . 12247) (time . 1419906264.844056) (annotation) (before-context-string . "e\")
+
+;背景ライトグリーン
+") (after-context-string . "(set-face-backgr")))))
