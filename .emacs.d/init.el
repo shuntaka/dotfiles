@@ -14,6 +14,7 @@
 ;; 14. Create Documents
 ;; Helm
 ;; Manipulating  Frame and Window
+;; Multi Term
 ;; For JavaScript
 ;; For Perl
 ;; Miscellenious
@@ -843,6 +844,26 @@
 ;;----------------------------------------------
 ;; (setq ns-pop-up-frames nil)
 
+
+;;=================================================================
+;; Multi Term
+;;=================================================================
+(require 'multi-term)
+(add-hook 'term-mode-hook '(lambda ()
+                           (setq show-trailing-whitespace nil)))
+(global-set-key (kbd "C-c t")
+               '(lambda () (interactive) (multi-term)))
+(global-set-key (kbd "C-c n") 'multi-term-next)
+(global-set-key (kbd "C-c p") 'multi-term-prev)
+(setq multi-term-program shell-file-name
+     ansi-term-color-vector [term
+                             term-color-black
+                             term-color-green
+                             term-color-yellow
+                             term-color-blue
+                             term-color-magenta
+                             term-color-cyan
+                             term-color-white])
 
 ;;=============================================
 ;; For JavaScript

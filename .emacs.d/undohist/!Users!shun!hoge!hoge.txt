@@ -1,5 +1,2 @@
 
-((digest . "c59548c3c576228486a1f0037eb16a1b") (undo-list nil (1 . 5) nil ("(defun multiply-by-seven (number) ; Interactive version.
-\"Multiply NUMBER by seven.\"
-(interactive \"p\")
-(message \"The result is %d\" (* 7 number)))" . 1) ((marker) . -57) ((marker) . -57) ((marker) . -85) ((marker) . -85) ((marker) . -103) ((marker) . -103) ((marker* . 5) . 145) ((marker* . 5) . 145) ((marker* . 5) . 145) ((marker* . 5) . 145) ((marker* . 5) . 145) ((marker* . 5) . 145) ((marker) . -145) ((marker*) . 1) ((marker) . -145) ((marker*) . 145) ((marker) . -145) ((marker) . -145) 146 (t 21667 5355 0 0)))
+((digest . "68b329da9893e34099c7d8ad5cb9c940") (undo-list nil undo-tree-canary))
