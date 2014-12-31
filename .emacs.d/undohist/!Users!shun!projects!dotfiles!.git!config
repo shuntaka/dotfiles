@@ -1,0 +1,5 @@
+
+((digest . "c1fc027e107c0e2ad6bcab4995bf39d9") (undo-list nil ("
+" . 1961) ((marker . 1961) . -1) ((marker . 1961) . -1) ((marker . 1961) . -1) nil ("
+" . 1961) ((marker) . -1) ((marker) . -1) ((marker . 1961) . -1) ((marker . 1961) . -1) nil ("[submodule \"helm\"]
+	url = /Users/shun/.emacs.d/public_repos/helm" . 1962) ((marker) . -19) ((marker) . -19) ((marker) . -64) ((marker) . -64) 2026 (t 21667 27354 0 0)))

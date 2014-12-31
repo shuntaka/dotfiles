@@ -1,0 +1,29 @@
+
+((digest . "bd24f49a460505572d7996e7a5e3efa6") (undo-list nil (1 . 12) nil ("t" . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) nil ("i" . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) nil ("g" . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) nil ("a" . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) nil ("m" . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) ((marker* . 12) . 1) (t 21667 25087 0 0) nil (189 . 277) ("up-to-date with 'origin/master'.
+#
+# You are currently reverting commit e973493." . 189) ((marker) . -33) ((marker) . -33) ((marker) . -35) ((marker) . -35) 16 nil ("q" . -16) nil (16 . 17) (t 21667 24975 0 0) nil (1 . 16) nil (1 . 2) nil ("Revert \"undo-tree, undohisto, helm-ls-git, multi-term\"
+
+This reverts commit e97349301bec4385cad07dc5f2a7ef24ed67d0de.
+
+Conflicts:
+	.emacs.d/#init.el#
+	.emacs.d/elpa/ace-jump-mode-20140616.115/ace-jump-mode-autoloads.el~
+	.emacs.d/elpa/git-rebase-mode-20140928.1547/git-rebase-mode-pkg.elc
+	.emacs.d/elpa/magit-20141228.1413/magit-autoloads.el~
+	.emacs.d/elpa/multi-term-20141203.1658/multi-term-autoloads.el
+	.emacs.d/elpa/multi-term-20141203.1658/multi-term-autoloads.el~
+	.emacs.d/elpa/multi-term-20141203.1658/multi-term-pkg.el
+	.emacs.d/elpa/multi-term-20141203.1658/multi-term-pkg.elc
+	.emacs.d/elpa/multi-term-20141203.1658/multi-term.el
+	.emacs.d/elpa/multi-term-20141203.1658/multi-term.elc
+	.emacs.d/elpa/undo-tree-20140509.522/undo-tree-autoloads.el
+	.emacs.d/elpa/undo-tree-20140509.522/undo-tree-autoloads.el~
+	.emacs.d/elpa/undo-tree-20140509.522/undo-tree-pkg.el
+	.emacs.d/elpa/undo-tree-20140509.522/undo-tree-pkg.elc
+	.emacs.d/elpa/undo-tree-20140509.522/undo-tree.el
+	.emacs.d/elpa/undo-tree-20140509.522/undo-tree.elc
+	.emacs.d/elpa/undohist-20140321.758/undohist-autoloads.el
+	.emacs.d/elpa/undohist-20140321.758/undohist-autoloads.el~
+	.emacs.d/elpa/undohist-20140321.758/undohist-pkg.elc
+	.emacs.d/elpa/undohist-20140321.758/undohist.el
+" . 1) ((marker) . -55) ((marker) . -55) ((marker) . -56) ((marker) . -56) ((marker) . -118) ((marker) . -118) ((marker) . -119) ((marker) . -119) ((marker) . -130) ((marker) . -130) ((marker) . -150) ((marker) . -150) ((marker) . -220) ((marker) . -220) ((marker) . -289) ((marker) . -289) ((marker) . -344) ((marker) . -344) ((marker) . -408) ((marker) . -408) ((marker) . -473) ((marker) . -473) ((marker) . -531) ((marker) . -531) ((marker) . -590) ((marker) . -590) ((marker) . -644) ((marker) . -644) ((marker) . -699) ((marker) . -699) ((marker) . -760) ((marker) . -760) ((marker) . -822) ((marker) . -822) ((marker) . -877) ((marker) . -877) ((marker) . -933) ((marker) . -933) ((marker) . -984) ((marker) . -984) ((marker) . -1036) ((marker) . -1036) ((marker) . -1095) ((marker) . -1095) ((marker) . -1155) ((marker) . -1155) ((marker) . -1209) ((marker) . -1209) ((marker) . -1258) ((marker) . -1258) ((marker* . 23) . 1258) ((marker* . 23) . 1258) ((marker* . 23) . 1258) ((marker* . 23) . 1258) ((marker* . 23) . 1258) ((marker* . 23) . 1258) ((marker* . 23) . 1258) ((marker) . -1258) ((marker* . 23) . 1258) ((marker* . 23) . 1258) ((marker* . 23) . 1203) ((marker . 1) . -55) ((marker* . 23) . 1203) ((marker . 1) . -55) ((marker* . 23) . 1203) ((marker) . -55) ((marker* . 23) . 1203) ((marker) . -1258) 1259 (t 21667 24949 0 0)))
