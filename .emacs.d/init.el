@@ -475,6 +475,12 @@
 (setq undo-limit 600000)
 (setq undo-strong-limit 900000)
 
+;;----------------------------------------------
+;; undo-tree
+;;----------------------------------------------
+(when (require 'undo-tree nil t)
+  (global-undo-tree-mode))
+
 ;;----------------------
 ;; auto-compelte
 ;;----------------------

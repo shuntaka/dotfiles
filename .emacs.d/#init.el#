@@ -431,15 +431,15 @@
                               (bm-buffer-save-all)
                               (bm-repository-save)))
 
-;; デフォルトでは文字色を白に染めてくれたので背景色だけ弄るよう変更
-(custom-set-faces
- '(bm-persistent-face ((t (:background "olive drab")))))
+;; ;; デフォルトでは文字色を白に染めてくれたので背景色だけ弄るよう変更
+;; (custom-set-faces
+;;  '(bm-persistent-face ((t (:background "olive drab")))))
 
 ;; 背景オレンジ
 ;; (set-face-background 'bm-persistent-face "DarkOrange")
 
-;; ;背景ライトグリーン
-;; (set-face-background 'bm-persistent-face "olive drab")
+;背景ライトグリーン
+(set-face-background 'bm-persistent-face "olive drab")
 
 ;; (setq bm-highlight-style 'bm-highlight-only-line)
 
@@ -474,6 +474,12 @@
 (setq undo-no-redo t) ; 過去のundoがredoされないようにする
 (setq undo-limit 600000)
 (setq undo-strong-limit 900000)
+
+;;----------------------------------------------
+;; undo-tree
+;;----------------------------------------------
+(when (require 'undo-tree nil t)
+  (global-undo-tree-mode))
 
 ;;----------------------
 ;; auto-compelte
