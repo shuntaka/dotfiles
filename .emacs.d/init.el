@@ -546,6 +546,15 @@ org-modeなどで活用。"
 (require 'color-moccur)
 (setq moccur-split-word t)
 
+;;----------------------------------------------
+;; ace-isearch
+;;----------------------------------------------
+;;http://rubikitch.com/2014/10/08/ace-isearch/
+(add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
+(require 'ace-isearch)
+(global-ace-isearch-mode 1)
+
+
 ;;=============================================
 ;; 8 Make Emacs More Convinient
 ;;=============================================
@@ -553,6 +562,7 @@ org-modeなどで活用。"
 ;; (column-highlight-mode 1)
 ;; (toggle-highlight-column-when-idle 1)
 ;; (col-highlight-set-interval 6)
+
 
 
 
@@ -708,8 +718,12 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 ;; helm-swoop
 ;;----------------------------------------------
+;;http://rubikitch.com/tag/package:helm-swoop/
 (add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
 (require 'helm-swoop)
+;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
 
 ;;=============================================
 ;; Manipulating Frame and Window
@@ -1056,6 +1070,7 @@ org-modeなどで活用。"
 ;;=============================================
 ;; yaml
 ;;=============================================
+
 
 
 ;;=============================================
