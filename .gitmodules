@@ -46,3 +46,6 @@
 [submodule ".emacs.d/public_repos/helm-swoop"]
 	path = .emacs.d/public_repos/helm-swoop
 	url = https://github.com/ShingoFukuyama/helm-swoop.git
+[submodule ".emacs.d/public_repos/ace-jump-mode"]
+	path = .emacs.d/public_repos/ace-jump-mode
+	url = https://github.com/winterTTr/ace-jump-mode.git

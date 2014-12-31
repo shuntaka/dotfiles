@@ -198,5 +198,5 @@ sub register_ne")) ((position . 27635) (time . 1416589997.12337) (annotation) (b
 ** $clen
 
 
-") (after-context-string . "* 13 Net:HTTP::M")))) ("/Users/shun/projects/dotfiles/.emacs.d/init.el" (version . 2) (size . 32465) (timestamp 21667 53491 573561 0) (bookmarks ((position . 2027) (time . 1420018007.856836) (annotation) (before-context-string . "---------------
+") (after-context-string . "* 13 Net:HTTP::M")))) ("/Users/shun/projects/dotfiles/.emacs.d/init.el" (version . 2) (size . 31806) (timestamp 21667 64639 228551 0) (bookmarks ((position . 2027) (time . 1420022145.086321) (annotation) (before-context-string . "---------------
 ") (after-context-string . "(set-face-backgr")))))
