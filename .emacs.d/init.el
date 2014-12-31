@@ -481,6 +481,12 @@
 (when (require 'undo-tree nil t)
   (global-undo-tree-mode))
 
+;;----------------------------------------------
+;; undohisto
+;;----------------------------------------------
+(when (require 'undohist nil t)
+  (undohist-initialize))
+
 ;;----------------------
 ;; auto-compelte
 ;;----------------------
