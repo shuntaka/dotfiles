@@ -43,3 +43,6 @@
 [submodule ".emacs.d/themes/emacs-color-theme-solarized"]
 	path = .emacs.d/themes/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule ".emacs.d/public_repos/helm-swoop"]
+	path = .emacs.d/public_repos/helm-swoop
+	url = https://github.com/ShingoFukuyama/helm-swoop.git

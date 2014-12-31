@@ -704,6 +704,12 @@ org-modeなどで活用。"
 (define-key global-map (kbd "C-,") 'helm-etags+-history-go-back)
 
 
+;;----------------------------------------------
+;; helm-swoop
+;;----------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
+(require 'helm-swoop)
+
 ;;=============================================
 ;; Manipulating Frame and Window
 ;;=============================================
