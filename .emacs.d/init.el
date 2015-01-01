@@ -1071,11 +1071,11 @@ org-modeなどで活用。"
           (lambda ()
             (flymake-mode t)))
 
-
-
 ;;=============================================
 ;; yaml
 ;;=============================================
+(when (require 'yaml-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
 
 
 
