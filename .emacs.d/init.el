@@ -1053,7 +1053,6 @@ org-modeなどで活用。"
 ;; make cperl-mode as an alias to perl-mode
 (defalias 'perl-mode 'cperl-mode)
 
-
 ;; perl-completion
 (add-to-list 'load-path "~/.emacs.d/public_repos/perl-completion/")
 
@@ -1066,6 +1065,13 @@ org-modeなどで活用。"
       (setq ac-sources
 	    '(ac-source-perl-completion)))))
 (add-hook 'cperl-mode-hook 'perl-completion-hook)
+
+;; flymake-hook
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (flymake-mode t)))
+
+
 
 ;;=============================================
 ;; yaml
