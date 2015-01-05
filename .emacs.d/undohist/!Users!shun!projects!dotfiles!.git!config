@@ -1,2 +1,4 @@
 
-((digest . "590b3902c8f545513f3326ac1c49083e") (undo-list nil undo-tree-canary))
+((digest . "d67bfc8a631bec01421b44d0533dea54") (undo-list nil ("
+" . 2267) ((marker) . -1) nil ("	url = https://github.com/emacs-helm/helm.git" . 2267) ((marker) . -45) nil ("
+" . 2267) ((marker) . -1) ((marker) . -1) ((marker) . -1) nil ("[submodule \".emacs.d/public_repos/helm\"]" . 2267) ((marker*) . 40) ((marker) . -1) ((marker*) . 40) ((marker) . -40) ((marker) . -40) (t 21669 21741 0 0)))

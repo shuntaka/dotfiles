@@ -573,11 +573,11 @@ org-modeなどで活用。"
 ;; Google日本語入力(Macの時)
 ;;----------------------------------------------
 ;;Google 日本語入力
-(when (eq system-type 'darwin)
+(when (eq window-system 'ns)
 (setq default-input-method "MacOSX")
 (mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ"))
 
-(when (eq system-type 'darwin)
+(when (eq window-system 'ns)
 (set-fontset-font
  nil 'japanese-jisx0208
 (font-spec :family "Hiragino Kaku Gothic ProN")))
@@ -681,13 +681,10 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 ;; helm.el
 ;;----------------------------------------------
-
-(add-to-list 'load-path "~/.emacs.d/public_repos/helml/")
 (require 'helm-config)
-(helm-mode 1)
 
 (global-set-key (kbd "C-;") 'helm-for-files)
-(define-key global-map (kbd "M-x")     'helm-M-x)
+;; (define-key global-map (kbd "M-x")     'helm-M-x)
 (define-key global-map (kbd "C-x C-f") 'helm-find-files)
 (define-key global-map (kbd "C-x C-r") 'helm-recentf)
 (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
@@ -697,12 +694,17 @@ org-modeなどで活用。"
 ;; (global-set-key (kbd "C-c y") 'helm-show-kill-ring)
 
 ;; auto complete with TAB for find-file etc.
-(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+;; (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 ;; auto complete with TAB for helm-find-files etc.
-(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+;; (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 
-; disable helm for kill-buffer
-(add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
+;; ; disable helm for kill-buffer
+;; (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
+
+;;----------------------------------------------
+;; ac-helm
+;;----------------------------------------------
+
 
 ;;----------------------------------------------
 ;;helm-etags-plus
