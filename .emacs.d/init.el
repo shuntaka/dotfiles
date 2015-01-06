@@ -523,8 +523,8 @@ org-modeなどで活用。"
 ;; cua-mode
 ;;----------------------
 ;; cua-modeの設定
-(cua-mode t)  ; cua-modeをオン
-(setq cua-enable-cua-keys nil)  ; CUAキーバインドを無効化
+;; (cua-mode t)  ; cua-modeをオン
+;; (setq cua-enable-cua-keys nil)  ; CUAキーバインドを無効化
 
 ;;----------------------
 ;; thing
@@ -1052,10 +1052,24 @@ org-modeなどで活用。"
 ;;=============================================
 ;; For Perl
 ;;=============================================
+;;----------------------------------------------
+;; cperl-mode
+;;----------------------------------------------
+
 ;; make cperl-mode as an alias to perl-mode
 (defalias 'perl-mode 'cperl-mode)
 
+;;----------------------------------------------
+;; flymake
+;;----------------------------------------------
+;; flymake-hook
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (flymake-mode t)))
+
+;;----------------------------------------------
 ;; perl-completion
+;;----------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/public_repos/perl-completion/")
 
 (defun perl-completion-hook()
@@ -1068,10 +1082,24 @@ org-modeなどで活用。"
 	    '(ac-source-perl-completion)))))
 (add-hook 'cperl-mode-hook 'perl-completion-hook)
 
-;; flymake-hook
-(add-hook 'cperl-mode-hook
-          (lambda ()
-            (flymake-mode t)))
+;;----------------------------------------------
+;; plsense
+;;----------------------------------------------
+;; (setq exec-path (append exec-path '("/Users/shun/perl5/perlbrew/perls/perl-5.16.3/bin/")))
+
+;; (require 'plsense)
+
+;; ;; キーバインド
+;; (setq plsense-popup-help-key "C-:")
+;; (setq plsense-display-help-buffer-key "M-:")
+;; (setq plsense-jump-to-definition-key "C->")
+
+;; ;; 必要に応じて適宜カスタマイズして下さい。以下のS式を評価することで項目についての情報が得られます。
+;; ;; (customize-group "plsense")
+
+;; ;; 推奨設定を行う
+;; (plsense-config-default)
+
 
 ;;=============================================
 ;; yaml

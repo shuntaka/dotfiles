@@ -1,0 +1,2 @@
+
+((digest . "0e3f6c5932a4172a620bb3fe07df0ae7") (undo-list nil (17 . 20) nil (16 . 17) (t 21675 61983 0 0) nil (16 . 17) nil ("!" . 1) ((marker . 20) . -1) ((marker . 32348) . -1) ((marker . 1) . -1) ((marker . 1) . -1) nil ("#" . 1) nil (nil rear-nonsticky nil 17 . 18) (nil fontified nil 4 . 18) (nil fontified nil 3 . 4) (3 . 18) nil (" " . -3) nil (3 . 4) nil (1 . 3) nil ("&" . -1) nil (1 . 2) nil ("*" . -1) nil (1 . 2) nil ("*" . -1) nil (1 . 2) nil ("*" . -1) nil (1 . 2) nil ("*" . -1) nil (1 . 2) nil ("kprint" . 1) nil (1 . 2) nil (1 . 6) (t . -1)))
