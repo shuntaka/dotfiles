@@ -405,33 +405,33 @@
 ;(global-set-key (kbd "M-[") 'bm-previous)
 ;(global-set-key (kbd "M-]") 'bm-next)
 
-;;; bm.elの設定
-;;; (install-elisp "http://cvs.savannah.gnu.org/viewvc/*checkout*/bm/bm/bm.el")
-(require 'bm)
-;; キーの設定
-(global-set-key (kbd "M-SPC") 'bm-toggle)
-(global-set-key (kbd "M-[") 'bm-previous)
-(global-set-key (kbd "M-]") 'bm-next)
-;; マークのセーブ
-(setq-default bm-buffer-persistence t)
-;; セーブファイル名の設定
-(setq bm-repository-file "~/.emacs.d/bm-repository")
-;; 起動時に設定のロード
-(setq bm-restore-repository-on-load t)
-(add-hook 'after-init-hook 'bm-repository-load)
-(add-hook 'find-file-hooks 'bm-buffer-restore)
-(add-hook 'after-revert-hook 'bm-buffer-restore)
-;; 設定ファイルのセーブ
-(add-hook 'kill-buffer-hook 'bm-buffer-save)
-(add-hook 'auto-save-hook 'bm-buffer-save)
-(add-hook 'after-save-hook 'bm-buffer-save)
-(add-hook 'vc-before-checkin-hook 'bm-buffer-save)
-;; Saving the repository to file when on exit
-;; kill-buffer-hook is not called when emacs is killed, so we
-;; must save all bookmarks first
-(add-hook 'kill-emacs-hook '(lambda nil
-                              (bm-buffer-save-all)
-                              (bm-repository-save)))
+;; bm.elの設定
+;; (install-elisp "http://cvs.savannah.gnu.org/viewvc/*checkout*/bm/bm/bm.el")
+;; (require 'bm)
+;; ;; キーの設定
+;; (global-set-key (kbd "M-SPC") 'bm-toggle)
+;; (global-set-key (kbd "M-[") 'bm-previous)
+;; (global-set-key (kbd "M-]") 'bm-next)
+;; ;; マークのセーブ
+;; (setq-default bm-buffer-persistence t)
+;; ;; セーブファイル名の設定
+;; (setq bm-repository-file "~/.emacs.d/bm-repository")
+;; ;; 起動時に設定のロード
+;; (setq bm-restore-repository-on-load t)
+;; (add-hook 'after-init-hook 'bm-repository-load)
+;; (add-hook 'find-file-hooks 'bm-buffer-restore)
+;; (add-hook 'after-revert-hook 'bm-buffer-restore)
+;; ;; 設定ファイルのセーブ
+;; (add-hook 'kill-buffer-hook 'bm-buffer-save)
+;; (add-hook 'auto-save-hook 'bm-buffer-save)
+;; (add-hook 'after-save-hook 'bm-buffer-save)
+;; (add-hook 'vc-before-checkin-hook 'bm-buffer-save)
+;; ;; Saving the repository to file when on exit
+;; ;; kill-buffer-hook is not called when emacs is killed, so we
+;; ;; must save all bookmarks first
+;; (add-hook 'kill-emacs-hook '(lambda nil
+;;                               (bm-buffer-save-all)
+;;                               (bm-repository-save)))
 
 ;; ;; デフォルトでは文字色を白に染めてくれたので背景色だけ弄るよう変更
 ;; (custom-set-faces
@@ -441,11 +441,48 @@
 ;; (set-face-background 'bm-persistent-face "DarkOrange")
 
 ;背景ライトグリーン
-(set-face-background 'bm-persistent-face "olive drab")
+;; (set-face-background 'bm-persistent-face "olive drab")
 
 ;; (setq bm-highlight-style 'bm-highlight-only-line)
 
+;;----------------------------------------------
+;; bm.el rubikiti setting
+;;----------------------------------------------
+;;; bm.el初期設定
+(setq-default bm-buffer-persistence nil)
+(setq bm-restore-repository-on-load t)
+(require 'bm)
+(add-hook 'find-file-hook 'bm-buffer-restore)
+(add-hook 'kill-buffer-hook 'bm-buffer-save)
+(add-hook 'after-save-hook 'bm-buffer-save)
+(add-hook 'after-revert-hook 'bm-buffer-restore)
+(add-hook 'vc-before-checkin-hook 'bm-buffer-save)
+(add-hook 'kill-emacs-hook '(lambda nil
+                              (bm-buffer-save-all)
+                              (bm-repository-save)))
+(global-set-key (kbd "M-[") 'bm-previous)
+(global-set-key (kbd "M-]") 'bm-next)
 
+;;; helm-bm.el設定
+(require 'helm-bm)
+;; migemoくらいつけようね
+(push '(migemo) helm-source-bm)
+;; annotationはあまり使わないので仕切り線で表示件数減るの嫌
+(setq helm-source-bm (delete '(multiline) helm-source-bm))
+
+(defun bm-toggle-or-helm ()
+  "2回連続で起動したらhelm-bmを実行させる"
+  (interactive)
+  (bm-toggle)
+  (when (eq last-command 'bm-toggle-or-helm)
+    (helm-bm)))
+(global-set-key (kbd "M-SPC") 'bm-toggle-or-helm)
+
+;;; これがないとemacs -Qでエラーになる。おそらくバグ。
+(require 'compile)
+
+;背景ライトグリーン
+(set-face-background 'bm-persistent-face "olive drab")
 
 ;;----------------------
 ;; goto-chg.el
