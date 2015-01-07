@@ -739,8 +739,22 @@ org-modeなどで活用。"
 ;; (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
 
 ;;----------------------------------------------
+;;	isearch-dabbrev
+;;----------------------------------------------
+(define-key isearch-mode-map (kbd "<tab>") 'isearch-dabbrev-expand)
+
+;;----------------------------------------------
+;; imenu-anyware
+;;----------------------------------------------
+;;http://rubikitch.com/category/helm/
+(require 'imenu)
+(setq ido-enable-flex-matching t)       ;あいまいマッチ
+(global-set-key (kbd "C-.") 'ido-imenu-anywhere)
+
+;;----------------------------------------------
 ;; helm-next error
 ;;----------------------------------------------
+;;http://rubikitch.com/category/helm/
 ;;;; replacement of `next-error' and `previous-error'
 
 ;; (require 'helm-anything nil t)
