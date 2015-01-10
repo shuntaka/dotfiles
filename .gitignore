@@ -12,9 +12,14 @@ Thumbs.db
 # Emacs #
 history
 auto-save-list
-/.emacs.d/howm
+.emacs.d/howm
 ac-comphist.dat
-/.emacs.d/url	
+.emacs.d/url
+.emacs.d/undohist
+.emacs.d/eshell
+.emacs.d/ex_init.el*
+.emacs.d/dis_init.el*
+
 
 
 

@@ -15,6 +15,7 @@
 ;; Helm
 ;; Manipulating  Frame and Window
 ;; Multi Term
+;; For Git
 ;; For JavaScript
 ;; For Perl
 ;; For Yaml
@@ -189,6 +190,37 @@
 ;; ;;; goto-line ショートカット
 ;; (global-set-key "\M-g" 'goto-line)
 
+;;----------------------------------------------
+;; generic mode
+;;----------------------------------------------
+(require 'generic-x)
+
+
+;;----------------------------------------------
+;; eww
+;;----------------------------------------------
+;; google
+(setq eww-search-prefix "https://www.google.co.jp/search?q=")
+
+;; color
+(require 'eww)
+;;; [2014-11-17 Mon]背景・文字色を無効化する
+(defvar eww-disable-colorize t)
+(defun shr-colorize-region--disable (orig start end fg &optional bg &rest _)
+  (unless eww-disable-colorize
+    (funcall orig start end fg)))
+(advice-add 'shr-colorize-region :around 'shr-colorize-region--disable)
+(advice-add 'eww-colorize-region :around 'shr-colorize-region--disable)
+(defun eww-disable-color ()
+  "ewwで文字色を反映させない"
+  (interactive)
+  (setq-local eww-disable-colorize t)
+  (eww-reload))
+(defun eww-enable-color ()
+  "ewwで文字色を反映させる"
+  (interactive)
+  (setq-local eww-disable-colorize nil)
+  (eww-reload))
 
 ;;=============================================
 ;;2. Package Management
@@ -523,8 +555,8 @@
 ;;----------------------------------------------
 ;; undohisto
 ;;----------------------------------------------
-(when (require 'undohist nil t)
-  (undohist-initialize))
+;; (when (require 'undohist nil t)
+;;   (undohist-initialize))
 
 ;;----------------------------------------------
 ;; smart-newline
@@ -659,6 +691,14 @@ org-modeなどで活用。"
 
 (global-set-key (kbd "C-M-w") 'copy-to-tmux) 
 
+;;----------------------------------------------
+;; magit
+;;----------------------------------------------
+(require 'magit)
+(global-set-key (kbd "C-x v d") 'magit-status)
+(global-set-key (kbd "C-x v L") 'magit-key-mode-popup-logging)
+(global-set-key (kbd "C-x v z") 'magit-stash)
+(define-key magit-mode-map "\M-l" "l-all")
 
 ;;=============================================
 ;; 13 For Programming 
@@ -737,6 +777,16 @@ org-modeなどで活用。"
 
 ;; ; disable helm for kill-buffer
 ;; (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
+
+;;----------------------------------------------
+;; helm-swoop
+;;----------------------------------------------
+;;http://rubikitch.com/tag/package:helm-swoop/
+(add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
+(require 'helm-swoop)
+;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
 
 ;;----------------------------------------------
 ;;	isearch-dabbrev
@@ -837,17 +887,6 @@ org-modeなどで活用。"
 (define-key global-map (kbd "C-.") 'helm-etags+-history-go-forward)
 (define-key global-map (kbd "C-,") 'helm-etags+-history-go-back)
 
-
-;;----------------------------------------------
-;; helm-swoop
-;;----------------------------------------------
-;;http://rubikitch.com/tag/package:helm-swoop/
-(add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
-(require 'helm-swoop)
-;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
-(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
-(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
-
 ;;=============================================
 ;; Manipulating Frame and Window
 ;;=============================================
@@ -872,7 +911,7 @@ org-modeなどで活用。"
 ;; elscreen
 ;;----------------------------------
 ;;; プレフィクスキーはC-z
-(setq elscreen-prefix-key (kbd "M-l"))
+(setq elscreen-prefix-key (kbd "M-z"))
 (elscreen-start)
 ;;; タブの先頭に[X]を表示しない
 (setq elscreen-tab-display-kill-screen nil)
@@ -1032,10 +1071,7 @@ org-modeなどで活用。"
 ;; For Git
 ;;=================================================================
 
-;;----------------------------------------------
-;; Magit
-;;----------------------------------------------
-(require 'magit)
+
 
 
 ;;=============================================
