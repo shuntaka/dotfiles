@@ -639,6 +639,17 @@ org-modeなどで活用。"
 ;; 9. External Program
 ;;=================================================================
 ;;----------------------------------------------
+;; inheritting path from PATH for GUI emacs
+;;----------------------------------------------
+;; When opened from Desktep entry, PATH won't be set to shell's value.
+;;http://kotatu.org/blog/2012/03/02/emacs-path-settings/
+(let ((path-str
+           (replace-regexp-in-string
+            "\n+$" "" (shell-command-to-string "echo $PATH"))))
+     (setenv "PATH" path-str)
+     (setq exec-path (nconc (split-string path-str ":") exec-path)))
+
+;;----------------------------------------------
 ;; Google日本語入力(Macの時)
 ;;----------------------------------------------
 ;;Google 日本語入力
@@ -699,6 +710,13 @@ org-modeなどで活用。"
 (global-set-key (kbd "C-x v L") 'magit-key-mode-popup-logging)
 (global-set-key (kbd "C-x v z") 'magit-stash)
 (define-key magit-mode-map "\M-l" "l-all")
+
+;;----------------------------------------------
+; emacs-dbi
+;;----------------------------------------------
+(add-to-list 'exec-path "~/perl5/perlbrew/perls/perl-5.16.3/bin/")
+(autoload 'edbi:open-db-viewer "edbi")
+(require 'edbi)
 
 ;;=============================================
 ;; 13 For Programming 
