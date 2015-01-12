@@ -718,6 +718,12 @@ org-modeなどで活用。"
 (autoload 'edbi:open-db-viewer "edbi")
 (require 'edbi)
 
+;; working with e2wm
+;; (autoload 'e2wm:dp-edbi "e2wm-edbi" nil t)
+(add-to-list 'load-path "~/projects/dotfiles/.emacs.d/elpa/edbi-20140920.35")
+(autoload 'e2wm:dp-edbi "e2wm-edbi" nil t)
+(global-set-key (kbd "s-d") 'e2wm:dp-edbi)
+
 ;;=============================================
 ;; 13 For Programming 
 ;;=============================================
