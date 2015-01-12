@@ -1249,7 +1249,7 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 
 ;; make cperl-mode as an alias to perl-mode
-;;(defalias 'perl-mode 'cperl-mode)
+(defalias 'perl-mode 'cperl-mode)
 
 ;;----------------------------------------------
 ;; flymake
