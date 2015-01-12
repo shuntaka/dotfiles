@@ -791,6 +791,7 @@ org-modeなどで活用。"
 (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
 (define-key global-map (kbd "C-c i")   'helm-imenu)
 (define-key global-map (kbd "C-x b")   'helm-buffers-list)
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
 ;; (global-set-key (kbd "C-c s") 'helm-ag)
 ;; (global-set-key (kbd "C-c y") 'helm-show-kill-ring)
 
