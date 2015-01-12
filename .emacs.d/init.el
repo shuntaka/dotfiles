@@ -728,10 +728,15 @@ org-modeなどで活用。"
 ;; 13 For Programming 
 ;;=============================================
 ;;----------------------------------------------
-;; open-junk-file.el
+;; 13.1 open-junk-file.el
 ;;----------------------------------------------
 (require 'open-junk-file)
 (setq open-junk-file-format "~/junk/%Y-%m-%d-%H%M%s.")
+
+;;----------------------------------------------
+;; 13.2 summarye.el
+;;----------------------------------------------
+(require 'summarye)
 
 ;;----------------------
 ;; ipa.el
@@ -1244,7 +1249,7 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 
 ;; make cperl-mode as an alias to perl-mode
-(defalias 'perl-mode 'cperl-mode)
+;;(defalias 'perl-mode 'cperl-mode)
 
 ;;----------------------------------------------
 ;; flymake
