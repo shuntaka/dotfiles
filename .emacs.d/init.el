@@ -607,7 +607,7 @@ org-modeなどで活用。"
 (global-set-key (kbd "C-(") 'mark-up-list)
 
 ;;=============================================
-;; 7 Search and Replace
+;; 7. Search and Replace
 ;;=============================================
 ;;----------------------
 ;; Moccur
@@ -623,6 +623,13 @@ org-modeなどで活用。"
 (require 'ace-isearch)
 (global-ace-isearch-mode 1)
 
+;;----------------------------------------------
+;; foreign-regexp.el
+;;----------------------------------------------
+(require 'foreign-regexp)
+(custom-set-variables
+ '(foreign-regexp/regexp-type 'perl)    ; perl や javascript も指定可能
+ '(reb-re-syntax 'foreign-regexp))
 
 ;;=============================================
 ;; 8 Make Emacs More Convinient
@@ -631,9 +638,6 @@ org-modeなどで活用。"
 ;; (column-highlight-mode 1)
 ;; (toggle-highlight-column-when-idle 1)
 ;; (col-highlight-set-interval 6)
-
-
-
 
 ;;=================================================================
 ;; 9. External Program
