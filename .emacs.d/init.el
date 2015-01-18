@@ -130,6 +130,13 @@
 (setq-default tab-width 4)
 
 ;;----------------------------------------------
+;; disable tab for yaml
+;;----------------------------------------------
+(add-hook 'yaml-mode-hook
+		  (lambda ()
+		  (setq-default indent-tabs-mode nil)))
+
+;;----------------------------------------------
 ;; from Emacs Technique Bible Basic Setting
 ;;----------------------------------------------
 ;;; 履歴を次回Emacs起動時にも保存する
