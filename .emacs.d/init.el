@@ -755,6 +755,21 @@ org-modeなどで活用。"
 (require 'hideshow)
 (require 'fold-dwim)
 
+;;----------------------------------------------
+;; 13.10 which-func-mode
+;;----------------------------------------------
+;;http://valvallow.blogspot.co.uk/2011/02/which-func-mode.html
+(defun toggle-which-func-mode ()
+  (interactive)
+  (which-func-mode)
+  (if which-func-mode
+      (progn
+        (delete (assoc 'which-func-mode mode-line-format)
+                mode-line-format)
+        (setq-default header-line-format
+                      '(which-func-mode ("" which-func-format))))
+    (setq-default header-line-format nil)))
+
 ;;----------------------
 ;; ipa.el
 ;;----------------------
