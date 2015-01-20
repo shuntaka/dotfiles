@@ -414,6 +414,10 @@
 ;(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
 
 ;----------------------------------------------
+; 4.12 
+;----------------------------------------------
+
+;----------------------------------------------
 ; sudo-ext.el
 ;----------------------------------------------
 ;; (server-start) ;  sudoeditで使う
@@ -511,27 +515,6 @@
                               (bm-repository-save)))
 (global-set-key (kbd "M-[") 'bm-previous)
 (global-set-key (kbd "M-]") 'bm-next)
-
-;;; helm-bm.el設定
-(require 'helm-bm)
-;; migemoくらいつけようね
-(push '(migemo) helm-source-bm)
-;; annotationはあまり使わないので仕切り線で表示件数減るの嫌
-(setq helm-source-bm (delete '(multiline) helm-source-bm))
-
-(defun bm-toggle-or-helm ()
-  "2回連続で起動したらhelm-bmを実行させる"
-  (interactive)
-  (bm-toggle)
-  (when (eq last-command 'bm-toggle-or-helm)
-    (helm-bm)))
-(global-set-key (kbd "M-SPC") 'bm-toggle-or-helm)
-
-;;; これがないとemacs -Qでエラーになる。おそらくバグ。
-(require 'compile)
-
-;背景ライトグリーン
-(set-face-background 'bm-persistent-face "olive drab")
 
 ;;----------------------
 ;; goto-chg.el
@@ -995,11 +978,28 @@ org-modeなどで活用。"
 (global-set-key (kbd "M-g M-n") 'helm-resume-and-next)
 (global-set-key (kbd "M-g M-p") 'helm-resume-and-previous)
 
-
 ;;----------------------------------------------
-;; ac-helm
+;; helm-bm.el設定
 ;;----------------------------------------------
+(require 'helm-bm)
+;; migemoくらいつけようね
+(push '(migemo) helm-source-bm)
+;; annotationはあまり使わないので仕切り線で表示件数減るの嫌
+(setq helm-source-bm (delete '(multiline) helm-source-bm))
 
+(defun bm-toggle-or-helm ()
+  "2回連続で起動したらhelm-bmを実行させる"
+  (interactive)
+  (bm-toggle)
+  (when (eq last-command 'bm-toggle-or-helm)
+    (helm-bm)))
+(global-set-key (kbd "M-SPC") 'bm-toggle-or-helm)
+
+;;; これがないとemacs -Qでエラーになる。おそらくバグ。
+(require 'compile)
+
+;背景ライトグリーン
+(set-face-background 'bm-persistent-face "olive drab")
 
 ;;----------------------------------------------
 ;;helm-etags-plus
