@@ -320,6 +320,15 @@
 (require 'sequential-command-config)
 (sequential-command-setup-keys)
 
+;;----------------------
+;; 3.9 key-chord.el
+;;----------------------
+(require 'key-chord)
+(setq key-chord-two-keys-delay 0.04)
+(key-chord-mode 1)
+(key-chord-define-global "jk" 'view-mode)
+;; (key-chord-define emacs-lisp-mode-map "df" describe-function)
+
 
 ;;=============================================
 ;; 4. Manipulating Buffers and Files
@@ -613,6 +622,24 @@ org-modeなどで活用。"
 (global-set-key (kbd "C-$") 'mark-word*)
 (global-set-key (kbd "C-\"") 'mark-string)
 (global-set-key (kbd "C-(") 'mark-up-list)
+
+;; カーソル位置の行を複製するコマンド
+(defun my-duplicate-thing (n &optional beg end)
+  (interactive "p\nr")
+  (let ((pos (- (point-max) (point)))
+        str)
+    (if mark-active
+        nil
+      (setq beg (point-at-bol)
+            end (point-at-eol)))
+    (setq str (buffer-substring-no-properties beg end))
+    (if (not (= (progn (goto-char end) (preceding-char)) ?\n))
+        (setq str (concat "\n" str)))
+    (dotimes (i n)
+      (insert str))
+    (goto-char (- (point-max) pos))))
+(global-set-key (kbd "H-y") 'my-duplicate-thing)
+
 
 ;;=============================================
 ;; 7. Search and Replace
