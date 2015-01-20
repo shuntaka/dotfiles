@@ -736,7 +736,7 @@ org-modeなどで活用。"
 (global-set-key (kbd "s-d") 'e2wm:dp-edbi)
 
 ;;=============================================
-;; 13 For Programming 
+;; 13. For Programming 
 ;;=============================================
 ;;----------------------------------------------
 ;; 13.1 open-junk-file.el
@@ -748,6 +748,12 @@ org-modeなどで活用。"
 ;; 13.2 summarye.el
 ;;----------------------------------------------
 (require 'summarye)
+
+;;----------------------------------------------
+;; 13.8 hideshow.el
+;;----------------------------------------------
+(require 'hideshow)
+(require 'fold-dwim)
 
 ;;----------------------
 ;; ipa.el
@@ -1266,7 +1272,7 @@ org-modeなどで活用。"
 ;; flymake
 ;;----------------------------------------------
 ;; flymake-hook
-(add-hook 'cperl-mode-hook
+(add-hook 'cperl-modeq-hook
           (lambda ()
             (flymake-mode t)))
 
