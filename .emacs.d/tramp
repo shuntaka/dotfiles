@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <14/12/30 02:24:11 /Users/shun/.emacs.d/tramp>
+;; -*- emacs-lisp -*- <15/01/23 12:03:16 /Users/shun/.emacs.d/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; You can delete it, forcing Tramp to reapply the checks.
 
@@ -88,4 +88,8 @@
   ("perl" "\\perl")
   ("readlink" "\\readlink")
   ("ls" "/bin/ls --color=never")
-  ("uid-integer" 0)))
+  ("uid-integer" 0)
+  ("tmpdir" "/sudo:root@plagger:/tmp")
+  ("touch-t" t)
+  ("touch" "\\touch")
+  ("ls-dired" t)))
