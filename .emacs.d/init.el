@@ -751,7 +751,7 @@ org-modeなどで活用。"
 ;;http://rubikitch.com/2014/09/12/ag/
 (setq ag-highlight-search t)
 
-;;http://kotatu.org/blog/2013/12/18/emacs-ag-wgrep-for-code-grep-search/
+;;http://kotatu.org/blog/2013/12/18/emacs-aag-wgrep-for-code-grep-search/
 ;; ag
 ;; ag(The Silver Searcher)コマンドを以下からインストール:
 ;;     http://github.com/ggreer/the_silver_searcher#installation
@@ -800,13 +800,21 @@ org-modeなどで活用。"
 (define-key view-mode-map (kbd "b") 'View-scroll-page-backward)						   
 (define-key view-mode-map (kbd "f") 'View-scroll-page-forward)
 
-;; vi
+;; ;; vi
+;; (define-key view-mode-map (kbd "h") 'backward-char)
+;; (define-key view-mode-map (kbd "j") 'next-line)
+;; (define-key view-mode-map (kbd "k") 'previous-line)
+;; (define-key view-mode-map (kbd "l") 'forward-char)
+;; (define-key view-mode-map (kbd "J") 'View-scroll-line-forward)
+;; (define-key view-mode-map (kbd "K") 'View-scroll-line-backward)
+
+;; vi-derived
 (define-key view-mode-map (kbd "h") 'backward-char)
 (define-key view-mode-map (kbd "j") 'next-line)
-(define-key view-mode-map (kbd "k") 'previous-line)
+(define-key view-mode-map (kbd "i") 'previous-line)
 (define-key view-mode-map (kbd "l") 'forward-char)
-(define-key view-mode-map (kbd "J") 'View-scroll-line-forward)
-(define-key view-mode-map (kbd "K") 'View-scroll-line-backward)
+(define-key view-mode-map (kbd "I") 'View-scroll-line-forward)
+(define-key view-mode-map (kbd "J") 'View-scroll-line-backward)
 
 ;; bm.el
 (define-key view-mode-map (kbd "m") 'bm-toggle)
