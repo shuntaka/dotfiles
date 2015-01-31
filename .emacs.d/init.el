@@ -958,6 +958,7 @@ org-modeなどで活用。"
 (require 'imenu)
 (setq ido-enable-flex-matching t)       ;あいまいマッチ
 (global-set-key (kbd "C-.") 'ido-imenu-anywhere)
+(global-set-key (kbd "C-M-.") 'helm-imenu-anywhere)
 
 ;;----------------------------------------------
 ;; helm-next error
