@@ -1062,6 +1062,35 @@ org-modeなどで活用。"
 (define-key global-map (kbd "C-.") 'helm-etags+-history-go-forward)
 (define-key global-map (kbd "C-,") 'helm-etags+-history-go-back)
 
+;; ;;----------------------------------------------
+;; ;;helm-ag
+;; ;;----------------------------------------------
+;; (require 'helm-config)
+;; (require 'helm-files)
+;; (require 'helm-ag)
+
+;; (global-set-key (kbd "M-g .") 'helm-ag)
+;; (global-set-key (kbd "M-g ,") 'helm-ag-pop-stack)
+;; (global-set-key (kbd "C-M-s") 'helm-ag-this-file)
+
+;;----------------------------------------------
+;;helm-ag-r
+;;----------------------------------------------
+;;http://sleepboy-zzz.blogspot.co.uk/2013/10/emacsaghelmhelm-ag-r_4267.html
+(require 'helm-ag-r)
+(setq
+ helm-ag-r-google-contacts-user "your gmail address"
+ helm-ag-r-google-contacts-lang "ja_JP.UTF-8"
+ helm-ag-r-option-list '("-S -U --hidden"
+                         "-S -U -g")
+ ;; 不安定な場合以下の項目を調整すれば
+ ;; よくなるかもしれません
+ helm-ag-r-requires-pattern 3    ; 文字数以上入力してから検索
+ helm-ag-r-input-idle-delay 0.5  ; 検索をdelay後からおこなう
+ helm-ag-r-use-no-highlight t    ; ハイライト無効化
+ helm-ag-r-candidate-limit 1000) ; 候補の上限を設定
+
+
 ;;=============================================
 ;; Manipulating Frame and Window
 ;;=============================================
