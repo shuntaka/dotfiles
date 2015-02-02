@@ -1425,7 +1425,7 @@ org-modeなどで活用。"
 ;; flymake
 ;;----------------------------------------------
 ;; flymake-hook
-(add-hook 'cperl-modeq-hook
+(add-hook 'cperl-mode-hook
           (lambda ()
             (flymake-mode t)))
 
