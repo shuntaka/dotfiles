@@ -735,7 +735,9 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 ; emacs-dbi
 ;;----------------------------------------------
-(add-to-list 'exec-path "~/perl5/perlbrew/perls/perl-5.16.3/bin/")
+;; make sure RPC::EPC::Service, DBI, DBD::Pg is installed
+;; enable the following when using local perl
+;;(add-to-list 'exec-path "~/perl5/perlbrew/perls/perl-5.16.3/bin/")
 (autoload 'edbi:open-db-viewer "edbi")
 (require 'edbi)
 
