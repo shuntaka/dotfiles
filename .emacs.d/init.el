@@ -393,7 +393,7 @@
 ;;----------------------
 ;; emacsclient
 ;;----------------------
-(server-start)
+;; (server-start)
 (defun iconify-emacs-when-server-is-done ()
   (unless server-clients (iconify-frame)))
 ;; 編集が終了したらEmacsをアイコン化する
