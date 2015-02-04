@@ -789,6 +789,16 @@ org-modeなどで活用。"
                     (select-window ; select ag buffer
                      (car (my/get-buffer-window-list-regexp "^\\*ag ")))))
 
+;;----------------------------------------------
+;; iterm2  
+;;----------------------------------------------
+(defun event-apply-meta-control-modifier (ignore-prompt)
+  "\\Add the Meta-Control modifier to the following event.
+For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-%."
+  (vector (event-apply-modifier
+           (event-apply-modifier (read-event) 'control 26 "C-")
+           'meta 27 "M-")))
+(define-key function-key-map (kbd "C-x @ M") 'event-apply-meta-control-modifier)
 
 
 ;;=============================================
