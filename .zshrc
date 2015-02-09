@@ -6,6 +6,9 @@
 # 環境変数
 export EDITOR=emacsclient
 export VISUAL=emacsclient
+export HOME=/Users/shun
+export PATH=$HOME/local/bin:$PATH
+
 
 # export LANG=ja_JP.UTF-8
  
@@ -32,8 +35,7 @@ PROMPT="%{${fg[red]}%}[%n@%m]%{${reset_color}%} %~
  
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
-select-word-style default
-# ここで指定した文字は単語区切りとみなされる
+select-word-style default# ここで指定した文字は単語区切りとみなされる
 # / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
