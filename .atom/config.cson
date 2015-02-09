@@ -1,0 +1,25 @@
+"*":
+  editor:
+    invisibles: {}
+  core:
+    themes: [
+      "atom-light-ui"
+      "monokai"
+    ]
+    disabledPackages: [
+      "atomic-emacs"
+    ]
+  "exception-reporting":
+    userId: "4a343abc-b932-4fa4-436b-4fe37816b36e"
+  welcome:
+    showOnStartup: false
+  linter: {}
+"linter-perl":
+  executeCommandViaShell: false
+  autoDetectCarton: true
+  additionalPerlOptions: ""
+  incPathsFromProjectPath: [
+    "."
+    "lib"
+  ]
+  lintOptions: "-no-bare-subs"
