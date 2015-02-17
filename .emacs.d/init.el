@@ -30,16 +30,21 @@
 ;;----------------------------------------------
 ;; PATH
 ;;----------------------------------------------
+;; ;; inheritting path from PATH for GUI emacs
+;; ;; When opened from Desktep entry, PATH won't be set to shell's value.
+;; ;;http://kotatu.org/blog/2012/03/02/emacs-path-settings/
+;; (let ((path-str
+;;            (replace-regexp-in-string
+;;             "\n+$" "" (shell-command-to-string "echo $PATH"))))
+;;      (setenv "PATH" path-str)
+;;      (setq exec-path (nconc (split-string path-str ":") exec-path)))
+
 ;; for Node
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
 ;; for plsense, perly-sense
 (setenv "PATH"
         (concat '"/Users/shun/perl5/perlbrew/perls/perl-5.10.1/bin:" (getenv "PATH")))
-
-
-
-
 
 ;;----------------------
 ;; color theme 
@@ -673,16 +678,6 @@ org-modeなどで活用。"
 ;;=================================================================
 ;; 9. External Program
 ;;=================================================================
-;;----------------------------------------------
-;; inheritting path from PATH for GUI emacs
-;;----------------------------------------------
-;; When opened from Desktep entry, PATH won't be set to shell's value.
-;;http://kotatu.org/blog/2012/03/02/emacs-path-settings/
-(let ((path-str
-           (replace-regexp-in-string
-            "\n+$" "" (shell-command-to-string "echo $PATH"))))
-     (setenv "PATH" path-str)
-     (setq exec-path (nconc (split-string path-str ":") exec-path)))
 
 ;;----------------------------------------------
 ;; Google日本語入力(Macの時)
