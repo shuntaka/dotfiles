@@ -27,6 +27,25 @@
 ;;===========================================================================
 ;; Basic Settings
 ;;===========================================================================
+;;----------------------------------------------
+;; PATH
+;;----------------------------------------------
+;; ;; inheritting path from PATH for GUI emacs
+;; ;; When opened from Desktep entry, PATH won't be set to shell's value.
+;; ;;http://kotatu.org/blog/2012/03/02/emacs-path-settings/
+;; (let ((path-str
+;;            (replace-regexp-in-string
+;;             "\n+$" "" (shell-command-to-string "echo $PATH"))))
+;;      (setenv "PATH" path-str)
+;;      (setq exec-path (nconc (split-string path-str ":") exec-path)))
+
+;; for Node
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+
+;; for plsense, perly-sense
+(setenv "PATH"
+        (concat '"/Users/shun/perl5/perlbrew/perls/perl-5.10.1/bin:" (getenv "PATH")))
+
 ;;----------------------
 ;; color theme 
 ;;----------------------
@@ -659,16 +678,6 @@ org-modeなどで活用。"
 ;;=================================================================
 ;; 9. External Program
 ;;=================================================================
-;;----------------------------------------------
-;; inheritting path from PATH for GUI emacs
-;;----------------------------------------------
-;; When opened from Desktep entry, PATH won't be set to shell's value.
-;;http://kotatu.org/blog/2012/03/02/emacs-path-settings/
-(let ((path-str
-           (replace-regexp-in-string
-            "\n+$" "" (shell-command-to-string "echo $PATH"))))
-     (setenv "PATH" path-str)
-     (setq exec-path (nconc (split-string path-str ":") exec-path)))
 
 ;;----------------------------------------------
 ;; Google日本語入力(Macの時)
@@ -891,6 +900,40 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (setq ctags-command "/usr/local/bin/ctags -e -R ")
 (global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table) 
 
+;;----------------------------------------------
+;; flymake
+;;----------------------------------------------
+;;http://blog.kentarok.org/entry/20080810/1218369556
+(require 'flymake)
+
+;; set-perl5lib
+;; 開いたスクリプトのパスに応じて、PERL5LIBにlibを追加してくれる
+;; http://svn.coderepos.org/share/lang/elisp/set-perl5lib/set-perl5lib.el
+(add-to-list 'load-path "~/.emacs.d/public_repos/1333926")
+(require 'set-perl5lib)
+
+;; エラー、ウォーニング時のフェイス
+(set-face-background 'flymake-errline "red4")
+(set-face-foreground 'flymake-errline "black")
+(set-face-background 'flymake-warnline "yellow")
+(set-face-foreground 'flymake-warnline "black")
+
+;; エラーをミニバッファに表示
+;; http://d.hatena.ne.jp/xcezx/20080314/1205475020
+(defun flymake-display-err-minibuf ()
+  "Displays the error/warning for the current line in the minibuffer"
+  (interactive)
+  (let** ((line-no             (flymake-current-line-no))
+         (line-err-info-list  (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+         (count               (length line-err-info-list)))
+    (while (> count 0)
+      (when line-err-info-list
+        (let** ((file       (flymake-ler-file (nth (1- count) line-err-info-list)))
+               (full-file  (flymake-ler-full-file (nth (1- count) line-err-info-list)))
+               (text (flymake-ler-text (nth (1- count) line-err-info-list)))
+               (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+          (message "[%s] %s" line text)))
+      (setq count (1- count)))))
 
 ;;=============================================
 ;; 14 Create Documents
@@ -1264,6 +1307,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; (setq ns-pop-up-frames nil)
 
 
+
 ;;=================================================================
 ;; Multi Term
 ;;=================================================================
@@ -1378,13 +1422,12 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; Node
 ;;----------------------------------
 ;; set the path to node
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
 ;;----------------------------------
-;; flymake
+;; jshint
 ;;----------------------------------
-
-;; set the path to jshint
+;; set the execution path to jshint
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; flymake-jshint.el
@@ -1402,12 +1445,11 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------
 ;; Tern.js
 ;;----------------------
-
 ;; set the path to tern
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; set the path to node
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
 (autoload 'tern-mode "tern.el" nil t)
 
@@ -1426,14 +1468,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;=============================================
 ;; For Perl
 ;;=============================================
-
-;;----------------------------------------------
-;; path 
-;;----------------------------------------------
-;; for plsense, perly-sense
-(setenv "PATH"
-        (concat '"/Users/shun/perl5/perlbrew/perls/perl-5.16.3/bin:" (getenv "PATH")))
-
 ;;----------------------------------------------
 ;; cperl-mode
 ;;----------------------------------------------
@@ -1441,13 +1475,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; make cperl-mode as an alias to perl-mode
 (defalias 'perl-mode 'cperl-mode)
 
-;;----------------------------------------------
-;; flymake
-;;----------------------------------------------
-;; flymake-hook
-(add-hook 'cperl-mode-hook
-          (lambda ()
-            (flymake-mode t)))
 
 ;;----------------------------------------------
 ;; perl-completion
@@ -1467,7 +1494,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 ;; plsense
 ;;----------------------------------------------
-;; (setq exec-path (append exec-path '("/Users/shun/perl5/perlbrew/perls/perl-5.16.3/bin/")))
 (require 'plsense)
 
 ;; キーバインド
@@ -1482,8 +1508,47 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (plsense-config-default)
 
 ;;----------------------------------------------
+;; flymake config for perl 
+;;----------------------------------------------
+;;http://blog.kentarok.org/entry/20080810/1218369556
+
+;; Perl用設定
+;; http://unknownplace.org/memo/2007/12/21#e001
+(defvar flymake-perl-err-line-patterns
+  '(("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1)))
+
+(defconst flymake-allowed-perl-file-name-masks
+  '(("\\.pl$" flymake-perl-init)
+    ("\\.pm$" flymake-perl-init)
+    ("\\.t$" flymake-perl-init)))
+
+(defun flymake-perl-init ()
+  (let** ((temp-file (flymake-init-create-temp-buffer-copy
+                     'flymake-create-temp-inplace))
+         (local-file (file-relative-name
+                      temp-file
+                      (file-name-directory buffer-file-name))))
+    (list "perl" (list "-wc" local-file))))
+
+(defun flymake-perl-load ()
+  (interactive)
+  (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
+    (setq flymake-check-was-interrupted t))
+  (ad-activate 'flymake-post-syntax-check)
+  (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-perl-file-name-masks))
+  (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
+  (set-perl5lib)
+  (flymake-mode t))
+
+(add-hook 'cperl-mode-hook 'flymake-perl-load)
+
+
+;;----------------------------------------------
 ;; perly-sense
 ;;----------------------------------------------
+;; executino path to perly_sense
+(setq exec-path (append exec-path '("Users/shun/perl5/perlbrew/perls/perl-5.10.1/bin/")))
+
 ;; *** PerlySense Config ***
 
 ;; ** PerlySense **
@@ -1520,32 +1585,32 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   )
 
 
-;; ** Flymake Config **
-;; If you only want syntax check whenever you save, not continously
-(setq flymake-no-changes-timeout 9999)
-(setq flymake-start-syntax-check-on-newline nil)
+;; ;; ** Flymake Config **
+;; ;; If you only want syntax check whenever you save, not continously
+;; (setq flymake-no-changes-timeout 9999)
+;; (setq flymake-start-syntax-check-on-newline nil)
 
-;; ** Code Coverage Visualization **
-;; If you have a Devel::CoverX::Covered database handy and want to
-;; display the sub coverage in the source, set this to t
-(setq ps/enable-test-coverage-visualization nil)
+;; ;; ** Code Coverage Visualization **
+;; ;; If you have a Devel::CoverX::Covered database handy and want to
+;; ;; display the sub coverage in the source, set this to t
+;; (setq ps/enable-test-coverage-visualization nil)
 
-;; ** Color Config **
-;; Emacs named colors: http://www.geocities.com/kensanata/colors.html
-;; The following colors work fine with a white X11
-;; background. They may not look that great on a console with the
-;; default color scheme.
-(set-face-background 'flymake-errline "antique white")
-(set-face-background 'flymake-warnline "lavender")
-(set-face-background 'dropdown-list-face "lightgrey")
-(set-face-background 'dropdown-list-selection-face "grey")
+;; ;; ** Color Config **
+;; ;; Emacs named colors: http://www.geocities.com/kensanata/colors.html
+;; ;; The following colors work fine with a white X11
+;; ;; background. They may not look that great on a console with the
+;; ;; default color scheme.
+;; (set-face-background 'flymake-errline "antique white")
+;; (set-face-background 'flymake-warnline "lavender")
+;; (set-face-background 'dropdown-list-face "lightgrey")
+;; (set-face-background 'dropdown-list-selection-face "grey")
 
 
-;; ** Misc Config **
+;; ;; ** Misc Config **
 
-;; Run calls to perly_sense as a prepared shell command. Experimental
-;; optimization, please try it out.
-(setq ps/use-prepare-shell-command t)
+;; ;; Run calls to perly_sense as a prepared shell command. Experimental
+;; ;; optimization, please try it out.
+;; (setq ps/use-prepare-shell-command t)
 
 ;; *** PerlySense End ***
 
