@@ -22,7 +22,7 @@ ac-comphist.dat
 
 # atom #
 # ignore packages
-.atom/packages
+.atom/packages/*
 
 # except keymap.cson, config.cson
 
