@@ -20,7 +20,11 @@ ac-comphist.dat
 .emacs.d/ex_init.el*
 .emacs.d/dis_init.el*
 
+# atom #
+# ignore packages
+.atom/packages
 
+# except keymap.cson, config.cson
 
 
 /.emacs.d/#init.el#
