@@ -49,3 +49,6 @@
 [submodule ".emacs.d/public_repos/ace-isearch"]
 	path = .emacs.d/public_repos/ace-isearch
 	url = https://github.com/tam17aki/ace-isearch.git
+[submodule ".emacs.d/public_repos/1333926"]
+	path = .emacs.d/public_repos/1333926
+	url = https://gist.github.com/1333926.git
