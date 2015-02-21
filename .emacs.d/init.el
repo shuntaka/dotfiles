@@ -1171,7 +1171,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; elscreen
 ;;----------------------------------
 ;;; プレフィクスキーはC-z
-(setq elscreen-prefix-key (kbd "M-z"))
+(setq elscreen-prefix-key (kbd "C-z"))
 (elscreen-start)
 ;;; タブの先頭に[X]を表示しない
 (setq elscreen-tab-display-kill-screen nil)
