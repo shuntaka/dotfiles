@@ -1471,9 +1471,45 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 ;; cperl-mode
 ;;----------------------------------------------
-
-;; make cperl-mode as an alias to perl-mode
+;; http://sugyan.com/presentations/perl-casual-06/#/11
 (defalias 'perl-mode 'cperl-mode)
+
+(custom-set-variables
+ '(cperl-indent-parens-as-block t)
+ '(cperl-close-paren-offset     -4)
+ '(cperl-indent-subs-specially  nil))
+
+(with-eval-after-load "cperl-mode"
+  (eval
+   '(progn
+      (cperl-set-style "PerlStyle"))))
+
+;;----------------------------------------------
+;; perlbrew.el
+;;----------------------------------------------
+(require 'perlbrew)
+(perlbrew-use "perl-5.10.1")
+
+;;----------------------------------------------
+;; flycheck
+;;----------------------------------------------
+;;http://blog.s2factory.co.jp/arakawa/2014/12/emacs-perl.html
+(with-eval-after-load "flycheck"
+  (flycheck-define-checker
+   perl-project-libs
+   "A perl syntax checker."
+   :command ("perl" "-MProject::Libs" "-wc" source-inplace)
+   :error-patterns ((error line-start
+                           (minimal-match (message))
+                           " at " (file-name) " line " line
+                           (or "." (and ", " (zero-or-more not-newline)))
+                           line-end))
+   :modes (cperl-mode)))
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (flycheck-mode t)
+            (setq flycheck-checker 'perl-project-libs)))
+
 
 
 ;;----------------------------------------------
@@ -1512,49 +1548,49 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 ;;http://blog.kentarok.org/entry/20080810/1218369556
 
-;; Perl用設定
-;; http://unknownplace.org/memo/2007/12/21#e001
-(defvar flymake-perl-err-line-patterns
-  '(("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1)))
+;; ;; Perl用設定
+;; ;; http://unknownplace.org/memo/2007/12/21#e001
+;; (defvar flymake-perl-err-line-patterns
+;;   '(("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1)))
 
-(defconst flymake-allowed-perl-file-name-masks
-  '(("\\.pl$" flymake-perl-init)
-    ("\\.pm$" flymake-perl-init)
-    ("\\.t$" flymake-perl-init)))
+;; (defconst flymake-allowed-perl-file-name-masks
+;;   '(("\\.pl$" flymake-perl-init)
+;;     ("\\.pm$" flymake-perl-init)
+;;     ("\\.t$" flymake-perl-init)))
 
-(defun flymake-perl-init ()
-  (let** ((temp-file (flymake-init-create-temp-buffer-copy
-                     'flymake-create-temp-inplace))
-         (local-file (file-relative-name
-                      temp-file
-                      (file-name-directory buffer-file-name))))
-    (list "perl" (list "-wc" local-file))))
+;; (defun flymake-perl-init ()
+;;   (let** ((temp-file (flymake-init-create-temp-buffer-copy
+;;                      'flymake-create-temp-inplace))
+;;          (local-file (file-relative-name
+;;                       temp-file
+;;                       (file-name-directory buffer-file-name))))
+;;     (list "perl" (list "-wc" local-file))))
 
-(defun flymake-perl-load ()
-  (interactive)
-  (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
-    (setq flymake-check-was-interrupted t))
-  (ad-activate 'flymake-post-syntax-check)
-  (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-perl-file-name-masks))
-  (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
-  (set-perl5lib)
-  (flymake-mode t))
+;; (defun flymake-perl-load ()
+;;   (interactive)
+;;   (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
+;;     (setq flymake-check-was-interrupted t))
+;;   (ad-activate 'flymake-post-syntax-check)
+;;   (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-perl-file-name-masks))
+;;   (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
+;;   (set-perl5lib)
+;;   (flymake-mode t))
 
-(add-hook 'cperl-mode-hook 'flymake-perl-load)
+;; (add-hook 'cperl-mode-hook 'flymake-perl-load)
 
 
 ;;----------------------------------------------
 ;; perly-sense
 ;;----------------------------------------------
 ;; executino path to perly_sense
-(setq exec-path (append exec-path '("Users/shun/perl5/perlbrew/perls/perl-5.10.1/bin/")))
+;; (setq exec-path (append exec-path '("Users/shun/perl5/perlbrew/perls/perl-5.10.1/bin/")))
 
 ;; *** PerlySense Config ***
 
 ;; ** PerlySense **
 ;; The PerlySense prefix key (unset only if needed, like for \C-o)
-(global-unset-key "\C-o")
-(setq ps/key-prefix "\C-o")
+;; (global-unset-key "\C-o")
+;; (setq ps/key-prefix "\C-o")
 
 
 ;; ** Flymake **
@@ -1562,27 +1598,27 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; Flymake must be installed.
 ;; It is included in Emacs 22
 ;;     (or http://flymake.sourceforge.net/, put flymake.el in your load-path)
-(setq ps/load-flymake t)
+;; (setq ps/load-flymake t)
 ;; Note: more flymake config below, after loading PerlySense
 
 
 ;; *** PerlySense load (don't touch) ***
-(setq ps/external-dir (shell-command-to-string "perly_sense external_dir"))
-(if (string-match "Devel.PerlySense.external" ps/external-dir)
-	(progn
-	  (message
-	   "PerlySense elisp files  at (%s) according to perly_sense, loading..."
-	   ps/external-dir)
-	  (setq load-path (cons
-					   (expand-file-name
-						(format "%s/%s" ps/external-dir "emacs")
-						) load-path))
-	  (load "perly-sense")
-	  )
-  (message "Could not identify PerlySense install dir.
-    Is Devel::PerlySense installed properly?
-    Does 'perly_sense external_dir' give you a proper directory? (%s)" ps/external-dir)
-  )
+;; (setq ps/external-dir (shell-command-to-string "perly_sense external_dir"))
+;; (if (string-match "Devel.PerlySense.external" ps/external-dir)
+;; 	(progn
+;; 	  (message
+;; 	   "PerlySense elisp files  at (%s) according to perly_sense, loading..."
+;; 	   ps/external-dir)
+;; 	  (setq load-path (cons
+;; 					   (expand-file-name
+;; 						(format "%s/%s" ps/external-dir "emacs")
+;; 						) load-path))
+;; 	  (load "perly-sense")
+;; 	  )
+;;   (message "Could not identify PerlySense install dir.
+;;     Is Devel::PerlySense installed properly?
+;;     Does 'perly_sense external_dir' give you a proper directory? (%s)" ps/external-dir)
+;;   )
 
 
 ;; ;; ** Flymake Config **
