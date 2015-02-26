@@ -1498,7 +1498,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   (flycheck-define-checker
    perl-project-libs
    "A perl syntax checker."
-   :command ("perl" "-MProject::Libs" "-wc" source-inplace)
+   :command ("perl" "-MProject::Libs lib_dirs => [qw(local/lib/perl5)]" "-wc" source-inplace)
    :error-patterns ((error line-start
                            (minimal-match (message))
                            " at " (file-name) " line " line
