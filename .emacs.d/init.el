@@ -451,14 +451,14 @@
 ;;----------------------
 ;; goto-line
 ;;----------------------
-;; (global-set-key "\M-g" 'goto-line)
+(define-key global-map (kbd "M-g") 'goto-line)
 
 ;;----------------------
 ;; poin-undo.el
 ;;----------------------
 (require 'point-undo)
-(define-key global-map (kbd "<f7>") 'point-undo)
-(define-key global-map (kbd "S-<f7>") 'point-redo)
+(define-key global-map (kbd "M-p") 'point-undo)
+(define-key global-map (kbd "M-n") 'point-redo)
 
 ;;----------------------
 ;; bm.el
@@ -1104,8 +1104,8 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;; Replace: next-error / previous-error
 (require 'helm-config)
 (ignore-errors (helm-anything-set-keys))
-(global-set-key (kbd "M-g M-n") 'helm-resume-and-next)
-(global-set-key (kbd "M-g M-p") 'helm-resume-and-previous)
+(global-set-key (kbd "M-N") 'helm-resume-and-next)
+(global-set-key (kbd "M-P") 'helm-resume-and-previous)
 
 ;;----------------------------------------------
 ;; helm-bm.el設定
