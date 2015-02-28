@@ -974,7 +974,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 (global-set-key (kbd "C-;") 'helm-for-files)
 (global-set-key(kbd "C-x b") 'helm-mini)
-(define-key global-map (kbd "M-x")     'lmhelm-M-x)
+(define-key global-map (kbd "M-x")     'helm-M-x)
 (define-key global-map (kbd "C-x C-f") 'helm-find-files)
 (define-key global-map (kbd "C-x C-r") 'helm-recentf)
 (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
@@ -982,15 +982,36 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; (define-key global-map (kbd "C-x b")   'helm-buffers-list)
 ;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
 (global-set-key (kbd "C-c s") 'helm-ag)
-(global-set-key (kbd "!C-c y") 'helm-show-kill-ring)
+;; (global-set-key (kbd "!C-c y") 'helm-show-kill-ring)e
 
-auto complete with TAB for find-file etc.
-(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
-auto complete with TAB for helm-find-files etc.
-(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+;; auto complete with TAB for find-file etc.
+;; (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+;; auto complete with TAB for helm-find-files etc.
+;; (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 
 ; disable helm for kill-buffer
-(add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
+;; (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
+
+;;----------------------------------------------
+;; helm-c-do-shell-command
+;;----------------------------------------------
+(require 'mylisp-helm-add-actions)
+(require 'dired-aux)
+
+(defun helm-c-do-shell-command (ignore)
+  (let ((files (mapcar 'expand-file-name (helm-marked-candidates)))
+        (helm--reading-passwd-or-string t))
+    (dired-do-shell-command
+     (dired-read-shell-command
+      (format "! on %s: "
+              (dired-mark-prompt (length files) files))
+      nil files)
+     nil files)))
+
+(setq helm-user-actions-type-file
+      '(("Execute Shell Command" . helm-c-do-shell-command)))
+(require 'helm-files)
+(helm-define-action-key helm-generic-files-map (kbd "!") 'helm-c-do-shell-command)
 
 ;;----------------------------------------------
 ;; helm-swoop
