@@ -974,23 +974,23 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 (global-set-key (kbd "C-;") 'helm-for-files)
 (global-set-key(kbd "C-x b") 'helm-mini)
-;; (define-key global-map (kbd "M-x")     'lmhelm-M-x)
-;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
-;; (define-key global-map (kbd "C-x C-r") 'helm-recentf)
-;; (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
-;; (define-key global-map (kbd "C-c i")   'helm-imenu)
+(define-key global-map (kbd "M-x")     'lmhelm-M-x)
+(define-key global-map (kbd "C-x C-f") 'helm-find-files)
+(define-key global-map (kbd "C-x C-r") 'helm-recentf)
+(define-key global-map (kbd "M-y")     'helm-show-kill-ring)
+(define-key global-map (kbd "C-c i")   'helm-imenu)
 ;; (define-key global-map (kbd "C-x b")   'helm-buffers-list)
 ;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-;; (global-set-key (kbd "C-c s") 'helm-ag)
-;; (global-set-key (kbd "C-c y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-c s") 'helm-ag)
+(global-set-key (kbd "!C-c y") 'helm-show-kill-ring)
 
-;; auto complete with TAB for find-file etc.
-;; (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
-;; auto complete with TAB for helm-find-files etc.
-;; (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+auto complete with TAB for find-file etc.
+(define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+auto complete with TAB for helm-find-files etc.
+(define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
 
-;; ; disable helm for kill-buffer
-;; (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
+; disable helm for kill-buffer
+(add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
 
 ;;----------------------------------------------
 ;; helm-swoop
