@@ -667,6 +667,12 @@ org-modeなどで活用。"
  '(foreign-regexp/regexp-type 'perl)    ; perl や javascript も指定可能
  '(reb-re-syntax 'foreign-regexp))
 
+;;----------------------------------------------
+;; visual-regexp
+;;----------------------------------------------
+(global-set-key (kbd "M-%") 'vr/query-replace)
+
+
 ;;=============================================
 ;; 8 Make Emacs More Convinient
 ;;=============================================
