@@ -1493,17 +1493,28 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; set the execution path to jshint
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
+;;----------------------------------
 ;; flymake-jshint.el
-(add-to-list 'load-path "~/.emacs.d/public_repos/flymake-jshint.el/")
+;;----------------------------------
+;; ;; flymake-jshint.el
+;; (add-to-list 'load-path "~/.emacs.d/public_repos/flymake-jshint.el/")
 
-(add-hook 'js2-mode-hook '(lambda ()
-          (require 'flymake-jshint)
-          (flymake-jshint-load)))
+;; (add-hook 'js2-mode-hook '(lambda ()
+;;           (require 'flymake-jshint)
+;;           (flymake-jshint-load)))
 
 ;; for flymake-cursor.el
 (custom-set-variables
    '(help-at-pt-timer-delay 0.9)
    '(help-at-pt-display-when-idle '(flymake-overlay)))
+
+;;----------------------------------
+;; flycheck
+;;----------------------------------										;
+;; flycheck
+;;http://syati.info/?p=2096
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;;----------------------
 ;; Tern.js
