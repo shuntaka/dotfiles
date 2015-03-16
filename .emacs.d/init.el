@@ -157,6 +157,13 @@
 		  (setq-default indent-tabs-mode nil)))
 
 ;;----------------------------------------------
+;; disable tab for perl
+;;----------------------------------------------
+(add-hook 'cperl-mode-hook
+		  (lambda ()
+		  (setq-default indent-tabs-mode nil)))
+
+;;----------------------------------------------
 ;; from Emacs Technique Bible Basic Setting
 ;;----------------------------------------------
 ;;; 履歴を次回Emacs起動時にも保存する
