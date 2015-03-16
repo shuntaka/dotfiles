@@ -1457,9 +1457,9 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
                                    (delete-overlay ovl)) ovl)))))
 (defun my-js2-mode-hook ()
   (require 'js)
-  (setq js-indent-level 8
+  (setq js-indent-level 4
         indent-tabs-mode nil
-        c-basic-offset 8)
+        c-basic-offset 4)
   (c-toggle-auto-state 0)
   (c-toggle-hungry-state 1)
   (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
