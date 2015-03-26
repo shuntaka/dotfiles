@@ -1643,13 +1643,14 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 ;; setting for the colors
 ;;  http://d.hatena.ne.jp/holidays-l/20070528/p1
-(set-face-italic-p 'cperl-hash-face nil)
-(set-face-background 'cperl-hash-face nil)
-(set-face-background 'cperl-array-face nil)
-(setq cperl-array-face 'font-lock-variable-name-face)
-(setq cperl-hash-face 'font-variable-name-face)
+;; (set-face-italic-p 'cperl-hash-face nil)
+;; (set-face-background 'cperl-hash-face nil)
+;; (set-face-background 'cperl-array-face nil)
+;; (setq cperl-array-face 'font-lock-variable-name-face)
+;; (setq cperl-hash-face 'font-variable-name-face)
 
 
+;; setting for perl
 ;; http://sugyan.com/presentations/perl-casual-06/#/11
 ;; (defalias 'perl-mode 'cperl-mode)
 
