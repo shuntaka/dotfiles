@@ -322,7 +322,7 @@
 	    (normal-top-level-add-subdirs-to-load-path))))))
 
 ;; add directories under "elisp", "elpa", "conf", "public_repos"
-(add-to-load-path "elisp" "elpa" "conf" "public_repos")
+(add-to-load-path "auto-install" "elisp" "elpa" "conf" "public_repos")
 
 ;;----------------------
 ;; setting for ELPA (package.el)
@@ -705,6 +705,14 @@ org-modeなどで活用。"
   (set (make-local-variable 'column-enforce-column) 80)
   (column-enforce-mode 1))
 (add-hook 'cperl-mode-hook 'cperl-mode-hook--column-enforce-mode)
+
+;;----------------------------------------------
+;; cursor-in-brackets.el
+;;----------------------------------------------
+;;http://d.hatena.ne.jp/yascentur/20130526/1369550512
+(when (require 'cursor-in-brackets nil t)
+  (global-cursor-in-brackets-mode t))
+
 
 ;;=============================================
 ;; 7. Search and Replace
@@ -1609,18 +1617,51 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 ;; cperl-mode
 ;;----------------------------------------------
-;; http://sugyan.com/presentations/perl-casual-06/#/11
+;; register files to open with cperl-mode
+;;http://blog.iss.ms/2010/06/15/211445
 (defalias 'perl-mode 'cperl-mode)
+(setq auto-mode-alist (append '(("\\.psgi$" . cperl-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\.cgi$" . cperl-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\.t$" . cperl-mode)) auto-mode-alist))
 
-(custom-set-variables
- '(cperl-indent-parens-as-block t)
- '(cperl-close-paren-offset     -4)
- '(cperl-indent-subs-specially  nil))
+;; setting for the indent in cperl-mode
+;;http://oinume.hatenablog.com/entry/wp/384
+(setq cperl-indent-level 4
+      cperl-continued-statement-offset 4
+      cperl-close-paren-offset -4
+      cperl-label-offset -4
+      cperl-comment-column 40
+      cperl-highlight-variables-indiscriminately t
+      cperl-indent-parens-as-block t
+      cperl-tab-always-indent nil
+      cperl-font-lock t)
+(add-hook 'cperl-mode-hook
+          '(lambda ()
+             (progn
+               (setq indent-tabs-mode nil)
+               (setq tab-width nil))))
 
-(with-eval-after-load "cperl-mode"
-  (eval
-   '(progn
-      (cperl-set-style "PerlStyle"))))
+;; setting for the colors
+;;  http://d.hatena.ne.jp/holidays-l/20070528/p1
+(set-face-italic-p 'cperl-hash-face nil)
+(set-face-background 'cperl-hash-face nil)
+(set-face-background 'cperl-array-face nil)
+(setq cperl-array-face 'font-lock-variable-name-face)
+(setq cperl-hash-face 'font-variable-name-face)
+
+
+;; http://sugyan.com/presentations/perl-casual-06/#/11
+;; (defalias 'perl-mode 'cperl-mode)
+
+;; (custom-set-variables
+;;  '(cperl-indent-parens-as-block t)
+;;  '(cperl-close-paren-offset     -4)
+;;  '(cperl-indent-subs-specially  nil))
+
+;; (with-eval-after-load "cperl-mode"
+;;   (eval
+;;    '(progn
+;;       (cperl-set-style "PerlStyle"))))
 
 ;;----------------------------------------------
 ;; perlbrew.el
