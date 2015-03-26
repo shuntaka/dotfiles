@@ -702,7 +702,7 @@ org-modeなどで活用。"
 ;;http://rubikitch.com/tag/emacs-80%E6%A1%81%E5%88%B6%E9%99%90/
 (require 'column-enforce-mode)
 (defun cperl-mode-hook--column-enforce-mode ()
-  (set (make-local-variable 'column-enforce-column) 50)
+  (set (make-local-variable 'column-enforce-column) 80)
   (column-enforce-mode 1))
 (add-hook 'cperl-mode-hook 'cperl-mode-hook--column-enforce-mode)
 
