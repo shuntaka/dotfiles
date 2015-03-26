@@ -47,7 +47,7 @@
         (concat '"/Users/shun/perl5/perlbrew/perls/perl-5.10.1/bin:" (getenv "PATH")))
 
 ;;----------------------
-;; color theme 
+;; color theme
 ;;----------------------
 (when (require 'color-theme nil t)
 (color-theme-initialize))
@@ -64,7 +64,7 @@
  '(custom-enabled-themes (quote (zenburn)))
  '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
 
-;;Molokai 
+;;Molokai
 ;; (setq custom-theme-directory "~/.emacs.d/themes")
 ;; (load-theme 'molokai t)
 ;; (enable-theme 'molokai)
@@ -79,7 +79,7 @@
 
 
 ;;----------------------
-;;font 
+;;font
 ;;----------------------
 (set-face-attribute 'default nil
 	    :family "Ricty"
@@ -122,7 +122,7 @@
 ;; ターミナル以外はツーバーとスクロールバーを消す
 ;;----------------------------------------------
 (when window-system
-(tool-bar-mode 0)    
+(tool-bar-mode 0)
 (scroll-bar-mode 0))
 ;; (when (eq system-type 'darwin)
 ;; (tool-bar-mode -1)
@@ -211,6 +211,16 @@
 (set-face-attribute 'whitespace-empty nil
                     :background my/bg-color)
 
+;;----------------------------------------------
+;; notify too long row
+;;----------------------------------------------
+;;http://rubikitch.com/tag/emacs-80%E6%A1%81%E5%88%B6%E9%99%90/
+(require 'column-enforce-mode)
+(defun text-mode-hook--column-enforce-mode ()
+  (set (make-local-variable 'column-enforce-column) 50)
+  (column-enforce-mode 1))
+(add-hook 'cperl-mode-hook 'text-mode-hook 'text-mode-hook--column-enforce-mode)
+
 
 ;;----------------------------------------------
 ;; from Emacs Technique Bible Basic Setting
@@ -227,7 +237,7 @@
 
 ;;; シェルに合わせるため、C-hは後退に割り当てる
 ;;; ヘルプは<f1>
-(global-set-key (kbd "C-h") 'delete-backward-char) 
+(global-set-key (kbd "C-h") 'delete-backward-char)
 
 ;;; モードラインに時刻を表示する
 (display-time)
@@ -237,7 +247,7 @@
 ;;(column-number-mode 1)
 
 ;;; リージョンに色をつける
-(transient-mark-mode 1) 
+(transient-mark-mode 1)
 
 ;;; GCを減らして軽くする（デフォルトの10倍）
 (setq gc-cons-threshold (* 10 gc-cons-threshold))
@@ -345,7 +355,7 @@
 ;;M-x install-elisp URL
 ;;M-x install-elisp-from-emacswiki EmacsWikiのページ名
 ;;M-x install-elisp-from-gist gist-id
-;;M-x autoinsall-batch 
+;;M-x autoinsall-batch
 
 ;; auto-installによってインストールされるEmacs Lispをロードパスに加える
 ;; デフォルトは ~/.emacs.d/auto-install/
@@ -488,7 +498,7 @@
 ;(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
 
 ;----------------------------------------------
-; 4.12 
+; 4.12
 ;----------------------------------------------
 
 ;----------------------------------------------
@@ -771,10 +781,10 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 ;; Tmux
 ;;----------------------------------------------
-(defun terminal-init-screen () 
-      "Terminal initialization function for screen." 
-      ;; Use the xterm color initialization code. 
-      (load "term/xterm") 
+(defun terminal-init-screen ()
+      "Terminal initialization function for screen."
+      ;; Use the xterm color initialization code.
+      (load "term/xterm")
       (xterm-register-default-colors))
 
 ;;----------------------------------------------
@@ -792,7 +802,7 @@ org-modeなどで活用。"
   (shell-command "tmux save-buffer - | nc -q1 localhost 2224")
   )
 
-(global-set-key (kbd "C-M-w") 'copy-to-tmux) 
+(global-set-key (kbd "C-M-w") 'copy-to-tmux)
 
 ;;----------------------------------------------
 ;; magit
@@ -861,7 +871,7 @@ org-modeなどで活用。"
                      (car (my/get-buffer-window-list-regexp "^\\*ag ")))))
 
 ;;----------------------------------------------
-;; iterm2  
+;; iterm2
 ;;----------------------------------------------
 (defun event-apply-meta-control-modifier (ignore-prompt)
   "\\Add the Meta-Control modifier to the following event.
@@ -880,7 +890,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (define-key view-mode-map (kbd "N") 'View-search-last-regexp-backward)
 (define-key view-mode-map (kbd "?") 'View-search-regexp-backward)
 (define-key view-mode-map (kbd "G") 'View-goto-line-last)
-(define-key view-mode-map (kbd "b") 'View-scroll-page-backward)						   
+(define-key view-mode-map (kbd "b") 'View-scroll-page-backward)
 (define-key view-mode-map (kbd "f") 'View-scroll-page-forward)
 
 ;; ;; vi
@@ -903,14 +913,14 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (define-key view-mode-map (kbd "m") 'bm-toggle)
 (define-key view-mode-map (kbd "[") 'bm-previous)
 (define-key view-mode-map (kbd "]") 'bm-next)
-						   
+
 (require 'viewer)
 (setq viewer-modeline-color-unwritable "tomato")
 (setq viewer-modeline-color-view "orange")
 (viewer-change-modeline-color-setup)
 
  ;;=============================================
-;; 13. For Programming 
+;; 13. For Programming
 ;;=============================================
 ;;----------------------------------------------
 ;; 13.1 open-junk-file.el
@@ -960,7 +970,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (require 'ctags nil t)
 (setq tags-revert-without-query t)
 (setq ctags-command "/usr/local/bin/ctags -e -R ")
-(global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table) 
+(global-set-key (kbd "<f5>") 'ctags-create-or-update-tags-table)
 
 ;;----------------------------------------------
 ;; flymake
@@ -1585,11 +1595,11 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
- 
+
 (add-hook 'js2-mode-hook
           (lambda ()
             (tern-mode t)))
- 
+
 (eval-after-load 'tern
    '(progn
       (require 'tern-auto-complete)
@@ -1674,7 +1684,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (plsense-config-default)
 
 ;;----------------------------------------------
-;; flymake config for perl 
+;; flymake config for perl
 ;;----------------------------------------------
 ;;http://blog.kentarok.org/entry/20080810/1218369556
 
@@ -1790,6 +1800,5 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 
 ;;=============================================
-;; Miscellenious 
+;; Miscellenious
 ;;=============================================
-
