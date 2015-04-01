@@ -614,6 +614,19 @@
 (global-set-key (kbd "C-M-m") (lambda () (interactive) (move-to-window-line nil)))
 (global-set-key (kbd "C-M-l") (lambda () (interactive) (move-to-window-line -1)))
 
+;;----------------------------------------------
+;; ace-jump-mode
+;;http://rubikitch.com/2014/10/09/ace-jump-mode/
+;;----------------------------------------------
+;; ヒント文字に使う文字を指定する
+(setq ace-jump-mode-move-keys
+      (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
+;; ace-jump-word-modeのとき文字を尋ねないようにする
+(setq ace-jump-word-mode-use-query-char nil)
+(global-set-key (kbd "C-o") 'ace-jump-char-mode)
+;; (global-set-key (kbd "C-;") 'ace-jump-word-mode)
+(global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
+
 ;;=============================================
 ;; 6 Input Support
 ;;=============================================
@@ -732,16 +745,6 @@ org-modeなどで活用。"
 (setq moccur-split-word t)
 
 ;;----------------------------------------------
-;; ace-isearch
-;;----------------------------------------------
-;;http://rubikitch.com/2014/10/08/ace-isearch/
-;;https://github.com/tam17aki/ace-isearch
-(add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
-(require 'ace-isearch)
-(global-ace-isearch-mode 1)
-;; '(ace-isearch-input-idle-delay 0.1)
-
-;;----------------------------------------------
 ;; foreign-regexp.el
 ;;----------------------------------------------
 (require 'foreign-regexp)
@@ -753,6 +756,16 @@ org-modeなどで活用。"
 ;; visual-regexp
 ;;----------------------------------------------
 (global-set-key (kbd "M-%") 'vr/query-replace)
+
+;;----------------------------------------------
+;; ace-isearch
+;;http://rubikitch.com/2014/10/08/ace-isearch/
+;;https://github.com/tam17aki/ace-isearch
+;;----------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
+(require 'ace-isearch)
+(global-ace-isearch-mode 1)
+;; '(ace-isearch-input-idle-delay 0.1)
 
 
 ;;=============================================
