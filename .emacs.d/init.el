@@ -394,6 +394,14 @@
 (require 'sequential-command-config)
 (sequential-command-setup-keys)
 
+;;----------------------------------------------
+;; 3.6 define-key
+;;----------------------------------------------
+
+(defun line-to-top-of-window () (interactive) (recenter 0))
+(global-set-key (kbd "C-z") 'line-to-top-of-window)
+
+
 ;;----------------------
 ;; 3.9 key-chord.el
 ;;----------------------
@@ -727,9 +735,11 @@ org-modeなどで活用。"
 ;; ace-isearch
 ;;----------------------------------------------
 ;;http://rubikitch.com/2014/10/08/ace-isearch/
+;;https://github.com/tam17aki/ace-isearch
 (add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
 (require 'ace-isearch)
 (global-ace-isearch-mode 1)
+;; '(ace-isearch-input-idle-delay 0.1)
 
 ;;----------------------------------------------
 ;; foreign-regexp.el
@@ -1255,7 +1265,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;http://fukuyama.co/window-number
 (require 'window-number)
 (window-number-meta-mode)
-
 
 ;; ウィンドウ間の移動
 ;;http://dev.ariel-networks.com/wp/documents/aritcles/emacs/part16
