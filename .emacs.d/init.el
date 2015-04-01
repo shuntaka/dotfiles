@@ -22,8 +22,6 @@
 ;; For Yaml
 ;; Miscellenious
 
-
-
 ;;===========================================================================
 ;; Basic Settings
 ;;===========================================================================
@@ -1116,13 +1114,29 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 ;;----------------------------------------------
 ;; helm-swoop
+;; http://rubikitch.com/tag/package:helm-swoop/
 ;;----------------------------------------------
-;;http://rubikitch.com/tag/package:helm-swoop/
+
 (add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
 (require 'helm-swoop)
 ;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+
+;;----------------------------------------------
+;; helm-swoop launch
+;; http://rubikitch.com/2015/03/23/helm-swoop-update/
+;;----------------------------------------------
+(defun isearch-forward-or-helm-swoop (use-helm-swoop)
+  (interactive "p")
+  (let (current-prefix-arg
+        (helm-swoop-pre-input-function 'ignore))
+    (call-interactively
+     (case use-helm-swoop
+       (1 'isearch-forward)
+       (4 'helm-swoop)
+       (16 'helm-swoop-nomigemo)))))
+(global-set-key (kbd "C-s") 'isearch-forward-or-helm-swoop)
 
 ;;----------------------------------------------
 ;;	isearch-dabbrev
@@ -1293,7 +1307,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; elscreen
 ;;----------------------------------
 ;;; プレフィクスキーはC-z
-(setq elscreen-prefix-key (kbd "C-z"))
+(setq elscreen-prefix-key (kbd "C-'"))
 (elscreen-start)
 ;;; タブの先頭に[X]を表示しない
 (setq elscreen-tab-display-kill-screen nil)
