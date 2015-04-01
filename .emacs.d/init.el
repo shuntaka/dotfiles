@@ -626,7 +626,7 @@
 (global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
 
 ;;=============================================
-;; 6 Input Support
+;; 6. Input Support
 ;;=============================================
 
 ;;----------------------
@@ -731,6 +731,16 @@ org-modeなどで活用。"
 ;;http://d.hatena.ne.jp/yascentur/20130526/1369550512
 (when (require 'cursor-in-brackets nil t)
   (global-cursor-in-brackets-mode t))
+
+;;----------------------------------------------
+;; kill-line and delete indent
+;;http://dev.ariel-networks.com/wp/documents/aritcles/emacs/part16
+;;----------------------------------------------
+(defadvice kill-line (before kill-line-and-fixup activate)
+  (when (and (not (bolp)) (eolp))
+    (forward-char)
+    (fixup-whitespace)
+    (backward-char)))
 
 
 ;;=============================================
