@@ -530,7 +530,7 @@
 (global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 
 ;; don't auto-save remote files
-(setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:"))
+(setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:" "/scp:"))
 
 ;;----------------------------------------------
 ;; backup locally
