@@ -1678,8 +1678,8 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
       cperl-close-paren-offset -4
       cperl-label-offset -4
       cperl-comment-column 40
-      cperl-highlight-variables-indiscriminately t
-      cperl-indent-parens-as-block t
+      cperl-highlight-variables-indiscriminately t ;;変数に色つける
+      cperl-indent-parens-as-block t ;;無名ハッシュインデント
       cperl-tab-always-indent nil
       cperl-font-lock t)
 (add-hook 'cperl-mode-hook
@@ -1693,15 +1693,11 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; http://wp.hebon.net/emacs/?p=33
 ;; ----------------------------------------------
 ;; 無名ハッシュ、無名サブルーチンのインデント調整
-(setq cperl-indent-parens-as-block t)
 (setq cperl-indent-subs-specially nil)
 
 
 ;; 途中改行時のインデント
 (setq cperl-continued-statement-offset 4)
-
-;; 変数に色つける
-(setq cperl-highlight-variables-indiscriminately t)
 
 ;;----------------------------------------------
 ;;  setting for the colors
