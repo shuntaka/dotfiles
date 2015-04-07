@@ -270,13 +270,6 @@
 ;; ;;; goto-line ショートカット
 ;; (global-set-key "\M-g" 'goto-line)
 
-;;----------------------------------------------
-;; auto-save
-;;----------------------------------------------
-;; Disable make backup file
-(setq make-backup-files nil)
-;; Disable auto save
-(setq auto-save-default nil)
 
 ;;----------------------------------------------
 ;; generic mode
@@ -510,8 +503,46 @@
 ;; (server-start) ;  sudoeditで使う
 ;; (require 'sudo-ext)
 
+;;----------------------------------------------
+;; auto-save-buffers-enhanced
+;; http://blog.sanojimaru.com/post/20090254216/emacs
+;; http://rubikitch.com/2014/11/23/auto-save-buffers-enhanced/
+;; http://qiita.com/tumf/items/40d4c35810017e0aeb29
+;;----------------------------------------------
+;; Disable auto save
+(setq auto-save-default nil)
 
+(require 'auto-save-buffers-enhanced)
 
+;;; 特定のファイルのみ有効にする
+(setq auto-save-buffers-enhanced-include-regexps '(".+")) ;全ファイル
+;; not-save-fileと.ignoreは除外する
+(setq auto-save-buffers-enhanced-exclude-regexps '("^not-save-file" "\\.ignore$"))
+;;; Wroteのメッセージを抑制
+(setq auto-save-buffers-enhanced-quiet-save-p t)
+;;; *scratch*も ~/.emacs.d/scratch に自動保存
+(setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
+(setq auto-save-buffers-enhanced-file-related-with-scratch-buffer
+      (locate-user-emacs-file "scratch"))
+(auto-save-buffers-enhanced t)
+
+;;; C-x a sでauto-save-buffers-enhancedの有効・無効をトグル
+(global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
+
+;; don't auto-save remote files
+(setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:"))
+
+;;----------------------------------------------
+;; backup locally
+;;----------------------------------------------
+(setq make-backup-files t)
+(setq backup-directory-alist
+  (cons (cons "\\.*$" (expand-file-name "~/.emacs.d/backup"))
+    backup-directory-alist))
+
+;; create auto-save file in ~/.emacs.d/backup
+(setq auto-save-file-name-transforms
+      `((".*" ,(expand-file-name "~/.emacs.d/backup/") t)))
 
 ;;=============================================
 ;; 5. Moving Cursor
