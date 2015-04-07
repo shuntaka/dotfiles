@@ -1661,17 +1661,18 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; For Perl
 ;;=============================================
 ;;----------------------------------------------
-;; cperl-mode
-;;----------------------------------------------
 ;; register files to open with cperl-mode
-;;http://blog.iss.ms/2010/06/15/211445
+;; http://blog.iss.ms/2010/06/15/211445
+;;----------------------------------------------
 (defalias 'perl-mode 'cperl-mode)
 (setq auto-mode-alist (append '(("\\.psgi$" . cperl-mode)) auto-mode-alist))
 (setq auto-mode-alist (append '(("\\.cgi$" . cperl-mode)) auto-mode-alist))
 (setq auto-mode-alist (append '(("\\.t$" . cperl-mode)) auto-mode-alist))
 
+;;----------------------------------------------
 ;; setting for the indent in cperl-mode
-;;http://oinume.hatenablog.com/entry/wp/384
+;; http://oinume.hatenablog.com/entry/wp/384
+;;----------------------------------------------
 (setq cperl-indent-level 4
       cperl-continued-statement-offset 4
       cperl-close-paren-offset -4
@@ -1687,8 +1688,25 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
                (setq indent-tabs-mode nil)
                (setq tab-width nil))))
 
-;; setting for the colors
+;; ----------------------------------------------
+;; cperl-mode indent
+;; http://wp.hebon.net/emacs/?p=33
+;; ----------------------------------------------
+;; 無名ハッシュ、無名サブルーチンのインデント調整
+(setq cperl-indent-parens-as-block t)
+(setq cperl-indent-subs-specially nil)
+
+
+;; 途中改行時のインデント
+(setq cperl-continued-statement-offset 4)
+
+;; 変数に色つける
+(setq cperl-highlight-variables-indiscriminately t)
+
+;;----------------------------------------------
+;;  setting for the colors
 ;;  http://d.hatena.ne.jp/holidays-l/20070528/p1
+;;----------------------------------------------
 ;; (set-face-italic-p 'cperl-hash-face nil)
 ;; (set-face-background 'cperl-hash-face nil)
 ;; (set-face-background 'cperl-array-face nil)
