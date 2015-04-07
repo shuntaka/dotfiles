@@ -271,6 +271,14 @@
 ;; (global-set-key "\M-g" 'goto-line)
 
 ;;----------------------------------------------
+;; auto-save
+;;----------------------------------------------
+;; Disable make backup file
+(setq make-backup-files nil)
+;; Disable auto save
+(setq auto-save-default nil)
+
+;;----------------------------------------------
 ;; generic mode
 ;;----------------------------------------------
 (require 'generic-x)
