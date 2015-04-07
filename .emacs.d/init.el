@@ -1876,6 +1876,20 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 ;; *** PerlySense End ***
 
+;;----------------------------------------------
+;; PerlTidy
+;;----------------------------------------------
+(defun perltidy-region ()               ;選択regionをperltidy
+   "Run perltidy on the current region."
+   (interactive)
+   (save-excursion
+     (shell-command-on-region (point) (mark) "perltidy -q" nil t)))
+(defun perltidy-defun ()                ;開いているソースをperltidy
+  "Run perltidy on the current defun."
+  (interactive)
+  (save-excursion (mark-defun)
+                  (perltidy-region)))
+
 ;;=============================================
 ;; yaml
 ;;=============================================
