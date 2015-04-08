@@ -534,7 +534,7 @@
 ;; auto-save-buffers-enhanced frequency
 ;; https://github.com/kentaro/auto-save-buffers-enhanced/blob/master/auto-save-buffers-enhanced.el
 ;;----------------------------------------------
-(defvar auto-save-buffers-enhanced-interval 1.0)
+(defvar auto-save-buffers-enhanced-interval 2.0)
 ;;  "*Interval by the second.
 ;;For that time, `auto-save-buffers-enhanced-save-buffers' is in
 ;;idle")
