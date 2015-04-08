@@ -13,7 +13,7 @@
 ;; 11. View Mode
 ;; 13. For Programming
 ;; 14. Create Documents
-;; Helm
+;; 15. Helm
 ;; Manipulating  Frame and Window
 ;; Multi Term
 ;; For Git
@@ -416,11 +416,11 @@
 ;;=============================================
 
 ;;----------------------
-;; ffap.el open the specified file
+;; 4.1 ffap.el open the specified file
 ;;----------------------
 ;; e.g. type C-x C-f with the cursor near a file name(e.g. init.el)
 ;; if it exists, that file is used as the file name to be opened
-(ffap-bindings)
+;; (ffap-bindings)
 
 
 ;;----------------------
@@ -1131,18 +1131,35 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 
 ;;===================================================================
-;; Helm
+;; 15. Helm
 ;;===================================================================
 
 ;;----------------------------------------------
-;; helm.el
+;; Helm setting avoiding helm-file-name
+;; http://rubikitch.com/2014/08/11/helm-avoid-find-files/
 ;;----------------------------------------------
-(require 'helm-config)
+(require 'helm)
+(require 'helm-mode)
+(defadvice helm-mode (around avoid-read-file-name activate)
+  (let ((read-file-name-function read-file-name-function)
+        (completing-read-function completing-read-function))
+    ad-do-it))
+(setq completing-read-function 'my-helm-completing-read-default)
+(defun my-helm-completing-read-default (&rest _)
+  (apply (cond ;; [2014-08-11 Mon]helm版のread-file-nameは重いからいらない
+          ((eq (nth 1 _) 'read-file-name-internal)
+           'completing-read-default)
+          (t
+           'helm--completing-read-default))
+         _))
 
+;;----------------------------------------------
+;; Helm Keybinding
+;;----------------------------------------------
 (global-set-key (kbd "C-;") 'helm-for-files)
 (global-set-key(kbd "C-x b") 'helm-mini)
 (define-key global-map (kbd "M-x")     'helm-M-x)
-(define-key global-map (kbd "C-x C-f") 'helm-find-files)
+;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
 (define-key global-map (kbd "C-x C-r") 'helm-recentf)
 (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
 (define-key global-map (kbd "C-c i")   'helm-imenu)
