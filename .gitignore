@@ -30,3 +30,4 @@ ac-comphist.dat
 /.emacs.d/#init.el#
 /.emacs.d/tramp
 /.emacs.d/backup/
+/.emacs.d/scratch

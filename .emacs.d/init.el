@@ -503,15 +503,16 @@
 ;; (server-start) ;  sudoeditで使う
 ;; (require 'sudo-ext)
 
-;;----------------------------------------------
-;; auto-save-buffers-enhanced
-;; http://blog.sanojimaru.com/post/20090254216/emacs
-;; http://rubikitch.com/2014/11/23/auto-save-buffers-enhanced/
-;; http://qiita.com/tumf/items/40d4c35810017e0aeb29
-;;----------------------------------------------
+;; ----------------------------------------------
 ;; Disable auto save
+;; http://blog.sanojimaru.com/post/20090254216/emacs
+;; ----------------------------------------------
 (setq auto-save-default nil)
 
+;;----------------------------------------------
+;; auto-save-buffers-enhanced
+;; http://rubikitch.com/2014/11/23/auto-save-buffers-enhanced/
+;;----------------------------------------------
 (require 'auto-save-buffers-enhanced)
 
 ;;; 特定のファイルのみ有効にする
@@ -529,20 +530,38 @@
 ;;; C-x a sでauto-save-buffers-enhancedの有効・無効をトグル
 (global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 
+;;----------------------------------------------
+;; auto-save-buffers-enhanced frequency
+;; https://github.com/kentaro/auto-save-buffers-enhanced/blob/master/auto-save-buffers-enhanced.el
+;;----------------------------------------------
+(defvar auto-save-buffers-enhanced-interval 1.0)
+;;  "*Interval by the second.
+;;For that time, `auto-save-buffers-enhanced-save-buffers' is in
+;;idle")
+
+;; ----------------------------------------------
 ;; don't auto-save remote files
+;; http://qiita.com/tumf/items/40d4c35810017e0aeb29
+;; ----------------------------------------------
 (setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:" "/scp:" "Remotes"))
+
+;; ----------------------------------------------
+;; Disable make backup file
+;; ----------------------------------------------
+(setq make-backup-files nil)
 
 ;;----------------------------------------------
 ;; backup locally
+;; http://qiita.com/catatsuy/items/f9fad90fa1352a4d3161
 ;;----------------------------------------------
-(setq make-backup-files t)
-(setq backup-directory-alist
-  (cons (cons "\\.*$" (expand-file-name "~/.emacs.d/backup"))
-    backup-directory-alist))
+;; (setq make-backup-files t)
+;; (setq backup-directory-alist
+;;   (cons (cons "\\.*$" (expand-file-name "~/.emacs.d/backup"))
+;;     backup-directory-alist))
 
-;; create auto-save file in ~/.emacs.d/backup
-(setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "~/.emacs.d/backup/") t)))
+;; ;; create auto-save file in ~/.emacs.d/backup
+;; (setq auto-save-file-name-transforms
+;;       `((".*" ,(expand-file-name "~/.emacs.d/backup/") t)))
 
 ;;=============================================
 ;; 5. Moving Cursor
