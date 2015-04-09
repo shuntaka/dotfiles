@@ -465,28 +465,28 @@
 ;; auto-save-buffers-enhanced
 ;; http://rubikitch.com/2014/11/23/auto-save-buffers-enhanced/
 ;;----------------------------------------------
-(require 'auto-save-buffers-enhanced)
+;; (require 'auto-save-buffers-enhanced)
 
-;;; 特定のファイルのみ有効にする
-(setq auto-save-buffers-enhanced-include-regexps '(".+")) ;全ファイル
-;; not-save-fileと.ignoreは除外する
-(setq auto-save-buffers-enhanced-exclude-regexps '("^not-save-file" "\\.ignore$"))
-;;; Wroteのメッセージを抑制
-(setq auto-save-buffers-enhanced-quiet-save-p t)
-;;; *scratch*も ~/.emacs.d/scratch に自動保存
-(setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
-(setq auto-save-buffers-enhanced-file-related-with-scratch-buffer
-      (locate-user-emacs-file "scratch"))
-(auto-save-buffers-enhanced t)
+;; ;;; 特定のファイルのみ有効にする
+;; (setq auto-save-buffers-enhanced-include-regexps '(".+")) ;全ファイル
+;; ;; not-save-fileと.ignoreは除外する
+;; (setq auto-save-buffers-enhanced-exclude-regexps '("^not-save-file" "\\.ignore$"))
+;; ;;; Wroteのメッセージを抑制
+;; (setq auto-save-buffers-enhanced-quiet-save-p t)
+;; ;;; *scratch*も ~/.emacs.d/scratch に自動保存
+;; (setq auto-save-buffers-enhanced-save-scratch-buffer-to-file-p t)
+;; (setq auto-save-buffers-enhanced-file-related-with-scratch-buffer
+;;       (locate-user-emacs-file "scratch"))
+;; (auto-save-buffers-enhanced t)
 
-;;; C-x a sでauto-save-buffers-enhancedの有効・無効をトグル
-(global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
+;; ;;; C-x a sでauto-save-buffers-enhancedの有効・無効をトグル
+;; (global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 
 ;;----------------------------------------------
 ;; auto-save-buffers-enhanced frequency
 ;; https://github.com/kentaro/auto-save-buffers-enhanced/blob/master/auto-save-buffers-enhanced.el
 ;;----------------------------------------------
-(defvar auto-save-buffers-enhanced-interval 3.0)
+;; (defvar auto-save-buffers-enhanced-interval 3.0)
 ;;  "*Interval by the second.
 ;;For that time, `auto-save-buffers-enhanced-save-buffers' is in
 ;;idle")
@@ -495,7 +495,7 @@
 ;; don't auto-save remote files
 ;; http://qiita.com/tumf/items/40d4c35810017e0aeb29
 ;; ----------------------------------------------
-(setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:" "/scp:" "Remotes"))
+;; (setq auto-save-buffers-enhanced-exclude-regexps '("^/ssh:" "/sudo:" "/multi:" "/scp:" "Remotes"))
 
 ;; ----------------------------------------------
 ;; Disable make backup file
