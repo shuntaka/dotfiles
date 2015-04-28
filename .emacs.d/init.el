@@ -1468,7 +1468,20 @@ Otherwise goto the end of minibuffer."
         ("*WL:Message*" . "Wanderlust")))
 
 ;; タブ移動を簡単に
-(define-key global-map (kbd "M-t") 'elscreen-next)
+;; (define-key global-map (kbd "M-t") 'elscreen-next)
+
+;;http://blog.iss.ms/2010/02/25/121855
+;;http://d.hatena.ne.jp/kobapan/20090429/1259971276
+;;http://sleepboy-zzz.blogspot.co.uk/2012/11/emacs.html
+;;http://qiita.com/saku/items/6ef40a0bbaadb2cffbce
+(define-key global-map (kbd "M-t") 'elscreen-create)
+(define-key global-map (kbd "M-T") 'elscreen-clone)
+(define-key global-map (kbd "<C-tab>") 'elscreen-next)
+(define-key global-map (kbd "<C-S-tab>")'elscreen-previous)
+(define-key org-mode-map (kbd "<C-tab>") 'elscreen-next)
+(define-key org-mode-map (kbd "<C-S-tab>")'elscreen-previous)
+
+
 
 ;;----------------------------------
 ;; elscreen_Old
