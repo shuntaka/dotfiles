@@ -1849,18 +1849,44 @@ Otherwise goto the end of minibuffer."
 ;;----------------------------------------------
 ;; perlbrew.el
 ;;----------------------------------------------
-(require 'perlbrew)
-(perlbrew-use "perl-5.10.1")
+;; (require 'perlbrew)
+;; (perlbrew-use "perl-5.10.1")
 
 ;;----------------------------------------------
 ;; flycheck
-;;----------------------------------------------
 ;;http://blog.s2factory.co.jp/arakawa/2014/12/emacs-perl.html
+;;----------------------------------------------
+;; (flycheck-define-checker perl-project-libs
+;;   "A perl syntax checker."
+;;   :command ("perl"
+;;             "-MProject::Libs lib_dirs => [qw(local/lib/perl5)]"
+;;             "-wc"
+;;             source-inplace)
+;;   :error-patterns ((error line-start
+;;                           (minimal-match (message))
+;;                           " at " (file-name) " line " line
+;;                           (or "." (and ", " (zero-or-more not-newline)))
+;;                           line-end))
+;;   :modes (cperl-mode))
+
+;; (add-hook 'cperl-mode-hook
+;;           (lambda ()
+;;             (flycheck-mode t)
+;;             (setq flycheck-checker 'perl-project-libs)))
+
 (with-eval-after-load "flycheck"
   (flycheck-define-checker
    perl-project-libs
    "A perl syntax checker."
-   :command ("perl" "-MProject::Libs lib_dirs => [qw(local/lib/perl5)]" "-wc" source-inplace)
+   ;; :command ("perl" "-MProject::Libs" "-wc" source-inplace)
+   ;; :command ("ssh" "pelican" "perl" "-wc" source-inplace)
+   ;; :command ("ssh" "pelican" "perl" "-MProject::Libs" "-wc" source-inplace)
+   ;; :command ("/Users/shun/.plenv/shims/perl" "-wc" source-inplace)
+   ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs" "-wc" source-inplace)
+   ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs lib_dirs => [qw(extlib vendor modules/*lib)]" "-wc" source-inplace)
+   ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs lib_dirs => [qw(/Users/shun/Remotes/nexus/lib/perl)]" "-wc" source-inplace)
+   :command ("/Users/shun/.plenv/shims/perl" "-I/Users/shun/Remotes/nexus/lib/perl" "-wc" source-inplace)
+
    :error-patterns ((error line-start
                            (minimal-match (message))
                            " at " (file-name) " line " line
@@ -1869,8 +1895,28 @@ Otherwise goto the end of minibuffer."
    :modes (cperl-mode)))
 (add-hook 'cperl-mode-hook
           (lambda ()
-            (flycheck-mode t)
-            (setq flycheck-checker 'perl-project-libs)))
+            (unless (or (and (fboundp 'tramp-tramp-file-p)
+                             (tramp-tramp-file-p buffer-file-name))
+                        (string-match "sudo:.*:" (buffer-file-name)))
+              (progn
+                (flycheck-mode t)
+                (setq flycheck-checker 'perl-project-libs)))))
+
+;; (with-eval-after-load "flycheck"
+;;   (flycheck-define-checker
+;;    perl-project-libs
+;;    "A perl syntax checker."
+;;    ;; :command ("ssh" "pelican" "perl" "-MProject/Libs" "-w" "-c" source-inplace)
+;;    :command ("ssh" "pelican" "perl" "-w" "-c" source-inplace)
+
+;;    :error-patterns ((error line-start
+;;                            (minimal-match (message))
+;;                            " at " (file-name) " line " line
+;;                            (or "." (and ", " (zero-or-more not-newline)))
+;;                            line-end))
+;;    :modes (cperl-mode)))
+
+;; (add-hook 'cperl-mode-hook 'flycheck-mode)
 
 
 
@@ -2027,7 +2073,7 @@ Otherwise goto the end of minibuffer."
                   (perltidy-region)))
 
 ;;=============================================
-;; yaml
+;; For yaml
 ;;=============================================
 (when (require 'yaml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
