@@ -13,7 +13,8 @@
 ;; 11. View Mode
 ;; 13. For Programming
 ;; 14. Create Documents
-;; 15. Helm
+;; 15. anything
+;; 16. Helm
 ;; Manipulating  Frame and Window
 ;; Multi Term
 ;; For Git
@@ -1146,7 +1147,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 
 ;;===================================================================
-;; 15. Helm
+;; 16. Helm
 ;;===================================================================
 
 ;;----------------------------------------------
@@ -1167,6 +1168,12 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
           (t
            'helm--completing-read-default))
          _))
+
+;;----------------------------------------------
+;; fine-file時にhelm-completeに入るのを無効化
+;; http://fukuyama.co/nonexpansion
+;;----------------------------------------------
+(custom-set-variables '(helm-ff-auto-update-initial-value nil))
 
 ;;----------------------------------------------
 ;; Helm Keybinding
@@ -1470,10 +1477,13 @@ Otherwise goto the end of minibuffer."
 ;; タブ移動を簡単に
 ;; (define-key global-map (kbd "M-t") 'elscreen-next)
 
+;;----------------------------------------------
+;; elscreen keybind
+;;http://qiita.com/saku/items/6ef40a0bbaadb2cffbce
 ;;http://blog.iss.ms/2010/02/25/121855
 ;;http://d.hatena.ne.jp/kobapan/20090429/1259971276
 ;;http://sleepboy-zzz.blogspot.co.uk/2012/11/emacs.html
-;;http://qiita.com/saku/items/6ef40a0bbaadb2cffbce
+;;----------------------------------------------
 (define-key global-map (kbd "M-t") 'elscreen-create)
 (define-key global-map (kbd "M-T") 'elscreen-clone)
 (define-key global-map (kbd "<C-tab>") 'elscreen-next)
@@ -1481,7 +1491,10 @@ Otherwise goto the end of minibuffer."
 (define-key org-mode-map (kbd "<C-tab>") 'elscreen-next)
 (define-key org-mode-map (kbd "<C-S-tab>")'elscreen-previous)
 
-
+;;----------------------------------------------
+;; helm-elscreen kenbind
+;;----------------------------------------------
+(define-key global-map (kbd "C-'") 'helm-elscreen)
 
 ;;----------------------------------
 ;; elscreen_Old
