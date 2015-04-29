@@ -1,8 +1,8 @@
 ;;##########################################################################
 ;; Index
 ;;##########################################################################
-;; 1. Basic Settings
-;; 2. Package Management
+;; 1. PATH
+;; 2. Basic Settings
 ;; 3. Key Binding
 ;; 4. Manipulating Buffers and Files
 ;; 5. Moving Cursor
@@ -16,7 +16,6 @@
 ;; 15. anything
 ;; 16. Helm
 ;; Manipulating  Frame and Window
-;; Multi Term
 ;; For Git
 ;; For JavaScript
 ;; For Perl
@@ -24,10 +23,10 @@
 ;; Miscellenious
 
 ;;===========================================================================
-;; 1. Basic Settings
+;; 1. PATH
 ;;===========================================================================
 ;;----------------------------------------------
-;; PATH
+;; inherit path from PATH for GUI emacs
 ;;----------------------------------------------
 ;; ;; inheritting path from PATH for GUI emacs
 ;; ;; When opened from Desktep entry, PATH won't be set to shell's value.
@@ -44,6 +43,124 @@
 ;; for plsense, perly-sense
 (setenv "PATH"
         (concat '"/Users/shun/perl5/perlbrew/perls/perl-5.10.1/bin:" (getenv "PATH")))
+
+;;=================================================================
+;; 2. Basic Settings
+;;=================================================================
+;;----------------------
+;; append the  directory and its subdirectoreis to the load-path
+;;----------------------
+;; define add-to-load-path
+(defun add-to-load-path (&rest paths)
+  (let (path)
+    (dolist (path paths paths)
+      (let ((default-directory
+	      (expand-file-name (concat user-emacs-directory path))))
+	(add-to-list 'load-path default-directory)
+	(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+	    (normal-top-level-add-subdirs-to-load-path))))))
+
+;; add directories under "elisp", "elpa", "conf", "public_repos"
+(add-to-load-path "auto-install" "elisp" "elpa" "conf" "public_repos")
+
+;;----------------------------------------------
+;; 2-2. auto-install.el
+;;----------------------------------------------
+;;How to use
+;;M-x install-elisp URL
+;;M-x install-elisp-from-emacswiki EmacsWikiのページ名
+;;M-x install-elisp-from-gist gist-id
+;;M-x autoinsall-batch
+
+;; auto-installによってインストールされるEmacs Lispをロードパスに加える
+;; デフォルトは ~/.emacs.d/auto-install/
+(add-to-list 'load-path "~/.emacs.d/auto-install/")
+(require 'auto-install)
+
+;; set .emacs.d/elisp as the auto-install directory
+;(setq auto-install-directory "~/.emacs.d/elisp/")
+
+;; 起動時にEmacsWikiのページ名を補完候補に加える
+
+;; install-elisp.el互換モードにする
+(auto-install-compatibility-setup)
+
+;; ediff関連のバッファを1つのフレームにまとめる
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;;----------------------------------------------
+;; 2-3. setting for ELPA (package.el)
+;;----------------------------------------------
+;; How to use
+;; M-x list-packages
+;;     or
+;; M-x package-refresh-contents
+;; M-x package-initialize "package name"
+
+(package-initialize)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+;;----------------------------------------------
+;; from Emacs Technique Bible Basic Setting
+;;----------------------------------------------
+;;; 履歴を次回Emacs起動時にも保存する
+(savehist-mode 1)
+
+;;; ファイル内のカーソル位置を記憶する
+(setq-default save-place t)
+(require 'saveplace)
+
+;;; 対応する括弧を光らせる
+;;(show-paren-mode t)
+
+;;; シェルに合わせるため、C-hは後退に割り当てる
+;;; ヘルプは<f1>
+(global-set-key (kbd "C-h") 'delete-backward-char)
+
+;;; モードラインに時刻を表示する
+(display-time)
+
+;;; 行番号・桁番号を表示する
+;;(line-number-mode 1)
+;;(column-number-mode 1)
+
+;;; リージョンに色をつける
+(transient-mark-mode 1)
+
+;;; GCを減らして軽くする（デフォルトの10倍）
+(setq gc-cons-threshold (* 10 gc-cons-threshold))
+
+;;; ログの記録行数を増やす
+(setq message-log-max 10000)
+
+;;; ミニバッファを再起的に呼び出す
+(setq enable-recursive-minibuffers t)
+
+;;; ダイアログボックスを使わないようにする
+(setq use-dialog-box nil)
+(defalias 'message-box 'message)
+
+;;; 履歴をたくさん保存する
+(setq history-length 1000)
+
+;;; キーストロークをエコーエリアに早く表示する
+(setq echo-keystrokes 0.1)
+
+;;; 大きいファイルを開くときに警告を表示する 10MBから25MBへ
+(setq large-file-warning-threshold (* 25 1024 1024))
+
+;;; ミニバッファで入力を取り消しても履歴に残す
+;;; 誤って取り消して入力が失われるのを防ぐため
+(defadvice abort-recursive-edit (before minibuffer-save activate)
+  (when (eq (selected-window) (active-minibuffer-window))
+    (add-to-history minibuffer-history-variable (minibuffer-contents))))
+
+;;; yesをyで応答するように
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;;; goto-line ショートカット
+(global-set-key "\M-g" 'goto-line)
 
 ;;----------------------
 ;; color theme
@@ -123,9 +240,9 @@
 (when window-system
 (tool-bar-mode 0)
 (scroll-bar-mode 0))
-;; (when (eq system-type 'darwin)
-;; (tool-bar-mode -1)
-;; (scroll-bar-mode -1))
+(when (eq system-type 'darwin)
+(tool-bar-mode -1)
+(scroll-bar-mode -1))
 
 ;;----------------------
 ;; display row  line-number
@@ -162,157 +279,12 @@
 		  (lambda ()
 		  (setq-default indent-tabs-mode nil)))
 
-;;----------------------------------------------
-;; from Emacs Technique Bible Basic Setting
-;;----------------------------------------------
-;;; 履歴を次回Emacs起動時にも保存する
-(savehist-mode 1)
-
-;;; ファイル内のカーソル位置を記憶する
-(setq-default save-place t)
-(require 'saveplace)
-
-;;; 対応する括弧を光らせる
-;;(show-paren-mode t)
-
-;;; シェルに合わせるため、C-hは後退に割り当てる
-;;; ヘルプは<f1>
-(global-set-key (kbd "C-h") 'delete-backward-char)
-
-;;; モードラインに時刻を表示する
-(display-time)
-
-;;; 行番号・桁番号を表示する
-;;(line-number-mode 1)
-;;(column-number-mode 1)
-
-;;; リージョンに色をつける
-(transient-mark-mode 1)
-
-;;; GCを減らして軽くする（デフォルトの10倍）
-(setq gc-cons-threshold (* 10 gc-cons-threshold))
-
-;;; ログの記録行数を増やす
-(setq message-log-max 10000)
-
-;;; ミニバッファを再起的に呼び出す
-(setq enable-recursive-minibuffers t)
-
-;;; ダイアログボックスを使わないようにする
-(setq use-dialog-box nil)
-(defalias 'message-box 'message)
-
-;;; 履歴をたくさん保存する
-(setq history-lenght 1000)
-
-;;; キーストロークをエコーエリアに早く表示する
-(setq echo-keystrokes 0.1)
-
-;;; 大きいファイルを開くときに警告を表示する 10MBから25MBへ
-(setq large-file-warning-threshold (* 25 1024 1024))
-
-;;; ミニバッファで入力を取り消しても履歴に残す
-;;; 誤って取り消して入力が失われるのを防ぐため
-(defadvice abort-recursive-edit (before minibuffer-save activate)
-  (when (eq (selected-window) (active-minibuffer-window))
-    (add-to-history minibuffer-history-variable (minibuffer-contents))))
-
-;;; yesをyで応答するように
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; ;;; goto-line ショートカット
-;; (global-set-key "\M-g" 'goto-line)
-
 
 ;;----------------------------------------------
 ;; generic mode
 ;;----------------------------------------------
 (require 'generic-x)
 
-
-;;----------------------------------------------
-;; eww
-;;----------------------------------------------
-;; google
-(setq eww-search-prefix "https://www.google.co.jp/search?q=")
-
-;; color
-(require 'eww)
-;;; [2014-11-17 Mon]背景・文字色を無効化する
-(defvar eww-disable-colorize t)
-(defun shr-colorize-region--disable (orig start end fg &optional bg &rest _)
-  (unless eww-disable-colorize
-    (funcall orig start end fg)))
-(advice-add 'shr-colorize-region :around 'shr-colorize-region--disable)
-(advice-add 'eww-colorize-region :around 'shr-colorize-region--disable)
-(defun eww-disable-color ()
-  "ewwで文字色を反映させない"
-  (interactive)
-  (setq-local eww-disable-colorize t)
-  (eww-reload))
-(defun eww-enable-color ()
-  "ewwで文字色を反映させる"
-  (interactive)
-  (setq-local eww-disable-colorize nil)
-  (eww-reload))
-
-;;=============================================
-;;2. Package Management
-;;=============================================
-
-;;----------------------
-;; append the  directory and its subdirectoreis to the load-path
-;;----------------------
-;; define add-to-load-path
-(defun add-to-load-path (&rest paths)
-  (let (path)
-    (dolist (path paths paths)
-      (let ((default-directory
-	      (expand-file-name (concat user-emacs-directory path))))
-	(add-to-list 'load-path default-directory)
-	(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-	    (normal-top-level-add-subdirs-to-load-path))))))
-
-;; add directories under "elisp", "elpa", "conf", "public_repos"
-(add-to-load-path "auto-install" "elisp" "elpa" "conf" "public_repos")
-
-;;----------------------
-;; setting for ELPA (package.el)
-;;----------------------
-;; How to use
-;; M-x list-packages
-;;     or
-;; M-x package-refresh-contents
-;; M-x package-initialize "package name"
-
-(package-initialize)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-;;----------------------
-;; auto-install
-;;----------------------
-;;How to use
-;;M-x install-elisp URL
-;;M-x install-elisp-from-emacswiki EmacsWikiのページ名
-;;M-x install-elisp-from-gist gist-id
-;;M-x autoinsall-batch
-
-;; auto-installによってインストールされるEmacs Lispをロードパスに加える
-;; デフォルトは ~/.emacs.d/auto-install/
-(add-to-list 'load-path "~/.emacs.d/auto-install/")
-(require 'auto-install)
-
-;; set .emacs.d/elisp as the auto-install directory
-;(setq auto-install-directory "~/.emacs.d/elisp/")
-
-;; 起動時にEmacsWikiのページ名を補完候補に加える
-
-;; install-elisp.el互換モードにする
-(auto-install-compatibility-setup)
-
-;; ediff関連のバッファを1つのフレームにまとめる
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;;=============================================
 ;; 3. Key Binding
@@ -375,16 +347,15 @@
 ;; if it exists, that file is used as the file name to be opened
 ;; (ffap-bindings)
 
-
 ;;----------------------
-;; uniquify.el
+;; 4.2 uniquify.el
 ;;----------------------
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 (setq uniquify-ignore-buffers-re "*[^*]+*")
 
 ;;----------------------
-;; iswitchb.el
+;; 4.3 iswitchb.el
 ;;----------------------
 ;; (iswitchb-mode 1)
 ;; ;; バッファ読み取り関数を iswitchb にする
@@ -395,7 +366,7 @@
 ;; (setq iswitchb-prompt-newbuffer nil)
 
 ;;----------------------
-;; recentf.el
+;; 4.4 recentf.el
 ;;----------------------
 ;; 最近使ったファイルを開く
 ;; M-x recentf-open-files
@@ -408,10 +379,8 @@
 (require 'recentf-ext)
 (global-set-key [?\C-c ?r ?f] 'recentf-open-files)
 
-
-
 ;;----------------------
-;; bookmark.el
+;; 4.5 bookmark.el
 ;;----------------------
 ;; ブックマークを変更したら即保存する
 (setq bookmark-save-flag 1)
@@ -425,7 +394,7 @@
   (add-hook 'bookmark-after-jump-hook 'bookmark-arrange-latest-top))
 
 ;;----------------------
-;; emacsclient
+;; 4.6 emacsclient
 ;;----------------------
 ;; (server-start)
 (defun iconify-emacs-when-server-is-done ()
@@ -438,7 +407,7 @@
 (defalias 'exit 'save-buffers-kill-emacs)
 
 ;;----------------------
-;; tempbuf.el
+;; 4.7 tempbuf.el
 ;;----------------------
 (require 'tempbuf)
 ;; ファイルを開いたら自動的にtempbufを有効にする
@@ -446,26 +415,15 @@
 ;; diredバッファに対してtempbufを有効にする
 ;(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
 
-;----------------------------------------------
-; 4.12
-;----------------------------------------------
-
-;----------------------------------------------
-; sudo-ext.el
-;----------------------------------------------
-;; (server-start) ;  sudoeditで使う
-;; (require 'sudo-ext)
-
-;; ----------------------------------------------
+;;----------------------------------------------
+;; 4.8 auto-save
+;;----------------------------------------------
 ;; Disable auto save
 ;; http://blog.sanojimaru.com/post/20090254216/emacs
-;; ----------------------------------------------
 (setq auto-save-default nil)
 
-;;----------------------------------------------
 ;; auto-save-buffers-enhanced
 ;; http://rubikitch.com/2014/11/23/auto-save-buffers-enhanced/
-;;----------------------------------------------
 ;; (require 'auto-save-buffers-enhanced)
 
 ;; ;;; 特定のファイルのみ有効にする
@@ -483,7 +441,8 @@
 ;; ;;; C-x a sでauto-save-buffers-enhancedの有効・無効をトグル
 ;; (global-set-key "\C-xas" 'auto-save-buffers-enhanced-toggle-activity)
 
-;;----------------------------------------------
+;; ----------------------------------------------
+;;
 ;; auto-save-buffers-enhanced frequency
 ;; https://github.com/kentaro/auto-save-buffers-enhanced/blob/master/auto-save-buffers-enhanced.el
 ;;----------------------------------------------
@@ -516,15 +475,27 @@
 ;; (setq auto-save-file-name-transforms
 ;;       `((".*" ,(expand-file-name "~/.emacs.d/backup/") t)))
 
+
+;;----------------------------------------------
+;; 4.13 Wdired.el
+;;----------------------------------------------
+
+;;----------------------------------------------
+;; 4.14. tramp.el
+;;----------------------------------------------
+(require 'tramp)
+(add-to-list 'tramp-default-proxies-alist
+             '(nil "\\`root\\'" "/ssh:%h:"))
+
+;----------------------------------------------
+; 4.15. sudoedit.el
+;----------------------------------------------
+;; (server-start) ;  sudoeditで使う
+;; (require 'sudo-ext)
+
 ;;=============================================
 ;; 5. Moving Cursor
 ;;=============================================
-
-;;----------------------
-;; goto-line
-;;----------------------
-(define-key global-map (kbd "M-g") 'goto-line)
-
 ;;----------------------
 ;; poin-undo.el
 ;;----------------------
@@ -856,6 +827,32 @@ org-modeなどで活用。"
 ;; (toggle-highlight-column-when-idle 1)
 ;; (col-highlight-set-interval 6)
 
+;;----------------------------------------------
+;; 8.4 eww
+;;----------------------------------------------
+;; google
+(setq eww-search-prefix "https://www.google.co.jp/search?q=")
+
+;; color
+(require 'eww)
+;;; [2014-11-17 Mon]背景・文字色を無効化する
+(defvar eww-disable-colorize t)
+(defun shr-colorize-region--disable (orig start end fg &optional bg &rest _)
+  (unless eww-disable-colorize
+    (funcall orig start end fg)))
+(advice-add 'shr-colorize-region :around 'shr-colorize-region--disable)
+(advice-add 'eww-colorize-region :around 'shr-colorize-region--disable)
+(defun eww-disable-color ()
+  "ewwで文字色を反映させない"
+  (interactive)
+  (setq-local eww-disable-colorize t)
+  (eww-reload))
+(defun eww-enable-color ()
+  "ewwで文字色を反映させる"
+  (interactive)
+  (setq-local eww-disable-colorize nil)
+  (eww-reload))
+
 ;;=================================================================
 ;; 9. External Program
 ;;=================================================================
@@ -873,19 +870,28 @@ org-modeなどで活用。"
  nil 'japanese-jisx0208
 (font-spec :family "Hiragino Kaku Gothic ProN")))
 
+;----------------------------------------------
+;; 9-9. Multi Term
 ;;----------------------------------------------
-;; Multi-Term
-;;----------------------------------------------
-;;multi-term
 (when (require 'multi-term nil t)
   (setq multi-term-program "/usr/local/bin/zsh"))
 
-;;----------------------------------------------
-;; Tramp
-;;----------------------------------------------
-(require 'tramp)
-(add-to-list 'tramp-default-proxies-alist
-             '(nil "\\`root\\'" "/ssh:%h:"))
+(require 'multi-term)
+(add-hook 'term-mode-hook '(lambda ()
+                           (setq show-trailing-whitespace nil)))
+(global-set-key (kbd "C-c t")
+               '(lambda () (interactive) (multi-term)))
+(global-set-key (kbd "C-c n") 'multi-term-next)
+(global-set-key (kbd "C-c p") 'multi-term-prev)
+(setq multi-term-program shell-file-name
+     ansi-term-color-vector [term
+                             term-color-black
+                             term-color-green
+                             term-color-yellow
+                             term-color-blue
+                             term-color-magenta
+                             term-color-cyan
+                             term-color-white])
 
 ;;----------------------------------------------
 ;; Tmux
@@ -1638,31 +1644,6 @@ Otherwise goto the end of minibuffer."
 ;;----------------------------------------------
 ;; (hiwin-activate)                           ;; hiwin-modeを有効化
 ;; (set-face-background 'hiwin-face "gray80") ;; 非アクティブウィンドウの背景色を設定
-
-
-;;=================================================================
-;; Multi Term
-;;=================================================================
-(require 'multi-term)
-(add-hook 'term-mode-hook '(lambda ()
-                           (setq show-trailing-whitespace nil)))
-(global-set-key (kbd "C-c t")
-               '(lambda () (interactive) (multi-term)))
-(global-set-key (kbd "C-c n") 'multi-term-next)
-(global-set-key (kbd "C-c p") 'multi-term-prev)
-(setq multi-term-program shell-file-name
-     ansi-term-color-vector [term
-                             term-color-black
-                             term-color-green
-                             term-color-yellow
-                             term-color-blue
-                             term-color-magenta
-                             term-color-cyan
-                             term-color-white])
-
-;;=================================================================
-;; For Git
-;;=================================================================
 
 ;;=============================================
 ;; For html
