@@ -403,7 +403,7 @@
 ;; Author: rubikitch <rubikitch@ruby-lang.org>
 ;; Keywords: convenience, files
 ;; URL: http://www.emacswiki.org/cgi-bin/wiki/download/recentf-ext.el
-(setq recentf-max-saved-itemsi 3000)
+(setq recentf-max-saved-items 3000)
 (setq recentf-exclude '("/TAGS$" "/var/tmp/"))
 (require 'recentf-ext)
 (global-set-key [?\C-c ?r ?f] 'recentf-open-files)
@@ -832,6 +832,8 @@ org-modeなどで活用。"
 (require 'ace-isearch)
 (global-ace-isearch-mode 1)
 ;; '(ace-isearch-input-idle-delay 0.1)
+
+
 
 
 ;;=============================================
