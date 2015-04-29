@@ -813,15 +813,15 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 ;; foreign-regexp.el
 ;;----------------------------------------------
-(require 'foreign-regexp)
-(custom-set-variables
- '(foreign-regexp/regexp-type 'perl)    ; perl や javascript も指定可能
- '(reb-re-syntax 'foreign-regexp))
+;; (require 'foreign-regexp)
+;; (custom-set-variables
+;;  '(foreign-regexp/regexp-type 'perl)    ; perl や javascript も指定可能
+;;  '(reb-re-syntax 'foreign-regexp))
 
 ;;----------------------------------------------
 ;; visual-regexp
 ;;----------------------------------------------
-(global-set-key (kbd "M-%") 'vr/query-replace)
+;; (global-set-key (kbd "M-%") 'vr/query-replace)
 
 ;;----------------------------------------------
 ;; ace-isearch
@@ -833,7 +833,19 @@ org-modeなどで活用。"
 (global-ace-isearch-mode 1)
 ;; '(ace-isearch-input-idle-delay 0.1)
 
-
+;;----------------------------------------------
+;;visual-regexp-steroids
+;; http://rubikitch.com/2015/04/20/visual-regexp-steroids/
+;;----------------------------------------------
+(require 'visual-regexp-steroids)
+(setq vr/engine 'python)                ;python regexpならばこれ
+;; (setq vr/engine 'pcre2el)               ;elispでPCREから変換
+(global-set-key (kbd "M-%") 'vr/query-replace)
+;; multiple-cursorsを使っているならこれで
+(global-set-key (kbd "C-c m") 'vr/mc-mark)
+;; 普段の正規表現isearchにも使いたいならこれを
+(global-set-key (kbd "C-M-r") 'vr/isearch-backward)
+(global-set-key (kbd "C-M-s") 'vr/isearch-forward)
 
 
 ;;=============================================
