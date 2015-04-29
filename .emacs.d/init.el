@@ -112,7 +112,7 @@
 (require 'saveplace)
 
 ;;; 対応する括弧を光らせる
-;;(show-paren-mode t)
+(show-paren-mode t)
 
 ;;; シェルに合わせるため、C-hは後退に割り当てる
 ;;; ヘルプは<f1>
@@ -122,8 +122,8 @@
 (display-time)
 
 ;;; 行番号・桁番号を表示する
-;;(line-number-mode 1)
-;;(column-number-mode 1)
+(line-number-mode 1)
+(column-number-mode 1)
 
 ;;; リージョンに色をつける
 (transient-mark-mode 1)
@@ -219,12 +219,6 @@
 (setq hl-line-face 'my-hl-line-face)
 (global-hl-line-mode t)
 
-
-;;----------------------
-;;Hilight Parenthesis
-;;----------------------
-(show-paren-mode t)
-
 ;;----------------------
 ;; Emphasize Parenthesis
 ;;----------------------
@@ -243,12 +237,6 @@
 (when (eq system-type 'darwin)
 (tool-bar-mode -1)
 (scroll-bar-mode -1))
-
-;;----------------------
-;; display row  line-number
-;;----------------------
-(line-number-mode 1)
-(column-number-mode 1)
 
 ;;----------------------
 ;; line-number on the left side
