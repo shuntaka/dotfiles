@@ -1085,7 +1085,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; 開いたスクリプトのパスに応じて、PERL5LIBにlibを追加してくれる
 ;; http://svn.coderepos.org/share/lang/elisp/set-perl5lib/set-perl5lib.el
 (add-to-list 'load-path "~/.emacs.d/public_repos/1333926")
-(require 'set-perl5lib)
+;; (require 'set-perl5lib)
 
 ;; エラー、ウォーニング時のフェイス
 (set-face-background 'flymake-errline "red4")
