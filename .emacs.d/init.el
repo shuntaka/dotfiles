@@ -1636,6 +1636,10 @@ Otherwise goto the end of minibuffer."
 ;;=============================================
 ;; For html
 ;;=============================================
+;;----------------------------------------------
+;; emmet
+;; http://qiita.com/ironsand/items/55f2ced218949efbb1fb
+;;----------------------------------------------
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; マークアップ言語全部で使う
 (add-hook 'css-mode-hook  'emmet-mode) ;; CSSにも使う
