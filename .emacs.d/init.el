@@ -13,10 +13,11 @@
 ;; 11. View Mode
 ;; 13. For Programming
 ;; 14. Create Documents
-;; 15. anything
-;; 16. Helm
-;; Manipulating  Frame and Window
-;; For Git
+;; 15. Helm & Anything
+;; Color Theme and Font
+;; Manipulating Frame and Window
+;; For HTML and CSS
+;; For SCSS
 ;; For JavaScript
 ;; For Perl
 ;; For Yaml
@@ -165,49 +166,6 @@
 ;;; goto-line ショートカット
 (global-set-key "\M-g" 'goto-line)
 
-;;----------------------
-;; color theme
-;;----------------------
-(when (require 'color-theme nil t)
-(color-theme-initialize))
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
-
-;;Zenburn For Non-Terminal
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-
- '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
-
-;;Molokai
-;; (setq custom-theme-directory "~/.emacs.d/themes")
-;; (load-theme 'molokai t)
-;; (enable-theme 'molokai)
-
-;; Solarized
-;; (setq custom-theme-directory "~/.emacs.d/themes/emacs-color-theme-solarized")
-;; (load-theme 'solarized-dark t)
-
-;; apribase
-;; (setq custom-theme-directory "~/.emacs.d/themes")
-;; (require 'apribase-theme)
-
-
-;;----------------------
-;;font
-;;----------------------
-(set-face-attribute 'default nil
-	    :family "Ricty"
-            :height 180)
-
-;;----------------------------------------------
-;; Background Color for Region
-;;----------------------------------------------
-(set-face-background 'region "darkgreen")
 
 ;;----------------------
 ;; Hilight the current line
@@ -273,6 +231,7 @@
 ;; generic mode
 ;;----------------------------------------------
 (require 'generic-x)
+
 
 
 ;;=============================================
@@ -1156,7 +1115,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 
 ;;===================================================================
-;; 16. Helm
+;; 15. Helm & Anything
 ;;===================================================================
 
 ;;----------------------------------------------
@@ -1430,6 +1389,56 @@ Otherwise goto the end of minibuffer."
  helm-ag-r-input-idle-delay 0.5  ; 検索をdelay後からおこなう
  helm-ag-r-use-no-highlight t    ; ハイライト無効化
  helm-ag-r-candidate-limit 1000) ; 候補の上限を設定
+
+;;=================================================================
+;; Color Theme and Font
+;;=================================================================
+;;----------------------
+;; color theme
+;;----------------------
+(load-theme 'zenburn t)
+
+;; (when (require 'color-theme nil t)
+;; (color-theme-initialize))
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+
+;; ;;Zenburn For Non-Terminal
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+
+;;  '(custom-enabled-themes (quote (zenburn)))
+;;  '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
+
+;;Molokai
+;; (setq custom-theme-directory "~/.emacs.d/themes")
+;; (load-theme 'molokai t)
+;; (enable-theme 'molokai)
+
+;; Solarized
+;; (setq custom-theme-directory "~/.emacs.d/themes/emacs-color-theme-solarized")
+;; (load-theme 'solarized-dark t)
+
+;; apribase
+;; (setq custom-theme-directory "~/.emacs.d/themes")
+;; (require 'apribase-theme)
+
+
+;;----------------------
+;;font
+;;----------------------
+(set-face-attribute 'default nil
+	    :family "Ricty"
+            :height 180)
+
+;;----------------------------------------------
+;; Background Color for Region
+;;----------------------------------------------
+(set-face-background 'region "darkgreen")
+
 
 
 ;;=============================================
