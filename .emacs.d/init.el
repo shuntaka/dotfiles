@@ -1705,7 +1705,7 @@ Otherwise goto the end of minibuffer."
 ;; flycheck for SCSS
 ;;----------------------------------------------
 (add-hook 'scss-mode-hook 'flycheck-mode)
-
+'(flycheck-scss-compass t)
 
 ;;=============================================
 ;; For JavaScript
