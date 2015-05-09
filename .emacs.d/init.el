@@ -1396,7 +1396,7 @@ Otherwise goto the end of minibuffer."
 ;;----------------------
 ;; color theme
 ;;----------------------
-;; (load-theme 'zenburn t)
+(load-theme 'zenburn t)
 
 ;; (when (require 'color-theme nil t)
 ;; (color-theme-initialize))
