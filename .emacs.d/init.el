@@ -215,17 +215,23 @@
 (setq-default tab-width 4)
 
 ;;----------------------------------------------
-;; disable tab
+;; disable tab for elisp
 ;;----------------------------------------------
+;; for elisp
+(add-hook 'emacs-lisp-mode-hook
+          (lambda ()
+            (setq-default indent-tabs-mode nil)))
+
+
 ;; for yaml
 (add-hook 'yaml-mode-hook
-		  (lambda ()
-		  (setq-default indent-tabs-mode nil)))
+          (lambda ()
+            (setq-default indent-tabs-mode nil)))
 
 ;; for Perl
 (add-hook 'cperl-mode-hook
-		  (lambda ()
-		  (setq-default indent-tabs-mode nil)))
+          (lambda ()
+            (setq-default indent-tabs-mode nil)))
 
 ;;----------------------------------------------
 ;; generic mode
@@ -1071,8 +1077,11 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
       (setq count (1- count)))))
 
 ;;=============================================
-;; 14 Create Documents
+;; 14. Create Documents
 ;;=============================================
+(add-hook 'org-mode-hook
+		  (lambda ()
+		  (setq-default indent-tabs-mode nil)))
 
 ;;----------------------
 ;; 14.2
