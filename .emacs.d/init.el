@@ -271,14 +271,6 @@
 		  (setq-default indent-tabs-mode nil)))
 
 ;;----------------------------------------------
-;; disable tab for html
-;;----------------------------------------------
-(add-hook 'html-mode-hook
-		  (lambda ()
-		  (setq-default indent-tabs-mode nil)))
-
-
-;;----------------------------------------------
 ;; generic mode
 ;;----------------------------------------------
 (require 'generic-x)
@@ -1644,8 +1636,15 @@ Otherwise goto the end of minibuffer."
 ;; (set-face-background 'hiwin-face "gray80") ;; 非アクティブウィンドウの背景色を設定
 
 ;;=============================================
-;; For html
+;; For HTML and CSS
 ;;=============================================
+;;----------------------------------------------
+;; disable tab for html
+;;----------------------------------------------
+(add-hook 'html-mode-hook
+		  (lambda ()
+		  (setq-default indent-tabs-mode nil)))
+
 ;;----------------------------------------------
 ;; emmet
 ;; http://qiita.com/ironsand/items/55f2ced218949efbb1fb
