@@ -1455,7 +1455,7 @@ Otherwise goto the end of minibuffer."
                     :box nil)
 
 (set-face-attribute 'powerline-active1 nil
-                    :foreground "#fff"
+                    :foreground "#000"
                     :background "#FF6699"
                     :inherit 'mode-line)
 
