@@ -1405,22 +1405,22 @@ Otherwise goto the end of minibuffer."
 ;;----------------------
 ;; color theme
 ;;----------------------
-(load-theme 'zenburn t)
+;; (load-theme 'zenburn t)
 
-;; (when (require 'color-theme nil t)
-;; (color-theme-initialize))
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
+(when (require 'color-theme nil t)
+(color-theme-initialize))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
 
-;; ;;Zenburn For Non-Terminal
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
+;;Zenburn For Non-Terminal
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
 
-;;  '(custom-enabled-themes (quote (zenburn)))
-;;  '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
+ '(custom-enabled-themes (quote (zenburn)))
+ '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
 
 ;;Molokai
 ;; (setq custom-theme-directory "~/.emacs.d/themes")
