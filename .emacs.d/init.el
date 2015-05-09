@@ -44,6 +44,9 @@
 (setenv "PATH"
         (concat '"/Users/shun/perl5/perlbrew/perls/perl-5.10.1/bin:" (getenv "PATH")))
 
+;; for scss-lint
+(setq exec-path (append exec-path '("/usr/bin")))
+
 ;;=================================================================
 ;; 2. Basic Settings
 ;;=================================================================
@@ -264,6 +267,13 @@
 ;; disable tab for perl
 ;;----------------------------------------------
 (add-hook 'cperl-mode-hook
+		  (lambda ()
+		  (setq-default indent-tabs-mode nil)))
+
+;;----------------------------------------------
+;; disable tab for html
+;;----------------------------------------------
+(add-hook 'html-mode-hook
 		  (lambda ()
 		  (setq-default indent-tabs-mode nil)))
 
@@ -1643,12 +1653,57 @@ Otherwise goto the end of minibuffer."
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; マークアップ言語全部で使う
 (add-hook 'css-mode-hook  'emmet-mode) ;; CSSにも使う
-(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2))) ;; indent はスペース2個
+(add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 4))) ;; indent はスペース2個
 (eval-after-load "emmet-mode"
   '(define-key emmet-mode-keymap (kbd "C-j") nil)) ;; C-j は newline のままにしておく
 (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
 (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line) ;; C-i で展開
 
+;;----------------------------------------------
+;; scss-mode
+;; http://cortyuming.hateblo.jp/entry/20120110/p1
+;; http://qiita.com/sawamur@github/items/bb50d84af4d01a2eb5c2
+;;----------------------------------------------
+;; ;; CSS
+(defun my-css-electric-pair-brace ()
+  (interactive)
+  (insert "{")(newline-and-indent)
+  (newline-and-indent)
+  (insert "}")
+  (indent-for-tab-command)
+  (previous-line)(indent-for-tab-command)
+  )
+
+(defun my-semicolon-ret ()
+  (interactive)
+  (insert ";")
+  (newline-and-indent))
+
+;; ;; scss-mode
+;; (autoload 'scss-mode "scss-mode")
+;; (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(scss\\|css\\)\\'" . scss-mode))
+(add-hook 'scss-mode-hook 'ac-css-mode-setup)
+(add-hook 'scss-mode-hook
+          (lambda ()
+            (define-key scss-mode-map "\M-{" 'my-css-electric-pair-brace)
+            (define-key scss-mode-map ";" 'my-semicolon-ret)
+            (setq css-indent-offset 4)
+            (setq scss-compile-at-save nil)
+            (setq ac-sources '(ac-source-yasnippet
+                               ;; ac-source-words-in-same-mode-buffers
+                               ac-source-words-in-all-buffer
+                               ac-source-dictionary
+                               ))
+            (flymake-mode t)
+            ))
+(add-to-list 'ac-modes 'scss-mode)
+
+;;----------------------------------------------
+;;
+;;----------------------------------------------
+
+(add-hook 'scss-mode-hook 'flycheck-mode)
 
 
 ;;=============================================
