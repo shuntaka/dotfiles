@@ -1658,6 +1658,9 @@ Otherwise goto the end of minibuffer."
 (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
 (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line) ;; C-i で展開
 
+;;=============================================
+;; For SCSS
+;;=============================================
 ;;----------------------------------------------
 ;; scss-mode
 ;; http://cortyuming.hateblo.jp/entry/20120110/p1
@@ -1699,9 +1702,8 @@ Otherwise goto the end of minibuffer."
 (add-to-list 'ac-modes 'scss-mode)
 
 ;;----------------------------------------------
-;;
+;; flycheck for SCSS
 ;;----------------------------------------------
-
 (add-hook 'scss-mode-hook 'flycheck-mode)
 
 
