@@ -257,15 +257,14 @@
 (setq-default tab-width 4)
 
 ;;----------------------------------------------
-;; disable tab for yaml
+;; disable tab
 ;;----------------------------------------------
+;; for yaml
 (add-hook 'yaml-mode-hook
 		  (lambda ()
 		  (setq-default indent-tabs-mode nil)))
 
-;;----------------------------------------------
-;; disable tab for perl
-;;----------------------------------------------
+;; for Perl
 (add-hook 'cperl-mode-hook
 		  (lambda ()
 		  (setq-default indent-tabs-mode nil)))
@@ -1638,6 +1637,7 @@ Otherwise goto the end of minibuffer."
 ;;=============================================
 ;; For HTML and CSS
 ;;=============================================
+
 ;;----------------------------------------------
 ;; disable tab for html
 ;;----------------------------------------------
