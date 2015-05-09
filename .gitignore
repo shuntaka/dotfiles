@@ -31,3 +31,4 @@ ac-comphist.dat
 /.emacs.d/tramp
 /.emacs.d/backup/
 /.emacs.d/scratch
+/.emacs.d/places
