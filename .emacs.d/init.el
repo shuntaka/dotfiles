@@ -1696,6 +1696,7 @@ Otherwise goto the end of minibuffer."
 (define-key global-map (kbd "<C-S-tab>")'elscreen-previous)
 (define-key org-mode-map (kbd "<C-tab>") 'elscreen-next)
 (define-key org-mode-map (kbd "<C-S-tab>")'elscreen-previous)
+(define-key org-mode-map (kbd "C-'")'helm-elscreen)
 
 ;;----------------------------------------------
 ;; helm-elscreen kenbind
