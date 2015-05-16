@@ -1853,6 +1853,14 @@ Otherwise goto the end of minibuffer."
 (add-hook 'html-mode-hook 'rainbow-mode)
 
 ;;----------------------------------------------
+;; e-palette
+;; http://filmlang.org/soft/emacs/e-palette
+;;----------------------------------------------
+(require 'e-palette)
+(define-key global-map [f2] 'e-palette)
+
+
+;;----------------------------------------------
 ;; emmet
 ;; http://qiita.com/ironsand/items/55f2ced218949efbb1fb
 ;;----------------------------------------------
