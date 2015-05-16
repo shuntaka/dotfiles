@@ -182,6 +182,7 @@
 
 ;;----------------------------------------------
 ;; make highlight the current line light
+;; http://rubikitch.com/2015/05/14/global-hl-line-mode-timer/
 ;;----------------------------------------------
 (defun global-hl-line-timer-function ()
   (global-hl-line-unhighlight-all)
