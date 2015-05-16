@@ -810,7 +810,7 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 ;; edit-server
 ;; http://qiita.com/umi_uyura/items/6551ca1955302c91f8de
-http://blog.kechako.com/entry/2011/12/02/105752
+;; http://blog.kechako.com/entry/2011/12/02/105752
 ;;----------------------------------------------
 (when (locate-library "edit-server")
   (require 'edit-server)
@@ -1841,6 +1841,15 @@ Otherwise goto the end of minibuffer."
 (add-hook 'html-mode-hook
 		  (lambda ()
 		  (setq-default indent-tabs-mode nil)))
+
+;;----------------------------------------------
+;; rainbow-mode
+;;----------------------------------------------
+(require 'rainbow-mode)
+(add-hook 'css-mode-hook 'rainbow-mode)
+(add-hook 'scss-mode-hook 'rainbow-mode)
+(add-hook 'php-mode-hook 'rainbow-mode)
+(add-hook 'html-mode-hook 'rainbow-mode)
 
 ;;----------------------------------------------
 ;; emmet
