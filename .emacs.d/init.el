@@ -807,6 +807,16 @@ org-modeなどで活用。"
   (setq-local eww-disable-colorize nil)
   (eww-reload))
 
+;;----------------------------------------------
+;; edit-server
+;; http://qiita.com/umi_uyura/items/6551ca1955302c91f8de
+http://blog.kechako.com/entry/2011/12/02/105752
+;;----------------------------------------------
+(when (locate-library "edit-server")
+  (require 'edit-server)
+  (defvar edit-server-new-frame nil)    ; 新しいフレームは開かない
+  (edit-server-start))
+
 ;;=================================================================
 ;; 9. External Program
 ;;=================================================================
