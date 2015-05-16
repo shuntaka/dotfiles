@@ -180,6 +180,17 @@
 (setq hl-line-face 'my-hl-line-face)
 (global-hl-line-mode t)
 
+;;----------------------------------------------
+;; make highlight the current line light
+;;----------------------------------------------
+(defun global-hl-line-timer-function ()
+  (global-hl-line-unhighlight-all)
+  (let ((global-hl-line-mode t))
+    (global-hl-line-highlight)))
+(setq global-hl-line-timer
+      (run-with-idle-timer 0.1 t 'global-hl-line-timer-function))
+;; (cancel-timer global-hl-line-timer)
+
 ;;----------------------
 ;; Emphasize Parenthesis
 ;;----------------------
