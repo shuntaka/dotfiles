@@ -666,13 +666,24 @@ org-modeなどで活用。"
 
 ;;----------------------------------------------
 ;; notify too long row
+;; http://rubikitch.com/2014/08/11/column-enforce-mode/
 ;;----------------------------------------------
-;;http://rubikitch.com/tag/emacs-80%E6%A1%81%E5%88%B6%E9%99%90/
+;; for cperl-mode
 (require 'column-enforce-mode)
 (defun cperl-mode-hook--column-enforce-mode ()
   (set (make-local-variable 'column-enforce-column) 80)
   (column-enforce-mode 1))
 (add-hook 'cperl-mode-hook 'cperl-mode-hook--column-enforce-mode)
+
+
+;; for js2-mode
+(defun js2-mode-hook--column-enforce-mode ()
+  (set (make-local-variable 'column-enforce-column) 80)
+  (column-enforce-mode 1))
+(add-hook 'js2-mode-hook 'js2-mode-hook--column-enforce-mode)
+
+
+
 
 ;;----------------------------------------------
 ;; cursor-in-brackets.el
@@ -2019,7 +2030,7 @@ Otherwise goto the end of minibuffer."
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
 ;;----------------------------------------------
-;; disable tab
+;; disable tab for js2-mode
 ;;----------------------------------------------
 (add-hook 'js2-mode-hook
           (lambda ()
@@ -2054,7 +2065,7 @@ Otherwise goto the end of minibuffer."
 
 ;;----------------------------------
 ;; flycheck
-;;----------------------------------										;
+;;----------------------------------
 ;; flycheck
 ;;http://syati.info/?p=2096
 (add-hook 'after-init-hook #'global-flycheck-mode)
