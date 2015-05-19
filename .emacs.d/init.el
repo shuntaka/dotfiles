@@ -668,22 +668,11 @@ org-modeなどで活用。"
 ;; notify too long row
 ;; http://rubikitch.com/2014/08/11/column-enforce-mode/
 ;;----------------------------------------------
-;; for cperl-mode
 (require 'column-enforce-mode)
 (defun cperl-mode-hook--column-enforce-mode ()
   (set (make-local-variable 'column-enforce-column) 80)
   (column-enforce-mode 1))
 (add-hook 'cperl-mode-hook 'cperl-mode-hook--column-enforce-mode)
-
-
-;; for js2-mode
-(defun js2-mode-hook--column-enforce-mode ()
-  (set (make-local-variable 'column-enforce-column) 80)
-  (column-enforce-mode 1))
-(add-hook 'js2-mode-hook 'js2-mode-hook--column-enforce-mode)
-
-
-
 
 ;;----------------------------------------------
 ;; cursor-in-brackets.el
@@ -1864,8 +1853,8 @@ Otherwise goto the end of minibuffer."
 ;; disable tab for html
 ;;----------------------------------------------
 (add-hook 'html-mode-hook
-		  (lambda ()
-		  (setq-default indent-tabs-mode nil)))
+          (lambda ()
+            (setq-default indent-tabs-mode nil)))
 
 ;;----------------------------------------------
 ;; rainbow-mode
@@ -2035,6 +2024,16 @@ Otherwise goto the end of minibuffer."
 (add-hook 'js2-mode-hook
           (lambda ()
             (setq-default indent-tabs-mode nil)))
+
+;;----------------------------------------------
+;; notify when a line exceeds the limit
+;; http://rubikitch.com/2014/08/11/column-enforce-mode/
+;;----------------------------------------------
+(defun js2-mode-hook--column-enforce-mode ()
+  (set (make-local-variable 'column-enforce-column) 80)
+  (column-enforce-mode 1))
+(add-hook 'js2-mode-hook 'js2-mode-hook--column-enforce-mode)
+
 
 ;;----------------------------------
 ;; Node
