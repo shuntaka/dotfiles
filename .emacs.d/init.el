@@ -2018,6 +2018,13 @@ Otherwise goto the end of minibuffer."
 
 (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
+;;----------------------------------------------
+;; disable tab
+;;----------------------------------------------
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (setq-default indent-tabs-mode nil)))
+
 ;;----------------------------------
 ;; Node
 ;;----------------------------------
