@@ -794,7 +794,7 @@ org-modeなどで活用。"
 (define-key ag-mode-map (kbd "r") 'wgrep-change-to-wgrep-mode)
 ;; キーバインドを適当につけておくと便利。"\C-xg"とか
 ;; (global-set-key [(super m)] 'ag)
-(global-set-key (kbd "M-m") 'ag)
+(global-set-key (kbd "M-m") 'ag-regexp)
 ;; ag開いたらagのバッファに移動するには以下をつかう
 (defun my/filter (condp lst)
   (delq nil
