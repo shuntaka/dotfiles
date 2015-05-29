@@ -1829,6 +1829,18 @@ Otherwise goto the end of minibuffer."
     (other-window -1)))
 
 ;;----------------------------------------------
+;; swap buffers
+;; http://rubikitch.com/2015/05/10/swap-buffers/
+;;----------------------------------------------
+(defun swap-buffers-keep-focus ()
+  (interactive)
+  (swap-buffers t))
+;;; 無設定で使えるが、swap-screenに倣ってf2/S-f2に割り当てる
+(global-set-key [f2] 'swap-buffers-keep-focus)
+(global-set-key [S-f2] 'swap-buffers)
+
+
+;;----------------------------------------------
 ;; Working with Terminal
 ;;----------------------------------------------
 ;; (setq ns-pop-up-frames nil)
