@@ -454,6 +454,12 @@
 (add-to-list 'tramp-default-proxies-alist
              '(nil "\\`root\\'" "/ssh:%h:"))
 
+;;----------------------------------------------
+;; not use zsh for tramp
+;; http://qiita.com/catatsuy/items/f9fad90fa1352a4d3161
+;;----------------------------------------------
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
 ;----------------------------------------------
 ; 4.15. sudoedit.el
 ;----------------------------------------------
