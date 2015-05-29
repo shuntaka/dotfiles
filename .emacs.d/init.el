@@ -580,6 +580,12 @@
 ;; (global-set-key (kbd "C-;") 'ace-jump-word-mode)
 (global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
 
+;;----------------------------------------------
+;; avy
+;; http://rubikitch.com/2015/05/20/avy/
+;;----------------------------------------------
+(global-set-key (kbd "C-o") 'avy-goto-char-timer)
+
 ;;=============================================
 ;; 6. Input Support
 ;;=============================================
@@ -745,14 +751,25 @@ org-modeなどで活用。"
                     :background my/bg-color)
 
 
-;;=============================================
+;;=================================================================
 ;; 7. Search and Replace
-;;=============================================
+;;=================================================================
 ;;----------------------
 ;; Moccur
 ;;----------------------
 (require 'color-moccur)
 (setq moccur-split-word t)
+
+;;----------------------------------------------
+;; ace-isearch
+;;http://rubikitch.com/2014/10/08/ace-isearch/
+;;https://github.com/tam17aki/ace-isearch
+;;----------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
+(require 'ace-isearch)
+(global-ace-isearch-mode 1)
+;; '(ace-isearch-input-idle-delay 0.1)
+
 
 ;;----------------------------------------------
 ;; foreign-regexp.el
@@ -766,16 +783,6 @@ org-modeなどで活用。"
 ;; visual-regexp
 ;;----------------------------------------------
 ;; (global-set-key (kbd "M-%") 'vr/query-replace)
-
-;;----------------------------------------------
-;; ace-isearch
-;;http://rubikitch.com/2014/10/08/ace-isearch/
-;;https://github.com/tam17aki/ace-isearch
-;;----------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
-(require 'ace-isearch)
-(global-ace-isearch-mode 1)
-;; '(ace-isearch-input-idle-delay 0.1)
 
 ;;----------------------------------------------
 ;;visual-regexp-steroids
