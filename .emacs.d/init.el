@@ -584,7 +584,7 @@
 ;; avy
 ;; http://rubikitch.com/2015/05/20/avy/
 ;;----------------------------------------------
-(global-set-key (kbd "C-o") 'avy-goto-char-timer)
+(global-set-key (kbd "C-M-o") 'avy-goto-char-timer)
 
 ;;=============================================
 ;; 6. Input Support
@@ -2041,14 +2041,14 @@ Otherwise goto the end of minibuffer."
   (c-toggle-auto-state 0)
   (c-toggle-hungry-state 1)
   (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
-;  (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
-  (define-key js2-mode-map [(meta control \;)]
-    '(lambda()
-       (interactive)
-       (insert "/* -----[ ")
-       (save-excursion
-         (insert " ]----- */"))
-       ))
+ (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
+  ;; (define-key js2-mode-map [(meta control \;)]
+  ;;   '(lambda()
+  ;;      (interactive)
+  ;;      (insert "/* -----[ ")
+  ;;      (save-excursion
+  ;;        (insert " ]----- */"))
+  ;;      ))
   (define-key js2-mode-map [(return)] 'newline-and-indent)
   (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
