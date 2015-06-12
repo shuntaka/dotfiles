@@ -32,3 +32,4 @@ ac-comphist.dat
 /.emacs.d/backup/
 /.emacs.d/scratch
 /.emacs.d/places
+/.emacs.d/flycheck_init.el
