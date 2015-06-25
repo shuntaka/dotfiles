@@ -56,7 +56,7 @@
 ;; debug
 ;;http://stackoverflow.com/questions/5413959/wrong-type-argument-stringp-nil
 ;;----------------------------------------------
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 ;;----------------------
 ;; append the  directory and its subdirectoreis to the load-path
