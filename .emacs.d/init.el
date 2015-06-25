@@ -232,10 +232,32 @@
 ;;----------------------------------------------
 ;; tab width
 ;;----------------------------------------------
-(setq-default tab-width 4)
+;; for html-mode
+(add-hook 'html-mode-hook
+          (lambda ()
+            (setq-default tab-width 2)))
+
+;; for web-mode
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq-default tab-width 2)))
+
+;; for javascript
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (setq-default tab-width 4)))
+
+
+;; for Perl
+(add-hook 'cperl-mode-hook
+          (lambda ()
+            (setq-default tab-width 4)))
+
+
+
 
 ;;----------------------------------------------
-;; disable tab for elisp
+;; disable tab
 ;;----------------------------------------------
 ;; for elisp
 (add-hook 'emacs-lisp-mode-hook
