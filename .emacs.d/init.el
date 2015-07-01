@@ -490,6 +490,41 @@
 ;; (server-start) ;  sudoeditで使う
 ;; (require 'sudo-ext)
 
+;;----------------------------------------------
+;; firestarter
+;; http://rubikitch.com/2015/04/13/firestarter/
+;;----------------------------------------------
+;; (firestarter-mode)
+;; ;;; 失敗時に結果をお知らせ
+;; (setq firestarter-default-type 'failure)
+;; ;;; コマンド実行後に実行したコマンドを知らせる
+;; (defun firestarter-sentinel--show-command (&rest ignore)
+;;   (run-at-time 1 nil 'message (format "firestarted: %s" (firestarter-format firestarter))))
+;; (advice-add 'firestarter-sentinel :before 'firestarter-sentinel--show-command)
+
+;; ;;; セキュリティと利便性を両立
+;; ;; firestarterに任意の値を受け取れるようにする
+;; (put 'firestarter 'safe-local-variable 'identity)
+;; ;; firestarterが設定されているときはmessageでお知らせ
+;; (defun find-file-hook--firestarter-notify ()
+;;   (when (and (bound-and-true-p firestarter-mode) firestarter)
+;;     (run-at-time 1 nil 'message "firestarter = %S" firestarter)))
+;; (add-hook 'find-file-hook 'find-file-hook--firestarter-notify)
+;; ;; ファイルに関連付けられていないバッファの保存時にfirestarterが設定されているときに警告
+;; (defun warn-firestarter-before-saving-nonfile-buffer (&rest ignore)
+;;   (let (it)
+;;     (when (and (not buffer-file-name)
+;;                (save-excursion
+;;                  (save-restriction
+;;                    (widen)
+;;                    (goto-char (point-min))
+;;                    (and (re-search-forward "firestarter *:" nil t)
+;;                         (setq it (buffer-substring (point-at-bol) (point-at-eol))))))
+;;                (not (yes-or-no-p (concat "Save buffer with firestarter\n" it))))
+;;       (error "Quit saving because of dangerous firestarter setting."))))
+;; (advice-add 'basic-save-buffer :before 'warn-firestarter-before-saving-nonfile-buffer)
+;; (advice-add 'write-file :before 'warn-firestarter-before-saving-nonfile-buffer)
+
 ;;=============================================
 ;; 5. Moving Cursor
 ;;=============================================
