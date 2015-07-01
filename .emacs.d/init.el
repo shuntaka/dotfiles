@@ -1926,6 +1926,7 @@ Otherwise goto the end of minibuffer."
 ;;----------------------------------------------
 ;; web-modeの設定
 ;; http://yanmoo.blogspot.co.uk/2013/06/html5web-mode.html
+;; https://github.com/fxbois/web-mode/issues/237
 ;;----------------------------------------------
 (require 'web-mode)
 (defun web-mode-hook ()
@@ -1942,6 +1943,7 @@ Otherwise goto the end of minibuffer."
   (setq web-mode-markup-indent-offset 2) ;; html indent
   (setq web-mode-css-indent-offset 2)    ;; css indent
   (setq web-mode-code-indent-offset 4)   ;; script indent(js,php,etc..)
+  (setq web-mode-enable-current-element-highlight t)
   ;; htmlの内容をインデント
   ;; TEXTAREA等の中身をインデントすると副作用が起こったりするので
   ;; デフォルトではインデントしない
