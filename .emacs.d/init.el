@@ -2574,8 +2574,6 @@ Otherwise goto the end of minibuffer."
 ;;----------------------------------------------
 ;; perl-completion
 ;;----------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/public_repos/perl-completion/")
-
 (defun perl-completion-hook()
   (when ( require 'perl-completion nil t)
     (perl-completion-mode t)
