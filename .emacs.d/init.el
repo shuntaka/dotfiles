@@ -2383,110 +2383,20 @@ Otherwise goto the end of minibuffer."
 ;;    '(progn
 ;;       (cperl-set-style "PerlStyle"))))
 
-;;----------------------------------------------
-;; perlbrew.el
-;;----------------------------------------------
-;; (require 'perlbrew)
-;; (perlbrew-use "perl-5.10.1")
 
 ;;----------------------------------------------
-;; flycheck
-;;http://blog.s2factory.co.jp/arakawa/2014/12/emacs-perl.html
+;; flymake
+;; http://d.hatena.ne.jp/sugyan/20120227/1330343152
 ;;----------------------------------------------
-;; (flycheck-define-checker perl-project-libs
-;;   "A perl syntax checker."
-;;   :command ("perl"
-;;             "-MProject::Libs lib_dirs => [qw(local/lib/perl5)]"
-;;             "-wc"
-;;             source-inplace)
-;;   :error-patterns ((error line-start
-;;                           (minimal-match (message))
-;;                           " at " (file-name) " line " line
-;;                           (or "." (and ", " (zero-or-more not-newline)))
-;;                           line-end))
-;;   :modes (cperl-mode))
+(defun my-cperl-mode-hook ()
+  (perl-completion-mode t)
+  (flymake-mode t))
+(add-hook 'cperl-mode-hook 'my-cperl-mode-hook)
 
-;; (add-hook 'cperl-mode-hook
-;;           (lambda ()
-;;             (flycheck-mode t)
-;;             (setq flycheck-checker 'perl-project-libs)))
-
-(with-eval-after-load "flycheck"
-  (flycheck-define-checker
-   perl-project-libs
-   "A perl syntax checker."
-   ;; :command ("perl" "-MProject::Libs" "-wc" source-inplace)
-   ;; :command ("ssh" "pelican" "perl" "-wc" source-inplace)
-   ;; :command ("ssh" "pelican" "perl" "-MProject::Libs" "-wc" source-inplace)
-   ;; :command ("/Users/shun/.plenv/shims/perl" "-wc" source-inplace)
-   ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs" "-wc" source-inplace)
-   ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs lib_dirs => [qw(extlib vendor modules/*lib)]" "-wc" source-inplace)
-   ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs lib_dirs => [qw(/Users/shun/Remotes/nexus/lib/perl)]" "-wc" source-inplace)
-   :command ("/Users/shun/.plenv/shims/perl" "-I/Users/shun/Remotes/nexus/lib/perl" "-wc" source-inplace)
-
-   :error-patterns ((error line-start
-                           (minimal-match (message))
-                           " at " (file-name) " line " line
-                           (or "." (and ", " (zero-or-more not-newline)))
-                           line-end))
-   :modes (cperl-mode)))
-(add-hook 'cperl-mode-hook
-          (lambda ()
-            (unless (or (and (fboundp 'tramp-tramp-file-p)
-                             (tramp-tramp-file-p buffer-file-name))
-                        (string-match "sudo:.*:" (buffer-file-name)))
-              (progn
-                (flycheck-mode t)
-                (setq flycheck-checker 'perl-project-libs)))))
-
-;; (with-eval-after-load "flycheck"
-;;   (flycheck-define-checker
-;;    perl-project-libs
-;;    "A perl syntax checker."
-;;    ;; :command ("ssh" "pelican" "perl" "-MProject/Libs" "-w" "-c" source-inplace)
-;;    :command ("ssh" "pelican" "perl" "-w" "-c" source-inplace)
-
-;;    :error-patterns ((error line-start
-;;                            (minimal-match (message))
-;;                            " at " (file-name) " line " line
-;;                            (or "." (and ", " (zero-or-more not-newline)))
-;;                            line-end))
-;;    :modes (cperl-mode)))
-
-;; (add-hook 'cperl-mode-hook 'flycheck-mode)
+(defadvice flymake-start-syntax-check-process (around flymake-start-syntax-check-lib-path activate)
+  (plcmp-with-set-perl5-lib ad-do-it))
 
 
-
-;;----------------------------------------------
-;; perl-completion
-;;----------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/public_repos/perl-completion/")
-
-(defun perl-completion-hook()
-  (when ( require 'perl-completion nil t)
-    (perl-completion-mode t)
-    (when (require 'auto-compelte nil t)
-      (auto-compelte-mode t)
-      (make-variable-buffer-local 'ac-sources)
-      (setq ac-sources
-	    '(ac-source-perl-completion)))))
-(add-hook 'cperl-mode-hook 'perl-completion-hook)
-
-;;----------------------------------------------
-;; plsense
-;;----------------------------------------------
-(require 'plsense)
-
-;; キーバインド
-(setq plsense-popup-help-key "C-:")
-(setq plsense-display-help-buffer-key "M-:")
-(setq plsense-jump-to-definition-key "C->")
-
-;; 必要に応じて適宜カスタマイズして下さい。以下のS式を評価することで項目についての情報が得られます。
-;; (customize-group "plsense")
-
-;; 推奨設定を行う
-(plsense-config-default)
 
 ;;----------------------------------------------
 ;; flymake config for perl
@@ -2522,6 +2432,72 @@ Otherwise goto the end of minibuffer."
 ;;   (flymake-mode t))
 
 ;; (add-hook 'cperl-mode-hook 'flymake-perl-load)
+
+;;----------------------------------------------
+;; flycheck
+;;http://blog.s2factory.co.jp/arakawa/2014/12/emacs-perl.html
+;;----------------------------------------------
+;; (flycheck-define-checker perl-project-libs
+;;   "A perl syntax checker."
+;;   :command ("perl"
+;;             "-MProject::Libs lib_dirs => [qw(local/lib/perl5)]"
+;;             "-wc"
+;;             source-inplace)
+;;   :error-patterns ((error line-start
+;;                           (minimal-match (message))
+;;                           " at " (file-name) " line " line
+;;                           (or "." (and ", " (zero-or-more not-newline)))
+;;                           line-end))
+;;   :modes (cperl-mode))
+
+;; (add-hook 'cperl-mode-hook
+;;           (lambda ()
+;;             (flycheck-mode t)
+;;             (setq flycheck-checker 'perl-project-libs)))
+
+;; (with-eval-after-load "flycheck"
+;;   (flycheck-define-checker
+;;    perl-project-libs
+;;    "A perl syntax checker."
+;;    ;; :command ("perl" "-MProject::Libs" "-wc" source-inplace)
+;;    ;; :command ("ssh" "pelican" "perl" "-wc" source-inplace)
+;;    ;; :command ("ssh" "pelican" "perl" "-MProject::Libs" "-wc" source-inplace)
+;;    ;; :command ("/Users/shun/.plenv/shims/perl" "-wc" source-inplace)
+;;    ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs" "-wc" source-inplace)
+;;    ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs lib_dirs => [qw(extlib vendor modules/*lib)]" "-wc" source-inplace)
+;;    ;; :command ("/Users/shun/.plenv/shims/perl" "-MProject::Libs lib_dirs => [qw(/Users/shun/Remotes/nexus/lib/perl)]" "-wc" source-inplace)
+;;    :command ("/Users/shun/.plenv/shims/perl" "-I/Users/shun/Remotes/nexus/lib/perl" "-wc" source-inplace)
+
+;;    :error-patterns ((error line-start
+;;                            (minimal-match (message))
+;;                            " at " (file-name) " line " line
+;;                            (or "." (and ", " (zero-or-more not-newline)))
+;;                            line-end))
+;;    :modes (cperl-mode)))
+;; (add-hook 'cperl-mode-hook
+;;           (lambda ()
+;;             (unless (or (and (fboundp 'tramp-tramp-file-p)
+;;                              (tramp-tramp-file-p buffer-file-name))
+;;                         (string-match "sudo:.*:" (buffer-file-name)))
+;;               (progn
+;;                 (flycheck-mode t)
+;;                 (setq flycheck-checker 'perl-project-libs)))))
+
+;; (with-eval-after-load "flycheck"
+;;   (flycheck-define-checker
+;;    perl-project-libs
+;;    "A perl syntax checker."
+;;    ;; :command ("ssh" "pelican" "perl" "-MProject/Libs" "-w" "-c" source-inplace)
+;;    :command ("ssh" "pelican" "perl" "-w" "-c" source-inplace)
+
+;;    :error-patterns ((error line-start
+;;                            (minimal-match (message))
+;;                            " at " (file-name) " line " line
+;;                            (or "." (and ", " (zero-or-more not-newline)))
+;;                            line-end))
+;;    :modes (cperl-mode)))
+
+;; (add-hook 'cperl-mode-hook 'flycheck-mode)
 
 
 ;;----------------------------------------------
@@ -2596,6 +2572,38 @@ Otherwise goto the end of minibuffer."
 ;; *** PerlySense End ***
 
 ;;----------------------------------------------
+;; perl-completion
+;;----------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/public_repos/perl-completion/")
+
+(defun perl-completion-hook()
+  (when ( require 'perl-completion nil t)
+    (perl-completion-mode t)
+    (when (require 'auto-compelte nil t)
+      (auto-compelte-mode t)
+      (make-variable-buffer-local 'ac-sources)
+      (setq ac-sources
+	    '(ac-source-perl-completion)))))
+(add-hook 'cperl-mode-hook 'perl-completion-hook)
+
+;;----------------------------------------------
+;; plsense
+;;----------------------------------------------
+(require 'plsense)
+
+;; キーバインド
+(setq plsense-popup-help-key "C-:")
+(setq plsense-display-help-buffer-key "M-:")
+(setq plsense-jump-to-definition-key "C->")
+
+;; 必要に応じて適宜カスタマイズして下さい。以下のS式を評価することで項目についての情報が得られます。
+;; (customize-group "plsense")
+
+;; 推奨設定を行う
+(plsense-config-default)
+
+
+;;----------------------------------------------
 ;; PerlTidy
 ;;----------------------------------------------
 (defun perltidy-region ()               ;選択regionをperltidy
@@ -2608,6 +2616,7 @@ Otherwise goto the end of minibuffer."
   (interactive)
   (save-excursion (mark-defun)
                   (perltidy-region)))
+
 
 ;;=============================================
 ;; For yaml
