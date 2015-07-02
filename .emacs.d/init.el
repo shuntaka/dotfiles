@@ -551,14 +551,16 @@
 ;; e.g. junk/以下のRubyスクリプトは無条件で実行
 ;; (ascmd:add '("junk/.*\.rb" "ruby $FILE"))
 
-(ascmd:add '("~/nexus/.*\.tt" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
-(ascmd:add '("~/nexus/.*\.ms" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
-(ascmd:add '("~/nexus/.*\.scss" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
-(ascmd:add '("~/nexus/.*\.css" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
-(ascmd:add '("~/nexus/.*\.js" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+(ascmd:add '("~/nexus/.*\.tt" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
+(ascmd:add '("~/nexus/.*\.ms" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
+(ascmd:add '("~/nexus/.*\.scss" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
+(ascmd:add '("~/nexus/.*\.css" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
+(ascmd:add '("~/nexus/.*\.js" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
 
-(ascmd:add '("~/nexus/.*\.pl" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
-(ascmd:add '("~/nexus/.*\.pm" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+(ascmd:add '("~/nexus/.*\.pl" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
+(ascmd:add '("~/nexus/.*\.pm" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
+
+(ascmd:add '("~/nexus/.*\.rb" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
 
 
 ;;=============================================
