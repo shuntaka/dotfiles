@@ -525,6 +525,42 @@
 ;; (advice-add 'basic-save-buffer :before 'warn-firestarter-before-saving-nonfile-buffer)
 ;; (advice-add 'write-file :before 'warn-firestarter-before-saving-nonfile-buffer)
 
+
+;;----------------------------------------------
+;; auto-shell-command.el
+;; http://rubikitch.com/2015/04/12/auto-shell-command-2/
+;;----------------------------------------------
+(require 'auto-shell-command)
+
+;;; キーバインドの設定
+;; 一時的に無効・有効にする
+(global-set-key (kbd "C-c C-m") 'ascmd:toggle)
+;; 実行結果をポップアップ表示する
+(global-set-key (kbd "C-c C-,") 'ascmd:popup)
+;; ファイルを指定してそれに対応するコマンドを実行させる
+(global-set-key (kbd "C-c C-.") 'ascmd:exec)
+
+;;; エラー時のポップアップを見やすくする
+(push '("*Auto Shell Command*" :height 20 :noselect t) popwin:special-display-config)
+
+;;; 結果の通知をGrowlで行う (optional)
+;; (defun ascmd:notify (msg) (deferred:process-shell (format "growlnotify -m %s -t emacs" msg))))
+
+;;; 各ファイルごとの設定
+;;; $FILEがファイル名, $DIRがディレクトリ名に置換されます
+;; e.g. junk/以下のRubyスクリプトは無条件で実行
+;; (ascmd:add '("junk/.*\.rb" "ruby $FILE"))
+
+(ascmd:add '("~/nexus/.*\.tt" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+(ascmd:add '("~/nexus/.*\.ms" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+(ascmd:add '("~/nexus/.*\.scss" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+(ascmd:add '("~/nexus/.*\.css" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+(ascmd:add '("~/nexus/.*\.js" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+
+(ascmd:add '("~/nexus/.*\.pl" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+(ascmd:add '("~/nexus/.*\.pm" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs scp"))
+
+
 ;;=============================================
 ;; 5. Moving Cursor
 ;;=============================================

@@ -1,0 +1,1 @@
+(define-package "auto-shell-command" "20150416.1057" "Run the shell command asynchronously that you specified when you save the file." '((deferred "20130312") (popwin "20130329")) :keywords '("shell" "save" "async" "deferred" "auto"))
