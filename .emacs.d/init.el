@@ -1200,37 +1200,37 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 ;; flymake
 ;;----------------------------------------------
-;;http://blog.kentarok.org/entry/20080810/1218369556
-(require 'flymake)
+;; ;;http://blog.kentarok.org/entry/20080810/1218369556
+;; (require 'flymake)
 
-;; set-perl5lib
-;; 開いたスクリプトのパスに応じて、PERL5LIBにlibを追加してくれる
-;; http://svn.coderepos.org/share/lang/elisp/set-perl5lib/set-perl5lib.el
-(add-to-list 'load-path "~/.emacs.d/public_repos/1333926")
-;; (require 'set-perl5lib)
+;; ;; set-perl5lib
+;; ;; 開いたスクリプトのパスに応じて、PERL5LIBにlibを追加してくれる
+;; ;; http://svn.coderepos.org/share/lang/elisp/set-perl5lib/set-perl5lib.el
+;; (add-to-list 'load-path "~/.emacs.d/public_repos/1333926")
+;; ;; (require 'set-perl5lib)
 
-;; エラー、ウォーニング時のフェイス
-(set-face-background 'flymake-errline "red4")
-(set-face-foreground 'flymake-errline "black")
-(set-face-background 'flymake-warnline "yellow")
-(set-face-foreground 'flymake-warnline "black")
+;; ;; エラー、ウォーニング時のフェイス
+;; (set-face-background 'flymake-errline "red4")
+;; (set-face-foreground 'flymake-errline "black")
+;; (set-face-background 'flymake-warnline "yellow")
+;; (set-face-foreground 'flymake-warnline "black")
 
-;; エラーをミニバッファに表示
-;; http://d.hatena.ne.jp/xcezx/20080314/1205475020
-(defun flymake-display-err-minibuf ()
-  "Displays the error/warning for the current line in the minibuffer"
-  (interactive)
-  (let** ((line-no             (flymake-current-line-no))
-         (line-err-info-list  (nth 0 (flymake-find-err-info flymake-err-info line-no)))
-         (count               (length line-err-info-list)))
-    (while (> count 0)
-      (when line-err-info-list
-        (let** ((file       (flymake-ler-file (nth (1- count) line-err-info-list)))
-               (full-file  (flymake-ler-full-file (nth (1- count) line-err-info-list)))
-               (text (flymake-ler-text (nth (1- count) line-err-info-list)))
-               (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
-          (message "[%s] %s" line text)))
-      (setq count (1- count)))))
+;; ;; エラーをミニバッファに表示
+;; ;; http://d.hatena.ne.jp/xcezx/20080314/1205475020
+;; (defun flymake-display-err-minibuf ()
+;;   "Displays the error/warning for the current line in the minibuffer"
+;;   (interactive)
+;;   (let** ((line-no             (flymake-current-line-no))
+;;          (line-err-info-list  (nth 0 (flymake-find-err-info flymake-err-info line-no)))
+;;          (count               (length line-err-info-list)))
+;;     (while (> count 0)
+;;       (when line-err-info-list
+;;         (let** ((file       (flymake-ler-file (nth (1- count) line-err-info-list)))
+;;                (full-file  (flymake-ler-full-file (nth (1- count) line-err-info-list)))
+;;                (text (flymake-ler-text (nth (1- count) line-err-info-list)))
+;;                (line       (flymake-ler-line (nth (1- count) line-err-info-list))))
+;;           (message "[%s] %s" line text)))
+;;       (setq count (1- count)))))
 
 ;;=============================================
 ;; 14. Create Documents
@@ -2336,109 +2336,37 @@ Otherwise goto the end of minibuffer."
 (setq auto-mode-alist (append '(("\\.t$" . cperl-mode)) auto-mode-alist))
 
 ;;----------------------------------------------
-;; setting for the indent in cperl-mode
-;; http://oinume.hatenablog.com/entry/wp/384
+;; plenv
 ;;----------------------------------------------
-(setq cperl-indent-level 4
-      cperl-continued-statement-offset 4
-      cperl-close-paren-offset -4
-      cperl-label-offset -4
-      cperl-comment-column 40
-      cperl-highlight-variables-indiscriminately t ;;変数に色つける
-      cperl-indent-parens-as-block t ;;無名ハッシュインデント
-      cperl-tab-always-indent nil
-      cperl-font-lock t)
+(require 'plenv)
+(plenv-global "5.10.1")
+
+;;----------------------------------------------
+;; flycheck
+;; http://m0t0k1ch1st0ry.com/blog/2014/07/07/flycheck/
+;; https://github.com/flycheck/flycheck/issues/567
+;; http://hitode909.hatenablog.com/entry/2013/08/04/194929
+;;----------------------------------------------
+
+(require 'flycheck)
+(flycheck-define-checker perl-project-libs
+  "A perl syntax checker."
+  :command ("perl"
+            "-MProject::Libs lib_dirs => [qw(nexus_lib_perl)]"
+            "-wc"
+            source-inplace)
+  :error-patterns ((error line-start
+                          (minimal-match (message))
+                          " at " (file-name) " line " line
+                          (or "." (and ", " (zero-or-more not-newline)))
+                          line-end))
+  :modes (cperl-mode))
+
 (add-hook 'cperl-mode-hook
-          '(lambda ()
-             (progn
-               (setq indent-tabs-mode nil)
-               (setq tab-width nil))))
+          (lambda ()
+            (flycheck-mode t)
+            (setq flycheck-checker 'perl-project-libs)))
 
-;; ----------------------------------------------
-;; cperl-mode indent
-;; http://wp.hebon.net/emacs/?p=33
-;; ----------------------------------------------
-;; 無名ハッシュ、無名サブルーチンのインデント調整
-(setq cperl-indent-subs-specially nil)
-
-
-;; 途中改行時のインデント
-(setq cperl-continued-statement-offset 4)
-
-;;----------------------------------------------
-;;  setting for the colors
-;;  http://d.hatena.ne.jp/holidays-l/20070528/p1
-;;----------------------------------------------
-;; (set-face-italic-p 'cperl-hash-face nil)
-;; (set-face-background 'cperl-hash-face nil)
-;; (set-face-background 'cperl-array-face nil)
-;; (setq cperl-array-face 'font-lock-variable-name-face)
-;; (setq cperl-hash-face 'font-variable-name-face)
-
-
-;; setting for perl
-;; http://sugyan.com/presentations/perl-casual-06/#/11
-;; (defalias 'perl-mode 'cperl-mode)
-
-;; (custom-set-variables
-;;  '(cperl-indent-parens-as-block t)
-;;  '(cperl-close-paren-offset     -4)
-;;  '(cperl-indent-subs-specially  nil))
-
-;; (with-eval-after-load "cperl-mode"
-;;   (eval
-;;    '(progn
-;;       (cperl-set-style "PerlStyle"))))
-
-
-;;----------------------------------------------
-;; flymake
-;; http://d.hatena.ne.jp/sugyan/20120227/1330343152
-;;----------------------------------------------
-(defun my-cperl-mode-hook ()
-  (perl-completion-mode t)
-  (flymake-mode t))
-(add-hook 'cperl-mode-hook 'my-cperl-mode-hook)
-
-(defadvice flymake-start-syntax-check-process (around flymake-start-syntax-check-lib-path activate)
-  (plcmp-with-set-perl5-lib ad-do-it))
-
-
-
-;;----------------------------------------------
-;; flymake config for perl
-;;----------------------------------------------
-;;http://blog.kentarok.org/entry/20080810/1218369556
-
-;; ;; Perl用設定
-;; ;; http://unknownplace.org/memo/2007/12/21#e001
-;; (defvar flymake-perl-err-line-patterns
-;;   '(("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1)))
-
-;; (defconst flymake-allowed-perl-file-name-masks
-;;   '(("\\.pl$" flymake-perl-init)
-;;     ("\\.pm$" flymake-perl-init)
-;;     ("\\.t$" flymake-perl-init)))
-
-;; (defun flymake-perl-init ()
-;;   (let** ((temp-file (flymake-init-create-temp-buffer-copy
-;;                      'flymake-create-temp-inplace))
-;;          (local-file (file-relative-name
-;;                       temp-file
-;;                       (file-name-directory buffer-file-name))))
-;;     (list "perl" (list "-wc" local-file))))
-
-;; (defun flymake-perl-load ()
-;;   (interactive)
-;;   (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
-;;     (setq flymake-check-was-interrupted t))
-;;   (ad-activate 'flymake-post-syntax-check)
-;;   (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-perl-file-name-masks))
-;;   (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
-;;   (set-perl5lib)
-;;   (flymake-mode t))
-
-;; (add-hook 'cperl-mode-hook 'flymake-perl-load)
 
 ;;----------------------------------------------
 ;; flycheck
@@ -2505,6 +2433,256 @@ Otherwise goto the end of minibuffer."
 ;;    :modes (cperl-mode)))
 
 ;; (add-hook 'cperl-mode-hook 'flycheck-mode)
+
+
+;;----------------------------------------------
+;; flymake
+;; http://hitode909.hatenablog.com/entry/2013/08/04/194929
+;; https://github.com/hitode909/emacs-config/blob/master/inits/50-perl-config.el
+;;----------------------------------------------
+;; (defalias 'perl-mode 'cperl-mode)
+;; (setq auto-mode-alist (cons '("\\.t$" . cperl-mode) auto-mode-alist))
+;; (setq auto-mode-alist (cons '("\\.cgi$" . cperl-mode) auto-mode-alist))
+;; (setq auto-mode-alist (cons '("\\.psgi$" . cperl-mode) auto-mode-alist))
+;; (setq auto-mode-alist (cons '("cpanfile$" . cperl-mode) auto-mode-alist))
+
+;; (defun run-perl-test ()
+;;   "test実行します"
+;;   (interactive)
+;;   (compile (format "cd %s; carton exec -- perl %s" (vc-git-root default-directory) (buffer-file-name (current-buffer)))))
+
+;; (defun run-perl-method-test ()
+;;   (interactive)
+;;   (let (
+;;         (command compile-command)
+;;         (test-method nil))
+;;     (save-excursion
+;;       (when (or
+;;              (re-search-backward "\\bsub\s+\\([_[:alpha:]]+\\)\s*:\s*Test" nil t)
+;;              (re-search-forward "\\bsub\s+\\([_[:alpha:]]+\\)\s*:\s*Test" nil t))
+;;         (setq test-method (match-string 1))))
+;;     (if test-method
+;;         (compile (format "cd  %s; TEST_METHOD=%s carton exec -- perl %s"
+;;                          (vc-git-root default-directory)
+;;                          (shell-quote-argument test-method)
+;;                          (buffer-file-name (current-buffer))))
+;;       (let ((a 1))
+;;         (save-excursion
+;;           (when (or
+;;                  (re-search-backward "^subtest\s+['\"]?\\([^'\"\s]+\\)['\"]?\s*=>\s*sub" nil t)
+;;                  (re-search-foreward "^subtest\s+['\"]?\\([^'\"\s]+\\)['\"]?\s*=>\s*sub" nil t))
+;;             (setq test-method (match-string 1))))
+;;         (if test-method
+;;             (compile (format "cd  %s; SUBTEST_FILTER=%s carton exec -- perl %s"
+;;                              (vc-git-root default-directory)
+;;                              (shell-quote-argument test-method)
+;;                              (buffer-file-name (current-buffer)))))
+;;         (message "not match")
+;;         ))))
+
+;; (defun popup-editor-perl-use ()
+;;   (interactive)
+;;   (let* ((module-name nil))
+;;     (cond ((use-region-p)
+;;            (setq module-name (buffer-substring (region-beginning) (region-end)))
+;;            (keyboard-escape-quit))
+;;           (t
+;;            (setq module-name (thing-at-point 'symbol))))
+;;     (kill-new (concat "use " module-name ";"))
+;;     (popwin:popup-buffer (current-buffer) :height 0.4)
+;;     (re-search-backward "^use " nil t)
+;;     (next-line)))
+
+;; (add-hook 'cperl-mode-hook
+;;           '(lambda ()
+;;              (setq indent-tabs-mode nil)
+;;              (setq cperl-close-paren-offset -4)
+;;              (setq cperl-continued-statement-offset 4)
+;;              (setq cperl-indent-level 4)
+;;              (setq cperl-indent-parens-as-block t)
+;;              (setq cperl-tab-always-indent t)
+;;              (setq cperl-indent-parens-as-block t)
+
+;;              (define-key cperl-mode-map [(super T)] 'run-perl-test)
+;;              (define-key cperl-mode-map [(super t)] 'run-perl-method-test)
+
+;;              (local-set-key (kbd "C-c C-c C-u") 'popup-editor-perl-use)
+
+;;              (font-lock-add-keywords
+;;               'cperl-mode
+;;               '(
+;;                 ("!" . font-lock-warning-face)
+;;                 (":" . font-lock-warning-face)
+;;                 ("TODO" 0 'font-lock-warning-face)
+;;                 ("XXX" 0 'font-lock-warning-face)
+;;                 ("Hatean" 0 'font-lock-warning-face)
+;;                 ))
+
+;;              ;; なんか動かない
+;;              ;; (setq plcmp-use-keymap nil)
+;;              ;; (require 'perl-completion)
+;;              ;; (perl-completion-mode t)
+;;              ;; (add-to-list 'ac-sources 'ac-source-perl-completion)
+
+;;              (require 'editortools)
+
+;;              ))
+
+;; ;; plenv
+
+;; (require 'plenv)
+;; (plenv-global "5.10.1")
+
+;; ;; flymake
+
+
+;; (defun flymake-perl-init ()
+;;   (let* ((root (expand-file-name (or (vc-git-root default-directory) default-directory))))
+;;     (list "perl" (list "-MProject::Libs lib_dirs => [qw(local/lib/perl5), glob(qw(nexus/*/lib))]" "-wc"  buffer-file-name) root)
+;;     ))
+
+;; (push '(".+\\.p[ml]$" flymake-perl-init) flymake-allowed-file-name-masks)
+;; (push '(".+\\.psgi$" flymake-perl-init) flymake-allowed-file-name-masks)
+;; (push '(".+\\.t$" flymake-perl-init) flymake-allowed-file-name-masks)
+
+;; (add-hook 'cperl-mode-hook (lambda () (flymake-mode t)))
+
+
+;;----------------------------------------------
+;; flymake
+;; https://github.com/sugyan/dotfiles/blob/b1401ad505495239f15b4ff95d8600f9ae36ebc0/.emacs.d/inits/21-perl.el
+;;----------------------------------------------
+
+;; ;;; Perl
+
+;; ;; cperl-mode
+;; (defalias 'perl-mode 'cperl-mode)
+;; (add-to-list 'auto-mode-alist '("\\.psgi$" . cperl-mode))
+;; (add-to-list 'auto-mode-alist '("\\.t\\'"  . cperl-mode))
+;; (eval-after-load "cperl-mode"
+;;   '(progn
+;;      (cperl-set-style "PerlStyle")
+;;      (define-key cperl-mode-map (kbd "C-m") 'newline-and-indent)
+;;      (define-key cperl-mode-map (kbd "(") nil)
+;;      (define-key cperl-mode-map (kbd "{") nil)
+;;      (define-key cperl-mode-map (kbd "[") nil)
+;;      (define-key cperl-mode-map (kbd "M-n") 'flymake-goto-next-error)
+;;      (define-key cperl-mode-map (kbd "M-p") 'flymake-goto-prev-error)))
+;; (custom-set-variables
+;;  '(cperl-indent-parens-as-block t)
+;;  '(cperl-close-paren-offset     -4))
+
+;; ;; perl-completion
+;; ;; (auto-install-from-emacswiki "perl-completion.el")
+;; (autoload 'perl-completion-mode "perl-completion" nil t)
+;; (eval-after-load "perl-completion"
+;;   '(progn
+;;      (defadvice flymake-start-syntax-check-process (around flymake-start-syntax-check-lib-path activate) (plcmp-with-set-perl5-lib ad-do-it))
+;;      (define-key plcmp-mode-map (kbd "M-TAB") nil)
+;;      (define-key plcmp-mode-map (kbd "M-C-o") 'plcmp-cmd-smart-complete)))
+
+;; ;; hook
+;; (defun my-cperl-mode-hook ()
+;;   (perl-completion-mode t)
+;;   (flymake-mode t)
+;;   (when (boundp 'auto-complete-mode)
+;;     (defvar ac-source-my-perl-completion
+;;       '((candidates . plcmp-ac-make-cands)))
+;;     (add-to-list 'ac-sources 'ac-source-my-perl-completion)))
+;; (add-hook 'cperl-mode-hook 'my-cperl-mode-hook)
+
+
+;;----------------------------------------------
+;; setting for the indent in cperl-mode
+;; http://oinume.hatenablog.com/entry/wp/384
+;;----------------------------------------------
+(setq cperl-indent-level 4
+      cperl-continued-statement-offset 4
+      cperl-close-paren-offset -4
+      cperl-label-offset -4
+      cperl-comment-column 40
+      cperl-highlight-variables-indiscriminately t ;;変数に色つける
+      cperl-indent-parens-as-block t ;;無名ハッシュインデント
+      cperl-tab-always-indent nil
+      cperl-font-lock t)
+(add-hook 'cperl-mode-hook
+          '(lambda ()
+             (progn
+               (setq indent-tabs-mode nil)
+               (setq tab-width nil))))
+
+;; ----------------------------------------------
+;; cperl-mode indent
+;; http://wp.hebon.net/emacs/?p=33
+;; ----------------------------------------------
+;; 無名ハッシュ、無名サブルーチンのインデント調整
+(setq cperl-indent-subs-specially nil)
+
+
+;; 途中改行時のインデント
+(setq cperl-continued-statement-offset 4)
+
+;;----------------------------------------------
+;;  setting for the colors
+;;  http://d.hatena.ne.jp/holidays-l/20070528/p1
+;;----------------------------------------------
+;; (set-face-italic-p 'cperl-hash-face nil)
+;; (set-face-background 'cperl-hash-face nil)
+;; (set-face-background 'cperl-array-face nil)
+;; (setq cperl-array-face 'font-lock-variable-name-face)
+;; (setq cperl-hash-face 'font-variable-name-face)
+
+
+;; setting for perl
+;; http://sugyan.com/presentations/perl-casual-06/#/11
+;; (defalias 'perl-mode 'cperl-mode)
+
+;; (custom-set-variables
+;;  '(cperl-indent-parens-as-block t)
+;;  '(cperl-close-paren-offset     -4)
+;;  '(cperl-indent-subs-specially  nil))
+
+;; (with-eval-after-load "cperl-mode"
+;;   (eval
+;;    '(progn
+;;       (cperl-set-style "PerlStyle"))))
+
+
+;;----------------------------------------------
+;; flymake config for perl
+;;----------------------------------------------
+;;http://blog.kentarok.org/entry/20080810/1218369556
+
+;; ;; Perl用設定
+;; ;; http://unknownplace.org/memo/2007/12/21#e001
+;; (defvar flymake-perl-err-line-patterns
+;;   '(("\\(.*\\) at \\([^ \n]+\\) line \\([0-9]+\\)[,.\n]" 2 3 nil 1)))
+
+;; (defconst flymake-allowed-perl-file-name-masks
+;;   '(("\\.pl$" flymake-perl-init)
+;;     ("\\.pm$" flymake-perl-init)
+;;     ("\\.t$" flymake-perl-init)))
+
+;; (defun flymake-perl-init ()
+;;   (let** ((temp-file (flymake-init-create-temp-buffer-copy
+;;                      'flymake-create-temp-inplace))
+;;          (local-file (file-relative-name
+;;                       temp-file
+;;                       (file-name-directory buffer-file-name))))
+;;     (list "perl" (list "-wc" local-file))))
+
+;; (defun flymake-perl-load ()
+;;   (interactive)
+;;   (defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
+;;     (setq flymake-check-was-interrupted t))
+;;   (ad-activate 'flymake-post-syntax-check)
+;;   (setq flymake-allowed-file-name-masks (append flymake-allowed-file-name-masks flymake-allowed-perl-file-name-masks))
+;;   (setq flymake-err-line-patterns flymake-perl-err-line-patterns)
+;;   (set-perl5lib)
+;;   (flymake-mode t))
+
+;; (add-hook 'cperl-mode-hook 'flymake-perl-load)
+
 
 
 ;;----------------------------------------------
@@ -2581,15 +2759,15 @@ Otherwise goto the end of minibuffer."
 ;;----------------------------------------------
 ;; perl-completion
 ;;----------------------------------------------
-(defun perl-completion-hook()
-  (when ( require 'perl-completion nil t)
-    (perl-completion-mode t)
-    (when (require 'auto-compelte nil t)
-      (auto-compelte-mode t)
-      (make-variable-buffer-local 'ac-sources)
-      (setq ac-sources
-	    '(ac-source-perl-completion)))))
-(add-hook 'cperl-mode-hook 'perl-completion-hook)
+;; (defun perl-completion-hook()
+;;   (when ( require 'perl-completion nil t)
+;;     (perl-completion-mode t)
+;;     (when (require 'auto-compelte nil t)
+;;       (auto-compelte-mode t)
+;;       (make-variable-buffer-local 'ac-sources)
+;;       (setq ac-sources
+;; 	    '(ac-source-perl-completion)))))
+;; (add-hook 'cperl-mode-hook 'perl-completion-hook)
 
 ;;----------------------------------------------
 ;; plsense
