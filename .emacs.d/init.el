@@ -2339,7 +2339,7 @@ Otherwise goto the end of minibuffer."
 ;; plenv
 ;;----------------------------------------------
 (require 'plenv)
-(plenv-global "5.10.1")
+;; (plenv-global "5.10.1")
 
 ;;----------------------------------------------
 ;; flycheck
