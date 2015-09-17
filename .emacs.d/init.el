@@ -1849,6 +1849,30 @@ Otherwise goto the end of minibuffer."
 ;;----------------------------------------------
 (define-key global-map (kbd "C-'") 'helm-elscreen)
 
+;;----------------------------------------------
+;; elscreen resume the last buffer on kill buffer
+;; http://qiita.com/fujimisakari/items/d7f1b904de11dcb018c3
+;;----------------------------------------------
+;; 直近バッファ選定時の無視リスト
+(defvar elscreen-ignore-buffer-list
+ '("*scratch*" "*Backtrace*" "*Colors*" "*Faces*" "*Compile-Log*" "*Packages*" "*vc-" "*Minibuf-" "*Messages" "*WL:Message"))
+;; elscreen用バッファ削除
+(defun kill-buffer-for-elscreen ()
+  (interactive)
+  (kill-buffer)
+  (let* ((next-buffer nil)
+         (re (regexp-opt elscreen-ignore-buffer-list))
+         (next-buffer-list (mapcar (lambda (buf)
+                                     (let ((name (buffer-name buf)))
+                                       (when (not (string-match re name))
+                                         name)))
+                                   (buffer-list))))
+    (dolist (buf next-buffer-list)
+      (if (equal next-buffer nil)
+          (setq next-buffer buf)))
+    (switch-to-buffer next-buffer)))
+(global-set-key (kbd "C-x k") 'kill-buffer-for-elscreen)             ; カレントバッファを閉じる
+
 ;;----------------------------------
 ;; elscreen_Old
 ;;----------------------------------
