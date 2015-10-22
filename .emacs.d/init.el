@@ -1393,8 +1393,8 @@ Otherwise goto the end of minibuffer."
 (add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
 (require 'helm-swoop)
 ;; disable pre-input
-;; (setq helm-swoop-pre-input-function
-;;       (lambda () ""))
+(setq helm-swoop-pre-input-function
+      (lambda () ""))
 (global-set-key (kbd "C-s") 'helm-swoop)
 ;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
@@ -1404,16 +1404,16 @@ Otherwise goto the end of minibuffer."
 ;; helm-swoop launch
 ;; http://rubikitch.com/2015/03/23/helm-swoop-update/
 ;;----------------------------------------------
-(defun isearch-forward-or-helm-swoop (use-helm-swoop)
-  (interactive "p")
-  (let (current-prefix-arg
-        (helm-swoop-pre-input-function 'ignore))
-    (call-interactively
-     (case use-helm-swoop
-       (1 'isearch-forward)
-       (4 'helm-swoop)
-       (16 'helm-swoop-nomigemo)))))
-(global-set-key (kbd "C-s") 'isearch-forward-or-helm-swoop)
+;; (defun isearch-forward-or-helm-swoop (use-helm-swoop)
+;;   (interactive "p")
+;;   (let (current-prefix-arg
+;;         (helm-swoop-pre-input-function 'ignore))
+;;     (call-interactively
+;;      (case use-helm-swoop
+;;        (1 'isearch-forward)
+;;        (4 'helm-swoop)
+;;        (16 'helm-swoop-nomigemo)))))
+;; (global-set-key (kbd "C-s") 'isearch-forward-or-helm-swoop)
 
 ;;----------------------------------------------
 ;; isearch-dabbrev
