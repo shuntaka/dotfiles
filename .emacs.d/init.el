@@ -1363,28 +1363,6 @@ Otherwise goto the end of minibuffer."
 (define-key helm-map (kbd "C-e")        'helm-select-2nd-action-or-end-of-line)
 (define-key helm-map (kbd "C-j")        'helm-select-3rd-action)
 
-
-;;----------------------------------------------
-;; helm-c-do-shell-command
-;;----------------------------------------------
-(require 'mylisp-helm-add-actions)
-(require 'dired-aux)
-
-(defun helm-c-do-shell-command (ignore)
-  (let ((files (mapcar 'expand-file-name (helm-marked-candidates)))
-        (helm--reading-passwd-or-string t))
-    (dired-do-shell-command
-     (dired-read-shell-command
-      (format "! on %s: "
-              (dired-mark-prompt (length files) files))
-      nil files)
-     nil files)))
-
-(setq helm-user-actions-type-file
-      '(("Execute Shell Command" . helm-c-do-shell-command)))
-(require 'helm-files)
-(helm-define-action-key helm-generic-files-map (kbd "!") 'helm-c-do-shell-command)
-
 ;;----------------------------------------------
 ;; helm-swoop
 ;; http://rubikitch.com/tag/package:helm-swoop/
@@ -1559,6 +1537,28 @@ Otherwise goto the end of minibuffer."
  helm-ag-r-input-idle-delay 0.5  ; 検索をdelay後からおこなう
  helm-ag-r-use-no-highlight t    ; ハイライト無効化
  helm-ag-r-candidate-limit 1000) ; 候補の上限を設定
+
+;;----------------------------------------------
+;; helm-c-do-shell-command
+;;----------------------------------------------
+(require 'mylisp-helm-add-actions)
+(require 'dired-aux)
+
+(defun helm-c-do-shell-command (ignore)
+  (let ((files (mapcar 'expand-file-name (helm-marked-candidates)))
+        (helm--reading-passwd-or-string t))
+    (dired-do-shell-command
+     (dired-read-shell-command
+      (format "! on %s: "
+              (dired-mark-prompt (length files) files))
+      nil files)
+     nil files)))
+
+(setq helm-user-actions-type-file
+      '(("Execute Shell Command" . helm-c-do-shell-command)))
+(require 'helm-files)
+(helm-define-action-key helm-generic-files-map (kbd "!") 'helm-c-do-shell-command)
+
 
 ;;=================================================================
 ;; Color Theme and Font
