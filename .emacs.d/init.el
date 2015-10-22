@@ -858,22 +858,19 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 (global-set-key (kbd "C-M-o") 'avy-goto-char-timer)
 
-
-;;----------------------
-;; Moccur
-;;----------------------
-(require 'color-moccur)
-(setq moccur-split-word t)
-
 ;;----------------------------------------------
-;; ace-isearch
-;;http://rubikitch.com/2014/10/08/ace-isearch/
-;;https://github.com/tam17aki/ace-isearch
+;; visual-regexp-steroids
+;; http://rubikitch.com/2015/04/20/visual-regexp-steroids/
 ;;----------------------------------------------
-;; (add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
-;; (require 'ace-isearch)
-;; (global-ace-isearch-mode 1)
-;; (ace-isearch-input-idle-delay 0.1)
+(require 'visual-regexp-steroids)
+(setq vr/engine 'python)                ;python regexpならばこれ
+;; (setq vr/engine 'pcre2el)               ;elispでPCREから変換
+(global-set-key (kbd "M-%") 'vr/query-replace)
+;; multiple-cursorsを使っているならこれで
+(global-set-key (kbd "C-c m") 'vr/mc-mark)
+;; 普段の正規表現isearchにも使いたいならこれを
+(global-set-key (kbd "C-M-r") 'vr/isearch-backward)
+(global-set-key (kbd "C-M-s") 'vr/isearch-forward)
 
 ;;----------------------------------------------
 ;; ag.el
@@ -921,23 +918,39 @@ org-modeなどで活用。"
                      (car (my/get-buffer-window-list-regexp "^\\*ag ")))))
 
 ;;----------------------------------------------
-;; wgrep
+;; old_ace-isearch
+;;http://rubikitch.com/2014/10/08/ace-isearch/
+;;https://github.com/tam17aki/ace-isearch
+;;----------------------------------------------
+;; (add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
+;; (require 'ace-isearch)
+;; (global-ace-isearch-mode 1)
+;; (ace-isearch-input-idle-delay 0.1)
+
+;;----------------------
+;; old_Moccur
+;;----------------------
+;; (require 'color-moccur)
+;; (setq moccur-split-word t)
+
+;;----------------------------------------------
+;; old_wgrep
 ;; http://rubikitch.com/2014/09/13/wgrep/
 ;;----------------------------------------------
-;; 1. M-x ag
-;; 2. eでwgrep-modeにする
-;; 3. *grep*バッファを編集する
-;; 4. C-c C-c (C-x C-s)でファイルに反映！
+;; ;; 1. M-x ag
+;; ;; 2. eでwgrep-modeにする
+;; ;; 3. *grep*バッファを編集する
+;; ;; 4. C-c C-c (C-x C-s)でファイルに反映！
 
-;;; eでwgrepモードにする
-(setf wgrep-enable-key "e")
-;;; wgrep終了時にバッファを保存
-(setq wgrep-auto-save-buffer t)
-;;; read-only bufferにも変更を適用する
-(setq wgrep-change-readonly-file t)
+;; ;;; eでwgrepモードにする
+;; (setf wgrep-enable-key "e")
+;; ;;; wgrep終了時にバッファを保存
+;; (setq wgrep-auto-save-buffer t)
+;; ;;; read-only bufferにも変更を適用する
+;; (setq wgrep-change-readonly-file t)
 
 ;;----------------------------------------------
-;; foreign-regexp.el
+;; old_foreign-regexp.el
 ;;----------------------------------------------
 ;; (require 'foreign-regexp)
 ;; (custom-set-variables
@@ -945,24 +958,9 @@ org-modeなどで活用。"
 ;;  '(reb-re-syntax 'foreign-regexp))
 
 ;;----------------------------------------------
-;; visual-regexp
+;; old_visual-regexp
 ;;----------------------------------------------
 ;; (global-set-key (kbd "M-%") 'vr/query-replace)
-
-;;----------------------------------------------
-;;visual-regexp-steroids
-;; http://rubikitch.com/2015/04/20/visual-regexp-steroids/
-;;----------------------------------------------
-(require 'visual-regexp-steroids)
-(setq vr/engine 'python)                ;python regexpならばこれ
-;; (setq vr/engine 'pcre2el)               ;elispでPCREから変換
-(global-set-key (kbd "M-%") 'vr/query-replace)
-;; multiple-cursorsを使っているならこれで
-(global-set-key (kbd "C-c m") 'vr/mc-mark)
-;; 普段の正規表現isearchにも使いたいならこれを
-(global-set-key (kbd "C-M-r") 'vr/isearch-backward)
-(global-set-key (kbd "C-M-s") 'vr/isearch-forward)
-
 
 ;;=============================================
 ;; 8 Make Emacs More Convinient
@@ -1390,10 +1388,14 @@ Otherwise goto the end of minibuffer."
 ;;----------------------------------------------
 ;; helm-swoop
 ;; http://rubikitch.com/tag/package:helm-swoop/
+;; https://github.com/ShingoFukuyama/helm-swoop
 ;;----------------------------------------------
-
 (add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
 (require 'helm-swoop)
+;; disable pre-input
+;; (setq helm-swoop-pre-input-function
+;;       (lambda () ""))
+(global-set-key (kbd "C-s") 'helm-swoop)
 ;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
