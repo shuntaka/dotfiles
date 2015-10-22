@@ -671,25 +671,6 @@
 (global-set-key (kbd "C-M-m") (lambda () (interactive) (move-to-window-line nil)))
 (global-set-key (kbd "C-M-l") (lambda () (interactive) (move-to-window-line -1)))
 
-;;----------------------------------------------
-;; ace-jump-mode
-;;http://rubikitch.com/2014/10/09/ace-jump-mode/
-;;----------------------------------------------
-;; ヒント文字に使う文字を指定する
-(setq ace-jump-mode-move-keys
-      (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
-;; ace-jump-word-modeのとき文字を尋ねないようにする
-(setq ace-jump-word-mode-use-query-char nil)
-(global-set-key (kbd "C-o") 'ace-jump-char-mode)
-;; (global-set-key (kbd "C-;") 'ace-jump-word-mode)
-(global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
-
-;;----------------------------------------------
-;; avy
-;; http://rubikitch.com/2015/05/20/avy/
-;;----------------------------------------------
-(global-set-key (kbd "C-M-o") 'avy-goto-char-timer)
-
 ;;=============================================
 ;; 6. Input Support
 ;;=============================================
@@ -858,6 +839,26 @@ org-modeなどで活用。"
 ;;=================================================================
 ;; 7. Search and Replace
 ;;=================================================================
+;;----------------------------------------------
+;; ace-jump-mode
+;;http://rubikitch.com/2014/10/09/ace-jump-mode/
+;;----------------------------------------------
+;; ヒント文字に使う文字を指定する
+(setq ace-jump-mode-move-keys
+      (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
+;; ace-jump-word-modeのとき文字を尋ねないようにする
+(setq ace-jump-word-mode-use-query-char nil)
+(global-set-key (kbd "C-o") 'ace-jump-char-mode)
+;; (global-set-key (kbd "C-;") 'ace-jump-word-mode)
+(global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
+
+;;----------------------------------------------
+;; avy
+;; http://rubikitch.com/2015/05/20/avy/
+;;----------------------------------------------
+(global-set-key (kbd "C-M-o") 'avy-goto-char-timer)
+
+
 ;;----------------------
 ;; Moccur
 ;;----------------------
@@ -869,18 +870,21 @@ org-modeなどで活用。"
 ;;http://rubikitch.com/2014/10/08/ace-isearch/
 ;;https://github.com/tam17aki/ace-isearch
 ;;----------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
-(require 'ace-isearch)
-(global-ace-isearch-mode 1)
-;; '(ace-isearch-input-idle-delay 0.1)
+;; (add-to-list 'load-path "~/.emacs.d/public_repos/ace-isearch")
+;; (require 'ace-isearch)
+;; (global-ace-isearch-mode 1)
+;; (ace-isearch-input-idle-delay 0.1)
 
 ;;----------------------------------------------
-;; emacs ag.el
-;;----------------------------------------------
+;; ag.el
 ;;http://rubikitch.com/2014/09/12/ag/
+;;----------------------------------------------
 (setq ag-highlight-search t)
 
+;;------------------------------------------------------------------------------------------
+;; wgrep-ag.el
 ;;http://kotatu.org/blog/2013/12/18/emacs-aag-wgrep-for-code-grep-search/
+;;------------------------------------------------------------------------------------------
 ;; ag
 ;; ag(The Silver Searcher)コマンドを以下からインストール:
 ;;     http://github.com/ggreer/the_silver_searcher#installation
@@ -1282,7 +1286,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;===================================================================
 ;; 15. Helm & Anything
 ;;===================================================================
-
 ;;----------------------------------------------
 ;; Helm setting avoiding helm-file-name
 ;; http://rubikitch.com/2014/08/11/helm-avoid-find-files/
@@ -1411,7 +1414,7 @@ Otherwise goto the end of minibuffer."
 (global-set-key (kbd "C-s") 'isearch-forward-or-helm-swoop)
 
 ;;----------------------------------------------
-;;	isearch-dabbrev
+;; isearch-dabbrev
 ;;----------------------------------------------
 (define-key isearch-mode-map (kbd "<tab>") 'isearch-dabbrev-expand)
 
