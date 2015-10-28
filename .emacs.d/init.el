@@ -843,20 +843,21 @@ org-modeなどで活用。"
 ;; ace-jump-mode
 ;;http://rubikitch.com/2014/10/09/ace-jump-mode/
 ;;----------------------------------------------
-;; ヒント文字に使う文字を指定する
-(setq ace-jump-mode-move-keys
-      (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
-;; ace-jump-word-modeのとき文字を尋ねないようにする
-(setq ace-jump-word-mode-use-query-char nil)
-(global-set-key (kbd "C-o") 'ace-jump-char-mode)
-;; (global-set-key (kbd "C-;") 'ace-jump-word-mode)
-(global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
+;; ;; ヒント文字に使う文字を指定する
+;; (setq ace-jump-mode-move-keys
+;;       (append "asdfghjkl;:]qwertyuiop@zxcvbnm,." nil))
+;; ;; ace-jump-word-modeのとき文字を尋ねないようにする
+;; (setq ace-jump-word-mode-use-query-char nil)
+;; (global-set-key (kbd "C-o") 'ace-jump-char-mode)
+;; ;; (global-set-key (kbd "C-;") 'ace-jump-word-mode)
+;; (global-set-key (kbd "C-M-;") 'ace-jump-line-mode)
 
 ;;----------------------------------------------
 ;; avy
 ;; http://rubikitch.com/2015/05/20/avy/
 ;;----------------------------------------------
-(global-set-key (kbd "C-M-o") 'avy-goto-char-timer)
+(global-set-key (kbd "C-o") 'avy-goto-char)
+(global-set-key (kbd "C-M-;") 'avy-goto-line)
 
 ;;----------------------------------------------
 ;; visual-regexp-steroids
