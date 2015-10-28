@@ -1262,26 +1262,64 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------
 ;;; howm from Otake Tomoy's  emacs Jissen Nyumon, p148
 ;;----------------------
-(setq howm-directory (concat user-emacs-directory "howm"))
+;;(setq howm-directory (concat user-emacs-directory "howm"))
 
-(setq howm-menu-lang 'ja)
+;;(setq howm-menu-lang 'ja)
 
-(setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
+;;(setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
 
-(when (require 'howm-mode nil t)
+;;(when (require 'howm-mode nil t)
 
-  (define-key global-map (kbd "C-c , ,") 'howm-menu))
+;;  (define-key global-map (kbd "C-c , ,") 'howm-menu))
 
-(defun howm-save-buffer-and-kill ()
-  (interactive)
-  (when (and (buffer-file-name)
-	     (string-match "\\.howm" (buffer-file-name)))
-    (save-buffer)
-    (kill-buffer nil)))
+;;(defun howm-save-buffer-and-kill ()
+;;  (interactive)
+;;  (when (and (buffer-file-name)
+;;	     (string-match "\\.howm" (buffer-file-name)))
+;;    (save-buffer)
+;;    (kill-buffer nil)))
 
-(define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
+;;(define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
 
+;;----------------------------------------------
+;; calender
+;; http://d.hatena.ne.jp/kiwanami/20110107/1294404952
+;;----------------------------------------------
+(add-hook 'calendar-load-hook
+          (lambda ()
+            (require 'japanese-holidays)
+            (setq calendar-holidays
+                  (append japanese-holidays local-holidays other-holidays))))
+(require 'calfw) ; 初回一度だけ
+(cfw:open-calendar-buffer) ; カレンダー表示
 
+;;----------------------------------------------
+;; calfw-org
+;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
+;;----------------------------------------------
+(setq org-agenda-files
+         '("~/Dropbox/org/org-ical.org" "~/Dropbox/org/next.org"
+           "~/Dropbox/org/work.org" "~/Dropbox/org/research.org"))
+
+(defun show-org-buffer (file)
+    "Show an org-file on the current buffer"
+    (interactive)
+    (if (get-buffer file)
+        (let ((buffer (get-buffer file)))
+          (switch-to-buffer buffer)
+          (message "%s" file))
+     (find-file (concat "~/Dropbox/org/" file))))
+(global-set-key (kbd "C-M-c") '(lambda () (interactive)
+                                  (show-org-buffer "org-ical.org")))
+
+(defvar org-capture-ical-file (concat org-directory "org-ical.org"))
+ ;; see org.pdf:p73
+ (setq org-capture-templates
+      `(("t" "TODO 項目を INBOX に貼り付ける" entry
+         (file+headline nil "INBOX") "** TODO %?\n\t")
+         ("c" "同期カレンダーにエントリー" entry
+          (file+headline ,org-capture-ical-file "Schedule")
+          "** TODO %?\n\t")))
 ;;===================================================================
 ;; 15. Helm & Anything
 ;;===================================================================
