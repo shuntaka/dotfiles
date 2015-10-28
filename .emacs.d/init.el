@@ -1640,8 +1640,19 @@ Otherwise goto the end of minibuffer."
 ;;font
 ;;----------------------
 (set-face-attribute 'default nil
-	    :family "Ricty"
+	    :family "Inconsolata"
             :height 180)
+
+(set-fontset-font (frame-parameter nil 'font)
+                  'japanese-jisx0208
+                  (cons "Ricty Discord" "iso10646-1"))
+(set-fontset-font (frame-parameter nil 'font)
+                  'japanese-jisx0212
+                  (cons "Ricty Discord" "iso10646-1"))
+(set-fontset-font (frame-parameter nil 'font)
+                  'katakana-jisx0201
+                  (cons "Ricty Discord" "iso10646-1"))
+
 
 ;;----------------------------------------------
 ;; Background Color for Region
