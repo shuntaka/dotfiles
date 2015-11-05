@@ -343,7 +343,7 @@
 ;;----------------------
 ;; e.g. type C-x C-f with the cursor near a file name(e.g. init.el)
 ;; if it exists, that file is used as the file name to be opened
-;; (ffap-bindings)
+(ffap-bindings)
 
 ;;----------------------
 ;; 4.2 uniquify.el
