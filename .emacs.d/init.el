@@ -1265,7 +1265,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (require 'org)
 (setq org-use-fast-todo-selection t)
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(x)" "CANCEL(c)")
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "PROJECT(p)" "SUBPROJECT(s)" "|" "DONE(x)" "CANCEL(c)")
         (sequence "APPT(a)" "|" "DONE(x)" "CANCEL(c)")))
 
 ;;----------------------------------------------
