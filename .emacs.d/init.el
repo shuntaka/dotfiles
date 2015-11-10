@@ -1268,6 +1268,28 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(x)" "CANCEL(c)")
         (sequence "APPT(a)" "|" "DONE(x)" "CANCEL(c)")))
 
+;;----------------------------------------------
+;; 14.14
+;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
+;;----------------------------------------------
+(setq org-agenda-files
+         '("~/Dropbox/Manage/Todo/master2015.org" "~/Dropbox/Manage/Todo/kai開発移管_todo.org" "~/Dropbox/Manage/Todo/kan環境構築_todo.org"))
+
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+;;----------------------------------------------
+;; todo management
+;; http://qiita.com/tamurashingo@github/items/ee033dadab64269edf63
+;;----------------------------------------------
+;; capture templates
+;; (setq org-capture-templates
+;;       '(("p" "Project Task" entry (file+headline (expand-file-name "~/Dropbox/Manage/ToDo/project.org") "Inbox")
+;;              "** TODO %?\n    %i\n    %a\n    %T")
+;;         ("m" "memo" entry (file (expand-file-name "~/memo.org"))
+;;              "* %?\n    %i\n    %a\n    %T")))
+
+;; ;; agenda
+;; (setq org-agenda-files (list (expand-file-name "~/project")))
 
 ;;----------------------
 ;;; howm from Otake Tomoy's  emacs Jissen Nyumon, p148
@@ -1307,29 +1329,29 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; calfw-org
 ;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
 ;;----------------------------------------------
-(setq org-agenda-files
-         '("~/Dropbox/org/org-ical.org" "~/Dropbox/org/next.org"
-           "~/Dropbox/org/work.org" "~/Dropbox/org/research.org"))
+;; (setq org-agenda-files
+;;          '("~/Dropbox/org/org-ical.org" "~/Dropbox/org/next.org"
+;;            "~/Dropbox/org/work.org" "~/Dropbox/org/research.org"))
 
-(defun show-org-buffer (file)
-    "Show an org-file on the current buffer"
-    (interactive)
-    (if (get-buffer file)
-        (let ((buffer (get-buffer file)))
-          (switch-to-buffer buffer)
-          (message "%s" file))
-     (find-file (concat "~/Dropbox/org/" file))))
-(global-set-key (kbd "C-M-c") '(lambda () (interactive)
-                                  (show-org-buffer "org-ical.org")))
+;; (defun show-org-buffer (file)
+;;     "Show an org-file on the current buffer"
+;;     (interactive)
+;;     (if (get-buffer file)
+;;         (let ((buffer (get-buffer file)))
+;;           (switch-to-buffer buffer)
+;;           (message "%s" file))
+;;      (find-file (concat "~/Dropbox/org/" file))))
+;; (global-set-key (kbd "C-M-c") '(lambda () (interactive)
+;;                                   (show-org-buffer "org-ical.org")))
 
-(defvar org-capture-ical-file (concat org-directory "org-ical.org"))
- ;; see org.pdf:p73
- (setq org-capture-templates
-      `(("t" "TODO 項目を INBOX に貼り付ける" entry
-         (file+headline nil "INBOX") "** TODO %?\n\t")
-         ("c" "同期カレンダーにエントリー" entry
-          (file+headline ,org-capture-ical-file "Schedule")
-          "** TODO %?\n\t")))
+;; (defvar org-capture-ical-file (concat org-directory "org-ical.org"))
+;;  ;; see org.pdf:p73
+;;  (setq org-capture-templates
+;;       `(("t" "TODO 項目を INBOX に貼り付ける" entry
+;;          (file+headline nil "INBOX") "** TODO %?\n\t")
+;;          ("c" "同期カレンダーにエントリー" entry
+;;           (file+headline ,org-capture-ical-file "Schedule")
+;;           "** TODO %?\n\t")))
 ;;===================================================================
 ;; 15. Helm & Anything
 ;;===================================================================
