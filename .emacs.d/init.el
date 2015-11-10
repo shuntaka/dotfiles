@@ -1301,7 +1301,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
             (setq calendar-holidays
                   (append japanese-holidays local-holidays other-holidays))))
 (require 'calfw) ; 初回一度だけ
-(cfw:open-calendar-buffer) ; カレンダー表示
+;; (cfw:open-calendar-buffer) ; カレンダー表示
 
 ;;----------------------------------------------
 ;; calfw-org
