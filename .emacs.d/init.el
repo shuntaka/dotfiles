@@ -1015,14 +1015,14 @@ org-modeなどで活用。"
 ;; Google日本語入力(Macの時)
 ;;----------------------------------------------
 ;;Google 日本語入力
-(when (eq window-system 'ns)
-(setq default-input-method "MacOSX")
-(mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ"))
+;; (when (eq window-system 'ns)
+;; (setq default-input-method "MacOSX")
+;; (mac-set-input-method-parameter "com.google.inputmethod.Japanese.base" `title "あ"))
 
-(when (eq window-system 'ns)
-(set-fontset-font
- nil 'japanese-jisx0208
-(font-spec :family "Hiragino Kaku Gothic ProN")))
+;; (when (eq window-system 'ns)
+;; (set-fontset-font
+;;  nil 'japanese-jisx0208
+;; (font-spec :family "Hiragino Kaku Gothic ProN")))
 
 ;----------------------------------------------
 ;; 9-9. Multi Term
