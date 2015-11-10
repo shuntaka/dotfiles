@@ -1259,6 +1259,16 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
     (t  (org-insert-heading nil))))
 (define-key org-mode-map (kbd "<C-return>") 'org-insert-heading-dwim)
 
+;;----------------------------------------------
+;; 14.6
+;;----------------------------------------------
+(require 'org)
+(setq org-use-fast-todo-selection t)
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "|" "DONE(x)" "CANCEL(c)")
+        (sequence "APPT(a)" "|" "DONE(x)" "CANCEL(c)")))
+
+
 ;;----------------------
 ;;; howm from Otake Tomoy's  emacs Jissen Nyumon, p148
 ;;----------------------
