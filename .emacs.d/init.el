@@ -1266,6 +1266,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (setq org-use-fast-todo-selection t)
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "PROJECT(p)" "SUBPROJECT(s)" "|" "DONE(x)" "CANCEL(c)")
+      ;; '((sequence "TODO(t)" "WAITING(w)" "PROJECT(p)" "SUBPROJECT(s)" "|" "DONE(x)" "CANCEL(c)")
         (sequence "APPT(a)" "|" "DONE(x)" "CANCEL(c)")))
 
 ;;----------------------------------------------
@@ -1273,23 +1274,9 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
 ;;----------------------------------------------
 (setq org-agenda-files
-         '("~/Dropbox/Manage/Todo/master2015.org" "~/Dropbox/Manage/Todo/kai開発移管_todo.org" "~/Dropbox/Manage/Todo/kan環境構築_todo.org"))
+         '("~/Dropbox/Manage/Todo/master2015.org" "~/Dropbox/Manage/Todo/kai開発移管_todo.org" "~/Dropbox/Manage/Todo/kan環境構築_todo.org" "~/Dropbox/Manage/ToDo/schedule2015.org"))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
-
-;;----------------------------------------------
-;; todo management
-;; http://qiita.com/tamurashingo@github/items/ee033dadab64269edf63
-;;----------------------------------------------
-;; capture templates
-;; (setq org-capture-templates
-;;       '(("p" "Project Task" entry (file+headline (expand-file-name "~/Dropbox/Manage/ToDo/project.org") "Inbox")
-;;              "** TODO %?\n    %i\n    %a\n    %T")
-;;         ("m" "memo" entry (file (expand-file-name "~/memo.org"))
-;;              "* %?\n    %i\n    %a\n    %T")))
-
-;; ;; agenda
-;; (setq org-agenda-files (list (expand-file-name "~/project")))
 
 ;;----------------------
 ;;; howm from Otake Tomoy's  emacs Jissen Nyumon, p148
@@ -1326,13 +1313,33 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; (cfw:open-calendar-buffer) ; カレンダー表示
 
 ;;----------------------------------------------
-;; calfw-org
-;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
+;; calfw-org view
+;; http://d.hatena.ne.jp/kiwanami/20110723/1311434175
 ;;----------------------------------------------
-;; (setq org-agenda-files
-;;          '("~/Dropbox/org/org-ical.org" "~/Dropbox/org/next.org"
-;;            "~/Dropbox/org/work.org" "~/Dropbox/org/research.org"))
+;; require calfw-org to view the schedule in the calender
+(require 'calfw-org)
+(global-set-key (kbd "C-c c") 'cfw:open-org-calendar)
 
+;;----------------------------------------------
+;; calfw-org view
+;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
+;; currently commented out
+;;----------------------------------------------
+;; ;; define autoload-if-func
+;; ;; http://d.hatena.ne.jp/tomoya/20090811/1250006208
+;; (defun autoload-if-found (function file &optional docstring interactive type)
+;;   "set autoload iff. FILE has found."
+;;   (and (locate-library file)
+;;        (autoload function file docstring interactive type)))
+;; ;; 使い方
+;; ;; 引数は autoload と全く同じです。-if-found を付けるだけ
+;; (when (autoload-if-found 'bs-show "bs" "buffer selection" t)
+;;   ;; autoload は成功した場合のみ non-nil を返すので、
+;;   ;; when の条件部に置くことで、依存関係にある設定項目を自然に表現できます。
+;;   (global-set-key [(control x) (control b)] 'bs-show)
+;;   (setq bs-max-window-height 10))
+
+;; ;; open the schedule org file
 ;; (defun show-org-buffer (file)
 ;;     "Show an org-file on the current buffer"
 ;;     (interactive)
@@ -1340,11 +1347,12 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;         (let ((buffer (get-buffer file)))
 ;;           (switch-to-buffer buffer)
 ;;           (message "%s" file))
-;;      (find-file (concat "~/Dropbox/org/" file))))
+;;      (find-file (concat "~/Dropbox/Manage/ToDo/" file))))
 ;; (global-set-key (kbd "C-M-c") '(lambda () (interactive)
-;;                                   (show-org-buffer "org-ical.org")))
+;;                                   (show-org-buffer "schedule2015.org")))
 
-;; (defvar org-capture-ical-file (concat org-directory "org-ical.org"))
+;; ;; add schedule to the schedule org file
+;; (defvar org-capture-ical-file (concat org-directory "schedule2015.org"))
 ;;  ;; see org.pdf:p73
 ;;  (setq org-capture-templates
 ;;       `(("t" "TODO 項目を INBOX に貼り付ける" entry
@@ -1352,6 +1360,32 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;          ("c" "同期カレンダーにエントリー" entry
 ;;           (file+headline ,org-capture-ical-file "Schedule")
 ;;           "** TODO %?\n\t")))
+
+;; ;; copy a task to the schedule org file
+;; (setq org-refile-targets
+;;        (quote (("org-ical.org" :level . 1)
+;;                ("next.org" :level . 1)
+;;                ("sleep.org" :level . 1))))
+
+
+;; ;; display the schedule on the schedule org file
+;; ;; (when (autoload-if-found 'cfw:open-org-calendar "calfw-org"
+;; ;;                          "Rich calendar for org-mode" t)
+;;   (eval-after-load "calfw-org"
+;;     '(progn
+;;        ;; calfw-org で表示する org バッファを指定する
+;;        (setq cfw:org-icalendars '("~/Dropbox/Manage/Schedule/schedule2015.org"))
+;;        ;; org で使う表にフェイスを統一
+;;        (setq cfw:fchar-junction ?+
+;;                cfw:fchar-vertical-line ?|
+;;                cfw:fchar-horizontal-line ?-
+;;                cfw:fchar-left-junction ?|
+;;                cfw:fchar-right-junction ?|
+;;                cfw:fchar-top-junction ?+
+;;                cfw:fchar-top-left-corner ?|
+;;                cfw:fchar-top-right-corner ?| )))
+
+
 ;;===================================================================
 ;; 15. Helm & Anything
 ;;===================================================================
@@ -1436,7 +1470,7 @@ Otherwise goto the end of minibuffer."
 
 ;;----------------------------------------------
 ;; helm-swoop
-;; http://rubikitch.com/tag/package:helm-swoop/
+;;
 ;; https://github.com/ShingoFukuyama/helm-swoop
 ;;----------------------------------------------
 (add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
@@ -1477,6 +1511,12 @@ Otherwise goto the end of minibuffer."
 (setq ido-enable-flex-matching t)       ;あいまいマッチ
 (global-set-key (kbd "C-.") 'ido-imenu-anywhere)
 (global-set-key (kbd "C-M-.") 'helm-imenu-anywhere)
+
+;;----------------------------------------------
+;; enhanced imenu
+;; http://rubikitch.com/tag/package:helm-swoop/
+;;----------------------------------------------
+
 
 ;;----------------------------------------------
 ;; helm-next error

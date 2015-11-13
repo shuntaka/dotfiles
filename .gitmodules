@@ -49,3 +49,6 @@
 [submodule ".emacs.d/public_repos/1333926"]
 	path = .emacs.d/public_repos/1333926
 	url = https://gist.github.com/1333926.git
+[submodule ".emacs.d/public_repos/emacs-calfw"]
+	path = .emacs.d/public_repos/emacs-calfw
+	url = https://github.com/kiwanami/emacs-calfw.git
