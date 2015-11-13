@@ -2359,7 +2359,7 @@ Otherwise goto the end of minibuffer."
           (unless (looking-at "\\s-*$")
             (indent-according-to-mode))
           (forward-line))
-        (run-with-timer 0.5 nil '(lambda(ovl)
+        (run-with-timer 0.03 nil '(lambda(ovl)
                                    (delete-overlay ovl)) ovl)))))
 (defun my-js2-mode-hook ()
   (require 'js)
