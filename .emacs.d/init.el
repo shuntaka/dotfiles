@@ -685,6 +685,24 @@
 (setq undo-strong-limit 900000)
 
 ;;----------------------------------------------
+;; 6.10
+;;----------------------------------------------
+(setq hippie-expand-try-functions-list
+      '(try-complete-file-name-partially
+        try-complete-file-name
+        try-expand-all-abbrevs
+        try-expand-dabbrev
+        try-expand-dabbrev-all-buffers
+        try-expand-dabbrev-from-kill
+        try-complete-lisp-symbol-partially
+        try-complete-lisp-symbol-partially
+        ))
+
+(keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
+(global-set-key (kbd "H-i") 'hippie-expand)
+
+
+;;----------------------------------------------
 ;; undo-tree
 ;;----------------------------------------------
 (when (require 'undo-tree nil t)
@@ -2241,7 +2259,6 @@ Otherwise goto the end of minibuffer."
 (require 'e-palette)
 (define-key global-map [f2] 'e-palette)
 
-
 ;;----------------------------------------------
 ;; emmet
 ;; http://qiita.com/ironsand/items/55f2ced218949efbb1fb
@@ -2250,10 +2267,12 @@ Otherwise goto the end of minibuffer."
 (add-hook 'sgml-mode-hook 'emmet-mode) ;; マークアップ言語全部で使う
 (add-hook 'css-mode-hook  'emmet-mode) ;; CSSにも使う
 (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 4))) ;; indent はスペース2個
-(eval-after-load "emmet-mode"
-  '(define-key emmet-mode-keymap (kbd "C-j") nil)) ;; C-j は newline のままにしておく
-(keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
-(define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line) ;; C-i で展開
+(define-key emmet-mode-keymap (kbd "C-j") 'emmet-expand-line) ;; C-j で展開
+
+;; (eval-after-load "emmet-mode"
+;;   '(define-key emmet-mode-keymap (kbd "C-j") nil)) ;; C-j は newline のままにしておく
+;; (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
+;; (define-key emmet-mode-keymap (kbd "H-i") 'emmet-expand-line) ;; C-i で展開
 
 ;;=============================================
 ;; For SCSS
