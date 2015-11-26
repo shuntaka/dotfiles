@@ -685,6 +685,30 @@
 (setq undo-strong-limit 900000)
 
 ;;----------------------------------------------
+;; 6.5
+;; http://rubikitch.com/tag/yasnippet/
+;; http://vdeep.net/emacs-yasnippet
+;;----------------------------------------------
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/mysnippets"
+        "~/.emacs.d/elpa/yasnippet-20151108.1505/snippets"
+      ))
+
+;; 既存スニペットを挿入する
+(define-key yas-minor-mode-map (kbd "C-x i i") 'yas-insert-snippet)
+;; 新規スニペットを作成するバッファを用意する
+(define-key yas-minor-mode-map (kbd "C-x i n") 'yas-new-snippet)
+;; 既存スニペットを閲覧・編集する
+(define-key yas-minor-mode-map (kbd "C-x i v") 'yas-visit-snippet-file)
+
+(require 'helm-c-yasnippet)
+(setq helm-yas-space-match-any-greedy t)
+(global-set-key (kbd "C-c y") 'helm-yas-complete)
+(push '("emacs.+/snippets/" . snippet-mode) auto-mode-alist)
+(yas-global-mode 1)
+
+;;----------------------------------------------
 ;; 6.10
 ;;----------------------------------------------
 (setq hippie-expand-try-functions-list
