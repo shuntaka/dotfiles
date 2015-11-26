@@ -1317,7 +1317,14 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
 ;;----------------------------------------------
 (setq org-agenda-files
-         '("~/Dropbox/Manage/Todo/master2015.org" "~/Dropbox/Manage/Todo/kai開発移管_todo.org" "~/Dropbox/Manage/Todo/kan環境構築_todo.org" "~/Dropbox/Manage/Todo/VMP_troubleshooting_todo.org" "~/Dropbox/Manage/Todo/SRP_KT_todo.org" "~/Dropbox/Manage/ToDo/schedule2015.org"))
+      '("~/Dropbox/Manage/Todo/master2015.org"
+        "~/Dropbox/Manage/Todo/kai開発移管_todo.org"
+        "~/Dropbox/Manage/Todo/kan環境構築_todo.org"
+        "~/Dropbox/Manage/Todo/VMP_troubleshooting_todo.org"
+        "~/Dropbox/Manage/Todo/SRP_KT_todo.org"
+        "~/Dropbox/Manage/ToDo/schedule2015.org"
+        "~/Dropbox/Manage/ToDo/India_business_trip_todo.org"
+        ))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 
