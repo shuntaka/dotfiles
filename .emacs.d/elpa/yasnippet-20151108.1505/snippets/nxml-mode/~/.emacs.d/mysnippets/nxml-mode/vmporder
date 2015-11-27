@@ -1,0 +1,76 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmporder
+# key: vmporder
+# binding: direct-keybinding
+# --
+<createorderrequest>
+    <accountid>$1</accountid>
+    <sourceid>2</sourceid>
+    <currencyid>JPY</currencyid>
+    <ispartial>false</ispartial>
+    <isconfirmed>true</isconfirmed>
+    <promoapplicable>true</promoapplicable>
+    <issecure>false</issecure>
+    <taxapplicable>false</taxapplicable>
+    <promotions>
+        <promotion></promotion>
+    </promotions>
+    <remarks>hi, this is an update order from Portal</remarks>
+    <lineitems>
+        <lineitem>
+            <accountproductid>$2</accountproductid>
+            <operationtypeid>U</operationtypeid>
+            <catalogofferingid>181</catalogofferingid>
+            <specid>33</specid>
+            <periods>
+                <period>1</period>
+                <period>1</period>
+                <period>1</period>
+            </periods>
+            <rules>
+                <rule>
+                    <ruleid>198</ruleid>
+                    <rulevalue>testord21125</rulevalue>
+                </rule>
+                <rule>
+                    <ruleid>199</ruleid>
+                    <rulevalue></rulevalue>
+                </rule>
+                <rule>
+                    <ruleid>200</ruleid>
+                    <rulevalue>yoshiaki.tabei@ntt.com</rulevalue>
+                </rule>
+                <rule>
+                    <ruleid>201</ruleid>
+                    <rulevalue>変更なし</rulevalue>
+                </rule>
+                <rule>
+                    <ruleid>202</ruleid>
+                    <rulevalue>変更なし</rulevalue>
+                </rule>
+                <rule>
+                    <ruleid>203</ruleid>
+                    <rulevalue>変更なし</rulevalue>
+                </rule>
+                <rule>
+                    <ruleid>204</ruleid>
+                    <rulevalue>変更なし</rulevalue>
+                </rule>
+            </rules>
+            <charvals>
+                <charval>
+                    <id>710</id>
+                </charval>
+                <charval>
+                    <id>468</id>
+                </charval>
+            </charvals>
+            <taxapplicable>false</taxapplicable>
+            <quantity>1</quantity>
+            <desc>SOA order 1</desc>
+            <remarks>Seems good product</remarks>
+            <isautorenewable>true</isautorenewable>
+        </lineitem>
+    </lineitems>
+</createorderrequest>
+
