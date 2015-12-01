@@ -694,8 +694,8 @@
 ;;----------------------------------------------
 (require 'yasnippet)
 (setq yas-snippet-dirs
-      '("~/.emacs.d/elpa/yasnippet-20151108.1505/snippets"
-        "~/.emacs.d/mysnippets"
+      '("~/.emacs.d/mysnippets"
+        "~/.emacs.d/elpa/yasnippet-20151108.1505/snippets"
         "~/.emacs.d/public_snippets"
       ))
 
