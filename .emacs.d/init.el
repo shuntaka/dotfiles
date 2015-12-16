@@ -1314,6 +1314,55 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (define-key org-mode-map (kbd "<C-return>") 'org-insert-heading-dwim)
 
 ;;----------------------------------------------
+;; 14.4
+;;----------------------------------------------
+;; (require 'org)
+;; (org-remember-insinuate)
+
+;; (setq org-directory "~/Dropbox/Memo/")
+;; (setq org-default-notes-file (expand-file-name "memo.org" org-directory))
+
+;; (setq org-remember-templates
+;;       '(("Note" ?n "** %?\n %i\n %t" nil "Inbox")
+;;         ("Todo" ?t "** TODO %?\n %i\n %a\n %t" nil "Inbox")))
+
+;;----------------------------------------------
+;; 14.4 (org-capture)
+;; http://kamuycikap.hatenablog.com/entry/2015/02/04/181043
+;;----------------------------------------------
+;; Org-captureをC-c rで呼び出す。
+;; (define-key global-map "\C-cr" 'org-capture)
+(key-chord-define-global "ji" 'org-capture)
+
+;; Org-caputure
+;; Org-mode version8.xから導入されたorg-rememberの高機能版
+(when (require 'org-capture nil t)
+
+  (setq org-capture-templates
+        '(("m" "Memo" entry (file+datetree "~/Dropbox/Memo/memo.org" "MEMO")
+           "* %^{Title} %^g\n%?\nAdded: %U")
+          ("t" "Todo" entry (file+headline "~/Dropbox/Manage/ToDo/tempo_todo.org" "INBOX")
+           "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
+          ))
+
+  (setq org-agenda-custom-commands
+        '(
+          ("s" "SVF Lists" tags "SVF")           ; SVFタグを抽出
+          ("p" "Projects Lists" tags "PROJECT")  ; PROJECTタグを抽出
+          ("n" "Note Lists" tags "NOTE")         ; NOTEタグを抽出
+          ("h" "Office and Home Lists"           ; @OFFICEタグでTODO
+           ((agenda)
+            (tags-todo "@OFFICE")
+            (tags-todo "@HOME")))
+
+          ("d" "Daily Action List"
+           (
+            (agenda "" ((org-agenda-ndays 1)
+                        (org-agenda-sorting-strategy
+                         (quote ((agenda time-up priority-down tag-up) )))
+                        (org-deadline-warning-days 0)
+                        )))))))
+;;----------------------------------------------
 ;; 14.6
 ;;----------------------------------------------
 (require 'org)
@@ -1328,7 +1377,8 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
 ;;----------------------------------------------
 (setq org-agenda-files
-      '("~/Dropbox/Manage/Todo/master2015.org"
+      '("~/Dropbox/Manage/ToDo/tempo_todo.org"
+        "~/Dropbox/Manage/Todo/jimu_todo.org"
         "~/Dropbox/Manage/Todo/kai開発移管_todo.org"
         "~/Dropbox/Manage/Todo/kan環境構築_todo.org"
         "~/Dropbox/Manage/Todo/VMP_troubleshooting_todo.org"
