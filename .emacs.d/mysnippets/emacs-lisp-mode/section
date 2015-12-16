@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: section
+# key: section
+# binding: direct-keybinding
+# --
+;;----------------------------------------------
+;; $1.$2
+;;----------------------------------------------
