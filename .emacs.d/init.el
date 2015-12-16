@@ -713,6 +713,14 @@
 (yas-global-mode 1)
 
 ;;----------------------------------------------
+;; 6.9
+;;----------------------------------------------
+(require 'yasnippet-config)
+;; (yas/setup "~/.emacs.d/plugins/yasnippet")
+(global-set-key (kbd "C-x y") 'yas/register-oneshot-snippet)
+(global-set-key (kbd "C-x C-y") 'yas/expand-oneshot-snippet)
+
+;;----------------------------------------------
 ;; 6.10
 ;;----------------------------------------------
 (setq hippie-expand-try-functions-list
