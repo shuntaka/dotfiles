@@ -1,0 +1,55 @@
+# key: createorder
+# name: createorder
+# --
+<createorderrequest>
+  <accountid>${1:191165}</accountid>
+  <sourceid>2</sourceid>
+  <currencyid>JPY</currencyid>
+  <ispartial>false</ispartial>
+  <isconfirmed>true</isconfirmed>
+  <issecure>true</issecure>
+  <promoapplicable>true</promoapplicable>
+  <taxapplicable>false</taxapplicable>
+  <promotions>
+    <promotion>
+      <promocode>OFF1MONTHFREENEW</promocode>
+    </promotion>
+  </promotions>
+  <remarks>Please pay Masa or give him a chocolate!</remarks>
+  <lineitems>
+    <lineitem>
+      <!-- offeringid: 639; offering name: 性能試験用オファリング; offering code:
+           NTTCOMOFFERINGTEST -->
+      <catalogofferingid>${2:639}</catalogofferingid>
+      <!-- specname: Offering for PreBill Test -->
+      <specid>${3:278}</specid>
+      <charvals>
+        <!-- charname: ID数; charcode: OPTUSERNUM; value: 10; displayText: 10ID -->
+        <charval>
+          <id>${4:10107}</id>
+        </charval>
+        <!-- charname: 基本ディスク容量; charcode: OPTSTDDISKCAP; value: 50;
+             displayText: 50GB -->
+        <charval>
+          <id>${5:10111}</id>
+        </charval>
+      </charvals>
+      <rules>
+        <!-- パスワード -->
+        <rule>
+          <ruleid>${6:508}</ruleid>
+          <rulevalue>Password1!</rulevalue>
+        </rule>
+      </rules>
+      <taxapplicable>false</taxapplicable>
+      <quantity>1</quantity>
+      <desc>Desc for Offering for PreBill Test</desc>
+      <remarks>Remarks for Offering for PreBill Test</remarks>
+      <periods>
+        <period>7</period>
+        <period>1</period>
+      </periods>
+      <isautorenewable>true</isautorenewable>
+    </lineitem>
+  </lineitems>
+</createorderrequest>
