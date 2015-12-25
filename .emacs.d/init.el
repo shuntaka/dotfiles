@@ -1395,6 +1395,23 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 
+;;----------------------------------------------
+;; short cut for task management by elmacro
+;;----------------------------------------------
+;; move a task item to the end of COMPLETED section
+(defun move-task-item-to-COMPLETED ()
+  "move the task item to the end of COMPLETED section"
+  (interactive)
+  (org-seq-home)
+  (kill-line nil)
+  (forward-page 1)
+  (newline)
+  (yank nil)
+  (point-undo)
+  (org-delete-char 1))
+
+(global-set-key (kbd "C-c k") 'move-task-item-to-COMPLETED)
+
 ;;----------------------
 ;;; howm from Otake Tomoy's  emacs Jissen Nyumon, p148
 ;;----------------------
