@@ -1341,13 +1341,13 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   (setq org-capture-templates
         '(("m" "Memo" entry (file+datetree "~/Dropbox/Memo/memo.org" "MEMO")
            "* %^{Title} %^g\n%?\nAdded: %U")
-          ("t" "Todo" entry (file+headline "~/Dropbox/Manage/ToDo/tempo_todo.org" "INBOX")
+          ("t" "Todo" entry (file+headline "~/Dropbox/Manage/ToDo/tempo_todo.org" "====INBOX====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("e" "Emacs_Todo" entry (file+headline "~/Dropbox/Note/Emacs_Note/emacs_noteW.org" "INBOX")
+          ("e" "Emacs_Todo" entry (file+headline "~/Dropbox/Note/Emacs_Note/emacs_noteW.org" "====INBOX====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("h" "Home Todo" entry (file+headline "~/Dropbox/Manage/ToDo/home_todo.org" "INBOX")
+          ("h" "Home Todo" entry (file+headline "~/Dropbox/Manage/ToDo/home_todo.org" "====INBOX====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("E" "Edogawa Todo" entry (file+headline "~/Dropbox/Manage/ToDo/edogawa_todo.org" "INBOX")
+          ("E" "Edogawa Todo" entry (file+headline "~/Dropbox/Manage/ToDo/edogawa_todo.org" "====INBOX====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
           ))
 
