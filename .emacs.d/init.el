@@ -737,6 +737,12 @@
 (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
 (global-set-key (kbd "H-i") 'hippie-expand)
 
+;;----------------------------------------------
+;; 6.12
+;; http://rubikitch.com/2014/08/28/elmacro/
+;;----------------------------------------------
+(require 'elmacro)
+(elmacro-mode)
 
 ;;----------------------------------------------
 ;; undo-tree
