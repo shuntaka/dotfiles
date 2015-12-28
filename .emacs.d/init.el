@@ -1392,6 +1392,15 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
                          (quote ((agenda time-up priority-down tag-up) )))
                         (org-deadline-warning-days 0)
                         )))))))
+
+;; short cut for tag-view by elmacro
+(defun tag-view ()
+  "tag view"
+  (interactive)
+  (org-match-sparse-tree nil))
+
+(global-set-key (kbd "C-c q") 'tag-view)
+
 ;;----------------------------------------------
 ;; 14.6
 ;;----------------------------------------------
