@@ -949,9 +949,21 @@ org-modeなどで活用。"
 ;; ag.elとwgrep-ag.elをlist-packageでMelpaなどからインストールしておく
 (require 'ag)
 (custom-set-variables
- '(ag-highlight-search t)  ; 検索結果の中の検索語をハイライトする
- '(ag-reuse-window 'nil)   ; 現在のウィンドウを検索結果表示に使う
- '(ag-reuse-buffers 'nil)) ; 現在のバッファを検索結果表示に使う
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ag-highlight-search t)
+ '(ag-reuse-buffers (quote nil))
+ '(ag-reuse-window (quote nil))
+ '(custom-enabled-themes (quote (zenburn)))
+ '(custom-safe-themes
+                                        ;(quote
+                                          ("5a66586336590c59abf21ab91178ce994d26fcfcd8fff3de224863fd9d6c9017" "be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default)))
+ '(helm-ff-auto-update-initial-value nil)
+ '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
+ '(help-at-pt-timer-delay 0.9))
+ 現在のバッファを検索結果表示に使う
 (require 'wgrep-ag)
 (autoload 'wgrep-ag-setup "wgrep-ag")
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
@@ -1345,33 +1357,33 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (when (require 'org-capture nil t)
 
   (setq org-capture-templates
-        '(("m" "Memo" entry (file+datetree "~/Dropbox/Memo/memo.org" "MEMO")
+        '(("m" "Memo" entry (file+datetree "~/Dropbox/Documents/Memo/memo.org" "MEMO")
            "* %^{Title} %^g\n%?\nAdded: %U")
-          ("t" "Todo" entry (file+headline "~/Dropbox/Manage/ToDo/Office/office_ToDo_INBOX.org" "====ToDo====")
+          ("t" "Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Office/office_ToDo_INBOX.org" "====ToDo====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("h" "Home Todo" entry (file+headline "~/Dropbox/Manage/ToDo/Home/home_ToDo_INBOX.org" "====ToDo====")
+          ("h" "Home Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Home/home_ToDo_INBOX.org" "====ToDo====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("E" "Edogawa Todo" entry (file+headline "~/Dropbox/Manage/ToDo/Edo/edogawa_ToDo_INBOX.org" "====ToDo====")
+          ("E" "Edogawa Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Edo/edogawa_ToDo_INBOX.org" "====ToDo====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("c" "CSS" entry (file+headline "~/Dropbox/Note/CSS_Note/css_note.org" "====Investigate====")
+          ("c" "CSS" entry (file+headline "~/Dropbox/Documents/Note/CSS_Note/css_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("e" "Emacs" entry (file+headline "~/Dropbox/Note/Emacs_Note/emacs_note.org" "====Investigate====")
+          ("e" "Emacs" entry (file+headline "~/Dropbox/Documents/Note/Emacs_Note/emacs_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("g" "Git" entry (file+headline "~/Dropbox/Note/Git_Note/git_note.org" "====Investigate====")
+          ("g" "Git" entry (file+headline "~/Dropbox/Documents/Note/Git_Note/git_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("j" "JavaScript" entry (file+headline "~/Dropbox/Note/JavaScript_Note/javascript_note.org" "====Investigate====")
+          ("j" "JavaScript" entry (file+headline "~/Dropbox/Documents/Note/JavaScript_Note/javascript_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("l" "Linux" entry (file+headline "~/Dropbox/Note/Linux_Note/linux_note.org" "====Investigate====")
+          ("l" "Linux" entry (file+headline "~/Dropbox/Documents/Note/Linux_Note/linux_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("n" "Node" entry (file+headline "~/Dropbox/Note/Node_Note/node_note.org" "====Investigate====")
+          ("n" "Node" entry (file+headline "~/Dropbox/Documents/Note/Node_Note/node_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("o" "Perl One-Liner" entry (file+headline "~/Dropbox/Note/Perl_One-Liner_Note/perl_one-liner_note.org" "====Investigate====")
+          ("o" "Perl One-Liner" entry (file+headline "~/Dropbox/Documents/Note/Perl_One-Liner_Note/perl_one-liner_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("p" "Perl" entry (file+headline "~/Dropbox/Note/Perl_Note/perl_note.org" "====Investigate====")
+          ("p" "Perl" entry (file+headline "~/Dropbox/Documents/Note/Perl_Note/perl_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("r" "Regex" entry (file+headline "~/Dropbox/Note/Regex_Note/regex_note.org" "====Investigate====")
+          ("r" "Regex" entry (file+headline "~/Dropbox/Documents/Note/Regex_Note/regex_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
-          ("q" "jQuery" entry (file+headline "~/Dropbox/Note/jQuery_Note/jquery_note.org" "====Investigate====")
+          ("q" "jQuery" entry (file+headline "~/Dropbox/Documents/Note/jQuery_Note/jquery_note.org" "====Investigate====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
           ))
 
@@ -1580,7 +1592,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; fine-file時にhelm-completeに入るのを無効化
 ;; http://fukuyama.co/nonexpansion
 ;;----------------------------------------------
-(custom-set-variables '(helm-ff-auto-update-initial-value nil))
+
 
 ;;----------------------------------------------
 ;; Helm Keybinding
@@ -1853,14 +1865,7 @@ Otherwise goto the end of minibuffer."
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
 
 ;;Zenburn For Non-Terminal
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
 
- '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
 
 ;;Molokai
 ;; (setq custom-theme-directory "~/.emacs.d/themes")
@@ -2596,9 +2601,7 @@ Otherwise goto the end of minibuffer."
 ;;           (flymake-jshint-load)))
 
 ;; for flymake-cursor.el
-(custom-set-variables
-   '(help-at-pt-timer-delay 0.9)
-   '(help-at-pt-display-when-idle '(flymake-overlay)))
+
 
 ;;----------------------------------
 ;; flycheck
