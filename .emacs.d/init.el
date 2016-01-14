@@ -881,8 +881,8 @@ org-modeなどで活用。"
 ;;----------------------
 ;; auto-compelte
 ;;----------------------
-(require 'auto-complete-config)
-(global-auto-complete-mode 1)
+;; (require 'auto-complete-config)
+;; (global-auto-complete-mode 1)
 ;; (when (require 'auto-complete-config nil t)
 ;;  (add-to-list 'ac-dictionary-directories "~/.emacs.d/elisp/ac-dict")
 ;;  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
