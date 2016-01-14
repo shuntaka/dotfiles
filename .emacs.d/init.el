@@ -805,16 +805,24 @@ using the specified hippie-expand function."
 (elmacro-mode)
 
 ;;----------------------------------------------
-;; 6.14' company-mode
+;; 6.14 company-mode
 ;; http://qiita.com/sune2/items/b73037f9e85962f5afb7
-;; https://github.com/company-mode/company-mode/issues/328
 ;;----------------------------------------------
 (require 'company)
 (global-company-mode) ; 全バッファで有効にする
 (setq company-idle-delay 0) ; デフォルトは0.5
 (setq company-minimum-prefix-length 2) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+(define-key company-active-map (kbd "M-n") nil)
+(define-key company-active-map (kbd "M-p") nil)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "C-h") nil)
 
+;;----------------------------------------------
+;; 6.14' include the hippie-expand candidate in company-mode
+;; https://github.com/company-mode/company-mode/issues/328
+;;----------------------------------------------
 (defun my-try-expand-company (old)
     (unless company-candidates
       (company-auto-begin))
