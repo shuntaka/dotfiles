@@ -734,8 +734,8 @@
         try-complete-lisp-symbol-partially
         ))
 
-(keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
-(global-set-key (kbd "H-i") 'hippie-expand)
+;; (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
+;; (global-set-key (kbd "H-i") 'hippie-expand)
 
 ;;----------------------------------------------
 ;; 6.10' ido-vertical
@@ -807,10 +807,11 @@ using the specified hippie-expand function."
 ;;----------------------------------------------
 ;; 6.14 company-mode
 ;; http://qiita.com/sune2/items/b73037f9e85962f5afb7
+;; http://rubikitch.com/2014/10/14/company/
 ;;----------------------------------------------
 (require 'company)
 (global-company-mode) ; 全バッファで有効にする
-(setq company-idle-delay 0) ; デフォルトは0.5
+(setq company-idle-delay nil) ; デフォルトは0.5
 (setq company-minimum-prefix-length 2) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 (define-key company-active-map (kbd "M-n") nil)
@@ -818,6 +819,9 @@ using the specified hippie-expand function."
 (define-key company-active-map (kbd "C-n") 'company-select-next)
 (define-key company-active-map (kbd "C-p") 'company-select-previous)
 (define-key company-active-map (kbd "C-h") nil)
+
+(keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
+(global-set-key (kbd "H-i") 'company-complete)
 
 ;;----------------------------------------------
 ;; 6.14' include the hippie-expand candidate in company-mode
