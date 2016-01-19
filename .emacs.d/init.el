@@ -21,6 +21,7 @@
 ;; For JavaScript
 ;; For Perl
 ;; For Yaml
+;; For SQLPlus
 ;; Miscellenious
 
 ;;===========================================================================
@@ -3236,6 +3237,122 @@ Otherwise goto the end of minibuffer."
 (when (require 'yaml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
 
+;;=============================================
+;; For SQLPlus
+;;=============================================
+;;----------------------------------------------
+;; SQLPlus basic setting
+;; http://homepage1.nifty.com/blankspace/emacs/sql.html
+;;----------------------------------------------
+(require 'sqlplus)
+(add-hook 'sqlplus-mode-hook
+          '(lambda ()
+             (abbrev-mode t)
+             (hscroll-mode)
+             ;; (setq tab-width 8)
+             ;; (modify-syntax-entry ?_ "w")
+             ;; (add-hook 'comint-output-filter-functions 'comint-truncate-buffer)
+             ;; (setq comint-buffer-maximum-size 50000
+             ;;       comint-scroll-show-maximum-output t
+             ;;       comint-input-ring-size 5000)
+             ;; (font-lock-add-keywords
+             ;;  major-mode
+             ;;  '(
+             ;;    ("^\\([a-zA-Z0-9_@-]*> \\)+" 1 font-lock-constant-face t)
+             ;;    ("'[^']*'"  . font-lock-string-face)
+             ;;    ("\\\"[^\\\"]*\\\"" . font-lock-string-face)
+             ;;    ("--.*" 0 font-lock-comment-face t)
+             ;;    ("/\\*.*\\*/" 0 font-lock-comment-face t)
+             ;;    ("^rem\\([ \t].*\\)?$" 0 font-lock-comment-face t)
+             ;;    ("^prompt\\([ \t].*\\)?$" 0 font-lock-comment-face t)))
+             ))
+
+;; for sqlplus
+(define-key sqlplus-mode-map (kbd "C-j") 'company-complete)
+
+;;----------------------------------------------
+;; abbrev for SQLPlus
+;;----------------------------------------------
+;; abbrev table
+(define-abbrev-table
+  'sqlplus-mode-abbrev-table
+  '(
+    ("a"    "and" nil)
+    ("ad"   "add datafile" nil)
+    ("af"   "* from" nil)
+    ("al"   "alter" nil)
+    ("be"   "between and " (lambda()(backward-char 5)))
+    ("c"    "count(*)" nil)
+    ("co"   "commit" nil)
+    ("cr"   "create" nil)
+    ("d"    "" (lambda()(insert (format-time-string "'%y-%m-%d'" (current-time)))))
+    ("de"   "describe" nil)
+    ("dd"   "DBA_DATA_FILES" nil)
+    ("df"   "DBA_FREE_SPACE" nil)
+    ("dp"   "DBA_PROFILES" nil)
+    ("dr"   "DBA_ROLLBACK_SEGS" nil)
+    ("du"   "DBA_USERS" nil)
+    ("e"    "exit" nil)
+    ("f"    "from" nil)
+    ("g"    "group by" nil)
+    ("ha"   "having" nil)
+    ("i"    "insert" nil)
+    ("inte" "intersect" nil)
+    ("l"    "like" nil)
+    ("m"    "minus" nil)
+    ("n"    "null" nil)
+    ("o"    "order by" nil)
+    ("q"    "quit" nil)
+    ("r"    "rownum<=10" nil)
+    ("ro"   "rollback" nil)
+    ("s"    "select" nil)
+    ("t"    "tablespace" nil)
+    ("tn"   "TABLESPACE_NAME" nil)
+    ("u"    "update" nil)
+    ("uc"   "USER_CONSTRAINTS" nil)
+    ("ud"   "USER_DB_LINKS" nil)
+    ("ui"   "USER_IND_COLUMNS" nil)
+    ("un"   "union" nil)
+    ("una"  "union all" nil)
+    ("us"   "USER_SEGMENTS" nil)
+    ("uv"   "USER_VIEWS" nil)
+    ("vp"   "v$parameter" nil)
+    ("vsp"  "v$system_parameter" nil)
+    ("w"    "where" nil)))
+
+
+;;----------------------------------------------
+;; ssh to DB
+;; http://stackoverflow.com/questions/17246119/emacs-how-to-use-ssh-tunnel-to-connect-to-remote-mysql
+;;----------------------------------------------
+;; (require 'sql)
+;; (defadvice sql-mysql (around sql-mysql-around activate)
+;;   "SSH to linux, then connect"
+;;   (let ((default-directory "/ssh:vmporacle:"))
+;;     ad-do-it))
+
+;; (setq sql-oracle-login-params
+;;       '((user :default "vmp_core_stage01")
+;;         (database :default "orac81r2")
+;;         (server :default "localhost")
+;;         (port :default 1521 )))
+
+;;----------------------------------------------
+;; SQLi
+;;----------------------------------------------
+(setq sql-connection-alist
+      '((qdba1 (sql-product 'oracle)
+                  (sql-port 1521)
+                  (sql-server "localhost")
+                  (sql-user "vmp_core_stage01")
+                  (sql-password "vmpc0r5_s2ag311")
+                  (sql-database "orac81r2"))
+        (server2 (sql-product 'postgres)
+                  (sql-port 5432)
+                  (sql-server "localhost")
+                  (sql-user "user")
+                  (sql-password "password")
+                  (sql-database "db2"))))
 
 
 
