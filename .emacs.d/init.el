@@ -856,6 +856,13 @@
 ;;     (setq he-expand-list (cdr he-expand-list))
 ;;     t)))
 
+;;----------------------------------------------
+;; abbrev
+;; http://ergoemacs.org/emacs/emacs_abbrev_mode.html
+;; https://www.emacswiki.org/emacs/AbbrevMode
+;;----------------------------------------------
+;; stop asking whether to save newly added abbrev when quitting emacs
+(setq save-abbrevs nil)
 
 ;;----------------------------------------------
 ;; undo-tree
