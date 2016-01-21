@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: vmp-simple_check_order_status
-# key: vmpChkOrdStat
-# binding: direct-keybinding
-# --
-SELECT order_header_id, account_id, status_id, state_id FROM ordr_order_header WHERE order_header_id=${1:17932};
