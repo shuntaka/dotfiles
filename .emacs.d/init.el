@@ -664,8 +664,8 @@
 ;; goto-chg.el
 ;;----------------------
 (require 'goto-chg)
-(global-set-key (kbd "C-M-p") 'goto-last-change)
-(global-set-key (kbd "C-M-n") 'goto-last-change-reverse)
+(global-set-key (kbd "M-j") 'goto-last-change)
+(global-set-key (kbd "M-i") 'goto-last-change-reverse)
 
 ;; (define-key global-map (kbd "<f8>") 'goto-last-change)
 ;; (define-key global-map (kbd "S-<f8>") 'goto-last-change-reverse)
