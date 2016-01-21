@@ -718,6 +718,10 @@
 (push '("emacs.+/snippets/" . snippet-mode) auto-mode-alist)
 (yas-global-mode 1)
 
+;; globally bind helm-c-yasnippet to C-j
+(keyboard-translate ?\C-j ?\H-j) ;;C-j とnewlineの被りを回避
+(define-key global-map (kbd "H-j") 'helm-yas-complete)
+
 ;;----------------------------------------------
 ;; 6.9
 ;;----------------------------------------------
