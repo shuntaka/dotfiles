@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp-check_account_product_status
+# key: vmpchkacpstat
+# binding: direct-keybinding
+# --
+SELECT account_id, account_product_id, status_id FROM cust_account_product WHERE account_product_id=${1:26982};

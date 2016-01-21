@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp-get_account_product_id_from_order
+# key: vmpgetapidfrmord
+# binding: direct-keybinding
+# --
+SELECT order_header_id, order_line_id, account_product_id FROM ordr_order_line WHERE order_header_id =${1:17932};

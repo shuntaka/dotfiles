@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: show_table
+# key: showtable
+# binding: direct-keybinding
+# --
+SELECT TABLE_NAME FROM USER_TABLES ORDER BY TABLE_NAME ASC;

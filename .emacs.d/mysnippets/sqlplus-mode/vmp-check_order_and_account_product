@@ -1,0 +1,14 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp-check_order_and_account_product
+# key: vmpchkordandacp
+# binding: direct-keybinding
+# --
+SELECT ooh.order_header_id, ool.account_product_id, cap.status_id, caps.status_name, ooh.status_id,oss.status_name, ooh.status_id, ot.trans_txt
+FROM ordr_order_header ooh, ordr_order_line ool, cust_account_product cap, cust_acct_prod_status caps, ordr_status oss, ordr_state ose, ordr_trans ot
+WHERE ooh.status_id=oss.status_id
+AND ooh.order_header_id=ool.order_header_id
+AND ool.account_product_id=cap.account_product_id
+AND cap.status_id=caps.status_id
+AND ooh.state_id=ose.state_id
+AND ose.state_name_lang=ot.trans_id
+AND ooh.order_header_id=${1:17932};

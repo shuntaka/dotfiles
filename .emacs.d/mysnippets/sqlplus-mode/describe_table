@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: describe_table
+# key: desctable
+# binding: direct-keybinding
+# --
+DESC ${1:cust_account_product};
