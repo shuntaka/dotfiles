@@ -829,8 +829,7 @@
 (define-key company-active-map (kbd "C-p") 'company-select-previous)
 (define-key company-active-map (kbd "C-h") nil)
 
-;; for org mode
-(define-key org-mode-map (kbd "C-j") 'company-complete)
+(define-key global-map (kbd "C-M-i") 'company-complete)
 
 ;;----------------------------------------------
 ;; 6.14' include the hippie-expand candidate in company-mode
@@ -1424,6 +1423,14 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (add-hook 'org-mode-hook
 		  (lambda ()
 		  (setq-default indent-tabs-mode nil)))
+;;----------------------------------------------
+;; org-mode keybind
+;;----------------------------------------------
+(define-key org-mode-map (kbd "<C-tab>") 'elscreen-next)
+(define-key org-mode-map (kbd "<C-S-tab>")'elscreen-previous)
+(define-key org-mode-map (kbd "C-'")'helm-elscreen)
+(define-key org-mode-map (kbd "C-M-t") 'elscreen-kill)
+(define-key org-mode-map (kbd "C-M-i") 'company-complete)
 
 ;;----------------------
 ;; 14.2
@@ -3328,7 +3335,6 @@ Otherwise goto the end of minibuffer."
              ))
 
 ;; for sqlplus
-(define-key sqlplus-mode-map (kbd "C-j") 'company-complete)
 
 ;;----------------------------------------------
 ;; ssh to DB
