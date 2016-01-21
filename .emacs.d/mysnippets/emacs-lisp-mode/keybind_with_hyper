@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name:keybind_with_hyper
+# key:kbdwhyp
+# binding: direct-keybinding
+# --
+(keyboard-translate ?\C-${1:i} ?\H-$1) ;;C-$1 と${2:tab}の被りを回避
+(define-key ${3:emmet-mode-keymap} (kbd "H-$1") '${4:emmet-expand-line})
