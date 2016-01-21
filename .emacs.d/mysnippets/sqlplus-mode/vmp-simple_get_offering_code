@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp-simple_get_offering_code
+# key: getOffrCd
+# binding: direct-keybinding
+# --
+SELECT offr_id, offr_cd FROM prod_offr WHERE offr_id=${1:639};

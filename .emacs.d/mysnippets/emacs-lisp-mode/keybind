@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: keybind
+# key: keybind
+# binding: direct-keybinding
+# --
+(define-key ${1:org-mode-map} (kbd "${2:C-M-i}") '${3:company-complete})

@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: vmp-simple-get_account_product_id
+# name: vmp-simple_get_account_product_id
 # key: getApid
 # binding: direct-keybinding
 # --

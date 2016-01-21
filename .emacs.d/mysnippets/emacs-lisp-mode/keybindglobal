@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: keybindglobal
+# name: keybind_global
 # key: keybindglobal
 # binding: direct-keybinding
 # --
-(global-set-key (kbd "${1:C-c q}") '${2:tag-view})
+(define-key global-map (kbd "${1:C-t}") '${2:other-window})
