@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: vmp-combi_check_order_and_account_product
+# name: vmp-combi_check_order_and_account_product_from_order_headerid
 # key: vmpchkordandacp
 # binding: direct-keybinding
 # --
