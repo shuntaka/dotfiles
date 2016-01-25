@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: host_to_ssh
+# key: hostToSsh
+# binding: direct-keybinding
+# --
+Host ${1:github.com}
+     User ${2:git}
+     HostName ${3:github.com}
+     IdentityFile ~/.ssh/${4:id_rsa.pub}
