@@ -1,6 +1,0 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: vmp-simple_get_router_message_from_correlationid
-# key: getRouterMessageFromCorrelationId
-# binding: direct-keybinding
-# --
-select router_message from ordr_router_msg where correlation_id='${1:121baa5557894f4b9aa98ecd24209937}';
