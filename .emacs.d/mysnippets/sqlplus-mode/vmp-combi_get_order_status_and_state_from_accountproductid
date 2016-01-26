@@ -1,12 +1,14 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: vmp-combi_get_order_status_and_state_from_accountproductid
+# name: vmp-combi_get_order_headerid_and_status_and_state_and_router_correlationid_from_accountproductid
 # key: getOrderStatusAndStateFromAccountProductId
 # binding: direct-keybinding
 # --
-select ORDR_ORDER_LINE.account_product_id, ORDR_ORDER_LINE.order_line_id, ORDR_ORDER_LINE.order_header_id, ORDR_ORDER_HEADER.status_id, ORDR_STATUS.status_name, ORDR_ORDER_HEADER.state_id, ORDR_TRANS.trans_txt  
-from ORDR_ORDER_LINE, ORDR_ORDER_HEADER, ORDR_STATUS, ORDR_STATE, ORDR_TRANS
+select ORDR_ORDER_LINE.account_product_id, ORDR_ORDER_LINE.order_line_id, ORDR_ORDER_LINE.order_header_id, ORDR_ORDER_HEADER.status_id, ORDR_STATUS.status_name, ORDR_ORDER_HEADER.state_id, ORDR_TRANS.trans_txt,ORDR_ROUTER_MSG.correlation_id
+from ORDR_ORDER_LINE, ORDR_ORDER_HEADER, ORDR_STATUS, ORDR_STATE, ORDR_TRANS, ORDR_ROUTER_MSG
 where ORDR_ORDER_LINE.order_header_id = ORDR_ORDER_HEADER.order_header_id
 and ORDR_ORDER_HEADER.status_id=ORDR_STATUS.status_id
 and ORDR_ORDER_HEADER.state_id=ORDR_STATE.state_id
 and ORDR_STATE.state_name_lang=ORDR_TRANS.trans_id
-and account_product_id='${1:26286}'
+and ORDR_ORDER_HEADER.order_header_id=ORDR_ROUTER_MSG.order_header_id
+and ORDR_ORDER_LINE.account_product_id='${1:26978}'
+and ORDR_ROUTER_MSG.is_request=1
