@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: set_parameter_for_viewing_router_message
+# key: setParameterForViewingRouterMessage
+# binding: direct-keybinding
+# --
+set heading off
+set linesize 30000
+set long 1000000
+set longchunksize 1000000
+

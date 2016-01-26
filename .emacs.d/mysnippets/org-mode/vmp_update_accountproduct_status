@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp_update_accountproduct_status
+# key: vmpUpdateAccounproductStatus
+# binding: direct-keybinding
+# --
+API_forC39/update_account_product_status ${1:191616} ${2:26996} ${3:14} file_format/update_account_product_status
