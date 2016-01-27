@@ -1431,7 +1431,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (define-key org-mode-map (kbd "C-'")'helm-elscreen)
 (define-key org-mode-map (kbd "C-M-t") 'elscreen-kill)
 (define-key org-mode-map (kbd "C-M-i") 'company-complete)
-
+(define-key org-mode-map (kbd "C-M-m") (lambda () (interactive) (move-to-window-line nil)))
 ;;----------------------
 ;; 14.2
 ;;----------------------
