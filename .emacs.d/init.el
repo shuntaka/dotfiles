@@ -2757,6 +2757,19 @@ Otherwise goto the end of minibuffer."
       (tern-ac-setup)))
 
 ;;=============================================
+;; For XML
+;;=============================================
+
+;;----------------------------------------------
+;; specify the mode to open xml files
+;; http://www15.plala.or.jp/h-kihara-home/prog/psgml.html
+;;----------------------------------------------
+;; *.xml 文書は xml-mode で
+;; (setq auto-mode-alist (cons (cons "\\.xml" 'xml-mode) auto-mode-alist))
+;; (autoload 'xml-mode "psgml" "Major mode to edit XML files." t)
+
+
+;;=============================================
 ;; For Perl
 ;;=============================================
 ;;----------------------------------------------
