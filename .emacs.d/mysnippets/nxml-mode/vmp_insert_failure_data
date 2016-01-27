@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp_insert_failure_data
+# key: vmpInsertFailureData
+# binding: direct-keybinding
+# --
+              <FailureData>
+                <FailureReason>NoAvailableService</FailureReason>
+                <FailureCode>Failed to find an available service to route</FailureCode>
+              </FailureData>
