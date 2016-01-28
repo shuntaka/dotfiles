@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: vmp-simple_get_router_message_from_order_header_id
+# name: vmp-simple_get_router_message_from_orderheaderid
 # key: getRouterMessageFromCorrelationId
 # binding: direct-keybinding
 # --
