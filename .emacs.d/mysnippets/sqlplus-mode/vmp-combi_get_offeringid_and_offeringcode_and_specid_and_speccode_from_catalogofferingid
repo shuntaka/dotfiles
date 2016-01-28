@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp-combi_get_offeringid_and_offeringcode_and_specid_and_speccode_from_catalogofferingid
+# key: getOfferingidAndOfferingcodeAndSpecidAndSpeccodeFromCatalogofferingid
+# binding: direct-keybinding
+# --
+SELECT PROD_CTLG_OFFR.ctlg_offr_id, PROD_CTLG_OFFR.offr_id, PROD_OFFR.offr_cd, PROD_SPEC.spec_id, PROD_SPEC.spec_cd
+FROM PROD_CTLG_OFFR, PROD_OFFR, PROD_SPEC
+WHERE PROD_CTLG_OFFR.offr_id=PROD_OFFR.offr_id
+AND PROD_OFFR.offr_cd=PROD_SPEC.spec_cd
+AND PROD_CTLG_OFFR.ctlg_offr_id=${1:802}

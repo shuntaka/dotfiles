@@ -1,0 +1,15 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp-combi_get_accountproduct_and_orderlineid_and_orderstatus_and_orderstate_and_correlationid_from_orderheaderid
+# key: getAccountproductAndOrderlineidAndOrderstatusAndOrderstateAndCorrelationid
+# binding: direct-keybinding
+# --
+select ORDR_ORDER_LINE.order_header_id, ORDR_ORDER_LINE.account_product_id, CUST_ACCOUNT_PRODUCT.status_id,CUST_ACCT_PROD_STATUS.status_name,ORDR_ORDER_LINE.order_line_id, ORDR_ORDER_HEADER.status_id, ORDR_STATUS.status_name, ORDR_ORDER_HEADER.state_id, ORDR_TRANS.trans_txt,ORDR_ROUTER_MSG.correlation_id, ORDR_ROUTER_MSG.is_request
+from ORDR_ORDER_LINE, ORDR_ORDER_HEADER, ORDR_STATUS, ORDR_STATE, ORDR_TRANS, ORDR_ROUTER_MSG, CUST_ACCOUNT_PRODUCT, CUST_ACCT_PROD_STATUS
+where ORDR_ORDER_LINE.order_header_id = ORDR_ORDER_HEADER.order_header_id
+and ORDR_ORDER_HEADER.status_id=ORDR_STATUS.status_id
+and ORDR_ORDER_HEADER.state_id=ORDR_STATE.state_id
+and ORDR_STATE.state_name_lang=ORDR_TRANS.trans_id
+and ORDR_ORDER_HEADER.order_header_id=ORDR_ROUTER_MSG.order_header_id
+and ORDR_ORDER_LINE.account_product_id=CUST_ACCOUNT_PRODUCT.account_product_id
+and CUST_ACCOUNT_PRODUCT.status_id=CUST_ACCT_PROD_STATUS.status_id
+and ORDR_ORDER_LINE.order_header_id ='${1:18042}'
