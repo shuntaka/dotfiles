@@ -867,6 +867,57 @@
 (setq save-abbrevs nil)
 
 ;;----------------------------------------------
+;; mark current word with thingopt.el
+;;----------------------------------------------
+;; using thingopt.el mark-word
+(defun shun-mark-current-word ()
+    "Change me!"
+  (interactive)
+  (mark-thing "word"))
+(define-key global-map (kbd "C-M-f") 'shun-mark-current-word)
+
+;;----------------------------------------------
+;; mark current line with thingopt.el
+;;----------------------------------------------
+(defun  shun-mark-current-line()
+    "Change me!"
+  (interactive)
+  (mark-thing "line"))
+(define-key global-map (kbd "C-M-b") 'shun-mark-current-line)
+
+;;----------------------------------------------
+;; mark paragraph
+;;----------------------------------------------
+(defun  shun-mark-paragraph()
+    "Change me!"
+  (interactive)
+  (mark-paragraph 1 1)
+  (next-line 1 1))
+(define-key global-map (kbd "M-h") 'shun-mark-paragraph)
+(define-key org-mode-map (kbd "M-h") 'shun-mark-paragraph)
+
+;;----------------------------------------------
+;; copy a line with avy.el
+;;----------------------------------------------
+(define-key global-map (kbd "C-M-m") 'avy-copy-line)
+
+;;----------------------------------------------
+;; copy region with avy.el
+;;----------------------------------------------
+(define-key global-map (kbd "C-M-w") 'avy-copy-region)
+
+;;----------------------------------------------
+;; kill current line
+;;----------------------------------------------
+(defun  shun-kill-current-line()
+    "Change me!"
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line nil))
+(define-key global-map (kbd "C-M-k") 'shun-kill-current-line)
+
+
+;;----------------------------------------------
 ;; undo-tree
 ;;----------------------------------------------
 (when (require 'undo-tree nil t)
