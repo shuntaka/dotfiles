@@ -918,30 +918,30 @@ org-modeなどで活用。"
 ;;----------------------
 ;; thing
 ;;----------------------
-(add-to-list 'load-path "~/.emacs.d/public_repos/thingopt-el")
-(require 'thingopt)
-(define-thing-commands)
-;; short cut
-(global-set-key (kbd "C-$") 'mark-word*)
-(global-set-key (kbd "C-\"") 'mark-string)
-(global-set-key (kbd "C-(") 'mark-up-list)
+;; (add-to-list 'load-path "~/.emacs.d/public_repos/thingopt-el")
+;; (require 'thingopt)
+;; (define-thing-commands)
+;; ;; short cut
+;; (global-set-key (kbd "C-$") 'mark-word*)
+;; (global-set-key (kbd "C-\"") 'mark-string)
+;; (global-set-key (kbd "C-(") 'mark-up-list)
 
-;; カーソル位置の行を複製するコマンド
-(defun my-duplicate-thing (n &optional beg end)
-  (interactive "p\nr")
-  (let ((pos (- (point-max) (point)))
-        str)
-    (if mark-active
-        nil
-      (setq beg (point-at-bol)
-            end (point-at-eol)))
-    (setq str (buffer-substring-no-properties beg end))
-    (if (not (= (progn (goto-char end) (preceding-char)) ?\n))
-        (setq str (concat "\n" str)))
-    (dotimes (i n)
-      (insert str))
-    (goto-char (- (point-max) pos))))
-(global-set-key (kbd "H-y") 'my-duplicate-thing)
+;; ;; カーソル位置の行を複製するコマンド
+;; (defun my-duplicate-thing (n &optional beg end)
+;;   (interactive "p\nr")
+;;   (let ((pos (- (point-max) (point)))
+;;         str)
+;;     (if mark-active
+;;         nil
+;;       (setq beg (point-at-bol)
+;;             end (point-at-eol)))
+;;     (setq str (buffer-substring-no-properties beg end))
+;;     (if (not (= (progn (goto-char end) (preceding-char)) ?\n))
+;;         (setq str (concat "\n" str)))
+;;     (dotimes (i n)
+;;       (insert str))
+;;     (goto-char (- (point-max) pos))))
+;; (global-set-key (kbd "H-y") 'my-duplicate-thing)
 
 ;;----------------------------------------------
 ;; notify too long row
