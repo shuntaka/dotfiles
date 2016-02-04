@@ -888,13 +888,13 @@
 ;;----------------------------------------------
 ;; mark paragraph
 ;;----------------------------------------------
-(defun  shun-mark-paragraph()
+(defun  shun-mark-current-paragraph()
     "Change me!"
   (interactive)
-  (mark-paragraph 1 1)
-  (next-line 1 1))
-(define-key global-map (kbd "M-h") 'shun-mark-paragraph)
-(define-key org-mode-map (kbd "M-h") 'shun-mark-paragraph)
+  (mark-thing "paragraph")
+  (next-line))
+(define-key global-map (kbd "M-h") 'shun-mark-current-paragraph)
+(define-key org-mode-map (kbd "M-h") 'shun-mark-current-paragraph)
 
 ;;----------------------------------------------
 ;; copy a line with avy.el
@@ -916,6 +916,14 @@
   (kill-line nil))
 (define-key global-map (kbd "C-M-k") 'shun-kill-current-line)
 
+;;----------------------------------------------
+;; kill paragraph
+;;----------------------------------------------
+(defun shun-kill-current-paragraph()
+  (interactive)
+  (shun-mark-current-paragraph)
+  (backward-delete-char-untabify 1 nil))
+(define-key global-map (kbd "M-k") 'shun-kill-current-paragraph)
 
 ;;----------------------------------------------
 ;; undo-tree
@@ -1303,8 +1311,7 @@ org-modeなどで活用。"
 	(emamux:set-buffer data 0))
   (shell-command "tmux save-buffer - | nc -q1 localhost 2224")
   )
-
-(global-set-key (kbd "C-M-w") 'copy-to-tmux)
+;; (global-set-key (kbd "C-M-w") 'copy-to-tmux)
 
 ;;----------------------------------------------
 ;; magit
@@ -3372,9 +3379,11 @@ Otherwise goto the end of minibuffer."
                  ("vsp"  "v$system_parameter" nil)
                  ("w"    "where" nil)
                  ("cap"  "CUST_ACCOUNT_PRODUCT" nil)
-                 ("acid" "account_id" nil)
-                 ("acpid" "account_product_id" nil)
+                 ("aid" "account_id" nil)
+                 ("apid" "account_product_id" nil)
+                 ("sid" "status_id" nil)
                  ("caps"  "CUST_ACCT_PROD_STATUS" nil)
+                 ("sname" "status_name" nil)
                  ("ool" "ORDR_ORDER_LINE" nil)
                  ("ooh" "ORDR_ORDER_HEADER" nil)
                  ("ohid" "order_header_id" nil)
