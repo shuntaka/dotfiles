@@ -3,4 +3,4 @@
 # key: vmpUpdateAccounproductStatus
 # binding: direct-keybinding
 # --
-API_forC39/update_account_product_status ${1:191616} ${2:26996} ${3:14} file_format/update_account_product_status
+./update_account_product_status ${1:191616} ${2:26996} ${3:14} file_format/update_account_product_status
