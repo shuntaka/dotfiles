@@ -1,0 +1,49 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp_troubleshoot_template
+# key: vmpTroubleshootTemplate
+# binding: direct-keybinding
+# --
+* [Date]${1:2016} ${2:0205} [Account ID] ${3:7281} [Summary] ${7:change order fails}
+** Basic status
+
+|----------------------------+----------------------------|
+| Account ID                 | $3                         |
+|----------------------------+----------------------------|
+| Order ID                   | ${4:5284}                  |
+|----------------------------+----------------------------|
+| Account Product ID         | ${5:2513}                  |
+|----------------------------+----------------------------|
+| Plan Detail                | ${6:32ID(1ID), 30GB(20GB)} |
+|----------------------------+----------------------------|
+| Account Product Status ID  |                            |
+| # listAccountProductStatus |                            |
+| /* need to feed Account ID |                            |
+|----------------------------+----------------------------|
+| specname                   |                            |
+| # listOrder                |                            |
+| /* need to set yes for     |                            |
+| /* show lineitems          |                            |
+| /* show lineitemdetails    |                            |
+| /* show order details      |                            |
+|----------------------------+----------------------------|
+| Status ID                  |                            |
+| # listOrderStatus          |                            |
+|----------------------------+----------------------------|
+| Status Name                |                            |
+| # listOrderStatus          |                            |
+|----------------------------+----------------------------|
+| State ID                   |                            |
+| # listOrderStatus          |                            |
+|----------------------------+----------------------------|
+| State Name                 |                            |
+| # listOrderStatus          |                            |
+|----------------------------+----------------------------|
+
+** adapt request message
+   # Vmp > Adaptrouter > viewer > Reauest Search
+
+** adapt response message
+
+** experiment with staging
+*** 134670
+***
