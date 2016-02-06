@@ -904,7 +904,7 @@
 ;;----------------------------------------------
 ;; copy region with avy.el
 ;;----------------------------------------------
-(define-key global-map (kbd "C-M-w") 'avy-copy-region)
+(define-key global-map (kbd "C-M-y") 'avy-copy-region)
 
 ;;----------------------------------------------
 ;; kill current line
