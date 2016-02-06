@@ -575,6 +575,7 @@
 
 (ascmd:add '("~/nexus/.*\.rb" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@pelican:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
 
+(ascmd:add '("~/Development/SRMS_API/.*" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@jump:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
 
 ;;=============================================
 ;; 5. Moving Cursor
