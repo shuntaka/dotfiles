@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: frequently_used_technique
+# key: frequentlyUsedTechnique
+# binding: direct-keybinding
+# --
+* ==== Frequently Used Technique > ${1:Regex} ====
