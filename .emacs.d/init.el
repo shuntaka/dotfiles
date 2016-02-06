@@ -32,6 +32,12 @@
 ;; 2. Basic Settings
 ;;=================================================================
 ;;----------------------------------------------
+;; debug
+;;http://stackoverflow.com/questions/5413959/wrong-type-argument-stringp-nil
+;;----------------------------------------------
+;; (setq debug-on-error t)
+
+;;----------------------------------------------
 ;; inherit path from PATH for GUI emacs
 ;;----------------------------------------------
 ;; ;; inheritting path from PATH for GUI emacs
@@ -53,14 +59,6 @@
 ;; for scss-lint
 (setq exec-path (append exec-path '("/usr/bin")))
 
-
-
-;;----------------------------------------------
-;; debug
-;;http://stackoverflow.com/questions/5413959/wrong-type-argument-stringp-nil
-;;----------------------------------------------
-;; (setq debug-on-error t)
-
 ;;----------------------
 ;; append the  directory and its subdirectoreis to the load-path
 ;;----------------------
@@ -76,6 +74,9 @@
 
 ;; add directories under "elisp", "elpa", "conf", "public_repos"
 (add-to-load-path "auto-install" "elisp" "elpa" "conf" "public_repos")
+
+
+
 
 ;;----------------------------------------------
 ;; 2-2. auto-install.el
