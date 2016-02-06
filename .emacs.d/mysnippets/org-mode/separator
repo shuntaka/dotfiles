@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: separator
+# key: separator
+# binding: direct-keybinding
+# --
+==== ${1:title} ====
