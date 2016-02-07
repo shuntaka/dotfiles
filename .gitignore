@@ -48,3 +48,4 @@ ac-comphist.dat
 
 # ignore el-get
 /.emacs.d/el-get/
+/.emacs.d/.#init.el
