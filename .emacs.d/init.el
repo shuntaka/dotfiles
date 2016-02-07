@@ -73,7 +73,7 @@
 	    (normal-top-level-add-subdirs-to-load-path))))))
 
 ;; add directories under "elisp", "elpa", "conf", "public_repos"
-(add-to-load-path "auto-install" "elisp" "elpa" "conf" "public_repos")
+(add-to-load-path "el-get" "auto-install" "elisp" "elpa" "conf" "public_repos")
 
 ;;----------------------------------------------
 ;; el-get setting
