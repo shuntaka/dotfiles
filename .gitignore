@@ -45,5 +45,5 @@ ac-comphist.dat
 /.emacs.d/el-get/*.elc
 /.emacs.d/el-get/.loaddefs.el
 /.emacs.d/el-get/.loaddefs.el~
-/.emacs.d/el-get/el-get/
+/.emacs.d/el-get/.*/
 /.emacs.d/el-get/el-get/!.status.el
