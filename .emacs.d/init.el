@@ -103,7 +103,7 @@
 ;; (el-get-lock-unlock 'js2-mode)
 
 ;;----------------------------------------------
-;; list of the bundles to install by el-get
+;; el-get bundles for helm
 ;;----------------------------------------------
 ;;https://github.com/Fuco1/smartparens
 (el-get-bundle helm
@@ -118,38 +118,41 @@
 (el-get-bundle helm-bm
   :type github :pkgname "yasuyk/helm-bm")
 
-
+;;----------------------------------------------
+;; el-get bundles for input support
+;;----------------------------------------------
 (el-get-bundle smartparens
   :type github :pkgname "Fuco1/smartparens")
 
-(el-get-bundle ace-jump-mode
-  :type github :pkgname "winterTTr/ace-jump-mode")
-
 (el-get-bundle auto-complete
   :type github :pkgname "auto-complete/auto-complete")
+
+;;----------------------------------------------
+;; el-get bundles for moving cursor
+;;----------------------------------------------
+(el-get-bundle ace-jump-mode
+  :type github :pkgname "winterTTr/ace-jump-mode")
 
 
 ;;----------------------------------------------
 ;; TODO elpa package to re-install with el-get
 ;;----------------------------------------------
-;; (el-get-bundle ace-jump-mode)
-;; (el-get-bundle ag)
-;; (el-get-bundle async)
-;; (el-get-bundle auto-complete)
-;; (el-get-bundle auto-install)
-;; ;;(el-get-bundle auto-save-buffers) ;; need to specify detail
-;; (el-get-bundle auto-shell-command)
-;; (el-get-bundle avy)
-;; (el-get-bundle avy-zap)
-;; (el-get-bundle bm)
-;; (el-get-bundle col-highlight)
-;; (el-get-bundle column-enforce-mode)
-;; (el-get-bundle column-marker)
-;; (el-get-bundle company)
+;; (el-get-bundle ag) ;;github
+;; (el-get-bundle async) ;; no
+;; (el-get-bundle auto-install) ;; emacswiki
+;; ;;(el-get-bundle auto-save-buffers) ;; no
+;; (el-get-bundle auto-shell-command) ;; no
+;; (el-get-bundle avy) ;;github
+;; (el-get-bundle avy-zap) ;; no
+;; (el-get-bundle bm) ;;github
+;; (el-get-bundle col-highlight) ;;emacsmirror
+;; (el-get-bundle column-enforce-mode) ;;no
+;; (el-get-bundle column-marker) ;;emacswiki
+;; (el-get-bundle company) ;;github
 ;; (el-get-bundle concurrent)
 ;; (el-get-bundle cperl-mode)
 ;; (el-get-bundle ctable)
-;; ;;(el-get-bundle ctags) ;; need to specify detail
+;; ;;(el-get-bundle ctags)
 ;; (el-get-bundle dash)
 ;; (el-get-bundle deferred)
 ;; (el-get-bundle e2wm)
@@ -161,18 +164,18 @@
 ;; (el-get-bundle epl)
 ;; (el-get-bundle exec-path-from-shell)
 ;; (el-get-bundle firestarter)
-;; ;;(el-get-bundle flycheck) ;; need to specify detail
+;; ;;(el-get-bundle flycheck)
 ;; (el-get-bundle fold-dwim)
 ;; (el-get-bundle foreign-regexp)
-;; ;;(el-get-bundle git-commit-mode);; need to specify detail
+;; ;;(el-get-bundle git-commit-mode)
 ;; (el-get-bundle git-rebase-mode)
 ;; (el-get-bundle hc-zenburn-theme)
-;; ;; (el-get-bundle helm) ;; need to specify detail
-;; ;; (el-get-bundle helm-ag) ;; need to specify detail
-;; ;; (el-get-bundle helm-ag-r) ;; need to specify detail
-;; ;; (el-get-bundle helm-bm) ;; need to specify detail
-;; ;; (el-get-bundle helm-c-yasnippet) ;; need to specify detail
-;; ;; (el-get-bundle helm-core) ;; need to specify detail
+
+;; ;; (el-get-bundle helm-ag) ;; github
+;; ;; (el-get-bundle helm-ag-r) ;; no
+
+
+
 ;; (el-get-bundle hexrgb)
 ;; (el-get-bundle hiwin)
 ;; (el-get-bundle ido-vertical-mode)
