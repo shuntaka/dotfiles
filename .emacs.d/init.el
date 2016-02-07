@@ -115,6 +115,10 @@
 (el-get-bundle helm-c-yasnippet
   :type github :pkgname "emacs-jp/helm-c-yasnippet")
 
+(el-get-bundle helm-bm
+  :type github :pkgname "yasuyk/helm-bm")
+
+
 (el-get-bundle smartparens
   :type github :pkgname "Fuco1/smartparens")
 
@@ -1921,6 +1925,31 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (define-key global-map (kbd "H-j") 'helm-yas-complete)
 
 ;;----------------------------------------------
+;; helm-bm.el設定
+;;----------------------------------------------
+(require 'helm-bm)
+;; migemoくらいつけようね
+(push '(migemo) helm-source-bm)
+;; annotationはあまり使わないので仕切り線で表示件数減るの嫌
+(setq helm-source-bm (delete '(multiline) helm-source-bm))
+
+(defun bm-toggle-or-helm ()
+  "2回連続で起動したらhelm-bmを実行させる"
+  (interactive)
+  (bm-toggle)
+  (when (eq last-command 'bm-toggle-or-helm)
+    (helm-bm)))
+(global-set-key (kbd "M-SPC") 'bm-toggle-or-helm)
+
+;; ;;; これがないとemacs -Qでエラーになる。おそらくバグ。
+;; (require 'compile)
+
+;; ;背景ライトグリーン
+;; (set-face-background 'bm-persistent-face "olive drab")
+
+
+
+;;----------------------------------------------
 ;; Helm setting avoiding helm-file-name
 ;; http://rubikitch.com/2014/08/11/helm-avoid-find-files/
 ;;----------------------------------------------
@@ -1945,28 +1974,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; ;;----------------------------------------------
 ;; (custom-set-variables '(helm-ff-auto-update-initial-value nil))
 
-;; ;;----------------------------------------------
-;; ;; Helm Keybinding
-;; ;;----------------------------------------------
-;; (global-set-key (kbd "C-;") 'helm-for-files)
-;; (global-set-key(kbd "C-x b") 'helm-mini)
-;; (define-key global-map (kbd "M-x")     'helm-M-x)
-;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
-;; (define-key global-map (kbd "C-x C-r") 'helm-recentf)
-;; (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
-;; (define-key global-map (kbd "C-c i")   'helm-imenu)
-;; ;; (define-key global-map (kbd "C-x b")   'helm-buffers-list)
-;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-;; (global-set-key (kbd "C-c s") 'helm-ag)
-;; ;; (global-set-key (kbd "!C-c y") 'helm-show-kill-ring)e
-
-;; ;; auto complete with TAB for find-file etc.
-;; ;; (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
-;; ;; auto complete with TAB for helm-find-files etc.
-;; ;; (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-
-;; ; disable helm for kill-buffer
-;; ;; (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
 
 ;; ;;----------------------------------------------
 ;; ;; Helm C-e C-j
@@ -2104,28 +2111,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; (global-set-key (kbd "M-N") 'helm-resume-and-next)
 ;; (global-set-key (kbd "M-P") 'helm-resume-and-previous)
 
-;; ;;----------------------------------------------
-;; ;; helm-bm.el設定
-;; ;;----------------------------------------------
-;; (require 'helm-bm)
-;; ;; migemoくらいつけようね
-;; (push '(migemo) helm-source-bm)
-;; ;; annotationはあまり使わないので仕切り線で表示件数減るの嫌
-;; (setq helm-source-bm (delete '(multiline) helm-source-bm))
-
-;; (defun bm-toggle-or-helm ()
-;;   "2回連続で起動したらhelm-bmを実行させる"
-;;   (interactive)
-;;   (bm-toggle)
-;;   (when (eq last-command 'bm-toggle-or-helm)
-;;     (helm-bm)))
-;; (global-set-key (kbd "M-SPC") 'bm-toggle-or-helm)
-
-;; ;;; これがないとemacs -Qでエラーになる。おそらくバグ。
-;; (require 'compile)
-
-;; ;背景ライトグリーン
-;; (set-face-background 'bm-persistent-face "olive drab")
 
 ;; ;;----------------------------------------------
 ;; ;;helm-etags-plus
