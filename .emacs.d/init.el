@@ -75,7 +75,116 @@
 ;; add directories under "elisp", "elpa", "conf", "public_repos"
 (add-to-load-path "auto-install" "elisp" "elpa" "conf" "public_repos")
 
+;;----------------------------------------------
+;; el-get setting
+;;----------------------------------------------
+(when load-file-name
+  (setq user-emacs-directory (file-name-directory load-file-name)))
 
+(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+;;----------------------------------------------
+;; bundle for el-get
+;;----------------------------------------------
+;; (el-get-bundle ace-jump-mode)
+;; (el-get-bundle ag)
+;; (el-get-bundle async)
+;; (el-get-bundle auto-complete)
+;; (el-get-bundle auto-install)
+;; ;;(el-get-bundle auto-save-buffers) ;; need to specify detail
+;; (el-get-bundle auto-shell-command)
+;; (el-get-bundle avy)
+;; (el-get-bundle avy-zap)
+;; (el-get-bundle bm)
+;; (el-get-bundle col-highlight)
+;; (el-get-bundle column-enforce-mode)
+;; (el-get-bundle column-marker)
+;; (el-get-bundle company)
+;; (el-get-bundle concurrent)
+;; (el-get-bundle cperl-mode)
+;; (el-get-bundle ctable)
+;; ;;(el-get-bundle ctags) ;; need to specify detail
+;; (el-get-bundle dash)
+;; (el-get-bundle deferred)
+;; (el-get-bundle e2wm)
+;; (el-get-bundle edbi)
+;; (el-get-bundle elmacro)
+;; (el-get-bundle elscreen)
+;; (el-get-bundle emmet-mode)
+;; (el-get-bundle epc)
+;; (el-get-bundle epl)
+;; (el-get-bundle exec-path-from-shell)
+;; (el-get-bundle firestarter)
+;; ;;(el-get-bundle flycheck) ;; need to specify detail
+;; (el-get-bundle fold-dwim)
+;; (el-get-bundle foreign-regexp)
+;; ;;(el-get-bundle git-commit-mode);; need to specify detail
+;; (el-get-bundle git-rebase-mode)
+;; (el-get-bundle hc-zenburn-theme)
+;; ;; (el-get-bundle helm) ;; need to specify detail
+;; ;; (el-get-bundle helm-ag) ;; need to specify detail
+;; ;; (el-get-bundle helm-ag-r) ;; need to specify detail
+;; ;; (el-get-bundle helm-bm) ;; need to specify detail
+;; ;; (el-get-bundle helm-c-yasnippet) ;; need to specify detail
+;; ;; (el-get-bundle helm-core) ;; need to specify detail
+;; (el-get-bundle hexrgb)
+;; (el-get-bundle hiwin)
+;; (el-get-bundle ido-vertical-mode)
+;; (el-get-bundle imenu-anywhere)
+;; (el-get-bundle isearch-dabbrev)
+;; (el-get-bundle js2-mode)
+;; (el-get-bundle json-mode)
+;; (el-get-bundle json-reformat)
+;; (el-get-bundle json-snatcher)
+;; (el-get-bundle key-chord)
+;; (el-get-bundle let-alist)
+;; (el-get-bundle log4e)
+;; ;; (el-get-bundle magit) ;; need to specify detail
+;; (el-get-bundle minor-mode-hack)
+;; (el-get-bundle multi-term)
+;; (el-get-bundle open-junk-file)
+;; (el-get-bundle palette)
+;; (el-get-bundle pcre2el)
+;; (el-get-bundle perl-completion)
+;; (el-get-bundle perlbrew)
+;; (el-get-bundle persp-mode)
+;; (el-get-bundle php-mode)
+;; (el-get-bundle pkg-info)
+;; (el-get-bundle plenv)
+;; (el-get-bundle plsense)
+;; (el-get-bundle popup)
+;; (el-get-bundle popwin)
+;; (el-get-bundle powerline)
+;; (el-get-bundle rainbow-mode)
+;; (el-get-bundle s)
+;; (el-get-bundle scss-mode)
+;; (el-get-bundle smart-newline)
+;; (el-get-bundle smartrep)
+;; ;;(el-get-bundle sqlplus) ;; need to specify detail
+;; (el-get-bundle summarye)
+;; (el-get-bundle swap-buffers)
+;; (el-get-bundle thingopt)
+;; (el-get-bundle undo-tree)
+;; (el-get-bundle undohist)
+;; (el-get-bundle viewer)
+;; (el-get-bundle visual-regexp)
+;; ;;(el-get-bundle visual-regexp-steroids) ;; need to specify detail
+;; (el-get-bundle vline)
+;; (el-get-bundle web-mode)
+;; (el-get-bundle wgrep)
+;; (el-get-bundle wgrep-ag)
+;; (el-get-bundle window-layout)
+;; (el-get-bundle window-number)
+;; (el-get-bundle yaml-mode)
+;; (el-get-bundle yasnippet)
+;; (el-get-bundle yaxception)
+;; (el-get-bundle zenburn-theme)
 
 
 ;;----------------------------------------------
