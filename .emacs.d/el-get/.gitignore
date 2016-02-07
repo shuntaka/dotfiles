@@ -1,5 +1,0 @@
-*.elc
-.loaddefs.el
-.loaddefs.el~
-el-get/
-!.status.el
