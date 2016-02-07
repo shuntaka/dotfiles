@@ -3413,18 +3413,18 @@ Otherwise goto the end of minibuffer."
 ;;----------------------------------------------
 ;; plsense
 ;;----------------------------------------------
-(require 'plsense)
+;; (require 'plsense)
 
-;; キーバインド
-(setq plsense-popup-help-key "C-:")
-(setq plsense-display-help-buffer-key "M-:")
-(setq plsense-jump-to-definition-key "C->")
+;; ;; キーバインド
+;; (setq plsense-popup-help-key "C-:")
+;; (setq plsense-display-help-buffer-key "M-:")
+;; (setq plsense-jump-to-definition-key "C->")
 
-;; 必要に応じて適宜カスタマイズして下さい。以下のS式を評価することで項目についての情報が得られます。
-;; (customize-group "plsense")
+;; ;; 必要に応じて適宜カスタマイズして下さい。以下のS式を評価することで項目についての情報が得られます。
+;; ;; (customize-group "plsense")
 
-;; 推奨設定を行う
-(plsense-config-default)
+;; ;; 推奨設定を行う
+;; (plsense-config-default)
 
 
 ;;----------------------------------------------
