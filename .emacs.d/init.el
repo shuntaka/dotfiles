@@ -1891,7 +1891,17 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 ;; helm keybind
 ;;----------------------------------------------
-(global-set-key (kbd "C-;") 'helm-for-files)
+(define-key global-map (kbd "C-;") 'helm-for-files)
+(define-key global-map (kbd "M-x")     'helm-M-x)
+(define-key global-map (kbd "M-x")     'helm-M-x)
+(define-key global-map (kbd "C-x C-f") 'helm-find-files)
+(define-key global-map (kbd "C-x C-r") 'helm-recentf)
+(define-key global-map (kbd "M-y")     'helm-show-kill-ring)
+(define-key global-map (kbd "C-c i")   'helm-imenu)
+;; (define-key global-map (kbd "C-x b")   'helm-buffers-list)
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
+(define-key global-map (kbd "C-c s") 'helm-ag)
+;; (global-set-key (kbd "!C-c y") 'helm-show-kill-ring)
 
 ;;----------------------------------------------
 ;; helm-swoop
@@ -1986,21 +1996,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 ;; (define-key helm-map (kbd "C-e")        'helm-select-2nd-action-or-end-of-line)
 ;; (define-key helm-map (kbd "C-j")        'helm-select-3rd-action)
-
-;; ;;----------------------------------------------
-;; ;; helm-swoop
-;; ;;
-;; ;; https://github.com/ShingoFukuyama/helm-swoop
-;; ;;----------------------------------------------
-;; (add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
-;; (require 'helm-swoop)
-;; ;; disable pre-input
-;; (setq helm-swoop-pre-input-function
-;;       (lambda () ""))
-;; (global-set-key (kbd "C-s") 'helm-swoop)
-;; ;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
-;; (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
-;; (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
 
 ;; ;;----------------------------------------------
 ;; ;; helm-swoop launch
