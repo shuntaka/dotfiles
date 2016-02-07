@@ -1,5 +1,8 @@
 (setq el-get-lock-package-versions
-      '((helm-bm :checksum "1764c0139cb2f04b9fd520c7aca0b6d0152913bd")
+      '((exec-path-from-shell :checksum "c2ca275d3243e8253513ced73e3ac21dc352e303")
+        (flycheck :checksum "7f9aafa1bcd459836466d6b0012263574e6fead8")
+        (js2-mode :checksum "7b430a37d2a77c8bc0f384e11e061e914f2d31de")
+        (helm-bm :checksum "1764c0139cb2f04b9fd520c7aca0b6d0152913bd")
         (helm-c-yasnippet :checksum "2833bff9427f6d06531cf798e9152141e6b2fc83")
         (helm-swoop :checksum "002338d9685d82ef10aaf97d2e8084e61dfc94b4")
         (helm :checksum "6085777884bf8cc63a6e15cbbb506d09d782f0cc")

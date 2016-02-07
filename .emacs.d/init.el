@@ -103,6 +103,12 @@
 ;; (el-get-lock-unlock 'js2-mode)
 
 ;;----------------------------------------------
+;; el-get bundles for basic setting
+;;----------------------------------------------
+(el-get-bundle exec-path-from-shell
+  :type github :pkgname "purcell/exec-path-from-shell")
+
+;;----------------------------------------------
 ;; el-get bundles for helm
 ;;----------------------------------------------
 ;;https://github.com/Fuco1/smartparens
