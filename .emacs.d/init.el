@@ -73,10 +73,12 @@
 	    (normal-top-level-add-subdirs-to-load-path))))))
 
 ;; add directories under "elisp", "elpa", "conf", "public_repos"
-(add-to-load-path "el-get" "auto-install" "elisp" "elpa" "conf" "public_repos")
+(add-to-load-path "auto-install" "elisp" "elpa" "conf" "public_repos")
 
 ;;----------------------------------------------
 ;; el-get setting
+;; http://tarao.hatenablog.com/entry/20150221/1424518030
+;; https://github.com/tarao/el-get-lock
 ;;----------------------------------------------
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
@@ -89,8 +91,23 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
+(el-get-bundle tarao/el-get-lock)
+
 ;;----------------------------------------------
-;; bundle for el-get
+;; el-get lock setting
+;;----------------------------------------------
+;; lock everything
+(el-get-lock)
+
+;; specify package to unlock e.g.
+;; (el-get-lock-unlock 'js2-mode)
+
+;;----------------------------------------------
+;; list of the bundles to install by el-get
+;;----------------------------------------------
+
+;;----------------------------------------------
+;; TODO elpa package to re-install with el-get
 ;;----------------------------------------------
 ;; (el-get-bundle ace-jump-mode)
 ;; (el-get-bundle ag)
@@ -138,7 +155,7 @@
 ;; (el-get-bundle ido-vertical-mode)
 ;; (el-get-bundle imenu-anywhere)
 ;; (el-get-bundle isearch-dabbrev)
-(el-get-bundle js2-mode)
+;; (el-get-bundle js2-mode)
 ;; (el-get-bundle json-mode)
 ;; (el-get-bundle json-reformat)
 ;; (el-get-bundle json-snatcher)
