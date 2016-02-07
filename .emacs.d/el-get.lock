@@ -1,4 +1,6 @@
 (setq el-get-lock-package-versions
-      '((smartparens :checksum "c119f782cb4099609617b1b7752139391baa17b4")))
+      '((ace-jump-mode :checksum "8351e2df4fbbeb2a4003f2fb39f46d33803f3dac")
+        (csv-nav :checksum "a8a1d85beffc15096f5ac23de5845931f7430a43")
+        (smartparens :checksum "c119f782cb4099609617b1b7752139391baa17b4")))
 (setq el-get-lock-locked-packages 'nil)
 (setq el-get-lock-unlocked-packages 'nil)

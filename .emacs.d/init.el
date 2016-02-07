@@ -109,6 +109,9 @@
 (el-get-bundle smartparens
   :type github :pkgname "Fuco1/smartparens")
 
+(el-get-bundle ace-jump-mode
+  :type github :pkgname "winterTTr/ace-jump-mode")
+
 ;;----------------------------------------------
 ;; TODO elpa package to re-install with el-get
 ;;----------------------------------------------
