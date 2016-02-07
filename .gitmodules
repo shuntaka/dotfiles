@@ -1,15 +1,3 @@
-[submodule ".emacs.d/public_repos/flymake-jshint.el"]
-	path = .emacs.d/public_repos/flymake-jshint.el
-	url = https://github.com/Wilfred/flymake-jshint.el.git
-[submodule ".emacs.d/public_repos/flymake-easy"]
-	path = .emacs.d/public_repos/flymake-easy
-	url = https://github.com/purcell/flymake-easy
-[submodule ".emacs.d/public_repos/emacs-flymake-cursor"]
-	path = .emacs.d/public_repos/emacs-flymake-cursor
-	url = https://github.com/illusori/emacs-flymake-cursor
-[submodule ".emacs.d/public_repos/smooth-scroll.el"]
-	path = .emacs.d/public_repos/smooth-scroll.el
-	url = https://github.com/k-talo/smooth-scroll.el.git
 [submodule "perl-completion"]
 	path = perl-completion
 	url = https://github.com/imakado/perl-completion.git
