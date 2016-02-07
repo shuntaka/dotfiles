@@ -138,7 +138,7 @@
 ;; (el-get-bundle ido-vertical-mode)
 ;; (el-get-bundle imenu-anywhere)
 ;; (el-get-bundle isearch-dabbrev)
-;; (el-get-bundle js2-mode)
+(el-get-bundle js2-mode)
 ;; (el-get-bundle json-mode)
 ;; (el-get-bundle json-reformat)
 ;; (el-get-bundle json-snatcher)
