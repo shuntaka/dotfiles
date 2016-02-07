@@ -112,6 +112,8 @@
 (el-get-bundle helm-swoop
   :type github :pkgname "ShingoFukuyama/helm-swoop")
 
+(el-get-bundle helm-c-yasnippet
+  :type github :pkgname "emacs-jp/helm-c-yasnippet")
 
 (el-get-bundle smartparens
   :type github :pkgname "Fuco1/smartparens")
@@ -856,16 +858,6 @@
 (define-key yas-minor-mode-map (kbd "C-x i n") 'yas-new-snippet)
 ;; 既存スニペットを閲覧・編集する
 (define-key yas-minor-mode-map (kbd "C-x i v") 'yas-visit-snippet-file)
-
-(require 'helm-c-yasnippet)
-(setq helm-yas-space-match-any-greedy t)
-(global-set-key (kbd "C-c y") 'helm-yas-complete)
-(push '("emacs.+/snippets/" . snippet-mode) auto-mode-alist)
-(yas-global-mode 1)
-
-;; globally bind helm-c-yasnippet to C-j
-(keyboard-translate ?\C-j ?\H-j) ;;C-j とnewlineの被りを回避
-(define-key global-map (kbd "H-j") 'helm-yas-complete)
 
 ;;----------------------------------------------
 ;; 6.9
@@ -1916,7 +1908,17 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
 (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
 
+;;----------------------------------------------
+;; helm-c-yasnippet
+;;----------------------------------------------
+(setq helm-yas-space-match-any-greedy t)
+(global-set-key (kbd "C-c y") 'helm-yas-complete)
+(push '("emacs.+/snippets/" . snippet-mode) auto-mode-alist)
+(yas-global-mode 1)
 
+;; globally bind helm-c-yasnippet to C-j
+(keyboard-translate ?\C-j ?\H-j) ;;C-j とnewlineの被りを回避
+(define-key global-map (kbd "H-j") 'helm-yas-complete)
 
 ;;----------------------------------------------
 ;; Helm setting avoiding helm-file-name

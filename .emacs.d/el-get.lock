@@ -1,5 +1,6 @@
 (setq el-get-lock-package-versions
-      '((helm-swoop :checksum "002338d9685d82ef10aaf97d2e8084e61dfc94b4")
+      '((helm-c-yasnippet :checksum "2833bff9427f6d06531cf798e9152141e6b2fc83")
+        (helm-swoop :checksum "002338d9685d82ef10aaf97d2e8084e61dfc94b4")
         (helm :checksum "6085777884bf8cc63a6e15cbbb506d09d782f0cc")
         (auto-complete :checksum "ab01ce9fe07fb30f156276dcb2ce795fdc54e241")
         (ace-jump-mode :checksum "8351e2df4fbbeb2a4003f2fb39f46d33803f3dac")
