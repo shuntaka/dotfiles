@@ -106,6 +106,9 @@
 ;; list of the bundles to install by el-get
 ;;----------------------------------------------
 ;;https://github.com/Fuco1/smartparens
+(el-get-bundle helm
+  :type github :pkgname "emacs-helm/helm")
+
 (el-get-bundle smartparens
   :type github :pkgname "Fuco1/smartparens")
 
@@ -1882,285 +1885,290 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; 15. Helm & Anything
 ;;===================================================================
 ;;----------------------------------------------
+;; helm keybind
+;;----------------------------------------------
+(global-set-key (kbd "C-;") 'helm-for-files)
+
+;;----------------------------------------------
 ;; Helm setting avoiding helm-file-name
 ;; http://rubikitch.com/2014/08/11/helm-avoid-find-files/
 ;;----------------------------------------------
-(require 'helm)
-(require 'helm-mode)
-(defadvice helm-mode (around avoid-read-file-name activate)
-  (let ((read-file-name-function read-file-name-function)
-        (completing-read-function completing-read-function))
-    ad-do-it))
-(setq completing-read-function 'my-helm-completing-read-default)
-(defun my-helm-completing-read-default (&rest _)
-  (apply (cond ;; [2014-08-11 Mon]helm版のread-file-nameは重いからいらない
-          ((eq (nth 1 _) 'read-file-name-internal)
-           'completing-read-default)
-          (t
-           'helm--completing-read-default))
-         _))
-
-;;----------------------------------------------
-;; fine-file時にhelm-completeに入るのを無効化
-;; http://fukuyama.co/nonexpansion
-;;----------------------------------------------
-(custom-set-variables '(helm-ff-auto-update-initial-value nil))
-
-;;----------------------------------------------
-;; Helm Keybinding
-;;----------------------------------------------
-(global-set-key (kbd "C-;") 'helm-for-files)
-(global-set-key(kbd "C-x b") 'helm-mini)
-(define-key global-map (kbd "M-x")     'helm-M-x)
-(define-key global-map (kbd "C-x C-f") 'helm-find-files)
-(define-key global-map (kbd "C-x C-r") 'helm-recentf)
-(define-key global-map (kbd "M-y")     'helm-show-kill-ring)
-(define-key global-map (kbd "C-c i")   'helm-imenu)
-;; (define-key global-map (kbd "C-x b")   'helm-buffers-list)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-(global-set-key (kbd "C-c s") 'helm-ag)
-;; (global-set-key (kbd "!C-c y") 'helm-show-kill-ring)e
-
-;; auto complete with TAB for find-file etc.
-;; (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
-;; auto complete with TAB for helm-find-files etc.
-;; (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
-
-; disable helm for kill-buffer
-;; (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
-
-;;----------------------------------------------
-;; Helm C-e C-j
-;;----------------------------------------------
-(require 'helm)
-(defun helm-select-2nd-action ()
-  "Select the 2nd action for the currently selected candidate."
-  (interactive)
-  (helm-select-nth-action 1))
-
-(defun helm-select-3rd-action ()
-  "Select the 3rd action for the currently selected candidate."
-  (interactive)
-  (helm-select-nth-action 2))
-
-(defun helm-select-4th-action ()
-  "Select the 4th action for the currently selected candidate."
-  (interactive)
-  (helm-select-nth-action 3))
-
-(defun helm-select-2nd-action-or-end-of-line ()
-  "Select the 2nd action for the currently selected candidate.
-This happen when point is at the end of minibuffer.
-Otherwise goto the end of minibuffer."
-  (interactive)
-  (if (eolp)
-      (helm-select-nth-action 1)
-    (end-of-line)))
-
-(define-key helm-map (kbd "C-e")        'helm-select-2nd-action-or-end-of-line)
-(define-key helm-map (kbd "C-j")        'helm-select-3rd-action)
-
-;;----------------------------------------------
-;; helm-swoop
-;;
-;; https://github.com/ShingoFukuyama/helm-swoop
-;;----------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
-(require 'helm-swoop)
-;; disable pre-input
-(setq helm-swoop-pre-input-function
-      (lambda () ""))
-(global-set-key (kbd "C-s") 'helm-swoop)
-;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
-(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
-(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
-
-;;----------------------------------------------
-;; helm-swoop launch
-;; http://rubikitch.com/2015/03/23/helm-swoop-update/
-;;----------------------------------------------
-;; (defun isearch-forward-or-helm-swoop (use-helm-swoop)
-;;   (interactive "p")
-;;   (let (current-prefix-arg
-;;         (helm-swoop-pre-input-function 'ignore))
-;;     (call-interactively
-;;      (case use-helm-swoop
-;;        (1 'isearch-forward)
-;;        (4 'helm-swoop)
-;;        (16 'helm-swoop-nomigemo)))))
-;; (global-set-key (kbd "C-s") 'isearch-forward-or-helm-swoop)
-
-;;----------------------------------------------
-;; isearch-dabbrev
-;;----------------------------------------------
-(define-key isearch-mode-map (kbd "<tab>") 'isearch-dabbrev-expand)
-
-;;----------------------------------------------
-;; imenu-anyware
-;;----------------------------------------------
-;;http://rubikitch.com/category/helm/
-(require 'imenu)
-(setq ido-enable-flex-matching t)       ;あいまいマッチ
-(global-set-key (kbd "C-.") 'ido-imenu-anywhere)
-(global-set-key (kbd "C-M-.") 'helm-imenu-anywhere)
-
-;;----------------------------------------------
-;; enhanced imenu
-;; http://rubikitch.com/tag/package:helm-swoop/
-;;----------------------------------------------
-
-
-;;----------------------------------------------
-;; helm-next error
-;;----------------------------------------------
-;;http://rubikitch.com/category/helm/
-;;;; replacement of `next-error' and `previous-error'
-
-;; (require 'helm-anything nil t)
-;; (require 'helm)
-
-;;; resumable helm/anything buffers
-(defvar helm-resume-goto-buffer-regexp
-  (rx (or (regexp "Helm Swoop") "helm imenu" (regexp "helm.+grep") "helm-ag"
-          "occur"
-          "*anything grep" "anything current buffer")))
-(defvar helm-resume-goto-function nil)
-(defun helm-initialize--resume-goto (resume &rest _)
-  (when (and (not (eq resume 'noresume))
-             (ignore-errors
-               (string-match helm-resume-goto-buffer-regexp helm-last-buffer)))
-    (setq helm-resume-goto-function
-          (list 'helm-resume helm-last-buffer))))
-(advice-add 'helm-initialize :after 'helm-initialize--resume-goto)
-(defun anything-initialize--resume-goto (resume &rest _)
-  (when (and (not (eq resume 'noresume))
-             (ignore-errors
-               (string-match helm-resume-goto-buffer-regexp anything-last-buffer)))
-    (setq helm-resume-goto-function
-          (list 'anything-resume anything-last-buffer))))
-(advice-add 'anything-initialize :after 'anything-initialize--resume-goto)
-
-;;; next-error/previous-error
-(defun compilation-start--resume-goto (&rest _)
-  (setq helm-resume-goto-function 'next-error))
-(advice-add 'compilation-start :after 'compilation-start--resume-goto)
-(advice-add 'occur-mode :after 'compilation-start--resume-goto)
-(advice-add 'occur-mode-goto-occurrence :after 'compilation-start--resume-goto)
-(advice-add 'compile-goto-error :after 'compilation-start--resume-goto)
-
-
-(defun helm-resume-and- (key)
-  (unless (eq helm-resume-goto-function 'next-error)
-    (if (fboundp 'helm-anything-resume)
-        (setq helm-anything-resume-function helm-resume-goto-function)
-      (setq helm-last-buffer (cadr helm-resume-goto-function)))
-    (execute-kbd-macro
-     (kbd (format "%s %s RET"
-                  (key-description (car (where-is-internal
-                                         (if (fboundp 'helm-anything-resume)
-                                             'helm-anything-resume
-                                           'helm-resume))))
-                  key)))
-    (message "Resuming %s" (cadr helm-resume-goto-function))
-    t))
-(defun helm-resume-and-previous ()
-  "Relacement of `previous-error'"
-  (interactive)
-  (or (helm-resume-and- "C-p")
-      (call-interactively 'previous-error)))
-(defun helm-resume-and-next ()
-  "Relacement of `next-error'"
-  (interactive)
-  (or (helm-resume-and- "C-n")
-      (call-interactively 'next-error)))
-
-;;; Replace: next-error / previous-error
-(require 'helm-config)
-(ignore-errors (helm-anything-set-keys))
-(global-set-key (kbd "M-N") 'helm-resume-and-next)
-(global-set-key (kbd "M-P") 'helm-resume-and-previous)
-
-;;----------------------------------------------
-;; helm-bm.el設定
-;;----------------------------------------------
-(require 'helm-bm)
-;; migemoくらいつけようね
-(push '(migemo) helm-source-bm)
-;; annotationはあまり使わないので仕切り線で表示件数減るの嫌
-(setq helm-source-bm (delete '(multiline) helm-source-bm))
-
-(defun bm-toggle-or-helm ()
-  "2回連続で起動したらhelm-bmを実行させる"
-  (interactive)
-  (bm-toggle)
-  (when (eq last-command 'bm-toggle-or-helm)
-    (helm-bm)))
-(global-set-key (kbd "M-SPC") 'bm-toggle-or-helm)
-
-;;; これがないとemacs -Qでエラーになる。おそらくバグ。
-(require 'compile)
-
-;背景ライトグリーン
-(set-face-background 'bm-persistent-face "olive drab")
-
-;;----------------------------------------------
-;;helm-etags-plus
-;;----------------------------------------------
-(add-to-list 'load-path "~/.emacs.d/public_repos/helm-etags-plus")
-(require 'helm-etags+)
-(define-key global-map (kbd "M-.") 'helm-etags+-select)
-(define-key global-map (kbd "M-,") 'helm-etags+-history-go-back)
-(define-key global-map (kbd "C-M-.") 'helm-etags+-history-go-forward)
-(define-key global-map (kbd "C-M-,") 'helm-etags+-history-go-back)
-
-;; ;;----------------------------------------------
-;; ;;helm-ag
-;; ;;----------------------------------------------
 ;; (require 'helm-config)
+;; (require 'helm-mode)
+;; (defadvice helm-mode (around avoid-read-file-name activate)
+;;   (let ((read-file-name-function read-file-name-function)
+;;         (completing-read-function completing-read-function))
+;;     ad-do-it))
+;; (setq completing-read-function 'my-helm-completing-read-default)
+;; (defun my-helm-completing-read-default (&rest _)
+;;   (apply (cond ;; [2014-08-11 Mon]helm版のread-file-nameは重いからいらない
+;;           ((eq (nth 1 _) 'read-file-name-internal)
+;;            'completing-read-default)
+;;           (t
+;;            'helm--completing-read-default))
+;;          _))
+
+;; ;;----------------------------------------------
+;; ;; fine-file時にhelm-completeに入るのを無効化
+;; ;; http://fukuyama.co/nonexpansion
+;; ;;----------------------------------------------
+;; (custom-set-variables '(helm-ff-auto-update-initial-value nil))
+
+;; ;;----------------------------------------------
+;; ;; Helm Keybinding
+;; ;;----------------------------------------------
+;; (global-set-key (kbd "C-;") 'helm-for-files)
+;; (global-set-key(kbd "C-x b") 'helm-mini)
+;; (define-key global-map (kbd "M-x")     'helm-M-x)
+;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
+;; (define-key global-map (kbd "C-x C-r") 'helm-recentf)
+;; (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
+;; (define-key global-map (kbd "C-c i")   'helm-imenu)
+;; ;; (define-key global-map (kbd "C-x b")   'helm-buffers-list)
+;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
+;; (global-set-key (kbd "C-c s") 'helm-ag)
+;; ;; (global-set-key (kbd "!C-c y") 'helm-show-kill-ring)e
+
+;; ;; auto complete with TAB for find-file etc.
+;; ;; (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+;; ;; auto complete with TAB for helm-find-files etc.
+;; ;; (define-key helm-find-files-map (kbd "TAB") 'helm-execute-persistent-action)
+
+;; ; disable helm for kill-buffer
+;; ;; (add-to-list 'helm-completing-read-handlers-alist '(kill-buffer . nil))
+
+;; ;;----------------------------------------------
+;; ;; Helm C-e C-j
+;; ;;----------------------------------------------
+;; (require 'helm)
+;; (defun helm-select-2nd-action ()
+;;   "Select the 2nd action for the currently selected candidate."
+;;   (interactive)
+;;   (helm-select-nth-action 1))
+
+;; (defun helm-select-3rd-action ()
+;;   "Select the 3rd action for the currently selected candidate."
+;;   (interactive)
+;;   (helm-select-nth-action 2))
+
+;; (defun helm-select-4th-action ()
+;;   "Select the 4th action for the currently selected candidate."
+;;   (interactive)
+;;   (helm-select-nth-action 3))
+
+;; (defun helm-select-2nd-action-or-end-of-line ()
+;;   "Select the 2nd action for the currently selected candidate.
+;; This happen when point is at the end of minibuffer.
+;; Otherwise goto the end of minibuffer."
+;;   (interactive)
+;;   (if (eolp)
+;;       (helm-select-nth-action 1)
+;;     (end-of-line)))
+
+;; (define-key helm-map (kbd "C-e")        'helm-select-2nd-action-or-end-of-line)
+;; (define-key helm-map (kbd "C-j")        'helm-select-3rd-action)
+
+;; ;;----------------------------------------------
+;; ;; helm-swoop
+;; ;;
+;; ;; https://github.com/ShingoFukuyama/helm-swoop
+;; ;;----------------------------------------------
+;; (add-to-list 'load-path "~/.emacs.d/public_repos/helm-swoop")
+;; (require 'helm-swoop)
+;; ;; disable pre-input
+;; (setq helm-swoop-pre-input-function
+;;       (lambda () ""))
+;; (global-set-key (kbd "C-s") 'helm-swoop)
+;; ;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
+;; (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+;; (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+
+;; ;;----------------------------------------------
+;; ;; helm-swoop launch
+;; ;; http://rubikitch.com/2015/03/23/helm-swoop-update/
+;; ;;----------------------------------------------
+;; ;; (defun isearch-forward-or-helm-swoop (use-helm-swoop)
+;; ;;   (interactive "p")
+;; ;;   (let (current-prefix-arg
+;; ;;         (helm-swoop-pre-input-function 'ignore))
+;; ;;     (call-interactively
+;; ;;      (case use-helm-swoop
+;; ;;        (1 'isearch-forward)
+;; ;;        (4 'helm-swoop)
+;; ;;        (16 'helm-swoop-nomigemo)))))
+;; ;; (global-set-key (kbd "C-s") 'isearch-forward-or-helm-swoop)
+
+;; ;;----------------------------------------------
+;; ;; isearch-dabbrev
+;; ;;----------------------------------------------
+;; (define-key isearch-mode-map (kbd "<tab>") 'isearch-dabbrev-expand)
+
+;; ;;----------------------------------------------
+;; ;; imenu-anyware
+;; ;;----------------------------------------------
+;; ;;http://rubikitch.com/category/helm/
+;; (require 'imenu)
+;; (setq ido-enable-flex-matching t)       ;あいまいマッチ
+;; (global-set-key (kbd "C-.") 'ido-imenu-anywhere)
+;; (global-set-key (kbd "C-M-.") 'helm-imenu-anywhere)
+
+;; ;;----------------------------------------------
+;; ;; enhanced imenu
+;; ;; http://rubikitch.com/tag/package:helm-swoop/
+;; ;;----------------------------------------------
+
+
+;; ;;----------------------------------------------
+;; ;; helm-next error
+;; ;;----------------------------------------------
+;; ;;http://rubikitch.com/category/helm/
+;; ;;;; replacement of `next-error' and `previous-error'
+
+;; ;; (require 'helm-anything nil t)
+;; ;; (require 'helm)
+
+;; ;;; resumable helm/anything buffers
+;; (defvar helm-resume-goto-buffer-regexp
+;;   (rx (or (regexp "Helm Swoop") "helm imenu" (regexp "helm.+grep") "helm-ag"
+;;           "occur"
+;;           "*anything grep" "anything current buffer")))
+;; (defvar helm-resume-goto-function nil)
+;; (defun helm-initialize--resume-goto (resume &rest _)
+;;   (when (and (not (eq resume 'noresume))
+;;              (ignore-errors
+;;                (string-match helm-resume-goto-buffer-regexp helm-last-buffer)))
+;;     (setq helm-resume-goto-function
+;;           (list 'helm-resume helm-last-buffer))))
+;; (advice-add 'helm-initialize :after 'helm-initialize--resume-goto)
+;; (defun anything-initialize--resume-goto (resume &rest _)
+;;   (when (and (not (eq resume 'noresume))
+;;              (ignore-errors
+;;                (string-match helm-resume-goto-buffer-regexp anything-last-buffer)))
+;;     (setq helm-resume-goto-function
+;;           (list 'anything-resume anything-last-buffer))))
+;; (advice-add 'anything-initialize :after 'anything-initialize--resume-goto)
+
+;; ;;; next-error/previous-error
+;; (defun compilation-start--resume-goto (&rest _)
+;;   (setq helm-resume-goto-function 'next-error))
+;; (advice-add 'compilation-start :after 'compilation-start--resume-goto)
+;; (advice-add 'occur-mode :after 'compilation-start--resume-goto)
+;; (advice-add 'occur-mode-goto-occurrence :after 'compilation-start--resume-goto)
+;; (advice-add 'compile-goto-error :after 'compilation-start--resume-goto)
+
+
+;; (defun helm-resume-and- (key)
+;;   (unless (eq helm-resume-goto-function 'next-error)
+;;     (if (fboundp 'helm-anything-resume)
+;;         (setq helm-anything-resume-function helm-resume-goto-function)
+;;       (setq helm-last-buffer (cadr helm-resume-goto-function)))
+;;     (execute-kbd-macro
+;;      (kbd (format "%s %s RET"
+;;                   (key-description (car (where-is-internal
+;;                                          (if (fboundp 'helm-anything-resume)
+;;                                              'helm-anything-resume
+;;                                            'helm-resume))))
+;;                   key)))
+;;     (message "Resuming %s" (cadr helm-resume-goto-function))
+;;     t))
+;; (defun helm-resume-and-previous ()
+;;   "Relacement of `previous-error'"
+;;   (interactive)
+;;   (or (helm-resume-and- "C-p")
+;;       (call-interactively 'previous-error)))
+;; (defun helm-resume-and-next ()
+;;   "Relacement of `next-error'"
+;;   (interactive)
+;;   (or (helm-resume-and- "C-n")
+;;       (call-interactively 'next-error)))
+
+;; ;;; Replace: next-error / previous-error
+;; (require 'helm-config)
+;; (ignore-errors (helm-anything-set-keys))
+;; (global-set-key (kbd "M-N") 'helm-resume-and-next)
+;; (global-set-key (kbd "M-P") 'helm-resume-and-previous)
+
+;; ;;----------------------------------------------
+;; ;; helm-bm.el設定
+;; ;;----------------------------------------------
+;; (require 'helm-bm)
+;; ;; migemoくらいつけようね
+;; (push '(migemo) helm-source-bm)
+;; ;; annotationはあまり使わないので仕切り線で表示件数減るの嫌
+;; (setq helm-source-bm (delete '(multiline) helm-source-bm))
+
+;; (defun bm-toggle-or-helm ()
+;;   "2回連続で起動したらhelm-bmを実行させる"
+;;   (interactive)
+;;   (bm-toggle)
+;;   (when (eq last-command 'bm-toggle-or-helm)
+;;     (helm-bm)))
+;; (global-set-key (kbd "M-SPC") 'bm-toggle-or-helm)
+
+;; ;;; これがないとemacs -Qでエラーになる。おそらくバグ。
+;; (require 'compile)
+
+;; ;背景ライトグリーン
+;; (set-face-background 'bm-persistent-face "olive drab")
+
+;; ;;----------------------------------------------
+;; ;;helm-etags-plus
+;; ;;----------------------------------------------
+;; (add-to-list 'load-path "~/.emacs.d/public_repos/helm-etags-plus")
+;; (require 'helm-etags+)
+;; (define-key global-map (kbd "M-.") 'helm-etags+-select)
+;; (define-key global-map (kbd "M-,") 'helm-etags+-history-go-back)
+;; (define-key global-map (kbd "C-M-.") 'helm-etags+-history-go-forward)
+;; (define-key global-map (kbd "C-M-,") 'helm-etags+-history-go-back)
+
+;; ;; ;;----------------------------------------------
+;; ;; ;;helm-ag
+;; ;; ;;----------------------------------------------
+;; ;; (require 'helm-config)
+;; ;; (require 'helm-files)
+;; ;; (require 'helm-ag)
+
+;; ;; (global-set-key (kbd "M-g .") 'helm-ag)
+;; ;; (global-set-key (kbd "M-g ,") 'helm-ag-pop-stack)
+;; ;; (global-set-key (kbd "C-M-s") 'helm-ag-this-file)
+
+;; ;;----------------------------------------------
+;; ;;helm-ag-r
+;; ;;----------------------------------------------
+;; ;;http://sleepboy-zzz.blogspot.co.uk/2013/10/emacsaghelmhelm-ag-r_4267.html
+;; (require 'helm-ag-r)
+;; (setq
+;;  helm-ag-r-google-contacts-user "your gmail address"
+;;  helm-ag-r-google-contacts-lang "ja_JP.UTF-8"
+;;  helm-ag-r-option-list '("-S -U --hidden"
+;;                          "-S -U -g")
+;;  ;; 不安定な場合以下の項目を調整すれば
+;;  ;; よくなるかもしれません
+;;  helm-ag-r-requires-pattern 3    ; 文字数以上入力してから検索
+;;  helm-ag-r-input-idle-delay 0.5  ; 検索をdelay後からおこなう
+;;  helm-ag-r-use-no-highlight t    ; ハイライト無効化
+;;  helm-ag-r-candidate-limit 1000) ; 候補の上限を設定
+
+;; ;;----------------------------------------------
+;; ;; helm-c-do-shell-command
+;; ;;----------------------------------------------
+;; (require 'mylisp-helm-add-actions)
+;; (require 'dired-aux)
+
+;; (defun helm-c-do-shell-command (ignore)
+;;   (let ((files (mapcar 'expand-file-name (helm-marked-candidates)))
+;;         (helm--reading-passwd-or-string t))
+;;     (dired-do-shell-command
+;;      (dired-read-shell-command
+;;       (format "! on %s: "
+;;               (dired-mark-prompt (length files) files))
+;;       nil files)
+;;      nil files)))
+
+;; (setq helm-user-actions-type-file
+;;       '(("Execute Shell Command" . helm-c-do-shell-command)))
 ;; (require 'helm-files)
-;; (require 'helm-ag)
-
-;; (global-set-key (kbd "M-g .") 'helm-ag)
-;; (global-set-key (kbd "M-g ,") 'helm-ag-pop-stack)
-;; (global-set-key (kbd "C-M-s") 'helm-ag-this-file)
-
-;;----------------------------------------------
-;;helm-ag-r
-;;----------------------------------------------
-;;http://sleepboy-zzz.blogspot.co.uk/2013/10/emacsaghelmhelm-ag-r_4267.html
-(require 'helm-ag-r)
-(setq
- helm-ag-r-google-contacts-user "your gmail address"
- helm-ag-r-google-contacts-lang "ja_JP.UTF-8"
- helm-ag-r-option-list '("-S -U --hidden"
-                         "-S -U -g")
- ;; 不安定な場合以下の項目を調整すれば
- ;; よくなるかもしれません
- helm-ag-r-requires-pattern 3    ; 文字数以上入力してから検索
- helm-ag-r-input-idle-delay 0.5  ; 検索をdelay後からおこなう
- helm-ag-r-use-no-highlight t    ; ハイライト無効化
- helm-ag-r-candidate-limit 1000) ; 候補の上限を設定
-
-;;----------------------------------------------
-;; helm-c-do-shell-command
-;;----------------------------------------------
-(require 'mylisp-helm-add-actions)
-(require 'dired-aux)
-
-(defun helm-c-do-shell-command (ignore)
-  (let ((files (mapcar 'expand-file-name (helm-marked-candidates)))
-        (helm--reading-passwd-or-string t))
-    (dired-do-shell-command
-     (dired-read-shell-command
-      (format "! on %s: "
-              (dired-mark-prompt (length files) files))
-      nil files)
-     nil files)))
-
-(setq helm-user-actions-type-file
-      '(("Execute Shell Command" . helm-c-do-shell-command)))
-(require 'helm-files)
-(helm-define-action-key helm-generic-files-map (kbd "!") 'helm-c-do-shell-command)
+;; (helm-define-action-key helm-generic-files-map (kbd "!") 'helm-c-do-shell-command)
 
 
 ;;=================================================================
