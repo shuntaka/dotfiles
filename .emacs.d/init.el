@@ -112,6 +112,10 @@
 (el-get-bundle ace-jump-mode
   :type github :pkgname "winterTTr/ace-jump-mode")
 
+(el-get-bundle auto-complete
+  :type github :pkgname "auto-complete/auto-complete")
+
+
 ;;----------------------------------------------
 ;; TODO elpa package to re-install with el-get
 ;;----------------------------------------------
