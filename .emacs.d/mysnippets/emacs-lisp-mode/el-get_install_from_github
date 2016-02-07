@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: el-get_install_from_github
+# key: elgetInstallFromGithub
+# binding: direct-keybinding
+# --
+(el-get-bundle ${1:smartparens}
+  :type github :pkgname "${2:Fuco1/smartparens}")
