@@ -109,6 +109,10 @@
 (el-get-bundle helm
   :type github :pkgname "emacs-helm/helm")
 
+(el-get-bundle helm-swoop
+  :type github :pkgname "ShingoFukuyama/helm-swoop")
+
+
 (el-get-bundle smartparens
   :type github :pkgname "Fuco1/smartparens")
 
@@ -1888,6 +1892,21 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; helm keybind
 ;;----------------------------------------------
 (global-set-key (kbd "C-;") 'helm-for-files)
+
+;;----------------------------------------------
+;; helm-swoop
+;; https://github.com/ShingoFukuyama/helm-swoop
+;;----------------------------------------------
+(require 'helm-swoop)
+;; disable pre-input
+(setq helm-swoop-pre-input-function
+      (lambda () ""))
+(global-set-key (kbd "C-s") 'helm-swoop)
+;;; isearchからの連携を考えるとC-r/C-sにも割り当て推奨
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+
+
 
 ;;----------------------------------------------
 ;; Helm setting avoiding helm-file-name
