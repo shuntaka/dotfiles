@@ -1,0 +1,4 @@
+(setq el-get-lock-package-versions
+      '((smartparens :checksum "c119f782cb4099609617b1b7752139391baa17b4")))
+(setq el-get-lock-locked-packages 'nil)
+(setq el-get-lock-unlocked-packages 'nil)

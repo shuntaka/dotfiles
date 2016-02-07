@@ -105,6 +105,9 @@
 ;;----------------------------------------------
 ;; list of the bundles to install by el-get
 ;;----------------------------------------------
+;;https://github.com/Fuco1/smartparens
+(el-get-bundle smartparens
+  :type github :pkgname "Fuco1/smartparens")
 
 ;;----------------------------------------------
 ;; TODO elpa package to re-install with el-get
