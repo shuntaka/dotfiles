@@ -482,6 +482,8 @@
 ;;----------------------
 ;;sequential.command.el
 ;;----------------------
+;; (package-initialize)
+;; (add-to-list 'load-path "/Users/shun/projects/dotfiles/.emacs.d/auto-install")
 ;; (require 'sequential-command-config)
 ;; (sequential-command-setup-keys)
 
