@@ -482,7 +482,6 @@
 ;;----------------------
 ;;sequential.command.el
 ;;----------------------
-;; (add-to-list 'load-path "/Users/shun/projects/dotfiles/.emacs.d/el-get/seqential-command")
 ;; (require 'sequential-command-config)
 ;; (sequential-command-setup-keys)
 
