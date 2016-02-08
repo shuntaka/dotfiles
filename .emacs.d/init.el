@@ -110,7 +110,7 @@
 ;;----------------------------------------------
 ;; el-get packages for keybinding
 ;;----------------------------------------------
-;;(el-get-bundle seqential-command)
+(el-get-bundle seqential-command)
 
 ;;----------------------------------------------
 ;; el-get packages for manipulating files and buffer
@@ -482,8 +482,6 @@
 ;;----------------------
 ;;sequential.command.el
 ;;----------------------
-;; (package-initialize)
-;; (add-to-list 'load-path "/Users/shun/projects/dotfiles/.emacs.d/auto-install")
 ;; (require 'sequential-command-config)
 ;; (sequential-command-setup-keys)
 
