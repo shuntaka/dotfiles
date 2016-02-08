@@ -73,7 +73,7 @@
 	    (normal-top-level-add-subdirs-to-load-path))))))
 
 ;; add directories under "elisp", "elpa", "conf", "public_repos"
-(add-to-load-path "auto-install" "elisp" "elpa" "conf" "public_repos")
+(add-to-load-path "el-get" "auto-install" "elisp" "elpa" "conf" "public_repos")
 
 ;;----------------------------------------------
 ;; el-get setting
@@ -103,11 +103,22 @@
 ;; (el-get-lock-unlock 'js2-mode)
 
 ;;----------------------------------------------
-;; el-get bundles for basic setting
+;; el-get packages for basic setting
 ;;----------------------------------------------
 (el-get-bundle exec-path-from-shell)
+
 ;;----------------------------------------------
-;; el-get bundles for helm
+;; el-get packages for keybinding
+;;----------------------------------------------
+;;(el-get-bundle seqential-command)
+
+;;----------------------------------------------
+;; el-get packages for manipulating files and buffer
+;;----------------------------------------------
+(el-get-bundle recentf-ext)
+
+;;----------------------------------------------
+;; el-get packages for helm
 ;;----------------------------------------------
 ;;https://github.com/Fuco1/smartparens
 (el-get-bundle helm)
@@ -120,24 +131,24 @@
 ;; (el-get-bundle helm-bm)
 
 ;;----------------------------------------------
-;; el-get bundles for javascript
+;; el-get packages for javascript
 ;;----------------------------------------------
 (el-get-bundle js2-mode)
 
 ;;----------------------------------------------
-;; el-get bundles for input support
+;; el-get packages for input support
 ;;----------------------------------------------
 (el-get-bundle smartparens)
 
 (el-get-bundle auto-complete)
 
 ;;----------------------------------------------
-;; el-get bundles for moving cursor
+;; el-get packages for moving cursor
 ;;----------------------------------------------
 (el-get-bundle ace-jump-mode)
 
 ;;----------------------------------------------
-;; el-get bundles for programming
+;; el-get packages for programming
 ;;----------------------------------------------
 ;; (el-get-bundle flycheck)
 
@@ -411,9 +422,6 @@
           (lambda ()
             (setq-default tab-width 4)))
 
-
-
-
 ;;----------------------------------------------
 ;; disable tab
 ;;----------------------------------------------
@@ -474,8 +482,9 @@
 ;;----------------------
 ;;sequential.command.el
 ;;----------------------
-(require 'sequential-command-config)
-(sequential-command-setup-keys)
+;; (add-to-list 'load-path "/Users/shun/projects/dotfiles/.emacs.d/el-get/seqential-command")
+;; (require 'sequential-command-config)
+;; (sequential-command-setup-keys)
 
 ;;----------------------------------------------
 ;; 3.3 minor-mode-hack.el
