@@ -42,5 +42,5 @@ ac-comphist.dat
 /.emacs.d/bookmarks
 
 # ignore el-get
-# /.emacs.d/el-get/*
-# !/.emacs.d/el-get/status.el
+.emacs.d/el-get/*
+!.emacs.d/el-get/status.el
