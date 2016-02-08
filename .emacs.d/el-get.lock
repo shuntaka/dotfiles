@@ -1,5 +1,6 @@
 (setq el-get-lock-package-versions
-      '((ace-jump-mode :checksum "8351e2df4fbbeb2a4003f2fb39f46d33803f3dac")
+      '((seqential-command :checksum "a88596631bb609e59d81085c37c95bc7706fd467")
+        (ace-jump-mode :checksum "8351e2df4fbbeb2a4003f2fb39f46d33803f3dac")
         (auto-complete :checksum "ab01ce9fe07fb30f156276dcb2ce795fdc54e241")
         (popup :checksum "004d58c47f6406b6555cf112f8a6eed6114cb63b")
         (fuzzy :checksum "534d723ad2e06322ff8d9bd0ba4863d243f698e7")

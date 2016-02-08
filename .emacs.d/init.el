@@ -482,8 +482,8 @@
 ;;----------------------
 ;;sequential.command.el
 ;;----------------------
-;; (require 'sequential-command-config)
-;; (sequential-command-setup-keys)
+(require 'sequential-command-config)
+(sequential-command-setup-keys)
 
 ;;----------------------------------------------
 ;; 3.3 minor-mode-hack.el
