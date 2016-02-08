@@ -43,4 +43,4 @@ ac-comphist.dat
 
 # ignore el-get
 .emacs.d/el-get/*
-!.emacs.d/el-get/status.el
+!.emacs.d/el-get/.status.el

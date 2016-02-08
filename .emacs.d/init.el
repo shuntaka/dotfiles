@@ -105,40 +105,41 @@
 ;;----------------------------------------------
 ;; el-get bundles for basic setting
 ;;----------------------------------------------
-(el-get-bundle exec-path-from-shell
-  :type github :pkgname "purcell/exec-path-from-shell")
-
+(el-get-bundle exec-path-from-shell)
 ;;----------------------------------------------
 ;; el-get bundles for helm
 ;;----------------------------------------------
 ;;https://github.com/Fuco1/smartparens
-(el-get-bundle helm
-  :type github :pkgname "emacs-helm/helm")
+(el-get-bundle helm)
 
-(el-get-bundle helm-swoop
-  :type github :pkgname "ShingoFukuyama/helm-swoop")
+(el-get-bundle helm-swoop)
 
-(el-get-bundle helm-c-yasnippet
-  :type github :pkgname "emacs-jp/helm-c-yasnippet")
 
-(el-get-bundle helm-bm
-  :type github :pkgname "yasuyk/helm-bm")
+(el-get-bundle helm-c-yasnippet)
+
+;; (el-get-bundle helm-bm)
+
+;;----------------------------------------------
+;; el-get bundles for javascript
+;;----------------------------------------------
+(el-get-bundle js2-mode)
 
 ;;----------------------------------------------
 ;; el-get bundles for input support
 ;;----------------------------------------------
-(el-get-bundle smartparens
-  :type github :pkgname "Fuco1/smartparens")
+(el-get-bundle smartparens)
 
-(el-get-bundle auto-complete
-  :type github :pkgname "auto-complete/auto-complete")
+(el-get-bundle auto-complete)
 
 ;;----------------------------------------------
 ;; el-get bundles for moving cursor
 ;;----------------------------------------------
-(el-get-bundle ace-jump-mode
-  :type github :pkgname "winterTTr/ace-jump-mode")
+(el-get-bundle ace-jump-mode)
 
+;;----------------------------------------------
+;; el-get bundles for programming
+;;----------------------------------------------
+;; (el-get-bundle flycheck)
 
 ;;----------------------------------------------
 ;; TODO elpa package to re-install with el-get
@@ -442,7 +443,7 @@
 ;; https://github.com/purcell/exec-path-from-shell
 ;; http://hitode909.hatenablog.com/entry/2013/08/04/194929
 ;;----------------------------------------------
-(exec-path-from-shell-initialize)
+;; (exec-path-from-shell-initialize)
 
 ;;=============================================
 ;; 3. Key Binding
@@ -1044,12 +1045,13 @@
   (mark-thing "paragraph")
   (next-line))
 (define-key global-map (kbd "M-h") 'shun-mark-current-paragraph)
+(require 'org)
 (define-key org-mode-map (kbd "M-h") 'shun-mark-current-paragraph)
 
 ;;----------------------------------------------
 ;; copy a line with avy.el
 ;;----------------------------------------------
-(define-key global-map (kbd "C-M-m") 'avy-copy-line)
+;; (define-key global-map (kbd "C-M-m") 'avy-copy-line)
 
 ;;----------------------------------------------
 ;; copy region with avy.el
@@ -1950,13 +1952,11 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
     (helm-bm)))
 (global-set-key (kbd "M-SPC") 'bm-toggle-or-helm)
 
-;; ;;; これがないとemacs -Qでエラーになる。おそらくバグ。
-;; (require 'compile)
+;;; これがないとemacs -Qでエラーになる。おそらくバグ。
+(require 'compile)
 
-;; ;背景ライトグリーン
-;; (set-face-background 'bm-persistent-face "olive drab")
-
-
+;背景ライトグリーン
+(set-face-background 'bm-persistent-face "olive drab")
 
 ;;----------------------------------------------
 ;; Helm setting avoiding helm-file-name
@@ -2815,84 +2815,90 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;=============================================
 ;; For JavaScript
 ;;=============================================
+;;----------------------------------------------
+;; js2-mode
+;;----------------------------------------------
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 ;;----------------------------------
 ;; js2-mode
 ;;----------------------------------
-(autoload 'js-mode "js")
-(defun my-js2-indent-function ()
-  (interactive)
-  (save-restriction
-    (widen)
-    (let* ((inhibit-point-motion-hooks t)
-           (parse-status (save-excursion (syntax-ppss (point-at-bol))))
-           (offset (- (current-column) (current-indentation)))
-           (indentation (js--proper-indentation parse-status))
-           node)
-      (save-excursion
-        ;; I like to indent case and labels to half of the tab width
-        (back-to-indentation)
-        (if (looking-at "case\\s-")
-            (setq indentation (+ indentation (/ js-indent-level 2))))
-        ;; consecutive declarations in a var statement are nice if
-        ;; properly aligned, i.e:
-        ;; var foo = "bar",
-        ;;     bar = "foo";
-        (setq node (js2-node-at-point))
-        (when (and node
-                   (= js2-NAME (js2-node-type node))
-                   (= js2-VAR (js2-node-type (js2-node-parent node))))
-          (setq indentation (+ 4 indentation))))
-      (indent-line-to indentation)
-      (when (> offset 0) (forward-char offset)))))
+;; (autoload 'js-mode "js")
+;; (defun my-js2-indent-function ()
+;;   (interactive)
+;;   (save-restriction
+;;     (widen)
+;;     (let* ((inhibit-point-motion-hooks t)
+;;            (parse-status (save-excursion (syntax-ppss (point-at-bol))))
+;;            (offset (- (current-column) (current-indentation)))
+;;            (indentation (js--proper-indentation parse-status))
+;;            node)
+;;       (save-excursion
+;;         ;; I like to indent case and labels to half of the tab width
+;;         (back-to-indentation)
+;;         (if (looking-at "case\\s-")
+;;             (setq indentation (+ indentation (/ js-indent-level 2))))
+;;         ;; consecutive declarations in a var statement are nice if
+;;         ;; properly aligned, i.e:
+;;         ;; var foo = "bar",
+;;         ;;     bar = "foo";
+;;         (setq node (js2-node-at-point))
+;;         (when (and node
+;;                    (= js2-NAME (js2-node-type node))
+;;                    (= js2-VAR (js2-node-type (js2-node-parent node))))
+;;           (setq indentation (+ 4 indentation))))
+;;       (indent-line-to indentation)
+;;       (when (> offset 0) (forward-char offset)))))
 
-(defun my-indent-sexp ()
-  (interactive)
-  (save-restriction
-    (save-excursion
-      (widen)
-      (let* ((inhibit-point-motion-hooks t)
-             (parse-status (syntax-ppss (point)))
-             (beg (nth 1 parse-status))
-             (end-marker (make-marker))
-             (end (progn (goto-char beg) (forward-list) (point)))
-             (ovl (make-overlay beg end)))
-        (set-marker end-marker end)
-        (overlay-put ovl 'face 'highlight)
-        (goto-char beg)
-        (while (< (point) (marker-position end-marker))
-          ;; don't reindent blank lines so we don't set the "buffer
-          ;; modified" property for nothing
-          (beginning-of-line)
-          (unless (looking-at "\\s-*$")
-            (indent-according-to-mode))
-          (forward-line))
-        (run-with-timer 0.5 nil '(lambda(ovl)
-                                   (delete-overlay ovl)) ovl)))))
-(defun my-js2-mode-hook ()
-  (require 'js)
-  (setq js-indent-level 4
-        indent-tabs-mode nil
-        c-basic-offset 4)
-  (c-toggle-auto-state 0)
-  (c-toggle-hungry-state 1)
-  (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
- (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
-  ;; (define-key js2-mode-map [(meta control \;)]
-  ;;   '(lambda()
-  ;;      (interactive)
-  ;;      (insert "/* -----[ ")
-  ;;      (save-excursion
-  ;;        (insert " ]----- */"))
-  ;;      ))
-  (define-key js2-mode-map [(return)] 'newline-and-indent)
-  (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
-  (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
-  (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
-  (if (featurep 'js2-highlight-vars)
-    (js2-highlight-vars-mode))
-  (message "My JS2 hook"))
+;; (defun my-indent-sexp ()
+;;   (interactive)
+;;   (save-restriction
+;;     (save-excursion
+;;       (widen)
+;;       (let* ((inhibit-point-motion-hooks t)
+;;              (parse-status (syntax-ppss (point)))
+;;              (beg (nth 1 parse-status))
+;;              (end-marker (make-marker))
+;;              (end (progn (goto-char beg) (forward-list) (point)))
+;;              (ovl (make-overlay beg end)))
+;;         (set-marker end-marker end)
+;;         (overlay-put ovl 'face 'highlight)
+;;         (goto-char beg)
+;;         (while (< (point) (marker-position end-marker))
+;;           ;; don't reindent blank lines so we don't set the "buffer
+;;           ;; modified" property for nothing
+;;           (beginning-of-line)
+;;           (unless (looking-at "\\s-*$")
+;;             (indent-according-to-mode))
+;;           (forward-line))
+;;         (run-with-timer 0.5 nil '(lambda(ovl)
+;;                                    (delete-overlay ovl)) ovl)))))
+;; (defun my-js2-mode-hook ()
+;;   (require 'js)
+;;   (setq js-indent-level 4
+;;         indent-tabs-mode nil
+;;         c-basic-offset 4)
+;;   (c-toggle-auto-state 0)
+;;   (c-toggle-hungry-state 1)
+;;   (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
+;;  (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
+;;   ;; (define-key js2-mode-map [(meta control \;)]
+;;   ;;   '(lambda()
+;;   ;;      (interactive)
+;;   ;;      (insert "/* -----[ ")
+;;   ;;      (save-excursion
+;;   ;;        (insert " ]----- */"))
+;;   ;;      ))
+;;   (define-key js2-mode-map [(return)] 'newline-and-indent)
+;;   (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+;;   (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
+;;   (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
+;;   (if (featurep 'js2-highlight-vars)
+;;     (js2-highlight-vars-mode))
+;;   (message "My JS2 hook"))
 
-(add-hook 'js2-mode-hook 'my-js2-mode-hook)
+;; (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
 ;;----------------------------------------------
 ;; disable tab for js2-mode
@@ -2910,6 +2916,40 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   (column-enforce-mode 1))
 (add-hook 'js2-mode-hook 'js2-mode-hook--column-enforce-mode)
 
+;;----------------------------------------------
+;; flycheck with eslint
+;;----------------------------------------------
+;; use web-mode for .jsx files
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
+;; http://www.flycheck.org/manual/latest/index.html
+(require 'flycheck)
+
+;; turn on flychecking globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; disable jshint since we prefer eslint checking
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(javascript-jshint)))
+
+;; use eslint with web-mode for jsx files and .js files
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+(flycheck-add-mode 'javascript-eslint 'js2-mode)
+
+;; customize flycheck temp file prefix
+(setq-default flycheck-temp-prefix ".flycheck")
+
+;; disable json-jsonlist checking for json files
+(setq-default flycheck-disabled-checkers
+  (append flycheck-disabled-checkers
+    '(json-jsonlist)))
+
+;; https://github.com/purcell/exec-path-from-shell
+;; only need exec-path-from-shell on OSX
+;; this hopefully sets up path and other vars better
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;;----------------------------------
 ;; Node
@@ -2921,7 +2961,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; jshint
 ;;----------------------------------
 ;; set the execution path to jshint
-(setq exec-path (append exec-path '("/usr/local/bin")))
+;; (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;;----------------------------------
 ;; flymake-jshint.el
@@ -2934,40 +2974,40 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;           (flymake-jshint-load)))
 
 ;; for flymake-cursor.el
-(custom-set-variables
-   '(help-at-pt-timer-delay 0.9)
-   '(help-at-pt-display-when-idle '(flymake-overlay)))
+;; (custom-set-variables
+;;    '(help-at-pt-timer-delay 0.9)
+;;    '(help-at-pt-display-when-idle '(flymake-overlay)))
 
 ;;----------------------------------
 ;; flycheck
 ;;----------------------------------
 ;; flycheck
 ;;http://syati.info/?p=2096
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;;----------------------
 ;; Tern.js
 ;;----------------------
 ;; set the path to tern
-(setq exec-path (append exec-path '("/usr/local/bin")))
+;; (setq exec-path (append exec-path '("/usr/local/bin")))
 
-;; set the path to node
-;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+;; ;; set the path to node
+;; ;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
-(autoload 'tern-mode "tern.el" nil t)
+;; (autoload 'tern-mode "tern.el" nil t)
 
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (autoload 'js2-mode "js2-mode" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (tern-mode t)))
+;; (add-hook 'js2-mode-hook
+;;           (lambda ()
+;;             (tern-mode t)))
 
-(eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
+;; (eval-after-load 'tern
+;;    '(progn
+;;       (require 'tern-auto-complete)
+;;       (tern-ac-setup)))
 
 ;;=============================================
 ;; For XML
@@ -3006,25 +3046,24 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; https://github.com/flycheck/flycheck/issues/567
 ;; http://hitode909.hatenablog.com/entry/2013/08/04/194929
 ;;----------------------------------------------
+;; (require 'flycheck)
+;; (flycheck-define-checker perl-project-libs
+;;   "A perl syntax checker."
+;;   :command ("perl"
+;;             "-MProject::Libs lib_dirs => [qw(nexus_lib_perl)]"
+;;             "-wc"
+;;             source-inplace)
+;;   :error-patterns ((error line-start
+;;                           (minimal-match (message))
+;;                           " at " (file-name) " line " line
+;;                           (or "." (and ", " (zero-or-more not-newline)))
+;;                           line-end))
+;;   :modes (cperl-mode))
 
-(require 'flycheck)
-(flycheck-define-checker perl-project-libs
-  "A perl syntax checker."
-  :command ("perl"
-            "-MProject::Libs lib_dirs => [qw(nexus_lib_perl)]"
-            "-wc"
-            source-inplace)
-  :error-patterns ((error line-start
-                          (minimal-match (message))
-                          " at " (file-name) " line " line
-                          (or "." (and ", " (zero-or-more not-newline)))
-                          line-end))
-  :modes (cperl-mode))
-
-(add-hook 'cperl-mode-hook
-          (lambda ()
-            (flycheck-mode t)
-            (setq flycheck-checker 'perl-project-libs)))
+;; (add-hook 'cperl-mode-hook
+;;           (lambda ()
+;;             (flycheck-mode t)
+;;             (setq flycheck-checker 'perl-project-libs)))
 
 
 ;;----------------------------------------------
