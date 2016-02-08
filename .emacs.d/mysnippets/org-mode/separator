@@ -3,4 +3,6 @@
 # key: separator
 # binding: direct-keybinding
 # --
-# ==== ${1:title} ====
+# /**
+#  * ${1:title}
+#  */
