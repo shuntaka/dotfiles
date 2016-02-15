@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: checklist
+# key: checklist
+# binding: direct-keybinding
+# --
+*** ${1:checklist_name} []
+    # hit C-c C-c inside the checkbox to tick
+    - [ ] 
+    - [ ]
+    - [ ]
