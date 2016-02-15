@@ -1047,14 +1047,14 @@
 ;;----------------------------------------------
 ;; mark paragraph
 ;;----------------------------------------------
-(defun  shun-mark-current-paragraph()
-    "Change me!"
-  (interactive)
-  (mark-thing "paragraph")
-  (next-line))
-(define-key global-map (kbd "M-h") 'shun-mark-current-paragraph)
-(require 'org)
-(define-key org-mode-map (kbd "M-h") 'shun-mark-current-paragraph)
+;; (defun  shun-mark-current-paragraph()
+;;     "Change me!"
+;;   (interactive)
+;;   (mark-thing "paragraph")
+;;   (next-line))
+;; (define-key global-map (kbd "M-h") 'shun-mark-current-paragraph)
+;; (require 'org)
+;; (define-key org-mode-map (kbd "M-h") 'shun-mark-current-paragraph)
 
 ;;----------------------------------------------
 ;; copy a line with avy.el
