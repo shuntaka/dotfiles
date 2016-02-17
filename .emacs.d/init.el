@@ -1748,12 +1748,28 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
                         )))))))
 
 ;; short cut for tag-view by elmacro
+;; (defun tag-view ()
+;;   "tag view"
+;;   (interactive)
+;;   (org-match-sparse-tree nil))
+;; (global-set-key (kbd "C-c q") 'tag-view)
+
+;; short cut for org-agenda showing TODO entries filtering by tag
 (defun tag-view ()
   "tag view"
   (interactive)
-  (org-match-sparse-tree nil))
+  (org-tags-view '(4)))
+(global-set-key (kbd "C-c m") 'tag-view)
 
-(global-set-key (kbd "C-c q") 'tag-view)
+
+;; short cut for org-agenda showing entry filtering by TODO keyword
+(defun filter-by-todo-keyword ()
+    "Change me!"
+  (interactive)
+  (org-todo-list '(4)))
+(define-key global-map (kbd "C-c t") 'filter-by-todo-keyword)
+
+
 
 
 ;; short cut for moving completed task in ToDo_INBOX.org by elmacro
