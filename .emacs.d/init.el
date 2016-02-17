@@ -160,6 +160,11 @@
 ;; (el-get-bundle flycheck)
 
 ;;----------------------------------------------
+;; el-get packages for SQL
+;;----------------------------------------------
+;; (el-get-bundle sqlplus)
+
+;;----------------------------------------------
 ;; TODO elpa package to re-install with el-get
 ;;----------------------------------------------
 ;; (el-get-bundle ag) ;;github
