@@ -138,6 +138,11 @@
 ;; (el-get-bundle helm-bm)
 
 ;;----------------------------------------------
+;; el-get packages for window
+;;----------------------------------------------
+(el-get-bundle window-numbering)
+
+;;----------------------------------------------
 ;; el-get packages for javascript
 ;;----------------------------------------------
 (el-get-bundle js2-mode)
@@ -2442,6 +2447,12 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;=============================================
 ;; Manipulating Frame and Window
 ;;=============================================
+;;----------------------------------------------
+;; window numbering
+;; http://rubikitch.com/2015/03/02/window-numbering/
+;;----------------------------------------------
+(window-numbering-mode 1)
+
 
 ;; ウィンドウ移動
 ;;http://fukuyama.co/window-number

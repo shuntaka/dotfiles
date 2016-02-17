@@ -84,6 +84,8 @@
 (:name smartparens :after nil :description "Autoinsert pairs of defined brackets and wrap regions" :type github :pkgname "Fuco1/smartparens" :depends dash))
 (sqlplus status "installed" recipe
 (:name sqlplus :after nil :auto-generated t :type emacswiki :description "User friendly interface to SQL*Plus and support for PL/SQL compilation" :website "https://raw.github.com/emacsmirror/emacswiki.org/master/sqlplus.el"))
+(window-numbering status "installed" recipe
+(:name window-numbering :after nil :website "http://nschum.de/src/emacs/window-numbering-mode/" :description "Assigns numbers to Emacs windows to allow easy window navigation." :type github :pkgname "nschum/window-numbering.el"))
 (yasnippet status "installed" recipe
 (:name yasnippet :website "https://github.com/capitaomorte/yasnippet.git" :description "YASnippet is a template system for Emacs." :type github :pkgname "capitaomorte/yasnippet" :compile "yasnippet.el" :submodule nil :build
 (("git" "submodule" "update" "--init" "--" "snippets")))))
