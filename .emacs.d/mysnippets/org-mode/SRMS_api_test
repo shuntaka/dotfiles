@@ -1,0 +1,40 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: SRMS_api_test
+# key: SRMSApiTest
+# binding: direct-keybinding
+# --
+** ${1:create invoice header}
+*** document correspondence
+    | Service | test  | UTC |
+    | design  | cases |     |
+    |---------+-------+-----|
+    |         |       |     |
+    |---------+-------+-----|
+
+*** URL parameter
+    | URL   |       |
+    | param | value |
+    |-------+-------|
+    |       |       |
+    |-------+-------|
+    |       |       |
+    |-------+-------|
+
+*** API & payload Path
+    /Users/shun/Development/API_forC39/SRMS/api/
+    /Users/shun/Development/API_forC39/SRMS/payload/
+
+    /home/shunsuke.takamiya/Development/API_forC39/SRMS/api/
+    /home/shunsuke.takamiya/Development/API_forC39/SRMS/payload/
+
+
+*** request for full API parameters
+
+*** response for full API parameters
+
+*** request for minimum API parameters
+
+*** response for minimum API parameters
+
+
+*** memo
