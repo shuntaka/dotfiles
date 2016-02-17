@@ -49,6 +49,13 @@
 ;;      (setenv "PATH" path-str)
 ;;      (setq exec-path (nconc (split-string path-str ":") exec-path)))
 
+;;----------------------------------------------
+;; exec-path-from-shell
+;; https://github.com/purcell/exec-path-from-shell
+;; http://hitode909.hatenablog.com/entry/2013/08/04/194929
+;;----------------------------------------------
+;; (exec-path-from-shell-initialize)
+
 ;; for Node
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 
