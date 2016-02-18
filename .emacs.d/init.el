@@ -1277,7 +1277,7 @@ org-modeなどで活用。"
 ;; avy
 ;; http://rubikitch.com/2015/05/20/avy/
 ;;----------------------------------------------
-;; (global-set-key (kbd "C-o") 'avy-goto-char)
+(global-set-key (kbd "C-M-o") 'avy-goto-char-2)
 ;; (global-set-key (kbd "C-M-;") 'avy-goto-line)
 
 ;;----------------------------------------------
