@@ -1759,7 +1759,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   (setq org-capture-templates
         '(("m" "Memo" entry (file+datetree "~/Dropbox/Documents/Memo/memo.org" "MEMO")
            "* %^{Title} %^g\n%?\nAdded: %U")
-          ("t" "Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Office/office_ToDo_INBOX.org" "====ToDo====")
+          ("t" "Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Office/master.org" "====ToDo====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
           ("h" "Home Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Home/home_ToDo_INBOX.org" "====ToDo====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
@@ -1997,6 +1997,36 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
 (define-key global-map (kbd "C-c s") 'helm-ag)
 ;; (global-set-key (kbd "!C-c y") 'helm-show-kill-ring)
+
+;;----------------------------------------------
+;; helm-ace-jump-line
+;;----------------------------------------------
+(require 'ace-jump-helm-line)
+
+(define-key helm-map (kbd "`") 'ace-jump-helm-line--with-error-fallback)
+(define-key helm-map (kbd "@") 'ace-jump-helm-line-and-execute-action)
+
+;;; anything-shortcut-keys-alistと同じように設定
+(setq avy-keys (append "asdfghjklzxcvbnmqwertyuiop" nil))
+
+;;; ちょっとアレンジ
+(defun ajhl--insert-last-char ()
+  (insert (substring (this-command-keys) -1)))
+(defun ace-jump-helm-line--with-error-fallback ()
+  "ヒント文字以外の文字が押されたらその文字を挿入するように修正"
+  (interactive)
+  (condition-case nil
+      (ace-jump-helm-line)
+    (error (ajhl--insert-last-char))))
+(defun ace-jump-helm-line-and-execute-action ()
+  "anything-select-with-prefix-shortcut互換"
+  (interactive)
+  (condition-case nil
+      (progn (ace-jump-helm-line)
+             (helm-exit-minibuffer))
+    (error (ajhl--insert-last-char))))
+
+
 
 ;;----------------------------------------------
 ;; helm-swoop
