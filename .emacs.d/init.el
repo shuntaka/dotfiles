@@ -1008,7 +1008,7 @@
 (define-key company-active-map (kbd "C-p") 'company-select-previous)
 (define-key company-active-map (kbd "C-h") nil)
 
-(define-key global-map (kbd "C-M-i") 'company-complete)
+;; (define-key global-map (kbd "C-M-i") 'company-complete)
 
 ;;----------------------------------------------
 ;; 6.14' include the hippie-expand candidate in company-mode
@@ -1711,7 +1711,8 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (define-key org-mode-map (kbd "<C-S-tab>")'elscreen-previous)
 (define-key org-mode-map (kbd "C-'")'helm-elscreen)
 (define-key org-mode-map (kbd "C-M-t") 'elscreen-kill)
-(define-key org-mode-map (kbd "C-M-i") 'company-complete)
+;; (define-key org-mode-map (kbd "C-M-i") 'company-complete)
+(define-key org-mode-map (kbd "C-M-i") 'helm-dabbrev)
 (define-key org-mode-map (kbd "C-M-m") (lambda () (interactive) (move-to-window-line nil)))
 ;;----------------------
 ;; 14.2
@@ -2021,6 +2022,12 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; globally bind helm-c-yasnippet to C-j
 (keyboard-translate ?\C-j ?\H-j) ;;C-j とnewlineの被りを回避
 (define-key global-map (kbd "H-j") 'helm-yas-complete)
+
+;;----------------------------------------------
+;; helm-dabbrev
+;;----------------------------------------------
+(define-key global-map (kbd "C-M-i") 'helm-dabbrev)
+
 
 ;;----------------------------------------------
 ;; helm-bm.el設定
