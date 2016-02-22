@@ -764,7 +764,7 @@
 ;; http://rubikitch.com/2016/02/15/sd1507-builtin/
 ;;----------------------------------------------
 (require 'misc)
-(global-set-key (kbd "M-f") 'forward-to-word)
+;; (global-set-key (kbd "M-f") 'forward-to-word)
 ;; (global-set-key (kbd "M-b") 'backward-to-word)
 
 
@@ -1116,6 +1116,18 @@
 ;; copy region with avy.el
 ;;----------------------------------------------
 (define-key global-map (kbd "C-M-y") 'avy-copy-region)
+
+;; (defun shun-test(query-char)
+;;   (set-mark-command)
+;;   (interactive (list (read-char "Query Char:")))
+;;   (if ace-jump-current-mode (ace-jump-done))
+;;   (if (eq (ace-jump-char-category query-char) 'other)
+;;     (error "[AceJump] Non-printable character"))
+;;   (setq ace-jump-query-char query-char)
+;;   (setq ace-jump-current-mode 'ace-jump-char-mode)
+;;   (ace-jump-do (regexp-quote (make-string 1 query-char))))
+;; (define-key global-map (kbd "C-M-y") 'shun-test)
+
 
 ;;----------------------------------------------
 ;; kill current line
