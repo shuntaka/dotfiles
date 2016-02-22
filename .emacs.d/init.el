@@ -1759,7 +1759,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   (setq org-capture-templates
         '(("m" "Memo" entry (file+datetree "~/Dropbox/Documents/Memo/memo.org" "MEMO")
            "* %^{Title} %^g\n%?\nAdded: %U")
-          ("t" "Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Office/master.org" "====ToDo====")
+          ("t" "Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Office/todo_master.org" "====ToDo====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
           ("h" "Home Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Home/home_ToDo_INBOX.org" "====ToDo====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
@@ -1861,7 +1861,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; http://qiita.com/takaxp/items/0b717ad1d0488b74429d
 ;;----------------------------------------------
 (setq org-agenda-files
-      '("~/Dropbox/Documents/Manage/ToDo/Office/office_ToDo_INBOX.org"
+      '("~/Dropbox/Documents/Manage/ToDo/Office/todo_master.org"
         "~/Dropbox/Documents/Manage/Todo/Office/jimu_todo.org"
         "~/Dropbox/Documents/Manage/Todo/Office/kai開発移管_todo.org"
         "~/Dropbox/Documents/Manage/Todo/Office/kan環境構築_todo.org"
