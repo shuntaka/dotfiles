@@ -3,6 +3,4 @@
 # key: elgetInstallFromGithub
 # binding: direct-keybinding
 # --
-(el-get-bundle ${1:flycheck}
-  :type github :pkgname "${2:Fuco1/flycheck}"
-  :depends ${3:seq})
+(el-get-bundle ${1:flycheck})
