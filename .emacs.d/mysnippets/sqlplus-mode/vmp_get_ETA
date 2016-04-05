@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp_get_ETA
+# key: vmpGetETA
+# --
+SELECT cap.account_id, cap.account_product_id, po.offr_cd, po.offr_id, cap.ctlg_offr_id, ps.spec_id, ps.spec_cd, cap.status_id, caps.status_name, cap.eta, cap.creation_date
+FROM CUST_ACCOUNT_PRODUCT cap, PROD_SPEC ps, PROD_OFFR po, CUST_ACCT_PROD_STATUS caps
+WHERE cap.spec_id=ps.spec_id
+AND ps.spec_cd=po.offr_cd
+AND cap.status_id=caps.status_id
+AND cap.account_id = '${1:191745}'
+AND cap.account_product_id = '${2:27519}'

@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: CRI_test_log
+# key: CRITestLog
+# binding: direct-keybinding
+# --
+* [TestCase-${1:47}][CRI-${2:38}] ${3:Create a ticket on account product failure}
+** Steps
+   -

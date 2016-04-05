@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: VMP_get_batch_start_date_batch_end_date
+# key: VMPgetBatchStartDateBatchEndDate
+# binding: direct-keybinding
+# --
+select * from bill_billing_batch

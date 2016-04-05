@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: VMP_update_activation_date_end_effective_date
+# key: VMPupdateActivationDateEndEffectiveDate
+# binding: direct-keybinding
+# --
+update cust_account_product
+set activation_date = '01-MAR-16 01:01:01',
+    beg_eff_date = '01-MAR-16 01:01:01',
+    end_eff_date  = null
+where account_product_id='${1:27659}'

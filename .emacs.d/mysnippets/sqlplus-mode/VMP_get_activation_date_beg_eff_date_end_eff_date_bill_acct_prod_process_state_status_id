@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: VMP_get_activation_date_beg_eff_date_end_eff_date_order_date_bill_acct_prod_process_state_status_id_from_account_product_id
+# key: VMPgetActivationDateBegEffDateEndEffDateOrderDateBillAcctProcProcessStateStatusIdFromAccountProductId
+# binding: direct-keybinding
+# --
+SELECT cap.account_id, cap.activation_date, cap.beg_eff_date, cap.end_eff_date, ooh.order_date, cap.bill_acct_prod_process_state, cap.account_product_id, cap.status_id, caps.status_name,cap.creation_date
+FROM CUST_ACCOUNT_PRODUCT cap, CUST_ACCT_PROD_STATUS caps, ORDR_ORDER_LINE ool, ORDR_ORDER_HEADER ooh
+WHERE cap.status_id=caps.status_id
+AND cap.account_product_id=ool.account_product_id
+AND ool.order_header_id=ooh.order_header_id
+AND cap.account_product_id = '${1:27659}';

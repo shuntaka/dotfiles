@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: VMP_update_order_date
+# key: VMPupdateOrderDate
+# binding: direct-keybinding
+# --
+update ordr_order_header
+set order_date = '01-MAR-16 01:01:01'
+where order_header_id = '${1:19109}'

@@ -1,0 +1,22 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: VMP_get_invoice_info_from_account_product_id
+# key: VMPgetInvoiceInfoFromAccountProductId
+# binding: direct-keybinding
+# --
+select SRMS_CUSTOMER.customer_no,
+SRMS_CUSTOMER.customer_id,
+SRMS_INVOICE_DETAILS.acct_prod_id,
+SRMS_INVOICE_HEADER.document_no,
+SRMS_INVOICE_HEADER.invoice_header_id,
+srms_invoice_HEADER.creation_date,
+SRMS_INVOICE_HEADER.batch_number,
+SRMS_INVOICE_HEADER.batch_status_id,
+SRMS_BATCH_STATUS.batch_status_name,
+SRMS_INVOICE_BATCH.creation_date,
+SRMS_INVOICE_DETAILS.beg_eff_date,
+SRMS_INVOICE_DETAILS.end_eff_date
+from SRMS_INVOICE_BATCH, SRMS_INVOICE_HEADER, SRMS_INVOICE_DETAILS, SRMS_CUSTOMER, SRMS_BATCH_STATUS
+where SRMS_INVOICE_HEADER.customer_id=SRMS_CUSTOMER.customer_id
+and SRMS_INVOICE_HEADER.invoice_header_id=SRMS_INVOICE_DETAILS.invoice_header_id
+and SRMS_INVOICE_HEADER.batch_status_id=SRMS_BATCH_STATUS.batch_status_id
+and acct_prod_id='${1:27661}'

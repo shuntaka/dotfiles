@@ -4,6 +4,9 @@
 # binding: direct-keybinding
 # --
 * [Date]${1:2016} ${2:0205} [Account ID] ${3:7281} [Summary] ${7:change order fails}
+** goal
+   - ${1:identify why the account product is suspended}
+   - ${2:activate the account product}
 ** Basic status
 
 |----------------------------+----------------------------|

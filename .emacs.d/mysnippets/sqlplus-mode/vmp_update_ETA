@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp_update_ETA
+# key: vmpUpdateETA
+# binding: direct-keybinding
+# --
+update cust_account_product set eta = ' ${1:26-FEB-16 01:01:01}' where account_id = ${2:191745} and account_product_id = ${3:27519};

@@ -1,0 +1,22 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: VMP_CRI_UAT_test
+# key: VMPCriUatTest
+# binding: direct-keybinding
+# --
+   - create an account product from retail (service > page  >  )
+   - get order header id
+
+   - get account product id
+
+   - get order header id for
+
+   - get correlation ID from order header id
+
+
+   - get router message from order header id
+     file name:
+
+   - send the message to queue
+     Queue:
+
+   - record ticket no

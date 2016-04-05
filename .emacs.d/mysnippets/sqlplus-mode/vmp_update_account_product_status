@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: vmp_update_account_product_status
+# key: vmpUpdateAccountProductStatus
+# binding: direct-keybinding
+# --
+update cust_account_product set status_id =${1:15} where account_id = ${2:191745} and account_product_id = ${3:27519};
