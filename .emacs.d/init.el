@@ -1862,12 +1862,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 (setq org-agenda-files
       '("~/Dropbox/Documents/Manage/ToDo/Office/todo_master.org"
-        "~/Dropbox/Documents/Manage/Todo/Office/jimu_todo.org"
-        "~/Dropbox/Documents/Manage/Todo/Office/kai開発移管_todo.org"
-        "~/Dropbox/Documents/Manage/Todo/Office/kan環境構築_todo.org"
-        "~/Dropbox/Documents/Manage/Todo/Office/VMP_troubleshooting_todo.org"
-        "~/Dropbox/Documents/Manage/Todo/Office/SRP_KT_todo.org"
-        "~/Dropbox/Documents/Manage/ToDo/Office/schedule2015.org"
         ))
 (global-set-key (kbd "C-c a") 'org-agenda)
 
