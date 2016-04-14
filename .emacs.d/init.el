@@ -74,10 +74,10 @@
   (let (path)
     (dolist (path paths paths)
       (let ((default-directory
-	      (expand-file-name (concat user-emacs-directory path))))
-	(add-to-list 'load-path default-directory)
-	(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-	    (normal-top-level-add-subdirs-to-load-path))))))
+          (expand-file-name (concat user-emacs-directory path))))
+    (add-to-list 'load-path default-directory)
+    (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+        (normal-top-level-add-subdirs-to-load-path))))))
 
 ;; add directories under "elisp", "elpa", "conf", "public_repos"
 (add-to-load-path "el-get" "auto-install" "elisp" "elpa" "conf" "public_repos")
@@ -1528,10 +1528,10 @@ org-modeなどで活用。"
 (defun copy-to-tmux ()
   (interactive)
   (if (use-region-p)
-	  (kill-ring-save (region-beginning)(region-end)))
+      (kill-ring-save (region-beginning)(region-end)))
   (let (
-		(data (substring-no-properties (car kill-ring))))
-	(emamux:set-buffer data 0))
+        (data (substring-no-properties (car kill-ring))))
+    (emamux:set-buffer data 0))
   (shell-command "tmux save-buffer - | nc -q1 localhost 2224")
   )
 ;; (global-set-key (kbd "C-M-w") 'copy-to-tmux)
@@ -1702,8 +1702,8 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; 14. Create Documents
 ;;=============================================
 (add-hook 'org-mode-hook
-		  (lambda ()
-		  (setq-default indent-tabs-mode nil)))
+          (lambda ()
+          (setq-default indent-tabs-mode nil)))
 ;;----------------------------------------------
 ;; org-mode keybind
 ;;----------------------------------------------
@@ -1882,7 +1882,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;(defun howm-save-buffer-and-kill ()
 ;;  (interactive)
 ;;  (when (and (buffer-file-name)
-;;	     (string-match "\\.howm" (buffer-file-name)))
+;;       (string-match "\\.howm" (buffer-file-name)))
 ;;    (save-buffer)
 ;;    (kill-buffer nil)))
 
@@ -3533,16 +3533,16 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; *** PerlySense load (don't touch) ***
 ;; (setq ps/external-dir (shell-command-to-string "perly_sense external_dir"))
 ;; (if (string-match "Devel.PerlySense.external" ps/external-dir)
-;; 	(progn
-;; 	  (message
-;; 	   "PerlySense elisp files  at (%s) according to perly_sense, loading..."
-;; 	   ps/external-dir)
-;; 	  (setq load-path (cons
-;; 					   (expand-file-name
-;; 						(format "%s/%s" ps/external-dir "emacs")
-;; 						) load-path))
-;; 	  (load "perly-sense")
-;; 	  )
+;;      (progn
+;;        (message
+;;         "PerlySense elisp files  at (%s) according to perly_sense, loading..."
+;;         ps/external-dir)
+;;        (setq load-path (cons
+;;                         (expand-file-name
+;;                          (format "%s/%s" ps/external-dir "emacs")
+;;                          ) load-path))
+;;        (load "perly-sense")
+;;        )
 ;;   (message "Could not identify PerlySense install dir.
 ;;     Is Devel::PerlySense installed properly?
 ;;     Does 'perly_sense external_dir' give you a proper directory? (%s)" ps/external-dir)
@@ -3588,7 +3588,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;       (auto-compelte-mode t)
 ;;       (make-variable-buffer-local 'ac-sources)
 ;;       (setq ac-sources
-;; 	    '(ac-source-perl-completion)))))
+;;          '(ac-source-perl-completion)))))
 ;; (add-hook 'cperl-mode-hook 'perl-completion-hook)
 
 ;;----------------------------------------------
