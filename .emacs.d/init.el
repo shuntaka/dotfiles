@@ -124,6 +124,12 @@
 ;;----------------------------------------------
 (el-get-bundle recentf-ext)
 
+
+;;----------------------------------------------
+;; el-get packages for input support
+;;----------------------------------------------
+(el-get-bundle hippie-exp-ext)
+
 ;;----------------------------------------------
 ;; el-get packages for helm
 ;;----------------------------------------------
@@ -913,17 +919,19 @@
 ;; 6.10 hippie-expand
 ;;----------------------------------------------
 (setq hippie-expand-try-functions-list
-      '(try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-all-abbrevs
-        try-expand-dabbrev
+      '(try-expand-dabbrev
         try-expand-dabbrev-all-buffers
-        try-complete-lisp-symbol-partially
-        try-complete-lisp-symbol-partially
         ))
 
+;; (global-set-key (kbd "H-i") 'hippie-expand)
+
+;;----------------------------------------------
+;; hippie-exp-ext
+;;----------------------------------------------
+(require 'hippie-exp-ext)
 (keyboard-translate ?\C-i ?\H-i) ;;C-i と Tabの被りを回避
-(global-set-key (kbd "H-i") 'hippie-expand)
+(global-set-key (kbd "H-i") 'hippie-expand-dabbrev-limited-chars)
+(global-set-key (kbd "M-/") 'hippie-expand-file-name)
 
 ;;----------------------------------------------
 ;; 6.10' ido-vertical
@@ -997,16 +1005,16 @@
 ;; http://qiita.com/sune2/items/b73037f9e85962f5afb7
 ;; http://rubikitch.com/2014/10/14/company/
 ;;----------------------------------------------
-(require 'company)
-(global-company-mode) ; 全バッファで有効にする
-(setq company-idle-delay nil) ; デフォルトは0.5
-(setq company-minimum-prefix-length 2) ; デフォルトは4
-(setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
-(define-key company-active-map (kbd "M-n") nil)
-(define-key company-active-map (kbd "M-p") nil)
-(define-key company-active-map (kbd "C-n") 'company-select-next)
-(define-key company-active-map (kbd "C-p") 'company-select-previous)
-(define-key company-active-map (kbd "C-h") nil)
+;; (require 'company)
+;; (global-company-mode) ; 全バッファで有効にする
+;; (setq company-idle-delay nil) ; デフォルトは0.5
+;; (setq company-minimum-prefix-length 2) ; デフォルトは4
+;; (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+;; (define-key company-active-map (kbd "M-n") nil)
+;; (define-key company-active-map (kbd "M-p") nil)
+;; (define-key company-active-map (kbd "C-n") 'company-select-next)
+;; (define-key company-active-map (kbd "C-p") 'company-select-previous)
+;; (define-key company-active-map (kbd "C-h") nil)
 
 ;; (define-key global-map (kbd "C-M-i") 'company-complete)
 

@@ -69,6 +69,8 @@
 (helm-swoop status "installed" recipe
 (:name helm-swoop :after nil :type github :description "Efficiently hopping squeezed lines powered by Emacs helm interface" :pkgname "ShingoFukuyama/helm-swoop" :depends
 (helm)))
+(hippie-exp-ext status "installed" recipe
+(:name hippie-exp-ext :after nil :auto-generated t :type emacswiki :description "Extension of hippie-expand" :website "https://raw.github.com/emacsmirror/emacswiki.org/master/hippie-exp-ext.el"))
 (js2-mode status "installed" recipe
 (:name js2-mode :after nil :website "https://github.com/mooz/js2-mode#readme" :description "An improved JavaScript editing mode" :type github :pkgname "mooz/js2-mode" :prepare
 (autoload 'js2-mode "js2-mode" nil t)))
