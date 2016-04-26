@@ -2936,6 +2936,12 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; (add-hook 'scss-mode-hook 'flycheck-mode)
 ;; '(flycheck-scss-compass t)
 
+;;==============================================
+;; Markdown
+;;==============================================
+
+
+
 ;;=============================================
 ;; For JavaScript
 ;;=============================================
