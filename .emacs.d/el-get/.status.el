@@ -2,16 +2,6 @@
                 (:name ace-jump-mode :after nil :website "https://github.com/winterTTr/ace-jump-mode/wiki" :description "A quick cursor location minor mode for emacs." :type github :pkgname "winterTTr/ace-jump-mode" :prepare
                        (eval-after-load "ace-jump-mode"
                          '(ace-jump-mode-enable-mark-sync))))
- (auto-complete status "installed" recipe
-                (:name auto-complete :after nil :features
-                       (auto-complete-config)
-                       :website "https://github.com/auto-complete/auto-complete" :description "The most intelligent auto-completion extension." :type github :pkgname "auto-complete/auto-complete" :depends
-                       (popup fuzzy)
-                       :post-init
-                       (progn
-                         (add-to-list 'ac-dictionary-directories
-                                      (expand-file-name "dict" default-directory))
-                         (ac-config-default))))
  (cl-lib status "installed" recipe
          (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
  (dash status "installed" recipe

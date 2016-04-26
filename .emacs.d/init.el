@@ -158,7 +158,7 @@
 ;;----------------------------------------------
 (el-get-bundle smartparens)
 
-(el-get-bundle auto-complete)
+;; (el-get-bundle auto-complete)
 
 ;;----------------------------------------------
 ;; el-get packages for moving cursor
@@ -2936,7 +2936,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
                                ))
             (flymake-mode t)
             ))
-(add-to-list 'ac-modes 'scss-mode)
+;; (add-to-list 'ac-modes 'scss-mode)
 
 ;;----------------------------------------------
 ;; flycheck for SCSS
