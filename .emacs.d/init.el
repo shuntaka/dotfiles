@@ -918,10 +918,9 @@
 ;;----------------------------------------------
 ;; 6.10 hippie-expand
 ;;----------------------------------------------
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        ))
+;; (setq hippie-expand-try-functions-list
+;;       '(try-expand-dabbrev
+;;         ))
 
 ;; (global-set-key (kbd "H-i") 'hippie-expand)
 
