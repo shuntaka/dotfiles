@@ -45,3 +45,4 @@ ac-comphist.dat
 .emacs.d/el-get/*
 !.emacs.d/el-get/.status.el
 /.emacs.d/recentf~
+/.emacs.d/.mc-lists.el
