@@ -418,8 +418,14 @@
 
 ;;----------------------
 ;; line-number on the left side
+;; http://d.hatena.ne.jp/daimatz/20120215/1329248780
 ;;----------------------
-(global-linum-mode t)
+;; (global-linum-mode t)
+
+;; (setq linum-delay t)
+;; (defadvice linum-schedule (around my-linum-schedule () activate)
+;;   (run-with-idle-timer 0.03 nil #'linum-update-current))
+
 
 ;;----------------------
 ;; show the file path for the currently opned file
