@@ -3061,6 +3061,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 ;;----------------------------------------------
 ;; flycheck with eslint
+;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 ;;----------------------------------------------
 ;; ;; use web-mode for .jsx files
 ;; (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
