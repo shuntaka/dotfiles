@@ -1536,17 +1536,17 @@ org-modeなどで活用。"
 ;;----------------------------------------------
 ;; emamux
 ;;----------------------------------------------
-(require 'emamux)
+;; (require 'emamux)
 
-(defun copy-to-tmux ()
-  (interactive)
-  (if (use-region-p)
-      (kill-ring-save (region-beginning)(region-end)))
-  (let (
-        (data (substring-no-properties (car kill-ring))))
-    (emamux:set-buffer data 0))
-  (shell-command "tmux save-buffer - | nc -q1 localhost 2224")
-  )
+;; (defun copy-to-tmux ()
+;;   (interactive)
+;;   (if (use-region-p)
+;;       (kill-ring-save (region-beginning)(region-end)))
+;;   (let (
+;;         (data (substring-no-properties (car kill-ring))))
+;;     (emamux:set-buffer data 0))
+;;   (shell-command "tmux save-buffer - | nc -q1 localhost 2224")
+;;   )
 ;; (global-set-key (kbd "C-M-w") 'copy-to-tmux)
 
 ;;----------------------------------------------
@@ -1905,12 +1905,12 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; calender
 ;; http://d.hatena.ne.jp/kiwanami/20110107/1294404952
 ;;----------------------------------------------
-(add-hook 'calendar-load-hook
-          (lambda ()
-            (require 'japanese-holidays)
-            (setq calendar-holidays
-                  (append japanese-holidays local-holidays other-holidays))))
-(require 'calfw) ; 初回一度だけ
+;; (add-hook 'calendar-load-hook
+;;           (lambda ()
+;;             (require 'japanese-holidays)
+;;             (setq calendar-holidays
+;;                   (append japanese-holidays local-holidays other-holidays))))
+;; (require 'calfw) ; 初回一度だけ
 ;; (cfw:open-calendar-buffer) ; カレンダー表示
 
 ;;----------------------------------------------
@@ -1918,8 +1918,8 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; http://d.hatena.ne.jp/kiwanami/20110723/1311434175
 ;;----------------------------------------------
 ;; require calfw-org to view the schedule in the calender
-(require 'calfw-org)
-(global-set-key (kbd "C-c c") 'cfw:open-org-calendar)
+;; (require 'calfw-org)
+;; (global-set-key (kbd "C-c c") 'cfw:open-org-calendar)
 
 ;;----------------------------------------------
 ;; calfw-org view
