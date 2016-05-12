@@ -5,33 +5,33 @@
  (dash status "installed" recipe
        (:checksum "7cc01498a27d63ff4e0f3cd19ce7a53397fb533d" :name dash :description "A modern list api for Emacs. No 'cl required." :type github :pkgname "magnars/dash.el"))
  (el-get status "installed" recipe
-	 (:checksum "ef436e5abfbf2e25171922b38f2db951c257db9d" :checksum "ef436e5abfbf2e25171922b38f2db951c257db9d" :name el-get :website "https://github.com/dimitri/el-get#readme" :description "Manage the external elisp bits and pieces you depend upon." :type github :branch "master" :pkgname "dimitri/el-get" :info "." :compile
-		    ("el-get.*\\.el$" "methods/")
-		    :features el-get :post-init
-		    (when
-			(memq 'el-get
-			      (bound-and-true-p package-activated-list))
-		      (message "Deleting melpa bootstrap el-get")
-		      (unless package--initialized
-			(package-initialize t))
-		      (when
-			  (package-installed-p 'el-get)
-			(let
-			    ((feats
-			      (delete-dups
-			       (el-get-package-features
-				(el-get-elpa-package-directory 'el-get)))))
-			  (el-get-elpa-delete-package 'el-get)
-			  (dolist
-			      (feat feats)
-			    (unload-feature feat t))))
-		      (require 'el-get))))
+	 (:name el-get :website "https://github.com/dimitri/el-get#readme" :description "Manage the external elisp bits and pieces you depend upon." :type github :branch "master" :pkgname "dimitri/el-get" :info "." :compile
+		("el-get.*\\.el$" "methods/")
+		:features el-get :post-init
+		(when
+		    (memq 'el-get
+			  (bound-and-true-p package-activated-list))
+		  (message "Deleting melpa bootstrap el-get")
+		  (unless package--initialized
+		    (package-initialize t))
+		  (when
+		      (package-installed-p 'el-get)
+		    (let
+			((feats
+			  (delete-dups
+			   (el-get-package-features
+			    (el-get-elpa-package-directory 'el-get)))))
+		      (el-get-elpa-delete-package 'el-get)
+		      (dolist
+			  (feat feats)
+			(unload-feature feat t))))
+		  (require 'el-get))))
  (el-get-lock status "installed" recipe
 	      (:name el-get-lock :type github :pkgname "tarao/el-get-lock" :after nil))
  (exec-path-from-shell status "installed" recipe
 		       (:checksum "c2ca275d3243e8253513ced73e3ac21dc352e303" :name exec-path-from-shell :after nil :website "https://github.com/purcell/exec-path-from-shell" :description "Emacs plugin for dynamic PATH loading" :type github :pkgname "purcell/exec-path-from-shell"))
  (helm status "installed" recipe
-       (:checksum "2227344374e3113b149da84a65591ec673520777" :checksum "2227344374e3113b149da84a65591ec673520777" :name helm :after nil :features
+       (:checksum "2227344374e3113b149da84a65591ec673520777" :name helm :after nil :features
 		  ("helm-config")
 		  :description "Emacs incremental completion and narrowing framework" :type github :pkgname "emacs-helm/helm" :autoloads "helm-autoloads" :build
 		  (("make"))
@@ -99,5 +99,5 @@
 (window-numbering status "installed" recipe
 (:checksum "575ad203545b01e21d28fefc0d8b809d1016ea3a" :name window-numbering :after nil :website "http://nschum.de/src/emacs/window-numbering-mode/" :description "Assigns numbers to Emacs windows to allow easy window navigation." :type github :pkgname "nschum/window-numbering.el"))
 (yasnippet status "installed" recipe
-(:checksum "e9406f51266f9b9179f475886fa4ec78f1ccba44" :checksum "e9406f51266f9b9179f475886fa4ec78f1ccba44" :name yasnippet :website "https://github.com/capitaomorte/yasnippet.git" :description "YASnippet is a template system for Emacs." :type github :pkgname "capitaomorte/yasnippet" :compile "yasnippet.el" :submodule nil :build
+(:checksum "e9406f51266f9b9179f475886fa4ec78f1ccba44" :name yasnippet :website "https://github.com/capitaomorte/yasnippet.git" :description "YASnippet is a template system for Emacs." :type github :pkgname "capitaomorte/yasnippet" :compile "yasnippet.el" :submodule nil :build
 (("git" "submodule" "update" "--init" "--" "snippets")))))
