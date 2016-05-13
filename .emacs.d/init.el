@@ -178,7 +178,7 @@
 ;;----------------------------------------------
 ;; el-get packages for programming
 ;;----------------------------------------------
-(el-get-bundle flycheck)
+;; (el-get-bundle flycheck)
 
 ;;----------------------------------------------
 ;; el-get packages for SQL
@@ -3070,13 +3070,64 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 ;;----------------------------------------------
 ;; flycheck with eslint
+;; https://github.com/verdammelt/dotfiles/blob/master/.emacs.d/init-react.el
+;;----------------------------------------------
+;;;
+;;; We will need the NVM environment to run eslint. (Here we cavalierly
+;;; choose the last nvm version from the installed list.)
+;;;
+;; (require 'nvm)
+;; (nvm-use (caar (last (nvm--installed-versions))))
+
+;; ;;;
+;; ;;; I don't like installing project dev tools globally (I have run into
+;; ;;; a problem or two with global vs. local grunt for example.) So I
+;; ;;; check for an eslint installed into the projects node_modules
+;; ;;; directory and use that as the executable for flycheck.
+;; ;;;
+;; (with-eval-after-load 'projectile
+;;   (add-hook 'projectile-after-switch-project-hook 'mjs/setup-local-eslint))
+
+;; (defun mjs/setup-local-eslint ()
+;;     "If ESLint found in node_modules directory - use that for flycheck.
+;; Intended for use in PROJECTILE-AFTER-SWITCH-PROJECT-HOOK."
+;;     (interactive)
+;;     (let ((local-eslint (expand-file-name "./node_modules/.bin/eslint")))
+;;       (defvar flycheck-javascript-eslint-executable)
+;;       (setq flycheck-javascript-eslint-executable
+;;             (and (file-exists-p local-eslint) local-eslint))))
+
+;; ;;;
+;; ;;; will try built-in js-jsx-mode and see if that works well
+;; ;;;
+;; ;;; Since I don't see a clear winner between naming React/ReactNative
+;; ;;; files *.js or *.jsx I will use web-mode for both.
+;; ;;;
+;; (add-to-list 'auto-mode-alist '("\\.jsx?$" . js2-jsx-mode))
+;; (with-eval-after-load 'js2-mode
+;;   (defvar sgml-basic-offset)
+;;   (defvar sgml-attribute-offset)
+;;   (defvar js-indent-level)
+;;   (diminish 'js2-mode "JS")
+;;   (diminish 'js2-jsx-mode "JSX")
+;;   (setq js-indent-level 2)
+;;   (setq sgml-basic-offset js-indent-level
+;;         sgml-attribute-offset js-indent-level))
+
+;; ;;;
+;; ;;; Javascript mode is used for JSON files. I'd like its identation to
+;; ;;; match the code.
+;; ;;;
+;; (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
+;;----------------------------------------------
+;; flycheck with eslint
 ;; http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 ;;----------------------------------------------
-;; ;; use web-mode for .jsx files
-;; (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+;; (el-get-bundle flycheck)
 
-;; ;; http://www.flycheck.org/manual/latest/index.html
-;; (require 'flycheck)
+;; use web-mode for .jsx files
+;; (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 
 ;; ;; turn on flychecking globally
 ;; (add-hook 'after-init-hook #'global-flycheck-mode)
