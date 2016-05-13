@@ -136,6 +136,11 @@
 (el-get-bundle hippie-exp-ext)
 
 ;;----------------------------------------------
+;; el-get packages for search and replace
+;;----------------------------------------------
+ (el-get-bundle visual-regexp-steroids)
+
+;;----------------------------------------------
 ;; el-get packages for helm
 ;;----------------------------------------------
 ;;https://github.com/Fuco1/smartparens
@@ -1345,7 +1350,6 @@ org-modeなどで活用。"
 ;; visual-regexp-steroids
 ;; http://rubikitch.com/2015/04/20/visual-regexp-steroids/
 ;;----------------------------------------------
-(require 'visual-regexp-steroids)
 (setq vr/engine 'python)                ;python regexpならばこれ
 ;; (setq vr/engine 'pcre2el)               ;elispでPCREから変換
 (global-set-key (kbd "M-%") 'vr/query-replace)

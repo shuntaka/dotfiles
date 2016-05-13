@@ -1,5 +1,7 @@
 (setq el-get-lock-package-versions
-      '((el-get :checksum "ef436e5abfbf2e25171922b38f2db951c257db9d")
+      '((visual-regexp-steroids :checksum "b724d2a30efbcf2a13f6c34b798aeb453ff076be")
+        (visual-regexp :checksum "b625cec147dd1ac185aac52e2ae27acb2a662b28")
+        (el-get :checksum "ef436e5abfbf2e25171922b38f2db951c257db9d")
         (ace-jump-mode :checksum "8351e2df4fbbeb2a4003f2fb39f46d33803f3dac")
         (smartparens :checksum "5bef0a91540c9d447d2dcb3e6008ef9ab8644c93")
         (dash :checksum "7cc01498a27d63ff4e0f3cd19ce7a53397fb533d")

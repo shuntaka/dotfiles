@@ -2,6 +2,8 @@
 		(:checksum "8351e2df4fbbeb2a4003f2fb39f46d33803f3dac" :name ace-jump-mode :after nil :website "https://github.com/winterTTr/ace-jump-mode/wiki" :description "A quick cursor location minor mode for emacs." :type github :pkgname "winterTTr/ace-jump-mode" :prepare
 			   (eval-after-load "ace-jump-mode"
 			     '(ace-jump-mode-enable-mark-sync))))
+ (cl-lib status "installed" recipe
+	 (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
  (dash status "installed" recipe
        (:checksum "7cc01498a27d63ff4e0f3cd19ce7a53397fb533d" :name dash :description "A modern list api for Emacs. No 'cl required." :type github :pkgname "magnars/dash.el"))
  (el-get status "installed" recipe
@@ -96,6 +98,12 @@
 (:checksum "5bef0a91540c9d447d2dcb3e6008ef9ab8644c93" :name smartparens :after nil :depends
 (dash)
 :description "Autoinsert pairs of defined brackets and wrap regions" :type github :pkgname "Fuco1/smartparens"))
+(visual-regexp status "installed" recipe
+(:name visual-regexp :description "A regexp/replace command for Emacs with\n       interactive visual feedback" :type github :depends cl-lib :pkgname "benma/visual-regexp.el"))
+(visual-regexp-steroids status "installed" recipe
+(:name visual-regexp-steroids :after nil :depends
+(visual-regexp)
+:description "An extension to visual-regexp-steroids which enables\nthe use of modern regexp engines" :type github :pkgname "benma/visual-regexp-steroids.el"))
 (window-numbering status "installed" recipe
 (:checksum "575ad203545b01e21d28fefc0d8b809d1016ea3a" :name window-numbering :after nil :website "http://nschum.de/src/emacs/window-numbering-mode/" :description "Assigns numbers to Emacs windows to allow easy window navigation." :type github :pkgname "nschum/window-numbering.el"))
 (yasnippet status "installed" recipe
