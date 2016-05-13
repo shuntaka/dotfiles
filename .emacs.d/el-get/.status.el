@@ -1,58 +1,58 @@
 ((ace-jump-mode status "installed" recipe
-                (:checksum "8351e2df4fbbeb2a4003f2fb39f46d33803f3dac" :name ace-jump-mode :after nil :website "https://github.com/winterTTr/ace-jump-mode/wiki" :description "A quick cursor location minor mode for emacs." :type github :pkgname "winterTTr/ace-jump-mode" :prepare
-                           (eval-after-load "ace-jump-mode"
-                             '(ace-jump-mode-enable-mark-sync))))
+		(:checksum "8351e2df4fbbeb2a4003f2fb39f46d33803f3dac" :name ace-jump-mode :after nil :website "https://github.com/winterTTr/ace-jump-mode/wiki" :description "A quick cursor location minor mode for emacs." :type github :pkgname "winterTTr/ace-jump-mode" :prepare
+			   (eval-after-load "ace-jump-mode"
+			     '(ace-jump-mode-enable-mark-sync))))
  (cl-lib status "installed" recipe
-         (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
+	 (:name cl-lib :builtin "24.3" :type elpa :description "Properly prefixed CL functions and macros" :url "http://elpa.gnu.org/packages/cl-lib.html"))
  (dash status "installed" recipe
        (:checksum "7cc01498a27d63ff4e0f3cd19ce7a53397fb533d" :name dash :description "A modern list api for Emacs. No 'cl required." :type github :pkgname "magnars/dash.el"))
  (el-get status "installed" recipe
-         (:name el-get :website "https://github.com/dimitri/el-get#readme" :description "Manage the external elisp bits and pieces you depend upon." :type github :branch "master" :pkgname "dimitri/el-get" :info "." :compile
-                ("el-get.*\\.el$" "methods/")
-                :features el-get :post-init
-                (when
-                    (memq 'el-get
-                          (bound-and-true-p package-activated-list))
-                  (message "Deleting melpa bootstrap el-get")
-                  (unless package--initialized
-                    (package-initialize t))
-                  (when
-                      (package-installed-p 'el-get)
-                    (let
-                        ((feats
-                          (delete-dups
-                           (el-get-package-features
-                            (el-get-elpa-package-directory 'el-get)))))
-                      (el-get-elpa-delete-package 'el-get)
-                      (dolist
-                          (feat feats)
-                        (unload-feature feat t))))
-                  (require 'el-get))))
+	 (:name el-get :website "https://github.com/dimitri/el-get#readme" :description "Manage the external elisp bits and pieces you depend upon." :type github :branch "master" :pkgname "dimitri/el-get" :info "." :compile
+		("el-get.*\\.el$" "methods/")
+		:features el-get :post-init
+		(when
+		    (memq 'el-get
+			  (bound-and-true-p package-activated-list))
+		  (message "Deleting melpa bootstrap el-get")
+		  (unless package--initialized
+		    (package-initialize t))
+		  (when
+		      (package-installed-p 'el-get)
+		    (let
+			((feats
+			  (delete-dups
+			   (el-get-package-features
+			    (el-get-elpa-package-directory 'el-get)))))
+		      (el-get-elpa-delete-package 'el-get)
+		      (dolist
+			  (feat feats)
+			(unload-feature feat t))))
+		  (require 'el-get))))
  (el-get-lock status "installed" recipe
-              (:name el-get-lock :type github :pkgname "tarao/el-get-lock" :after nil))
+	      (:name el-get-lock :type github :pkgname "tarao/el-get-lock" :after nil))
  (epl status "installed" recipe
       (:name epl :description "EPL provides a convenient high-level API for various package.el versions, and aims to overcome its most striking idiocies." :type github :pkgname "cask/epl"))
  (exec-path-from-shell status "installed" recipe
-                       (:checksum "c2ca275d3243e8253513ced73e3ac21dc352e303" :name exec-path-from-shell :after nil :website "https://github.com/purcell/exec-path-from-shell" :description "Emacs plugin for dynamic PATH loading" :type github :pkgname "purcell/exec-path-from-shell"))
+		       (:checksum "c2ca275d3243e8253513ced73e3ac21dc352e303" :name exec-path-from-shell :after nil :website "https://github.com/purcell/exec-path-from-shell" :description "Emacs plugin for dynamic PATH loading" :type github :pkgname "purcell/exec-path-from-shell"))
  (flycheck status "installed" recipe
-           (:name flycheck :after nil :depends
-                  (seq let-alist pkg-info dash)
-                  :type github :pkgname "flycheck/flycheck" :minimum-emacs-version "24.3" :description "On-the-fly syntax checking extension"))
+	   (:name flycheck :after nil :depends
+		  (seq let-alist pkg-info dash)
+		  :type github :pkgname "flycheck/flycheck" :minimum-emacs-version "24.3" :description "On-the-fly syntax checking extension"))
  (helm status "installed" recipe
-       (:checksum "2227344374e3113b149da84a65591ec673520777" :name helm :after nil :features
-                  ("helm-config")
-                  :description "Emacs incremental completion and narrowing framework" :type github :pkgname "emacs-helm/helm" :autoloads "helm-autoloads" :build
-                  (("make"))
-                  :build/darwin
-                  `(("make" ,(format "EMACS_COMMAND=%s" el-get-emacs)))
-                  :build/windows-nt
-                  (let
-                      ((generated-autoload-file
-                        (expand-file-name "helm-autoloads.el"))
-                       \
-                       (backup-inhibited t))
-                  (update-directory-autoloads default-directory)
-                  nil)
+       (:checksum "6085777884bf8cc63a6e15cbbb506d09d782f0cc" :name helm :after nil :features
+		  ("helm-config")
+		  :description "Emacs incremental completion and narrowing framework" :type github :pkgname "emacs-helm/helm" :autoloads "helm-autoloads" :build
+		  (("make"))
+		  :build/darwin
+		  `(("make" ,(format "EMACS_COMMAND=%s" el-get-emacs)))
+		  :build/windows-nt
+		  (let
+		      ((generated-autoload-file
+			(expand-file-name "helm-autoloads.el"))
+		       \
+		       (backup-inhibited t))
+		  (update-directory-autoloads default-directory)
+		  nil)
        :post-init
        (helm-mode)))
 (helm-c-yasnippet status "installed" recipe
@@ -62,7 +62,7 @@
 (yasnippet helm)
 :type github :pkgname "emacs-jp/helm-c-yasnippet" :description "Helm source for yasnippet.el."))
 (helm-swoop status "installed" recipe
-(:checksum "fd01dac3d647544f4ca297ca9963859b07ebe354" :name helm-swoop :after nil :depends
+(:checksum "002338d9685d82ef10aaf97d2e8084e61dfc94b4" :name helm-swoop :after nil :depends
 (helm)
 :type github :description "Efficiently hopping squeezed lines powered by Emacs helm interface" :pkgname "ShingoFukuyama/helm-swoop"))
 (hippie-exp-ext status "installed" recipe
