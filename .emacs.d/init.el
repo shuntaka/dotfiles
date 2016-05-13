@@ -178,7 +178,7 @@
 ;;----------------------------------------------
 ;; el-get packages for programming
 ;;----------------------------------------------
-;; (el-get-bundle flycheck)
+(el-get-bundle flycheck)
 
 ;;----------------------------------------------
 ;; el-get packages for SQL
