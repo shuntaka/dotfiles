@@ -161,7 +161,7 @@
 ;;----------------------------------------------
 ;; el-get packages for javascript
 ;;----------------------------------------------
-(el-get-bundle js2-mode)
+;; (el-get-bundle js2-mode)
 
 ;;----------------------------------------------
 ;; el-get packages for input support
@@ -2782,6 +2782,55 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; (hiwin-activate)                           ;; hiwin-modeを有効化
 ;; (set-face-background 'hiwin-face "gray80") ;; 非アクティブウィンドウの背景色を設定
 
+;;==============================================
+;; For js
+;;==============================================
+(el-get-bundle js2-mode)
+
+;;----------------------------------------------
+;; js2-mode hook
+;;----------------------------------------------
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+
+;;----------------------------------------------
+;; disable tab
+;;----------------------------------------------
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (setq-default indent-tabs-mode nil)))
+
+;;----------------------------------------------
+;; indent
+;; http://witterk.blogspot.jp/2012/04/emacs-no-tab.html
+;;----------------------------------------------
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(js2-basic-offset 2))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;;----------------------------------------------
+;; notify when a line exceeds the limit
+;; http://rubikitch.com/2014/08/11/column-enforce-mode/
+;;----------------------------------------------
+(defun js2-mode-hook--column-enforce-mode ()
+  (set (make-local-variable 'column-enforce-column) 80)
+  (column-enforce-mode 1))
+(add-hook 'js2-mode-hook 'js2-mode-hook--column-enforce-mode)
+
+
+
+
+
 ;;=============================================
 ;; For HTML and CSS
 ;;=============================================
@@ -2967,11 +3016,6 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;=============================================
 ;; For JavaScript
 ;;=============================================
-;;----------------------------------------------
-;; js2-mode
-;;----------------------------------------------
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;;----------------------------------
 ;; js2-mode
@@ -3052,21 +3096,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 ;; (add-hook 'js2-mode-hook 'my-js2-mode-hook)
 
-;;----------------------------------------------
-;; disable tab for js2-mode
-;;----------------------------------------------
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (setq-default indent-tabs-mode nil)))
 
-;;----------------------------------------------
-;; notify when a line exceeds the limit
-;; http://rubikitch.com/2014/08/11/column-enforce-mode/
-;;----------------------------------------------
-(defun js2-mode-hook--column-enforce-mode ()
-  (set (make-local-variable 'column-enforce-column) 80)
-  (column-enforce-mode 1))
-(add-hook 'js2-mode-hook 'js2-mode-hook--column-enforce-mode)
 
 ;;----------------------------------------------
 ;; flycheck with eslint
