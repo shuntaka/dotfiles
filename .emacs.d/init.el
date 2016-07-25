@@ -2871,7 +2871,13 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (add-hook 'js2-mode-hook 'js2-mode-hook--column-enforce-mode)
 
 
-
+;;==============================================
+;; For json
+;;==============================================
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
 
 
 ;;=============================================
