@@ -2406,7 +2406,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------
 (set-face-attribute 'default nil
                     :family "Ricty Diminished Discord"
-                    :height 200)
+                    :height 240)
 ;;----------------------------------------------
 ;; Background Color for Region
 ;;----------------------------------------------
