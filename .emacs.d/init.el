@@ -1886,6 +1886,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
       '("~/Dropbox/Documents/Manage/ToDo/Office/todo_master.org"
         "~/Dropbox/Documents/Local_Note/CM_Note/CM_note.org"
         "~/Dropbox/Documents/Local_Note/CD_Note/CD_note.org"
+        "~/Dropbox/Documents/Memo/memo.org"
         ))
 (global-set-key (kbd "C-c a") 'org-agenda)
 
