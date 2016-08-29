@@ -78,10 +78,10 @@
   (let (path)
     (dolist (path paths paths)
       (let ((default-directory
-          (expand-file-name (concat user-emacs-directory path))))
-    (add-to-list 'load-path default-directory)
-    (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-        (normal-top-level-add-subdirs-to-load-path))))))
+              (expand-file-name (concat user-emacs-directory path))))
+        (add-to-list 'load-path default-directory)
+        (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+            (normal-top-level-add-subdirs-to-load-path))))))
 
 ;; add directories under "elisp", "elpa", "conf", "public_repos"
 ;;(add-to-load-path "el-get" "auto-install" "elisp" "elpa" "conf" "public_repos")
@@ -138,7 +138,7 @@
 ;;----------------------------------------------
 ;; el-get packages for search and replace
 ;;----------------------------------------------
- (el-get-bundle visual-regexp-steroids)
+(el-get-bundle visual-regexp-steroids)
 
 ;;----------------------------------------------
 ;; el-get packages for helm
@@ -296,7 +296,7 @@
 (require 'auto-install)
 
 ;; set .emacs.d/elisp as the auto-install directory
-;(setq auto-install-directory "~/.emacs.d/elisp/")
+                                        ;(setq auto-install-directory "~/.emacs.d/elisp/")
 
 ;; 起動時にEmacsWikiのページ名を補完候補に加える
 
@@ -412,19 +412,19 @@
 (setq show-paren-delay 0)
 (show-paren-mode t)
 ;; (setq show-paren-style 'expression)
-(set-face-background 'show-paren-match-face nil)
-(set-face-underline-p 'show-paren-match-face "yellow")
+;;(set-face-background 'show-paren-match-face nil)
+;;(set-face-underline-p 'show-paren-match-face "yellow")
 
 
 ;;----------------------------------------------
 ;; ターミナル以外はツーバーとスクロールバーを消す
 ;;----------------------------------------------
 (when window-system
-(tool-bar-mode 0)
-(scroll-bar-mode 0))
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0))
 (when (eq system-type 'darwin)
-(tool-bar-mode -1)
-(scroll-bar-mode -1))
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
 
 ;;----------------------
 ;; line-number on the left side
@@ -453,7 +453,7 @@
 ;; for javascript
 (add-hook 'js2-mode-hook
           (lambda ()
-            (setq-default tab-width 4)))
+            (setq-default tab-width 2)))
 
 
 ;; for Perl
@@ -615,9 +615,9 @@
 ;;----------------------
 (require 'tempbuf)
 ;; ファイルを開いたら自動的にtempbufを有効にする
-;(add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
+                                        ;(add-hook 'find-file-hooks 'turn-on-tempbuf-mode)
 ;; diredバッファに対してtempbufを有効にする
-;(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
+                                        ;(add-hook 'dired-mode-hook 'turn-on-tempbuf-mode)
 
 ;;----------------------------------------------
 ;; 4.8 auto-save
@@ -697,9 +697,9 @@
 ;;----------------------------------------------
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
-;----------------------------------------------
-; 4.15. sudoedit.el
-;----------------------------------------------
+                                        ;----------------------------------------------
+                                        ; 4.15. sudoedit.el
+                                        ;----------------------------------------------
 ;; (server-start) ;  sudoeditで使う
 ;; (require 'sudo-ext)
 
@@ -801,17 +801,17 @@
 ;; bm.el
 ;;----------------------
 
-;(setq-default bm-buffer-persistence t)
-;(setq bm-restore-repository-on-load t)
-;(require 'bm)
-;(add-hook 'find-file-hooks 'bm-buffer-restore)
-;(add-hook 'kill-buffer-hook 'bm-buffer-save)
-;(add-hook 'after-save-hook 'bm-buffer-save)
-;(add-hook 'after-revert-hook 'bm-buffer-restore)
-;(add-hook 'vc-before-checkin-hook 'bm-buffer-save)
-;(global-set-key (kbd "M-SPC") 'bm-toggle)
-;(global-set-key (kbd "M-[") 'bm-previous)
-;(global-set-key (kbd "M-]") 'bm-next)
+                                        ;(setq-default bm-buffer-persistence t)
+                                        ;(setq bm-restore-repository-on-load t)
+                                        ;(require 'bm)
+                                        ;(add-hook 'find-file-hooks 'bm-buffer-restore)
+                                        ;(add-hook 'kill-buffer-hook 'bm-buffer-save)
+                                        ;(add-hook 'after-save-hook 'bm-buffer-save)
+                                        ;(add-hook 'after-revert-hook 'bm-buffer-restore)
+                                        ;(add-hook 'vc-before-checkin-hook 'bm-buffer-save)
+                                        ;(global-set-key (kbd "M-SPC") 'bm-toggle)
+                                        ;(global-set-key (kbd "M-[") 'bm-previous)
+                                        ;(global-set-key (kbd "M-]") 'bm-next)
 
 ;; bm.elの設定
 ;; (install-elisp "http://cvs.savannah.gnu.org/viewvc/*checkout*/bm/bm/bm.el")
@@ -848,7 +848,7 @@
 ;; 背景オレンジ
 ;; (set-face-background 'bm-persistent-face "DarkOrange")
 
-;背景ライトグリーン
+                                        ;背景ライトグリーン
 ;; (set-face-background 'bm-persistent-face "olive drab")
 
 ;; (setq bm-highlight-style 'bm-highlight-only-line)
@@ -914,7 +914,7 @@
       '("~/.emacs.d/mysnippets"
         "~/.emacs.d/elpa/yasnippet-20151108.1505/snippets"
         "~/.emacs.d/public_snippets"
-      ))
+        ))
 
 ;; 既存スニペットを挿入する
 (define-key yas-minor-mode-map (kbd "C-x i i") 'yas-insert-snippet)
@@ -1103,7 +1103,7 @@
 ;;----------------------------------------------
 ;; using thingopt.el mark-word
 (defun shun-mark-current-word ()
-    "Change me!"
+  "Change me!"
   (interactive)
   (mark-thing "word")
   (exchange-point-and-mark))
@@ -1113,7 +1113,7 @@
 ;; mark current line with thingopt.el
 ;;----------------------------------------------
 (defun  shun-mark-current-line()
-    "Change me!"
+  "Change me!"
   (interactive)
   (mark-thing "line"))
 (define-key global-map (kbd "C-M-b") 'shun-mark-current-line)
@@ -1156,7 +1156,7 @@
 ;; kill current line
 ;;----------------------------------------------
 (defun  shun-kill-current-line()
-    "Change me!"
+  "Change me!"
   (interactive)
   (move-beginning-of-line 1)
   (kill-line nil))
@@ -1394,9 +1394,9 @@ org-modeなどで活用。"
 (defun my/get-buffer-window-list-regexp (regexp)
   "Return list of windows whose buffer name matches regexp."
   (my/filter #'(lambda (window)
-              (string-match regexp
-               (buffer-name (window-buffer window))))
-          (window-list)))
+                 (string-match regexp
+                               (buffer-name (window-buffer window))))
+             (window-list)))
 (global-set-key [(super m)]
                 #'(lambda ()
                     (interactive)
@@ -1510,7 +1510,7 @@ org-modeなどで活用。"
 ;;  nil 'japanese-jisx0208
 ;; (font-spec :family "Hiragino Kaku Gothic ProN")))
 
-;----------------------------------------------
+                                        ;----------------------------------------------
 ;; 9-9. Multi Term
 ;;----------------------------------------------
 (when (require 'multi-term nil t)
@@ -1518,29 +1518,29 @@ org-modeなどで活用。"
 
 (require 'multi-term)
 (add-hook 'term-mode-hook '(lambda ()
-                           (setq show-trailing-whitespace nil)))
+                             (setq show-trailing-whitespace nil)))
 (global-set-key (kbd "C-c t")
-               '(lambda () (interactive) (multi-term)))
+                '(lambda () (interactive) (multi-term)))
 (global-set-key (kbd "C-c n") 'multi-term-next)
 (global-set-key (kbd "C-c p") 'multi-term-prev)
 (setq multi-term-program shell-file-name
-     ansi-term-color-vector [term
-                             term-color-black
-                             term-color-green
-                             term-color-yellow
-                             term-color-blue
-                             term-color-magenta
-                             term-color-cyan
-                             term-color-white])
+      ansi-term-color-vector [term
+                              term-color-black
+                              term-color-green
+                              term-color-yellow
+                              term-color-blue
+                              term-color-magenta
+                              term-color-cyan
+                              term-color-white])
 
 ;;----------------------------------------------
 ;; Tmux
 ;;----------------------------------------------
 (defun terminal-init-screen ()
-      "Terminal initialization function for screen."
-      ;; Use the xterm color initialization code.
-      (load "term/xterm")
-      (xterm-register-default-colors))
+  "Terminal initialization function for screen."
+  ;; Use the xterm color initialization code.
+  (load "term/xterm")
+  (xterm-register-default-colors))
 
 ;;----------------------------------------------
 ;; emamux
@@ -1568,7 +1568,7 @@ org-modeなどで活用。"
 (define-key magit-mode-map "\M-l" "l-all")
 
 ;;----------------------------------------------
-; emacs-dbi
+                                        ; emacs-dbi
 ;;----------------------------------------------
 ;; make sure RPC::EPC::Service, DBI, DBD::Pg is installed
 ;; enable the following when using local perl
@@ -1632,7 +1632,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (setq viewer-modeline-color-view "orange")
 (viewer-change-modeline-color-setup)
 
- ;;=============================================
+;;=============================================
 ;; 13. For Programming
 ;;=============================================
 ;;----------------------------------------------
@@ -1725,7 +1725,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;=============================================
 (add-hook 'org-mode-hook
           (lambda ()
-          (setq-default indent-tabs-mode nil)))
+            (setq-default indent-tabs-mode nil)))
 ;;----------------------------------------------
 ;; org-mode keybind
 ;;----------------------------------------------
@@ -1744,7 +1744,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   (interactive "P")
   (org-insert-heading arg)
   (cond ((org-on-heading-p) (org-do-promote))
-         ((org-at-item-p) (org-indent-item -1 ))))
+        ((org-at-item-p) (org-indent-item -1 ))))
 (defun org-insert-heading-dwim (arg)
   (interactive "p")
   (case arg
@@ -1844,7 +1844,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 
 ;; short cut for org-agenda showing entry filtering by TODO keyword
 (defun filter-by-todo-keyword ()
-    "Change me!"
+  "Change me!"
   (interactive)
   (org-todo-list '(4)))
 (define-key global-map (kbd "C-c t") 'filter-by-todo-keyword)
@@ -1875,7 +1875,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (setq org-use-fast-todo-selection t)
 (setq org-todo-keywords
       '((sequence "TODO(t)" "STARTED(s)" "WAITING(w)" "PROJECT(p)" "SUBPROJECT(s)" "|" "DONE(x)" "CANCEL(c)")
-      ;; '((sequence "TODO(t)" "WAITING(w)" "PROJECT(p)" "SUBPROJECT(s)" "|" "DONE(x)" "CANCEL(c)")
+        ;; '((sequence "TODO(t)" "WAITING(w)" "PROJECT(p)" "SUBPROJECT(s)" "|" "DONE(x)" "CANCEL(c)")
         (sequence "APPT(a)" "|" "DONE(x)" "CANCEL(c)")))
 
 ;;----------------------------------------------
@@ -1901,7 +1901,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
    (let ((src-code-types
           '("emacs-lisp" "python" "C" "sh" "java" "js" "clojure" "C++" "css"
             "calc" "asymptote" "dot" "gnuplot" "ledger" "lilypond" "mscgen"
-           "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk" "ditaa"
+            "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk" "ditaa"
             "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "ruby"
             "scheme" "sqlite")))
      (list (ido-completing-read "Source code type: " src-code-types))))
@@ -2139,7 +2139,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;; これがないとemacs -Qでエラーになる。おそらくバグ。
 (require 'compile)
 
-;背景ライトグリーン
+                                        ;背景ライトグリーン
 (set-face-background 'bm-persistent-face "olive drab")
 
 ;;----------------------------------------------
@@ -2374,7 +2374,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; (load-theme 'zenburn t)
 
 (when (require 'color-theme nil t)
-(color-theme-initialize))
+  (color-theme-initialize))
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/emacs-color-theme-solarized")
 
@@ -2667,7 +2667,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 ;; 直近バッファ選定時の無視リスト
 (defvar elscreen-ignore-buffer-list
- '("*scratch*" "*Backtrace*" "*Colors*" "*Faces*" "*Compile-Log*" "*Packages*" "*vc-" "*Minibuf-" "*Messages" "*WL:Message"))
+  '("*scratch*" "*Backtrace*" "*Colors*" "*Faces*" "*Compile-Log*" "*Packages*" "*vc-" "*Minibuf-" "*Messages" "*WL:Message"))
 ;; elscreen用バッファ削除
 (defun kill-buffer-for-elscreen ()
   (interactive)
@@ -2939,7 +2939,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   ;;    ((t (:background "grey36"))))                ; javascript Blockの背景色
   ;;  )
   ;;(setq web-mode-enable-heredoc-fontification t)
-)
+  )
 (add-hook 'web-mode-hook  'web-mode-hook)
 ;; 色の設定
 (custom-set-faces
@@ -2961,7 +2961,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
    ((t (:foreground "#FF7F00"))))                          ; css 疑似クラス
  '(web-mode-css-at-rule-face
    ((t (:foreground "#FF7F00"))))                          ; cssのタグ
-)
+ )
 ;;----------------------------------------------
 ;; disable tab for web-mode
 ;;----------------------------------------------
@@ -3772,10 +3772,10 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; PerlTidy
 ;;----------------------------------------------
 (defun perltidy-region ()               ;選択regionをperltidy
-   "Run perltidy on the current region."
-   (interactive)
-   (save-excursion
-     (shell-command-on-region (point) (mark) "perltidy -q" nil t)))
+  "Run perltidy on the current region."
+  (interactive)
+  (save-excursion
+    (shell-command-on-region (point) (mark) "perltidy -q" nil t)))
 (defun perltidy-defun ()                ;開いているソースをperltidy
   "Run perltidy on the current defun."
   (interactive)
