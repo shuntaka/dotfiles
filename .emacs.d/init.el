@@ -772,6 +772,24 @@
 (ascmd:add '("~/Development/SRMS_API/.*" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@jump:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
 (ascmd:add '("~/Development/API_forC39/.*" "find $DIR$FILE | perl -pe 's/(\\/Users\\/shun(.*?)$)/\\1 shunsuke\\.takamiya\\@jump:\\/home\\/shunsuke\\.takamiya\\2/' | xargs rsync"))
 
+;;----------------------------------------------
+;; copy the path for the currently opend file
+;; http://futurismo.biz/archives/2989
+;;----------------------------------------------
+;; (defun my/get-curernt-path ()
+;;   (if (equal major-mode ‘dired-mode)
+;;       default-directory
+;;     (buffer-file-name)))
+
+;; (defun my/copy-current-path ()
+;;   (interactive)
+;;   (let ((fPath (my/get-curernt-path)))
+;;     (when fPath
+;;       (message “stored path: %s” fPath)
+;;       (kill-new (file-truename fPath)))))
+
+;; (global-set-key (kbd “C-c c”) ‘my/copy-current-path)
+
 ;;=============================================
 ;; 5. Moving Cursor
 ;;=============================================
