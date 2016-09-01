@@ -450,12 +450,6 @@
           (lambda ()
             (setq-default tab-width 2)))
 
-;; for javascript
-(add-hook 'js2-mode-hook
-          (lambda ()
-            (setq-default tab-width 2)))
-
-
 ;; for Perl
 (add-hook 'cperl-mode-hook
           (lambda ()
@@ -2843,7 +2837,8 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;;----------------------------------------------
 (add-hook 'js2-mode-hook
           (lambda ()
-            (setq-default indent-tabs-mode nil)))
+            (setq-default indent-tabs-mode nil)
+            (setq-default js2-basic-offset 2)))
 
 ;;----------------------------------------------
 ;; indent
