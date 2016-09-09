@@ -3804,7 +3804,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; http://qiita.com/kyanagimoto/items/8d3c81ae806f74bfae1b
 ;;----------------------------------------------
 ;; php-mode
-(require 'php-mode)
+;; (require 'php-mode)
 
 
 ;;=============================================
