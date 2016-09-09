@@ -1793,6 +1793,8 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   (setq org-capture-templates
         '(("m" "Memo" entry (file+datetree "~/Dropbox/Documents/Memo/memo.org" "MEMO")
            "* %^{Title} %^g\n%?\nAdded: %U")
+          ("d" "DevMemo" entry (file+datetree "~/Dropbox/Documents/Memo/DevMemo.org" "MEMO")
+           "* %^{Title} %^g\n%?\nAdded: %U")
           ("t" "Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Office/todo_master.org" "====ToDo====")
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U")
           ("h" "Home Todo" entry (file+headline "~/Dropbox/Documents/Manage/ToDo/Home/home_ToDo_INBOX.org" "====ToDo====")
