@@ -119,6 +119,10 @@
 ;;----------------------------------------------
 (el-get-bundle exec-path-from-shell)
 
+(el-get-bundle highlight-indentation)
+
+(el-get-bundle indent-guide)
+
 ;;----------------------------------------------
 ;; el-get packages for keybinding
 ;;----------------------------------------------
@@ -473,6 +477,17 @@
 (add-hook 'cperl-mode-hook
           (lambda ()
             (setq-default indent-tabs-mode nil)))
+
+;;----------------------------------------------
+;; highlight indent
+;;----------------------------------------------
+;; (require 'highlight-indentation)
+
+
+;;----------------------------------------------
+;; indent-guide
+;;----------------------------------------------
+(require 'indent-guide)
 
 ;;----------------------------------------------
 ;; generic mode
