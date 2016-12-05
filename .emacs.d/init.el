@@ -1884,6 +1884,11 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   (org-tags-view '(4)))
 (global-set-key (kbd "C-c m") 'tag-view)
 
+(defun tag-view-all ()
+    "Change me!"
+  (interactive)
+  (org-tags-view nil))
+(global-set-key (kbd "C-c M") 'tag-view-all)
 
 ;; short cut for org-agenda showing entry filtering by TODO keyword
 (defun filter-by-todo-keyword ()
