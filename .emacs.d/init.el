@@ -1658,9 +1658,9 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 ;; vi-derived
 (define-key view-mode-map (kbd "h") 'backward-char)
 (define-key view-mode-map (kbd "j") 'next-line)
-(define-key view-mode-map (kbd "i") 'previous-line)
+(define-key view-mode-map (kbd "k") 'previous-line)
 (define-key view-mode-map (kbd "l") 'forward-char)
-(define-key view-mode-map (kbd "I") 'View-scroll-line-forward)
+(define-key view-mode-map (kbd "K") 'View-scroll-line-forward)
 (define-key view-mode-map (kbd "J") 'View-scroll-line-backward)
 
 ;; bm.el
@@ -2885,6 +2885,11 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
+;;----------------------------------------------
+;; web-mode hook for jsx
+;;----------------------------------------------
+(autoload 'web-mode "web-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
 
 ;;----------------------------------------------
 ;; disable tab
@@ -2962,7 +2967,7 @@ For example, type \\[event-apply-meta-control-modifier] % to enter Meta-Control-
   ;; web-modeの設定
   (setq web-mode-markup-indent-offset 2) ;; html indent
   (setq web-mode-css-indent-offset 2)    ;; css indent
-  (setq web-mode-code-indent-offset 4)   ;; script indent(js,php,etc..)
+  (setq web-mode-code-indent-offset 2)   ;; script indent(js,php,etc..)
   (setq web-mode-enable-current-element-highlight t)
   ;; htmlの内容をインデント
   ;; TEXTAREA等の中身をインデントすると副作用が起こったりするので

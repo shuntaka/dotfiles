@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: callMasaTool
+# key: callMasaTool
+# --
+callMasaTool(
+  '${1:createOrder}',
+  () => ({
+    text: {},
+    select: {},
+    radio: [],
+  }),
+  '${2:xml}',
+  writeResult
+)

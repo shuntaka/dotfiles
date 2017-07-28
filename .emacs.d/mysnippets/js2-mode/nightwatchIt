@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: nightwatchIt
+# key: nightwatchIt
+# --
+it('${1:test3}: ${2:createOffering}', (client) => {
+
+})

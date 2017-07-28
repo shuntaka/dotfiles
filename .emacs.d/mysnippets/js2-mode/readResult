@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: readResult
+# key: readResult
+# --
+readResult({
+            testNum: '${1:test0}',
+            opeName: '${2:registerOffering}',
+            index: ${3:0},
+            properties: [${4:'logfilename'}],
+          })
